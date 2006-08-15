@@ -1,0 +1,1 @@
+<jsp:forward page="blog-remover.jsp"></jsp:forward>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://www.getahead.ltd.uk/dwr/dwr20.dtd">
+<dwr>
+	<allow>
+		<create creator="spring" javascript="User">
+			<param name="beanName" value="user" />
+		</create>
+		<convert converter="bean" match="com.redv.blogremover.Status" />
+		<convert converter="bean" match="com.redv.blogremover.WebLog" />
+		<convert converter="bean" match="com.redv.blogremover.Comment" />
+		<convert converter="bean" match="com.redv.blogremover.BSP" />
+		<convert converter="bean" match="com.redv.blogremover.BlogReader" />
+		<convert converter="bean" match="com.redv.blogremover.BlogWriter" />
+	</allow>
+</dwr>

@@ -1,0 +1,125 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	font: normal 12px tahoma, times, serif, 宋体;
+	line-height: 150%;
+}
+
+p {
+	text-indent: 2em;
+}
+
+ul,ol {
+	margin-left: 4em;
+}
+
+h3 {
+	font: bold 16px/ 18px tahoma, times, serif, 宋体;
+}
+
+.attention {
+	color: #f00;
+}
+
+#blogRemoverHeader {
+	color: #776655;
+	padding: 20px;
+	text-align: center;
+	background: #dbe1d3;
+}
+
+#blogRemoverHeader h1 {
+	font: bold 18pt/ 20pt tahoma, times, serif, 宋体;
+}
+
+#step1,#step2,#step3,#option {
+	display: none;
+}
+
+#step1,#step2,#step3,#option,#about {
+	margin: 5px 0px 5px 0px;
+	padding: 0px 0px 5px 0px;
+	background: url("../images/index_line1.gif") no-repeat bottom;
+}
+
+#readers,#webLogs,#writers,#options,#explanation {
+	margin: 10px 0px 10px 0px;
+}
+
+#statusBar {
+	padding: 5px 10px 0px 10px;
+	background: #eee url("../images/index_line.gif") repeat-x bottom;
+}
+
+#debugContainer {
+	margin: 10px;
+	text-align: center;
+	display: none;
+}
+
+#footer {
+	text-align: right;
+}
+
+/* Show WebLogs */
+div #webLogsBox {
+	padding: 2px;
+	/*background: #e6e6e6;*/
+	background: #eee;
+}
+
+#webLogsBox thead {
+	
+}
+
+#webLogsBox th {
+	font: bold 12px tohoma, times, serif, 宋体;
+	text-align: center;
+}
+
+#webLogsTbody {
+	
+}
+
+#deleteButton,#clearButton,#firstButton,#previousButton,#nextButton,#lastButton,#refreshButton
+	{
+	width: 40px;
+	height: 24px;
+	font: bold 12px tahoma, times, serif, 宋体;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#deleteButton,#clearButton {
+	color: red;
+}
+
+#refreshButton {
+	color: green;
+}
+
+#pageSize {
+	width: 40px;
+	border-top: none 0px #000;
+	border-right: none 0px #000;
+	border-bottom: solid 1px #000;
+	border-left: none 0px #000;
+}
+
+#feature,#googleGroup {
+	margin: 5px 0px 5px 0px;
+	padding: 0px 0px 5px 0px;
+	background: url("../images/index_line1.gif") no-repeat bottom;
+}
+
+#googleGroup {
+	
+}
+
+#developProgress {
+	
+}
+
+#author {
+	
+}
