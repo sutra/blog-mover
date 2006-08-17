@@ -1,7 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <div id="about">
 	<h3>
-		Blog Remover （博客搬家工具）可以帮你的博客搬家：
+		Blog Mover （博客搬家工具）可以帮你的博客搬家：
 	</h3>
 	<div id="explanation">
 		<div id="feature">
@@ -9,7 +9,7 @@
 				“博客搬家”是指将某个 Blog 用户（Blogger）的全部或者部分日志（Web Log）从源 BSP（Blog Service
 				Provider 即博客服务提供商） 搬迁到目标 BSP。
 			</p>
-			Blog Remover 具有如下特点：
+			Blog Mover 具有如下特点：
 			<ol>
 				<li>
 					搬迁后原 Blog 的数据不会丢失，将仍然保留；
@@ -78,6 +78,10 @@
 					<img src="images/email-qq.png" alt="QQ" />
 				</li>
 			</ul>
+		</div>
+		<div>
+			Project Home:
+			<a href="http://code.google.com/p/blog-mover/">http://code.google.com/p/blog-mover/</a>
 		</div>
 		<div id="developProgress">
 			将按照 BSP排行中心：

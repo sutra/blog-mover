@@ -1,1 +1,1 @@
-<jsp:forward page="blog-remover.jsp"></jsp:forward>
+<jsp:forward page="blog-mover.jsp"></jsp:forward>
