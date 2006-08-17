@@ -9,11 +9,11 @@
   <inceptionYear>2006</inceptionYear>
   <developers>
     <developer>
-      <id>shutra</id>
-      <name>Shuqun, Zhou</name>
+      <id>zhoushuqun</id>
+      <name>Shutra, Zhou</name>
       <email>zhoushuqun@gmail.com</email>
-      <organization></organization>
-      <organizationUrl></organizationUrl>
+      <organization>Redv Soft</organization>
+      <organizationUrl>http://www.redv.com</organizationUrl>
       <roles>
         <role>Administrator</role>
         <role>Developer</role>
