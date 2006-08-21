@@ -24,7 +24,7 @@
 			<input type="button" id="lastButton" value="&#x00BB;" onclick="showWebLogs(2)" title="末页" />
 		</div>
 		<div id="webLogsBox">
-			<fmt:bundle basename="com.redv.blogremover.messages">
+			<fmt:bundle basename="com.redv.blogmover.messages">
 				<table border="0" style="width: 100%;">
 					<thead>
 						<tr>
