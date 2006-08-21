@@ -3,9 +3,18 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
 	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>Blog Mover</display-name>
+	<description>
+		Our goal is allowing your blog moving freely between each BSP.
+	</description>
 	<context-param>
+		<description>
+			该 web application 的根目录的绝对文件路径作为属性保存在 System 的属性列表中。该属性的名字，由
+			web.xml 文件中的名为 "webAppRootKey" 的参数值指出。如果不在 web.xml 中定义
+			webAppRootKey 参数，那么属性名就是缺省的 "webapp.root".
+		</description>
 		<param-name>webAppRootKey</param-name>
-		<param-value>com.redv.blogmover</param-value>
+		<param-value>com.redv.blogmover.root</param-value>
 	</context-param>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
