@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Untitled Gantt Project" company="" webLink="http://" view-date="2006-08-07" view-index="0" gantt-divider-location="316" resource-divider-location="301" version="2.0">
+<project name="Untitled Gantt Project" company="" webLink="http://" view-date="2006-08-07" view-index="0" gantt-divider-location="303" resource-divider-location="301" version="2.0">
     <description/>
     <view zooming-state="default:2"/>
     <!-- -->
@@ -59,7 +59,7 @@
     <taskdisplaycolumns>
         <displaycolumn property-id="tpd3" order="0" width="75"/>
         <displaycolumn property-id="tpd4" order="1" width="75"/>
-        <displaycolumn property-id="tpd5" order="2" width="75"/>
+        <displaycolumn property-id="tpd6" order="2" width="50"/>
     </taskdisplaycolumns>
     <previous/>
     <roles roleset-name="Default"/>
