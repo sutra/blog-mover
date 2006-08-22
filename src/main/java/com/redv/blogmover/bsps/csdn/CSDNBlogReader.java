@@ -17,7 +17,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.impl.WebLogImpl;
@@ -99,14 +99,14 @@ public class CSDNBlogReader extends AbstractBlogReader {
 		this.username = username;
 	}
 
-	private void checkLogin() throws BlogRemoverException {
+	private void checkLogin() throws BlogMoverException {
 		if (!loggedIn) {
 			csdnLogin.login(username, password, identifyingCode);
 		}
 	}
 
 	@Override
-	public List<WebLog> read() throws BlogRemoverException {
+	public List<WebLog> read() throws BlogMoverException {
 		checkLogin();
 		String urlPrefix = "http://writeblog.csdn.net/PostList.aspx?pg=";
 		String firstPage = urlPrefix + 1;
@@ -195,7 +195,7 @@ public class CSDNBlogReader extends AbstractBlogReader {
 		return webLog;
 	}
 
-	public byte[] getIdentifyingCodeImage() throws BlogRemoverException {
+	public byte[] getIdentifyingCodeImage() throws BlogMoverException {
 		return csdnLogin.getIdentifyingCodeImage();
 	}
 }

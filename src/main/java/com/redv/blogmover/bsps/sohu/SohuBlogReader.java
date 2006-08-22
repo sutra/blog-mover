@@ -26,7 +26,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.util.DomNodeUtils;
@@ -139,20 +139,20 @@ public class SohuBlogReader extends AbstractBlogReader {
 	/**
 	 * 检查是否已经登录，如果没有登录，执行登录。
 	 * 
-	 * @throws BlogRemoverException
+	 * @throws BlogMoverException
 	 */
-	private void checkLogin() throws BlogRemoverException {
+	private void checkLogin() throws BlogMoverException {
 		if (!loggedIn) {
 			try {
 				boolean b = new SohuBlogLogin(this.httpClient).login(username,
 						maildomain, passwd);
 				if (!b) {
-					throw new BlogRemoverException("Login failed.");
+					throw new BlogMoverException("Login failed.");
 				}
 			} catch (HttpException e) {
-				throw new BlogRemoverException(e);
+				throw new BlogMoverException(e);
 			} catch (IOException e) {
-				throw new BlogRemoverException(e);
+				throw new BlogMoverException(e);
 			}
 		}
 	}
@@ -163,7 +163,7 @@ public class SohuBlogReader extends AbstractBlogReader {
 	 * @see com.redv.blogremover.BlogReader#read(java.util.List)
 	 */
 	@Override
-	public List<WebLog> read() throws BlogRemoverException {
+	public List<WebLog> read() throws BlogMoverException {
 		List<WebLog> webLogs = new ArrayList<WebLog>();
 		this.currentCount = 0;
 		log.debug("username: " + this.getUsername());
@@ -183,10 +183,10 @@ public class SohuBlogReader extends AbstractBlogReader {
 			}
 			this.parseWebLogManagementListPage(webLogs, setting);
 		} catch (IOException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} catch (SAXException e) {
-			throw new BlogRemoverException(e);
-		} catch (BlogRemoverException e) {
+			throw new BlogMoverException(e);
+		} catch (BlogMoverException e) {
 			throw e;
 		}
 		return webLogs;
@@ -198,10 +198,10 @@ public class SohuBlogReader extends AbstractBlogReader {
 	 * @return
 	 * @throws IOException
 	 * @throws SAXException
-	 * @throws BlogRemoverException
+	 * @throws BlogMoverException
 	 */
 	private Setting parseSetting() throws IOException, SAXException,
-			BlogRemoverException {
+			BlogMoverException {
 		if (log.isDebugEnabled()) {
 			Cookie[] cookies = httpClient.getState().getCookies();
 			for (Cookie cookie : cookies) {
@@ -221,7 +221,7 @@ public class SohuBlogReader extends AbstractBlogReader {
 			}
 		}
 		if (node == null) {
-			throw new BlogRemoverException("No setting form found.");
+			throw new BlogMoverException("No setting form found.");
 		}
 		NodeList inputs = doc.getElementsByTagName("input");
 		for (int i = 0; i < inputs.getLength(); i++) {
@@ -286,11 +286,11 @@ public class SohuBlogReader extends AbstractBlogReader {
 	 * @param setting
 	 * @throws IOException
 	 * @throws SAXException
-	 * @throws BlogRemoverException
+	 * @throws BlogMoverException
 	 */
 	private void parseWebLogManagementListPage(final List<WebLog> webLogs,
 			final Setting setting) throws IOException, SAXException,
-			BlogRemoverException {
+			BlogMoverException {
 		Document doc = httpDocument.get(ManageUrlConstants.ENTRY);
 		// 查找页码总数。
 		int pages = 0;
@@ -346,7 +346,7 @@ public class SohuBlogReader extends AbstractBlogReader {
 	}
 
 	private void parseEntryList(List<WebLog> webLogs, Document doc)
-			throws IOException, SAXException, BlogRemoverException {
+			throws IOException, SAXException, BlogMoverException {
 		Element entryList = doc.getElementById("entryList");
 		log.debug(entryList.getChildNodes().getLength());
 		Node item = entryList.getChildNodes().item(5);
@@ -403,7 +403,7 @@ public class SohuBlogReader extends AbstractBlogReader {
 	}
 
 	private void parse(SohuWebLog webLog) throws IOException, SAXException,
-			BlogRemoverException {
+			BlogMoverException {
 		// 因为列表只能得到weblog的发布日志，所以从查看weblog页面得到具体时间。
 		parseView(webLog);
 		// 从修改页面获得weblog的详细信息。
@@ -440,10 +440,10 @@ public class SohuBlogReader extends AbstractBlogReader {
 	 * @param webLog
 	 * @throws IOException
 	 * @throws SAXException
-	 * @throws BlogRemoverException
+	 * @throws BlogMoverException
 	 */
 	private void parseModify(SohuWebLog webLog) throws IOException,
-			SAXException, BlogRemoverException {
+			SAXException, BlogMoverException {
 		Document doc = httpDocument.get(webLog.getModifyUrl());
 
 		String title = doc.getElementById("entrytitle").getAttribute("value");

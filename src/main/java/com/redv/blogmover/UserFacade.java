@@ -114,10 +114,10 @@ public class UserFacade implements Serializable {
 	 *            The property to set.
 	 * @param value
 	 *            The value to set.
-	 * @throws BlogRemoverException
+	 * @throws BlogMoverException
 	 */
 	public void setReaderProperty(String property, String value)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		log.debug("setReaderProperty called. property=" + property + ", value="
 				+ value);
 		this.readerLock.writeLock().lock();
@@ -129,15 +129,15 @@ public class UserFacade implements Serializable {
 					"set" + StringUtils.capitalize(property), String.class);
 			m.invoke(this.reader, value);
 		} catch (SecurityException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} catch (NoSuchMethodException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} catch (IllegalArgumentException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} catch (IllegalAccessException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} catch (InvocationTargetException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} finally {
 			this.readerLock.writeLock().unlock();
 		}
@@ -149,10 +149,10 @@ public class UserFacade implements Serializable {
 	 *            The property to set.
 	 * @param value
 	 *            The value to set.
-	 * @throws BlogRemoverException
+	 * @throws BlogMoverException
 	 */
 	public void setWriterProperty(String property, String value)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		log.debug("setReaderProperty called. property=" + property + ", value="
 				+ value);
 		this.writerLock.writeLock().lock();
@@ -164,21 +164,21 @@ public class UserFacade implements Serializable {
 					"set" + StringUtils.capitalize(property), String.class);
 			m.invoke(this.writer, value);
 		} catch (SecurityException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} catch (NoSuchMethodException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} catch (IllegalArgumentException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} catch (IllegalAccessException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} catch (InvocationTargetException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} finally {
 			this.writerLock.writeLock().unlock();
 		}
 	}
 
-	public void read() throws BlogRemoverException {
+	public void read() throws BlogMoverException {
 		this.readerLock.readLock().lock();
 		try {
 			List<WebLog> webLogs = reader.read();
@@ -190,7 +190,7 @@ public class UserFacade implements Serializable {
 		}
 	}
 
-	public void write() throws BlogRemoverException {
+	public void write() throws BlogMoverException {
 		this.writerLock.readLock().lock();
 		try {
 			List<WebLog> unmodifiableList = Collections

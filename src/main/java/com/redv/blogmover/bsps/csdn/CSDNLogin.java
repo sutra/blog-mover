@@ -19,7 +19,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.util.DomNodeUtils;
 import com.redv.blogmover.util.HttpDocument;
 
@@ -69,7 +69,7 @@ public class CSDNLogin {
 	}
 
 	public void login(String username, String password, String identifyingCode)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		Document loginPageDocument = this.getLoginPage();
 
 		// Parse form.
@@ -117,16 +117,16 @@ public class CSDNLogin {
 
 		Element element = document.getElementById("CSDNUserLoginOK_lb_Name");
 		if (element == null) {
-			throw new BlogRemoverException("Login failed.(CSDN Passport)");
+			throw new BlogMoverException("Login failed.(CSDN Passport)");
 		} else {
 			if (element.getNodeValue().indexOf("您好，您已经成功登录。") == -1) {
-				throw new BlogRemoverException(
+				throw new BlogMoverException(
 						"登录失败。用户名、密码或者验证码不正确，请检查你的用户名和密码或者重新获取验证码");
 			}
 		}
 	}
 
-	public byte[] getIdentifyingCodeImage() throws BlogRemoverException {
+	public byte[] getIdentifyingCodeImage() throws BlogMoverException {
 		String showExPwdUrl = "http://passport.csdn.net/"
 				+ getShowExPwdUrl(this.getLoginPage());
 		showExPwdUrl = showExPwdUrl.replace(" ", "%20");
@@ -134,9 +134,9 @@ public class CSDNLogin {
 		try {
 			return this.showExPwd(showExPwdUrl);
 		} catch (HttpException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} catch (IOException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		}
 	}
 

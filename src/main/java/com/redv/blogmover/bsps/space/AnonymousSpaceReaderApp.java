@@ -15,7 +15,7 @@ import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
 
 /**
@@ -35,7 +35,7 @@ public class AnonymousSpaceReaderApp {
 	}
 
 	public static void main(String[] args) throws IOException,
-			BlogRemoverException {
+			BlogMoverException {
 		AnonymousSpaceReader bsp = new AnonymousSpaceReader();
 
 		bsp.setSpaceName("jungleford");

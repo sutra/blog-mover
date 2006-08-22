@@ -3,7 +3,7 @@ package com.redv.blogmover.bsps.bokee;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.bsps.bokee.BokeeReader;
 
@@ -28,7 +28,7 @@ public class BokeeReaderTest extends TestCase {
 	/*
 	 * Test method for 'com.redv.blogremover.bsps.bokee.BokeeReader.read()'
 	 */
-	public void testRead() throws BlogRemoverException {
+	public void testRead() throws BlogMoverException {
 		reader.read();
 	}
 

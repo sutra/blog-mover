@@ -15,7 +15,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogReader;
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.StatusImpl;
@@ -77,7 +77,7 @@ public class AnonymousSpaceReader implements BlogReader {
 	 * 
 	 * @see com.redv.blogremover.BlogReader#read(java.util.List)
 	 */
-	public List<WebLog> read() throws BlogRemoverException {
+	public List<WebLog> read() throws BlogMoverException {
 		List<WebLog> webLogs = new ArrayList<WebLog>();
 		this.currentCount = 0;
 		String url = startUrl;
@@ -86,7 +86,7 @@ public class AnonymousSpaceReader implements BlogReader {
 			Document doc = readerUtil.getDoc(url);
 			// Check is "Space Not Available"?
 			if (spaceNotAvailable(doc)) {
-				throw new BlogRemoverException(
+				throw new BlogMoverException(
 						"Space Not Available. 你的 Space 不允许匿名访问。如果你要使用本 Reader，你必须打开你的 Space 的匿名访问权限。");
 			}
 			findEntries(doc, webLogs);

@@ -2,7 +2,7 @@ package com.redv.blogmover.bsps.baidu;
 
 import org.apache.commons.httpclient.HttpClient;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.bsps.baidu.BaiduLogin;
 import com.redv.blogmover.util.HttpDocument;
 
@@ -22,7 +22,7 @@ public class BaiduLoginTest extends TestCase {
 	 * Test method for 'com.redv.blogremover.bsps.baidu.BaiduLogin.login(String,
 	 * String)'
 	 */
-	public void testLogin() throws BlogRemoverException {
+	public void testLogin() throws BlogMoverException {
 		baiduLogin.login("blogremover", "wangjing");
 	}
 

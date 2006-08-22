@@ -14,6 +14,6 @@ public interface BlogReader extends Statusable {
 	 * 从BSP读取某个用户的所有日志。
 	 * 
 	 */
-	List<WebLog> read() throws BlogRemoverException;
+	List<WebLog> read() throws BlogMoverException;
 
 }

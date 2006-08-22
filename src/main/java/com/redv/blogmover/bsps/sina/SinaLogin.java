@@ -18,7 +18,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
@@ -39,7 +39,7 @@ public class SinaLogin {
 	}
 
 	public void login(String loginname, String passwd, String checkwd)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		String action = "http://blog.sina.com.cn/login.php?url=%2Fcontrol%2F";
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 
@@ -72,7 +72,7 @@ public class SinaLogin {
 			}
 		}
 		if (!ok) {
-			throw new BlogRemoverException("用户名密码或者验证码有误，请重新输入，或者重新获取验证码。");
+			throw new BlogMoverException("用户名密码或者验证码有误，请重新输入，或者重新获取验证码。");
 		}
 	}
 

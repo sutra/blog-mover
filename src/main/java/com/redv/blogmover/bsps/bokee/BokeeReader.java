@@ -10,7 +10,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.xml.sax.SAXException;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
 
@@ -37,18 +37,7 @@ public class BokeeReader extends AbstractBlogReader {
 	 * @see com.redv.blogremover.BlogReader#read()
 	 */
 	@Override
-	public List<WebLog> read() throws BlogRemoverException {
-		try {
-			BokeeLogin.login(httpClient, "blogremover", "wangjing");
-		} catch (HttpException e) {
-			throw new BlogRemoverException(e);
-		} catch (IOException e) {
-			throw new BlogRemoverException(e);
-		} catch (SAXException e) {
-			throw new BlogRemoverException(e);
-		} catch (BlogRemoverException e) {
-			throw new BlogRemoverException(e);
-		}
+	public List<WebLog> read() throws BlogMoverException {
 		return null;
 	}
 

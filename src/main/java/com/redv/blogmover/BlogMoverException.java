@@ -8,7 +8,7 @@ package com.redv.blogmover;
  * @version 1.0
  * 
  */
-public class BlogRemoverException extends Exception {
+public class BlogMoverException extends Exception {
 
 	/**
 	 * 
@@ -18,14 +18,14 @@ public class BlogRemoverException extends Exception {
 	/**
 	 * 
 	 */
-	public BlogRemoverException() {
+	public BlogMoverException() {
 		super();
 	}
 
 	/**
 	 * @param arg0
 	 */
-	public BlogRemoverException(String arg0) {
+	public BlogMoverException(String arg0) {
 		super(arg0);
 	}
 
@@ -33,14 +33,14 @@ public class BlogRemoverException extends Exception {
 	 * @param arg0
 	 * @param arg1
 	 */
-	public BlogRemoverException(String arg0, Throwable arg1) {
+	public BlogMoverException(String arg0, Throwable arg1) {
 		super(arg0, arg1);
 	}
 
 	/**
 	 * @param arg0
 	 */
-	public BlogRemoverException(Throwable arg0) {
+	public BlogMoverException(Throwable arg0) {
 		super(arg0);
 	}
 

@@ -20,7 +20,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
@@ -51,7 +51,7 @@ class DoNewsLogin implements Serializable {
 	}
 
 	public void login(String username, String password, String validationKey)
-			throws DOMException, BlogRemoverException {
+			throws DOMException, BlogMoverException {
 		String loginUrl = "http://writeblog.donews.com/login.aspx?ReturnUrl=/editposts.aspx";
 		log.debug("获取登录页面，url：" + loginUrl);
 		Document document = httpDocument.get(loginUrl);
@@ -96,11 +96,11 @@ class DoNewsLogin implements Serializable {
 		Element vKValidator = loginResultDocument.getElementById("VKValidator");
 		Element message = loginResultDocument.getElementById("Message");
 		if (vKValidator != null) {
-			throw new BlogRemoverException("验证码输入有误："
+			throw new BlogMoverException("验证码输入有误："
 					+ vKValidator.getNodeValue());
 		} else if (message != null
 				&& StringUtils.isNotEmpty(message.getNodeValue())) {
-			throw new BlogRemoverException("登录失败：" + message.getNodeValue());
+			throw new BlogMoverException("登录失败：" + message.getNodeValue());
 		}
 	}
 

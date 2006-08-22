@@ -20,7 +20,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.Attachment;
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogWriter;
@@ -75,13 +75,13 @@ public class SohuBlogWriter extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#begin()
 	 */
 	@Override
-	protected void begin() throws BlogRemoverException {
+	protected void begin() throws BlogMoverException {
 		try {
 			sohuBlogLogin.login(username, maildomain, passwd);
 		} catch (HttpException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} catch (IOException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		}
 	}
 
@@ -91,7 +91,7 @@ public class SohuBlogWriter extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#end()
 	 */
 	@Override
-	protected void end() throws BlogRemoverException {
+	protected void end() throws BlogMoverException {
 
 	}
 
@@ -113,7 +113,7 @@ public class SohuBlogWriter extends AbstractBlogWriter {
 	 */
 	@Override
 	protected void writeBlog(WebLog webLog, Map<Attachment, String> attachments)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		String url = "http://blog.sohu.com/manage/entry.do?m=add";
 		Document document = httpDocument.get(url);
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
@@ -150,7 +150,7 @@ public class SohuBlogWriter extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#writeComment(com.redv.blogremover.Comment)
 	 */
 	@Override
-	protected void writeComment(Comment comment) throws BlogRemoverException {
+	protected void writeComment(Comment comment) throws BlogMoverException {
 		// TODO Auto-generated method stub
 
 	}

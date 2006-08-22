@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.util.DomNodeUtils;
 import com.redv.blogmover.util.HttpDocument;
 
@@ -34,7 +34,7 @@ public class BaiduLogin {
 	}
 
 	public void login(String username, String password)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		String action = "http://passport.baidu.com/?login&tpl=sp&tpl_reg=sp&u=http://hi.baidu.com/";
 		String u = "http://hi.baidu.com/";
 		NameValuePair[] parameters = new NameValuePair[4];
@@ -56,7 +56,7 @@ public class BaiduLogin {
 			}
 		}
 		if (!ok) {
-			throw new BlogRemoverException("登录失败，用户名或者密码错误。");
+			throw new BlogMoverException("登录失败，用户名或者密码错误。");
 		}
 	}
 }

@@ -15,6 +15,6 @@ public interface BlogWriter extends Statusable {
 	 * 
 	 * @param webLogs
 	 */
-	void write(List<WebLog> webLogs) throws BlogRemoverException;
+	void write(List<WebLog> webLogs) throws BlogMoverException;
 
 }

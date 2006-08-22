@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.bsps.hexun.HexunLogin;
 import com.redv.blogmover.util.HttpDocument;
 
@@ -30,7 +30,7 @@ public class HexunLoginTest extends TestCase {
 	 * Test method for 'com.redv.blogremover.bsps.hexun.HexunLogin.login(String,
 	 * String, String)'
 	 */
-	public void testLogin() throws BlogRemoverException {
+	public void testLogin() throws BlogMoverException {
 		hexunLogin.login("blogremover", "wangjing",
 				"http://blog.hexun.com/group/inc/login.aspx");
 	}

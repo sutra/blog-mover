@@ -13,7 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.redv.blogmover.Attachment;
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.BlogWriter;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.Status;
@@ -43,7 +43,7 @@ public abstract class AbstractBlogWriter implements BlogWriter {
 	 * @see com.redv.blogremover.BlogWriter#write(java.util.List)
 	 */
 	@SuppressWarnings("unchecked")
-	public void write(List<WebLog> webLogs) throws BlogRemoverException {
+	public void write(List<WebLog> webLogs) throws BlogMoverException {
 		this.status.setTotalCount(webLogs.size());
 		// 对日志排序。
 		Collections.sort(webLogs);
@@ -82,7 +82,7 @@ public abstract class AbstractBlogWriter implements BlogWriter {
 
 	@SuppressWarnings("unchecked")
 	private void write(WebLog webLog, Map<Attachment, String> attachments)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		log.debug("开始写入日志：" + webLog.getTitle());
 		this.writeBlog(webLog, attachments);
 		List<Comment> comments = webLog.getComments();
@@ -102,35 +102,35 @@ public abstract class AbstractBlogWriter implements BlogWriter {
 	/**
 	 * 在开始写入前调用。
 	 * 
-	 * @throws BlogRemoverException
+	 * @throws BlogMoverException
 	 */
-	protected abstract void begin() throws BlogRemoverException;
+	protected abstract void begin() throws BlogMoverException;
 
 	/**
 	 * 在所有的日志都写入结束后调用。
 	 * 
-	 * @throws BlogRemoverException
+	 * @throws BlogMoverException
 	 */
-	protected abstract void end() throws BlogRemoverException;
+	protected abstract void end() throws BlogMoverException;
 
 	/**
 	 * 写入单个日志。
 	 * 
 	 * @param webLog
 	 * @param attachments
-	 * @throws BlogRemoverException
+	 * @throws BlogMoverException
 	 */
 	protected abstract void writeBlog(WebLog webLog,
-			Map<Attachment, String> attachments) throws BlogRemoverException;
+			Map<Attachment, String> attachments) throws BlogMoverException;
 
 	/**
 	 * 写入一个评论。
 	 * 
 	 * @param comment
-	 * @throws BlogRemoverException
+	 * @throws BlogMoverException
 	 */
 	protected abstract void writeComment(Comment comment)
-			throws BlogRemoverException;
+			throws BlogMoverException;
 
 	/**
 	 * 写入一个附件。

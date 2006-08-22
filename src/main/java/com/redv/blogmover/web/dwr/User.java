@@ -15,7 +15,7 @@ import org.directwebremoting.WebContextFactory;
 import org.springframework.web.util.WebUtils;
 
 import com.redv.blogmover.BlogReader;
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.BlogWriter;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.UserFacade;
@@ -159,21 +159,21 @@ public class User implements Serializable {
 	 * 
 	 * @param property
 	 * @param value
-	 * @throws BlogRemoverException
+	 * @throws BlogMoverException
 	 */
 	public void setReaderProperty(String property, String value)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		UserFacade facade = this.getUserFacade();
 		try {
 			facade.setReaderProperty(property, value);
-		} catch (BlogRemoverException e) {
+		} catch (BlogMoverException e) {
 			log.error(e);
 			throw e;
 		}
 	}
 
 	public void setReaderProperties(String[] properties, String[] values)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		UserFacade facade = this.getUserFacade();
 		for (int i = 0; i < properties.length; i++) {
 			log.debug("Setting reader property: " + properties[i] + ", value: "
@@ -187,21 +187,21 @@ public class User implements Serializable {
 	 * 
 	 * @param property
 	 * @param value
-	 * @throws BlogRemoverException
+	 * @throws BlogMoverException
 	 */
 	public void setWriterProperty(String property, String value)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		UserFacade facade = this.getUserFacade();
 		try {
 			facade.setWriterProperty(property, value);
-		} catch (BlogRemoverException e) {
+		} catch (BlogMoverException e) {
 			log.error(e);
 			throw e;
 		}
 	}
 
 	public void setWriterProperties(String[] properties, String[] values)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		UserFacade facade = this.getUserFacade();
 		for (int i = 0; i < properties.length; i++) {
 			log.debug("Setting writer property: " + properties[i] + ", value: "
@@ -213,13 +213,13 @@ public class User implements Serializable {
 	/**
 	 * 读取。
 	 * 
-	 * @throws BlogRemoverException
+	 * @throws BlogMoverException
 	 */
-	public void read() throws BlogRemoverException {
+	public void read() throws BlogMoverException {
 		log.debug("read() called.");
 		try {
 			this.getUserFacade().read();
-		} catch (BlogRemoverException e) {
+		} catch (BlogMoverException e) {
 			log.error(e);
 			throw e;
 		} catch (RuntimeException e) {
@@ -231,14 +231,14 @@ public class User implements Serializable {
 	/**
 	 * 写入。
 	 * 
-	 * @throws BlogRemoverException
+	 * @throws BlogMoverException
 	 */
 	@SuppressWarnings("unchecked")
-	public void write() throws BlogRemoverException {
+	public void write() throws BlogMoverException {
 		log.debug("write() called.");
 		try {
 			this.getUserFacade().write();
-		} catch (BlogRemoverException e) {
+		} catch (BlogMoverException e) {
 			log.error(e);
 			throw e;
 		} catch (RuntimeException e) {

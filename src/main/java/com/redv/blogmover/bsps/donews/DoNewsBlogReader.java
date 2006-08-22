@@ -18,7 +18,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.impl.WebLogImpl;
@@ -73,7 +73,7 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 	 * @see com.redv.blogremover.impl.AbstractBlogReader#read()
 	 */
 	@Override
-	public List<WebLog> read() throws BlogRemoverException {
+	public List<WebLog> read() throws BlogMoverException {
 		webLogs = new ArrayList<WebLog>();
 		checkLogin();
 		String url = "http://writeblog.donews.com/EditPosts.aspx?pg=";
@@ -89,7 +89,7 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 			}
 		}
 		if (pager == null) {
-			throw new BlogRemoverException("没有找到分页部分代码，无法继续。");
+			throw new BlogMoverException("没有找到分页部分代码，无法继续。");
 		}
 		NodeList children = pager.getChildNodes().item(0).getChildNodes().item(
 				0).getChildNodes();
@@ -106,7 +106,7 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 			}
 		}
 		if (last == null) {
-			throw new BlogRemoverException("没有找到最后一页标识，无法继续。");
+			throw new BlogMoverException("没有找到最后一页标识，无法继续。");
 		}
 		String href = last.getAttributes().getNamedItem("href").getNodeValue();
 		String pageString = href.substring("EditPosts.aspx?pg=".length(), href
@@ -124,7 +124,7 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 		return this.webLogs;
 	}
 
-	private void checkLogin() throws DOMException, BlogRemoverException {
+	private void checkLogin() throws DOMException, BlogMoverException {
 		if (!loggedIn) {
 			doNewsLogin.login(username, password, identifyingCode);
 			loggedIn = true;

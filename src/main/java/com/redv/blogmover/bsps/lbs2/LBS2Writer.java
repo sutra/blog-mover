@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import java.util.Map;
 
 import com.redv.blogmover.Attachment;
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogWriter;
@@ -125,13 +125,13 @@ public class LBS2Writer extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#start()
 	 */
 	@Override
-	protected void begin() throws BlogRemoverException {
+	protected void begin() throws BlogMoverException {
 		try {
 			this.prepareStatement();
 		} catch (SQLException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} catch (ClassNotFoundException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		}
 	}
 
@@ -141,17 +141,17 @@ public class LBS2Writer extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#end()
 	 */
 	@Override
-	protected void end() throws BlogRemoverException {
+	protected void end() throws BlogMoverException {
 		try {
 			this.closeStatement();
 		} catch (SQLException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		}
 	}
 
 	@Override
 	protected void writeBlog(WebLog webLog, Map<Attachment, String> attachments)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		try {
 			this.blogPstmt.setString(1, webLog.getTitle());
 			this.blogPstmt.setString(2, webLog.getBody());
@@ -160,7 +160,7 @@ public class LBS2Writer extends AbstractBlogWriter {
 			this.blogPstmt.setInt(4, webLog.getComments().size());
 			this.blogPstmt.executeUpdate();
 		} catch (SQLException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		}
 	}
 
@@ -170,7 +170,7 @@ public class LBS2Writer extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#writeComment(com.redv.blogremover.Comment)
 	 */
 	@Override
-	protected void writeComment(Comment comment) throws BlogRemoverException {
+	protected void writeComment(Comment comment) throws BlogMoverException {
 		try {
 			int id = 0;
 			ResultSet rs = this.idPstmt.executeQuery();
@@ -185,7 +185,7 @@ public class LBS2Writer extends AbstractBlogWriter {
 					.getPublishedDate().getTime()));
 			this.commentPstmt.executeUpdate();
 		} catch (SQLException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		}
 	}
 

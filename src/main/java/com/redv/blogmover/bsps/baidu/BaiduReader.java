@@ -20,7 +20,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.impl.WebLogImpl;
@@ -72,7 +72,7 @@ public class BaiduReader extends AbstractBlogReader {
 	 * @see com.redv.blogremover.impl.AbstractBlogReader#read()
 	 */
 	@Override
-	public List<WebLog> read() throws BlogRemoverException {
+	public List<WebLog> read() throws BlogMoverException {
 		webLogs = new ArrayList<WebLog>();
 		checkLogin();
 		parseSetting();
@@ -88,7 +88,7 @@ public class BaiduReader extends AbstractBlogReader {
 		return webLogs;
 	}
 
-	private void checkLogin() throws BlogRemoverException {
+	private void checkLogin() throws BlogMoverException {
 		if (!loggedIn) {
 			baiduLogin.login(username, password);
 		}

@@ -13,7 +13,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import com.redv.blogmover.BlogRemoverRuntimeException;
+import com.redv.blogmover.BlogMoverRuntimeException;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
@@ -36,7 +36,7 @@ class HexunLogin {
 		Document document = httpDocument.get(url);
 		NodeList forms = document.getElementsByTagName("form");
 		if (forms.getLength() == 0) {
-			throw new BlogRemoverRuntimeException("登录表单获取失败，和讯 Blog 登录服务器故障。");
+			throw new BlogMoverRuntimeException("登录表单获取失败，和讯 Blog 登录服务器故障。");
 		}
 		Element form = (Element) forms.item(0);
 		String action = form.getAttribute("action");
@@ -69,7 +69,7 @@ class HexunLogin {
 		for (int i = 0; i < scripts.getLength(); i++) {
 			String alert = scripts.item(i).getFirstChild().getNodeValue();
 			if (alert.startsWith("alert")) {
-				throw new BlogRemoverRuntimeException("用户名或密码错误。");
+				throw new BlogMoverRuntimeException("用户名或密码错误。");
 			}
 		}
 	}

@@ -22,7 +22,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.util.DomNodeUtils;
 
@@ -51,7 +51,7 @@ class CSDNBlogWriterUtil implements Serializable {
 	}
 
 	void login() throws HttpException, IOException, SAXException,
-			BlogRemoverException {
+			BlogMoverException {
 		log.debug("Start of login...");
 		loginPassport();
 
@@ -66,7 +66,7 @@ class CSDNBlogWriterUtil implements Serializable {
 			log.debug("---- Login response start ----");
 			log.error("登录失败： " + s);
 			log.debug("---- Login response end ----");
-			throw new BlogRemoverException("Login failed.(CSDN Blog)");
+			throw new BlogMoverException("Login failed.(CSDN Blog)");
 		}
 		log.debug("End of login.");
 	}
@@ -99,7 +99,7 @@ class CSDNBlogWriterUtil implements Serializable {
 	}
 
 	void loginPassport() throws HttpException, IOException, SAXException,
-			BlogRemoverException {
+			BlogMoverException {
 		Document loginPageDocument = writer.loginPageDocument;
 
 		// Parse form.
@@ -168,7 +168,7 @@ class CSDNBlogWriterUtil implements Serializable {
 			log.debug("---- Login passport response start ----");
 			log.debug(s);
 			log.debug("---- Login passport response end ----");
-			throw new BlogRemoverException("Login failed.(CSDN Passport)");
+			throw new BlogMoverException("Login failed.(CSDN Passport)");
 		}
 	}
 
@@ -315,16 +315,16 @@ class CSDNBlogWriterUtil implements Serializable {
 	/**
 	 * 检查是否已经登录。如果没有登录，尝试登录。
 	 */
-	void checkLogin() throws BlogRemoverException {
+	void checkLogin() throws BlogMoverException {
 		if (!writer.loggedIn) {
 			try {
 				login();
 			} catch (HttpException e) {
-				throw new BlogRemoverException(e);
+				throw new BlogMoverException(e);
 			} catch (IOException e) {
-				throw new BlogRemoverException(e);
+				throw new BlogMoverException(e);
 			} catch (SAXException e) {
-				throw new BlogRemoverException(e);
+				throw new BlogMoverException(e);
 			}
 			writer.loggedIn = true;
 		}

@@ -19,8 +19,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.Attachment;
-import com.redv.blogmover.BlogRemoverException;
-import com.redv.blogmover.BlogRemoverRuntimeException;
+import com.redv.blogmover.BlogMoverException;
+import com.redv.blogmover.BlogMoverRuntimeException;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogWriter;
@@ -115,7 +115,7 @@ public class DoNewsBlogWriter extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#start()
 	 */
 	@Override
-	protected void begin() throws BlogRemoverException {
+	protected void begin() throws BlogMoverException {
 		if (!loggedIn) {
 			log.debug("尚未登录，开始登录。");
 			doNewsLogin.login(username, password, identifyingCode);
@@ -130,7 +130,7 @@ public class DoNewsBlogWriter extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#end()
 	 */
 	@Override
-	protected void end() throws BlogRemoverException {
+	protected void end() throws BlogMoverException {
 
 	}
 
@@ -142,11 +142,11 @@ public class DoNewsBlogWriter extends AbstractBlogWriter {
 	 */
 	@Override
 	protected void writeBlog(WebLog webLog, Map<Attachment, String> attachments)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		Document document = this.getPostForm();
 		Element titleElement = document.getElementById("Editor_Edit_txbTitle");
 		if (titleElement == null) {
-			throw new BlogRemoverRuntimeException("没有找到发表文章的表单。");
+			throw new BlogMoverRuntimeException("没有找到发表文章的表单。");
 		}
 
 		List<NameValuePair> parameters = this.buildPostParameters(document,
@@ -245,7 +245,7 @@ public class DoNewsBlogWriter extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#writeComment(com.redv.blogremover.Comment)
 	 */
 	@Override
-	protected void writeComment(Comment comment) throws BlogRemoverException {
+	protected void writeComment(Comment comment) throws BlogMoverException {
 		// TODO Auto-generated method stub
 
 	}

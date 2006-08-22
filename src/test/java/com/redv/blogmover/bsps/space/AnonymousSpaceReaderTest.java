@@ -10,7 +10,7 @@ import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.bsps.space.AnonymousSpaceReader;
 
@@ -44,12 +44,12 @@ public class AnonymousSpaceReaderTest extends TestCase {
 	public void testRead() {
 		try {
 			read("jf8264");
-		} catch (BlogRemoverException e) {
+		} catch (BlogMoverException e) {
 			log.debug(e.getMessage());
 		}
 	}
 
-	private void read(String spaceName) throws BlogRemoverException {
+	private void read(String spaceName) throws BlogMoverException {
 		bsp.setSpaceName(spaceName);
 		List<WebLog> webLogs = bsp.read();
 		for (WebLog webLog : webLogs) {

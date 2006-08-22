@@ -9,7 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.redv.blogmover.BlogReader;
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.WebLog;
 
@@ -35,7 +35,7 @@ public abstract class AbstractBlogReader implements BlogReader {
 	 * 
 	 * @see com.redv.blogremover.BlogReader#read()
 	 */
-	public abstract List<WebLog> read() throws BlogRemoverException;
+	public abstract List<WebLog> read() throws BlogMoverException;
 
 	/*
 	 * (non-Javadoc)

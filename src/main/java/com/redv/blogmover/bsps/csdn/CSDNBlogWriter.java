@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.BlogWriter;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.WebLog;
@@ -132,7 +132,7 @@ public class CSDNBlogWriter implements BlogWriter {
 	 * @see com.redv.blogremover.BlogWriter#write(java.util.List)
 	 */
 	@SuppressWarnings("unchecked")
-	public void write(List<WebLog> webLogs) throws BlogRemoverException {
+	public void write(List<WebLog> webLogs) throws BlogMoverException {
 		log.debug("write(java.util.List) called. webLogs.size()="
 				+ webLogs.size());
 		this.status.setTotalCount(webLogs.size());
@@ -147,11 +147,11 @@ public class CSDNBlogWriter implements BlogWriter {
 				writerUtil.write(webLog);
 				this.status.setCurrentCount(++i);
 			} catch (HttpException e) {
-				throw new BlogRemoverException(e);
+				throw new BlogMoverException(e);
 			} catch (IOException e) {
-				throw new BlogRemoverException(e);
+				throw new BlogMoverException(e);
 			} catch (SAXException e) {
-				throw new BlogRemoverException(e);
+				throw new BlogMoverException(e);
 			}
 		}
 	}
@@ -160,7 +160,7 @@ public class CSDNBlogWriter implements BlogWriter {
 		return status;
 	}
 
-	public byte[] getIdentifyingCodeImage() throws BlogRemoverException {
+	public byte[] getIdentifyingCodeImage() throws BlogMoverException {
 		String showExPwdUrl = "http://passport.csdn.net/"
 				+ this.writerUtil.getShowExPwdUrl(loginPageDocument);
 		showExPwdUrl = showExPwdUrl.replace(" ", "%20");
@@ -168,9 +168,9 @@ public class CSDNBlogWriter implements BlogWriter {
 		try {
 			return this.showExPwd(showExPwdUrl);
 		} catch (HttpException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		} catch (IOException e) {
-			throw new BlogRemoverException(e);
+			throw new BlogMoverException(e);
 		}
 	}
 

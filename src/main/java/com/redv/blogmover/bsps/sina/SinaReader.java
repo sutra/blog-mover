@@ -24,8 +24,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.redv.blogmover.BlogRemoverException;
-import com.redv.blogmover.BlogRemoverRuntimeException;
+import com.redv.blogmover.BlogMoverException;
+import com.redv.blogmover.BlogMoverRuntimeException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.impl.WebLogImpl;
@@ -92,7 +92,7 @@ public class SinaReader extends AbstractBlogReader {
 	 * @see com.redv.blogremover.impl.AbstractBlogReader#read()
 	 */
 	@Override
-	public List<WebLog> read() throws BlogRemoverException {
+	public List<WebLog> read() throws BlogMoverException {
 		if (!loggedIn) {
 			new SinaLogin(httpDocument).login(username, password,
 					identifyingCode);
@@ -136,19 +136,19 @@ public class SinaReader extends AbstractBlogReader {
 	private void parse(Document document) {
 		NodeList nodeList = document.getChildNodes();
 		if (nodeList.getLength() <= 0) {
-			throw new BlogRemoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
+			throw new BlogMoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
 		}
 		nodeList = nodeList.item(0).getChildNodes();
 		if (nodeList.getLength() <= 1) {
-			throw new BlogRemoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
+			throw new BlogMoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
 		}
 		nodeList = nodeList.item(1).getChildNodes();
 		if (nodeList.getLength() <= 19) {
-			throw new BlogRemoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
+			throw new BlogMoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
 		}
 		nodeList = nodeList.item(19).getChildNodes();
 		if (nodeList.getLength() <= 0) {
-			throw new BlogRemoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
+			throw new BlogMoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
 		}
 		Node node = nodeList.item(0);
 		String str = node.getNodeValue();
@@ -204,7 +204,7 @@ public class SinaReader extends AbstractBlogReader {
 		Document document = httpDocument.get(editUrl);
 		Element element = document.getElementById("blog_title");
 		if (element == null) {
-			throw new BlogRemoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
+			throw new BlogMoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
 		}
 		webLog.setTitle(element.getAttribute("value"));
 		log.debug("title: " + webLog.getTitle());

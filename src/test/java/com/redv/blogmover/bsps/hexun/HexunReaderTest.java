@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.bsps.hexun.HexunReader;
 
@@ -28,7 +28,7 @@ public class HexunReaderTest extends TestCase {
 	/*
 	 * Test method for 'com.redv.blogremover.bsps.hexun.HexunReader.read()'
 	 */
-	public void testRead() throws BlogRemoverException {
+	public void testRead() throws BlogMoverException {
 		hexunReader.setUsername("blogremover");
 		hexunReader.setPassword("wangjing");
 		List<WebLog> webLogs = hexunReader.read();

@@ -21,7 +21,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.Attachment;
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogWriter;
@@ -92,7 +92,7 @@ public class SinaWriter extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#start()
 	 */
 	@Override
-	protected void begin() throws BlogRemoverException {
+	protected void begin() throws BlogMoverException {
 		if (!loggedIn) {
 			new SinaLogin(httpDocument).login(username, password,
 					identifyingCode);
@@ -106,7 +106,7 @@ public class SinaWriter extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#end()
 	 */
 	@Override
-	protected void end() throws BlogRemoverException {
+	protected void end() throws BlogMoverException {
 
 	}
 
@@ -118,7 +118,7 @@ public class SinaWriter extends AbstractBlogWriter {
 	 */
 	@Override
 	protected void writeBlog(WebLog webLog, Map<Attachment, String> attachments)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		String action = "http://blog.sina.com.cn/control/writing/scriber/article_post.php";
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 
@@ -208,7 +208,7 @@ public class SinaWriter extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#writeComment(com.redv.blogremover.Comment)
 	 */
 	@Override
-	protected void writeComment(Comment comment) throws BlogRemoverException {
+	protected void writeComment(Comment comment) throws BlogMoverException {
 		// TODO Auto-generated method stub
 
 	}

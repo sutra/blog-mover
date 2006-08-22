@@ -13,7 +13,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 
 import com.redv.blogmover.Attachment;
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogWriter;
@@ -68,7 +68,7 @@ public class BaiduWriter extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#start()
 	 */
 	@Override
-	protected void begin() throws BlogRemoverException {
+	protected void begin() throws BlogMoverException {
 		new BaiduLogin(httpDocument).login(username, password);
 	}
 
@@ -78,7 +78,7 @@ public class BaiduWriter extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#end()
 	 */
 	@Override
-	protected void end() throws BlogRemoverException {
+	protected void end() throws BlogMoverException {
 
 	}
 
@@ -90,7 +90,7 @@ public class BaiduWriter extends AbstractBlogWriter {
 	 */
 	@Override
 	protected void writeBlog(WebLog webLog, Map<Attachment, String> attachments)
-			throws BlogRemoverException {
+			throws BlogMoverException {
 		String action = "http://hi.baidu.com/blogremover/commit";
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 
@@ -130,7 +130,7 @@ public class BaiduWriter extends AbstractBlogWriter {
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#writeComment(com.redv.blogremover.Comment)
 	 */
 	@Override
-	protected void writeComment(Comment comment) throws BlogRemoverException {
+	protected void writeComment(Comment comment) throws BlogMoverException {
 		// TODO Auto-generated method stub
 
 	}

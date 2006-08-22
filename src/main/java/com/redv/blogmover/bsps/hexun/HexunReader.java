@@ -15,8 +15,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.redv.blogmover.BlogRemoverException;
-import com.redv.blogmover.BlogRemoverRuntimeException;
+import com.redv.blogmover.BlogMoverException;
+import com.redv.blogmover.BlogMoverRuntimeException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.util.DomNodeUtils;
@@ -101,7 +101,7 @@ public class HexunReader extends AbstractBlogReader {
 	 * @see com.redv.blogremover.impl.AbstractBlogReader#read()
 	 */
 	@Override
-	public List<WebLog> read() throws BlogRemoverException {
+	public List<WebLog> read() throws BlogMoverException {
 		new HexunLogin(httpDocument).login(username, password,
 				"http://blog.hexun.com/group/inc/login.aspx");
 		// String url = "http://hexun.com/admin_index.aspx";
@@ -137,7 +137,7 @@ public class HexunReader extends AbstractBlogReader {
 			}
 		}
 		if (table == null) {
-			throw new BlogRemoverRuntimeException("没有找到文章列表表格。");
+			throw new BlogMoverRuntimeException("没有找到文章列表表格。");
 		}
 		NodeList trs = table.getChildNodes();
 		Node tr;

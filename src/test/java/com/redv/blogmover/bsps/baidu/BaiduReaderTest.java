@@ -3,7 +3,7 @@
  */
 package com.redv.blogmover.bsps.baidu;
 
-import com.redv.blogmover.BlogRemoverException;
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.bsps.baidu.BaiduReader;
 
 import junit.framework.TestCase;
@@ -27,9 +27,9 @@ public class BaiduReaderTest extends TestCase {
 
 	/**
 	 * Test method for {@link com.redv.blogmover.bsps.baidu.BaiduReader#read()}.
-	 * @throws BlogRemoverException 
+	 * @throws BlogMoverException 
 	 */
-	public void testRead() throws BlogRemoverException {
+	public void testRead() throws BlogMoverException {
 		baiduReader.read();
 	}
 

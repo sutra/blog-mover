@@ -25,7 +25,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.redv.blogmover.BlogRemoverRuntimeException;
+import com.redv.blogmover.BlogMoverRuntimeException;
 
 /**
  * @author Joe
@@ -185,9 +185,9 @@ public class HttpDocument implements Serializable {
 		try {
 			return getDocumentInternal(method);
 		} catch (SAXException e) {
-			throw new BlogRemoverRuntimeException(e);
+			throw new BlogMoverRuntimeException(e);
 		} catch (IOException e) {
-			throw new BlogRemoverRuntimeException(e);
+			throw new BlogMoverRuntimeException(e);
 		}
 	}
 
@@ -227,7 +227,7 @@ public class HttpDocument implements Serializable {
 				method.releaseConnection();
 				document = get(newuri);
 			} else {
-				throw new BlogRemoverRuntimeException("Invalid redirect");
+				throw new BlogMoverRuntimeException("Invalid redirect");
 			}
 		} else {
 			if (log.isDebugEnabled()) {
@@ -301,9 +301,9 @@ public class HttpDocument implements Serializable {
 		try {
 			httpClient.executeMethod(method);
 		} catch (HttpException e) {
-			throw new BlogRemoverRuntimeException(e);
+			throw new BlogMoverRuntimeException(e);
 		} catch (IOException e) {
-			throw new BlogRemoverRuntimeException(e);
+			throw new BlogMoverRuntimeException(e);
 		}
 	}
 

@@ -30,11 +30,11 @@
 							height="58" width="150" alt="Google Groups">
 					</td>
 					<td colspan="2" align="center">
-						<b> Subscribe to Blog Remover（博客搬家工具） </b>
+						<b> Subscribe to Blog Mover（博客搬家工具） </b>
 					</td>
 				</tr>
 				<form
-					action="http://groups.google.com/group/blog-remover/boxsubscribe">
+					action="http://groups.google.com/group/blog-mover/boxsubscribe">
 				<tr>
 					<td>
 						Email:
@@ -54,7 +54,7 @@
 				</form>
 				<tr>
 					<td colspan="2" align="center">
-						<a href="http://groups.google.com/group/blog-remover"> Browse
+						<a href="http://groups.google.com/group/blog-mover"> Browse
 							Archives </a> at
 						<a href="http://groups.google.com/"> groups.google.com </a>
 					</td>
