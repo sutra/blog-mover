@@ -3,16 +3,15 @@
  */
 package com.redv.blogmover.bsps.bokee;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
-import org.xml.sax.SAXException;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
+import com.redv.blogmover.util.HttpDocument;
 
 /**
  * @author Joe
@@ -27,8 +26,36 @@ public class BokeeReader extends AbstractBlogReader {
 
 	private HttpClient httpClient;
 
+	private HttpDocument httpDocument;
+
+	private BokeeLogin bokeeLogin;
+
+	private String username;
+
+	private String password;
+
+	/**
+	 * @param password
+	 *            the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @param username
+	 *            the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public BokeeReader() {
 		httpClient = new HttpClient();
+		httpClient.getParams().setCookiePolicy(
+				CookiePolicy.BROWSER_COMPATIBILITY);
+		httpDocument = new HttpDocument(httpClient, "GBK");
+		bokeeLogin = new BokeeLogin(httpClient, httpDocument);
 	}
 
 	/*
@@ -38,6 +65,7 @@ public class BokeeReader extends AbstractBlogReader {
 	 */
 	@Override
 	public List<WebLog> read() throws BlogMoverException {
+		bokeeLogin.login(username, password);
 		return null;
 	}
 

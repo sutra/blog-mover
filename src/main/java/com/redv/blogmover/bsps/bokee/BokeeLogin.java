@@ -3,26 +3,17 @@
  */
 package com.redv.blogmover.bsps.bokee;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.NameValuePair;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cyberneko.html.parsers.DOMParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
-import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
@@ -30,8 +21,10 @@ import com.redv.blogmover.util.HttpDocument;
  * @version 1.0
  */
 public class BokeeLogin {
+	@SuppressWarnings("unused")
 	private static final Log log = LogFactory.getLog(BokeeLogin.class);
 
+	@SuppressWarnings("unused")
 	private HttpClient httpClient;
 
 	private HttpDocument httpDocument;
