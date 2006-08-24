@@ -45,9 +45,16 @@
             <task id="5" name="Baidu 读" color="#8cb6ce" meeting="false" start="2006-08-01" duration="3" complete="100" priority="1" expand="true"/>
         </task>
         <task id="6" name="Sohu 写" color="#8cb6ce" meeting="false" start="2006-08-04" duration="2" complete="100" priority="1" expand="true"/>
-        <task id="7" name="博客写" color="#ffffff" meeting="false" start="2006-08-08" duration="4" complete="0" priority="1" expand="true"/>
-        <task id="8" name="和讯写" color="#8cb6ce" meeting="false" start="2006-08-11" duration="2" complete="0" priority="1" expand="true"/>
-        <task id="9" name="Email 写（MSN Space测试）" color="#8cb6ce" meeting="false" start="2006-08-15" duration="5" complete="0" priority="1" expand="true"/>
+        <task id="7" name="博客写" color="#ffffff" meeting="false" start="2006-08-08" duration="4" complete="0" priority="1" expand="true">
+            <notes><![CDATA[任务取消。
+]]></notes>
+        </task>
+        <task id="8" name="和讯写" color="#ffffff" meeting="false" start="2006-08-11" duration="2" complete="0" priority="1" expand="true">
+            <notes><![CDATA[任务取消。]]></notes>
+        </task>
+        <task id="9" name="Email 写（MSN Space测试）" color="#ffffff" meeting="false" start="2006-08-15" duration="5" complete="0" priority="1" expand="true">
+            <notes><![CDATA[任务取消。]]></notes>
+        </task>
         <task id="14" name="CSDN Login 修复" color="#8cb6ce" meeting="false" start="2006-08-22" duration="4" complete="0" priority="1" expand="true"/>
         <task id="15" name="敏思博客读" color="#8cb6ce" meeting="false" start="2006-08-28" duration="3" complete="0" priority="1" expand="true"/>
         <task id="16" name="导出为 RSS 2.0" color="#8cb6ce" meeting="false" start="2006-08-31" duration="3" complete="0" priority="1" expand="true"/>
