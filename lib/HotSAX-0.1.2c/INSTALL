@@ -1,0 +1,27 @@
+HotSAX installation
+
+This has been tested only with Java 2 J2SE jdk1.3. It should work in any 1.1 or later.
+
+Make sure lib/hotsax.jar and lib/xerces.jar is in your CLASSPATH.  
+You will need the Xerces XML library. You can get it from
+http://xml.apache.org/xerces-j/index.html
+
+If you want to run the test suite, you will need Pat Niemeyer's BeanShell.
+http://www.beanshell.org
+Edit the setclasspath shell script to indicate where your jar files are.
+
+To run the test suite:
+  cd ./test
+  ./test.sh     - Unix shell script test harness. Sorry no Windows one yet.
+
+
+The Java examples directory contains various examples from the user manual. See the
+user manual (./doc/manual/userman.html) for usage instructions.
+
+Build instructions are in the user manual. Download the buildtools.tar.gz file from
+sourceforge. This contains the Ant jar files.
+
+Documentation instructions are in the Colophon chapter of the user manual. You will need 
+Xalan, the DocBook stylesheets and Xerces. You can get these from the doctools.tar.gz at 
+sourceforge.
+  

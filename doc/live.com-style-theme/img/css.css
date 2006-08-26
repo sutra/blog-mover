@@ -1,0 +1,18 @@
+.line {
+	background-color: #88C1F4;
+	height: 1px;
+}
+a {
+	text-decoration: none;
+	color: #000000;
+}
+.titleb {
+	font-weight: bold;
+}
+
+a:link {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}

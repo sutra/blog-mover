@@ -1,0 +1,140 @@
+This is where you get your HotSAX!
+
+This is version 0.1.1 of HotSAX. It is in pre-Alpha release state.
+The home site of this project is http://hotsax.sourceforge.net
+The project page is at http://sourceforge.net/projects/hotsax/
+
+
+HotSAX is a small (~25k) HTML-aware SAX2 compliant parser. SAX is 'Simple API for
+XML' which was developed by David Meggison and others on the xml-dev mailing
+list. (http://www.meggison.com/SAX). SAX parsers parse XML by generating events
+for start tags, text, and end tags which trigger event handlers in your code. 
+They are meant to be faster and use less memory than an equivalent DOM parser. 
+SAX2 adds lexical handling extensions like comments and CDATA blocks. 
+
+Until now, you needed at least well-formed XML as input to a
+SAX parser. With the introduction of HotSAX, you can parse HTML (even badly
+formed HTML,) and still generate SAX events.
+
+Why would you want to do this? This tool is designed to help build other useful
+things, like link spiders, page scrapers, HTML to other format converters and 
+scripted web browsers. A quick example would be a simple text only browser like 
+'lynx'. 
+
+You can embed HotSAX in larger projects like a headline grabber for a content
+management system. Similar to what My Yahoo does when it displays the top
+stories from CNET, NY Times etc. The small memory footprint of HotSAX enables it
+to be embedded in mobile internet devices like the Handspring PDA and the Nokia Java
+enabled phone. A useful example of this would be grabbing stock quotes from a web site.
+
+HotSAX can deal with almost any HTML you can thow at it. It doesn't care if
+you use single or double quoted attributes or no quotes at all. It understands
+the arbitrary case (mixed upper and lower case) for element and attribute
+names. HotSAX will normalize these for you as you need them, The case can be
+converted to all UPPER (default), lower or ignored.
+
+The elements don't have to have matching end tags and can even interleave each
+other. A common occurance of this occurs in sites trying to appease both
+Netscape and IE browsers like this:
+<LAYER>
+<DIV>
+  text
+</LAYER>
+<NOLAYER>
+</NOLAYER>
+</DIV>
+
+HotSAX doesn't try to fix this, the events just fire in the sequence they are
+recognized. This implys that if you attached some other SAX aware filter to the
+output like DOMBuilder, you might get unexpected results (or even exceptions)
+with poorly formatted HTML. A subproject for HotSAX might be to build a 
+Tidy-like filter. HotSAX does a little bit of canonization like Tidy already. See the
+test/hazel directory for a test suite that cleans up your HTML without
+checking it for syntax.
+
+HotSAX is by default XML 1.0 compliant, since well formed, consistent case tags
+and attributes are what XML wants; they are ok by HotSAX too. This means that
+HotSAX handles "text/html", "text/xml" and "text/xhtml" as well. HotSAX is
+non-validating so if you need to do any of that, I'd suggest just using the
+SAXParser in xerces or another XML parsing package. To validate HTML, I'd look
+to some SGML stuff. Check out http://jclark.com/sp/index.html. You can convert
+HTML into XML with the W3C's Tidy program. Check out
+http://www.w3c.org/People/Ragget/tidy.html.
+
+JTidy, a port from C to Java is at http://sourceforge.net/projects/jtidy.
+You could use JTidy to first convert your HTML into a DOM, then walk the tree
+firing SAX events and you would have the equivalent of what HotSAX does. 
+<shaneless-plug>
+But this would require a much larger memory footprint and in my experience, runs a
+lot slower. If you need simple HTML parsing, then you need HotSAX!
+</shamless-plug> 
+
+
+Getting some HotSAX:
+	FTP  ftp://hotsax.sourceforge.net/hotsax-0.1.3.tar.gz
+
+Usage:
+   Requirements: Java JDK 1.1+
+   		 Xerces XML library* (xerces.jar)
+		 HotSAX (hotsax.jar)
+   
+   import org.xml.sax.*;
+   import org.xml.sax.helpers.*;
+   
+   ... 
+   // make a ContentHandler implementation with methods to work on start/End
+   // tags, characters etc.
+   public class myContentHandler implements ContentHandler {
+   	....
+   }
+   
+   ...
+   public static void main(String args[]) {
+   	// use factory to create a SAX compliant parser using our HotSAX
+   	XMLReader parser =
+	   XMLReaderFactory.createXMLReader("hotsax.html.sax.SaxParser");
+	
+	// register your contentHandler
+   	parser.setContentHandler(new myContentHandler());
+	parser.parse(args[0]);
+   }
+   
+   
+   
+See MANIFEST for a list of directories and files.
+See COPYING for the LGPL source license HotSAX is released under.
+# Not done:  See the FAQ for more information. 
+The user manual is in doc/manual/userman.html
+Sources are in src/hotsax/html/sax/*.java..
+# Developers should read doc/development/coder.html.  # coming RSN!
+The test/ directory contains some useful BeanShell test cases, like a
+HTML pretty printer, Slashdot headline reader and more.
+The exampes directory contains examples from the user manual organized
+by chapter.
+
+
+
+Thanks to:
+
+Contributers:
+Shamant Ayyar
+Erwin Adi
+Dusty Jewett
+Marco Shulze
+Kunal Gungakhedkar
+Michele Milesi (aka Shadowblade)
+Atul Gosain
+Amu Nair
+	
+Thanks go out to Pat Niemeyer for his invaluable suggestion to use BeanShell as
+the scripting language for the test cases.
+http://www.beanshell.org
+
+Thanks also to the SourceForge people and VA Linux for hosting this project.
+
+
+Ed Howland
+June 2001
+ulysees2001@yahoo.com
+
+*See the FAQ for why we still need the xerces project jar file.

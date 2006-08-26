@@ -1,0 +1,6 @@
+TODO: HotSAX
+
+After 0.1.3
+add support for resolving common character entities such as &nbsp; &lt; 
+Build test/nasty suite of .html files
+

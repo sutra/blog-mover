@@ -1,0 +1,79 @@
+Frequently Asked Questions about HotSAX.
+
+(At this time, FAQ is a misnomer. So far only questions 1,2 and 10 
+have ever actually been asked exactly once. But I usually read the FAQ 
+to get a feeling for a project overall. Obviously, most of these I thought 
+up myself. When I get some time, I'll actually answer them.
+
+This file is covered under the GFDL :
+http://www.gnu.org/copyleft/fld.html Feel free to improve it.
+Ed.)
+
+General questions
+
+1.  What is HotSAX?
+2.  Why did you call it that?
+3.  How can I get HotSAX?
+4.  If HotSAX is a SAX parser, why do you still need xerces.jar?
+5.  What do I need to run HotSAX?
+6.  How is HotSAX licensed?
+7.  What things can I do with HotSAX?
+8.  Are there any known forms of HTML HotSAX can't handle?
+9.  How do I report a bug in HotSAX?
+10. How can I contact the HotSAX developers if I have a question?
+11. How can I join the HotSAX project and contribute to HotSAX?
+
+Developer related questions
+
+12  How do I compile HotSAX?
+13. What is BYACC/J and JFlex and why do I need them?
+14. How do I run the test scripts?
+15. What is BeanShell and where can I get it?
+16. Why not just use Java programs to test it?
+17. How can I embed HotSAX in my program?
+18. How can I run HotSAX on a file rather than a URL?
+19. What is a content handler? 
+20, How do I extract the comments out an HTML file?
+21. HotSAX is not correctly handling parsed entities in my text. What's up with
+that?
+
+1. What is HotSAX?
+	HotSAX is a small footprint, fast SAX2 compliant parser. It is non-validating. It differs from other
+SAX parsers in that it can handle dirty HTML as well as XML or XHTML. 
+
+	HotSAX is meant to be embedded in small memory devices like PDAs and cell phones, like the new Nokia
+Java enabled mobile phone. You can create a "midlet" with HotSAX for example that scrapes stock quotes for you.
+
+	You can use HotSAX in many environments from large to small. It is helpful in content management, personal
+organizers, building web agents or Internet spiders.
+ 
+
+2. Why did you call it that?
+	Several people accused me of just creating a cutesy name to get it recognized. I plead the fifth. The 
+actual name comes from the practice of naming HTML related tools with Hot prepended. E.g. HotMetal - the HTMl
+editor, HotMail - the HTML mail app. 
+
+   HotSAX is the first HTML-aware SAX parser I know of.
+
+4.  If HotSAX is a SAX parser, why do you still need xerces.jar?
+	Xerces.jar is needed to supply the various org.xml.sax.* interface definitions. It is also useful in that
+it contains a stub DefaultHandler and a XMLReaderFactory. Eventually, as we near the 1.0 release, HotSAX will
+be a standalone SAX jar file.
+
+6.  How is HotSAX licensed?
+	HotSAX is free software.
+	HotSAX is licensed under the GNU Lesser General Public License (LGPL). The Lesser Public License
+was originally named the Library General Public License, which allowed it to be linked to from proprietary
+software. HotSAX can be included in any non-open source project. You can't extend it and distributing the
+library without releasing the source code. For more explanation of this, please visit the Free Software 
+Foundation's web site at http://www.fsf.org.
+
+10. How can I contact the HotSAX developers if I have a question?
+	You can mail me directly at ulysees2001@yahoo,com.
+
+	Or you can contact any of the team members from the SourceForge project page.
+
+	http://sourceforge.net/projects/hotsax.
+
+    Click on "View Members"
+

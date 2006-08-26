@@ -1,0 +1,29 @@
+CHANGES						Changes since the last release
+COPYING						The Lesser General Public License (LGPL)
+License.txt					Our source license statement
+MANIFEST					This file
+README						Introduction to HotSAX
+TODO						Things we know we have to do
+build.sh
+build.bat					Build scripts. Rely on Ant
+build.xml					Ant build file
+doc/						Documentation
+     /manual               User Manual (and someday, the FAQ)					
+	 /docsrc				DocBook (XML) sources for the user manual
+src/
+     hotsax/					HotSAX source files
+	   /html/sax				Main source directory
+       /html/sax/helpers		Various utility classes used by HotSAX
+     org/
+       xml/sax					XML SAX classes : org.xml.sax.*
+       /html/sax/helpers		Various helper classes used by org.xml.sax
+       /html/sax/ext			Various extension classes used by org.xml.sax
+lib/						hotsax.jar - jar library distribution. 
+examples/					Chapter numbered examples from the user manual
+scripts/					Various contributed BeanShell scripts useful with HotSAX 
+scripts/man					The BeanShell script to format the manual.
+test/						Test harnesses.
+test/cleaner				HTML pretty printer
+test/linkchecker			Checks links on your site for 404 errors	
+test/slashdot				Slashdot.org headline grabber. They have a dirty non-HTML 4 home page
+test/hazel					A W3C Tidy like cleaner

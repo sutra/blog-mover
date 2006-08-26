@@ -1,0 +1,30 @@
+0.1.2c Small fixes
+- build.xml: removed classic compiler property
+- test/generic: made url.bash read from the command line
+- Added org.xml.sax classes to the build
+
+0.1.2 Parser Redux
+- Prerelease prior to jump to milestone 0.2.
+- Build process moved to Ant.
+- Added StyleLexer a SemanticLexer flex file to handle <style> elements
+- SemanticLexers added. 
+- User manual rewritten. Uses DocBook XML. DocBook XSL stylesheet to format.
+- Grammar rewritten to parse XML/HTML using onion method.  
+
+0.1.1 Bug Fix
+- Added "file://" scheme handler for InputSource.
+- Improved UserManual.
+- Fixed unquoted attribute values.
+- Added more debugging support. Test scripts now have a debug.bsh as well as a test.bsh.
+- Fixed CDATA handling section. Now works correctly with SAX2 LexicalHandler. Beats Opera and IE in conformance
+- Added xerces.jar to distribution
+- Added example code from the UserManual. See ./examples
+- Added scripts directory for contributions
+
+0.1	first release to SourceForge.
+
+- Created standard directory structure like open source projects
+- Added some docs
+- Added test harnesses with BeanShell scripting
+- Modified package name to hotsax.html.sax
+- Built and tested hotsax.jar
