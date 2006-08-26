@@ -8,14 +8,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN">
 	<head>
-		<title>Blog Mover （博客“搬家公司”、博客通用搬家工具、博客搬家服务）</title>
+		<title>Blog Mover （博客“搬家公司”、博客通用搬家工具、博客搬家服务、博客备份工具）</title>
 		<meta http-equiv="Content-Type"
 			content="application/xhtml-xml; charset=UTF-8" />
 		<meta name="robots" content="all" />
 		<meta name="keywords"
-			content="blog, weblog, 博客, mover, remover, 搬家, 博客搬家, 博客通用搬家工具, 博客搬家服务, 博客搬家软件" />
+			content="blog, weblog, 博客, mover, remover, 搬家, 备份, 博客搬家, 博客通用搬家工具, 博客搬家服务, 博客搬家软件" />
 		<meta name="description"
-			content="Blog Mover （博客通用搬家工具）可以帮你的博客搬家，可以在任意 BSP 之前自由地搬迁。" />
+			content="Blog Mover （博客通用搬家工具）可以帮你的博客搬家（备份），可以在任意 BSP 之前自由地搬迁。" />
 		<link rel="stylesheet" type="text/css" media="screen"
 			href="styles/nicetabs.css" />
 		<style type="text/css">
