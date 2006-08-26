@@ -3,6 +3,8 @@
  */
 package com.redv.blogmover.bsps.csdn;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ import org.apache.commons.httpclient.HeaderGroup;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -181,4 +184,25 @@ public class CSDNLogin {
 		return showExPwdUrl;
 	}
 
+	public static void main(String[] args) throws BlogMoverException,
+			IOException {
+		HttpClient httpClient = new HttpClient();
+		// 如果没有设定cookie模式将会有警告：Cookie rejected
+		httpClient.getParams().setCookiePolicy(
+				CookiePolicy.BROWSER_COMPATIBILITY);
+
+		CSDNLogin login = new CSDNLogin(httpClient);
+		byte[] bytes = login.getIdentifyingCodeImage();
+		FileOutputStream fos = new FileOutputStream("/tmp/csdn-login.png");
+		fos.write(bytes);
+		fos.close();
+		System.out.print("Enter the verify code: ");
+		int ch;
+		StringBuffer verifyCode = new StringBuffer();
+		while ((ch = System.in.read()) != '\n') {
+			verifyCode.append(ch);
+		}
+		System.out.println("verifyCode: " + ch);
+		login.login("redv", "wangjing", verifyCode.toString());
+	}
 }
