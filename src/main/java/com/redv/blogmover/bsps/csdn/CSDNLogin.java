@@ -3,12 +3,12 @@
  */
 package com.redv.blogmover.bsps.csdn;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HeaderGroup;
 import org.apache.commons.httpclient.HttpClient;
@@ -38,6 +38,8 @@ public class CSDNLogin {
 
 	private HttpDocument httpDocument;
 
+	private String loginPageUrl = "http://passport.csdn.net/UserLogin.aspx?from=http%3a%2f%2fwriteblog.csdn.net%2fLogin.aspx%3fReturnUrl%3d%2fDefault.aspx";
+
 	private Document loginPage;
 
 	/**
@@ -49,24 +51,30 @@ public class CSDNLogin {
 		HeaderGroup hg = new HeaderGroup();
 		hg
 				.addHeader(new Header(
-						"Accept",
-						"image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-shockwave-flash, */*"));
-		hg.addHeader(new Header("Accept-Language", "zh-cn"));
-		hg.addHeader(new Header("UA-CPU", "x86"));
+						"User-Agent",
+						"Mozilla/5.0 (Windows; U; Windows NT 5.2; zh-CN; rv:1.8.0.6) Gecko/20060728 Firefox/1.5.0.6"));
 		hg
-				.addHeader(new Header("User-Agent",
-						"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322)"));
+				.addHeader(new Header(
+						"Accept",
+						"text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5"));
+		hg.addHeader(new Header("Accept-Language",
+				"zh-cn,zh-tw;q=0.7,en-us;q=0.3"));
 		hg.addHeader(new Header("Accept-Encoding", "gzip, deflate"));
-		hg.addHeader(new Header("Host", "passport.csdn.net"));
+		hg
+				.addHeader(new Header("Accept-Charset",
+						"gb2312,utf-8;q=0.7,*;q=0.7"));
+		// hg.addHeader(new Header("Host", "passport.csdn.net"));
+		hg.addHeader(new Header("Keep-Alive", "300"));
 		hg.addHeader(new Header("Connection", "Keep-Alive"));
 
-		this.httpDocument = new HttpDocument(httpClient, hg, true);
+		this.httpDocument = new HttpDocument(httpClient, hg, true, "GB2312");
 	}
 
 	private Document getLoginPage() {
-		String url = "http://passport.csdn.net/UserLogin.aspx?from=http%3a%2f%2fwriteblog.csdn.net%2fLogin.aspx%3fReturnUrl%3d%2fDefault.aspx";
+		String url = loginPageUrl;
 		if (this.loginPage == null) {
 			this.loginPage = httpDocument.get(url);
+			// httpDocument.get("http://www.csdn.net/LoginPageSideColumns.aspx");
 		}
 		return loginPage;
 	}
@@ -97,32 +105,72 @@ public class CSDNLogin {
 		log.debug("from=" + from);
 		String __EVENTVALIDATION = loginPageDocument.getElementById(
 				"__EVENTVALIDATION").getAttribute("value");
+		log.debug("__EVENTVALIDATION: " + __EVENTVALIDATION);
 
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+		parameters.add(new NameValuePair("__EVENTTARGET", ""));
+		parameters.add(new NameValuePair("__EVENTARGUMENT", ""));
 		parameters.add(new NameValuePair("__VIEWSTATE", __VIEWSTATE));
 		parameters
-				.add(new NameValuePair("CSDNUserLogin:tb_UserName", username));
+				.add(new NameValuePair("CSDNUserLogin$tb_UserName", username));
 		parameters
-				.add(new NameValuePair("CSDNUserLogin:tb_Password", password));
+				.add(new NameValuePair("CSDNUserLogin$tb_Password", password));
 		parameters.add(new NameValuePair("ClientKey", clientKey));
-		parameters.add(new NameValuePair("CSDNUserLogin:tb_ExPwd",
+		parameters.add(new NameValuePair("CSDNUserLogin$tb_ExPwd",
 				identifyingCode));
 		parameters
 				.add(new NameValuePair("from",
 						"http://writeblog.csdn.net/Login.aspx?ReturnUrl=%2fDefault.aspx"));
+		parameters.add(new NameValuePair("CSDNUserLogin$Image_Login.x", "24"));
+		parameters.add(new NameValuePair("CSDNUserLogin$Image_Login.y", "0"));
 		parameters
 				.add(new NameValuePair("__EVENTVALIDATION", __EVENTVALIDATION));
-		parameters.add(new NameValuePair("CSDNUserLogin:Image_Login.x", "47"));
-		parameters.add(new NameValuePair("CSDNUserLogin:Image_Login.y", "8"));
+		if (log.isDebugEnabled()) {
+			log.debug("parameters......");
+			for (NameValuePair nvp : parameters) {
+				log.debug(nvp.getName() + ": " + nvp.getValue());
+			}
+			log.debug("......parameters");
+		}
 
 		// Submit login form.
-		Document document = httpDocument.post(action, parameters);
+		HeaderGroup requestHeaderGroup = new HeaderGroup();
+		requestHeaderGroup.addHeader(new Header("Referer", loginPageUrl));
+		requestHeaderGroup.addHeader(new Header("Content-type",
+				"application/x-www-form-urlencoded; charset=gb2312"));
+		Document document = httpDocument.post(action, parameters,
+				requestHeaderGroup);
+
+		// httpDocument.get("http://www.csdn.net/LoginPageSideColumns.aspx");
+
+		Cookie[] cookies = httpDocument.getHttpClient().getState().getCookies();
+		log.debug("cookies...");
+		for (Cookie cookie : cookies) {
+			log.debug(cookie.getName() + ": " + cookie.getValue());
+		}
+		log.debug("...cookies");
+
+		NodeList scripts = document.getElementsByTagName("script");
+		for (int i = 0; i < scripts.getLength(); i++) {
+			Element script = (Element) scripts.item(i);
+			if (script.hasChildNodes()) {
+				String v = script.getFirstChild().getNodeValue();
+				log.debug("script v: " + v);
+
+				if (v != null && v.indexOf("附加码不正确") != -1) {
+					throw new BlogMoverException(
+							"登录失败。验证码不正确，请检查你的用户名和密码或者重新获取验证码");
+				}
+			}
+		}
 
 		Element element = document.getElementById("CSDNUserLoginOK_lb_Name");
 		if (element == null) {
 			throw new BlogMoverException("Login failed.(CSDN Passport)");
 		} else {
-			if (element.getNodeValue().indexOf("您好，您已经成功登录。") == -1) {
+			String v = element.getFirstChild().getNodeValue();
+			log.debug("v: " + v);
+			if (v.indexOf(username) == -1) {
 				throw new BlogMoverException(
 						"登录失败。用户名、密码或者验证码不正确，请检查你的用户名和密码或者重新获取验证码");
 			}
@@ -186,6 +234,7 @@ public class CSDNLogin {
 
 	public static void main(String[] args) throws BlogMoverException,
 			IOException {
+		System.out.println(java.net.URLDecoder.decode("%24", "UTF-8"));
 		HttpClient httpClient = new HttpClient();
 		// 如果没有设定cookie模式将会有警告：Cookie rejected
 		httpClient.getParams().setCookiePolicy(
@@ -199,8 +248,8 @@ public class CSDNLogin {
 		System.out.print("Enter the verify code: ");
 		int ch;
 		StringBuffer verifyCode = new StringBuffer();
-		while ((ch = System.in.read()) != '\n') {
-			verifyCode.append(ch);
+		while ((ch = System.in.read()) != '\n' && ch != '\r') {
+			verifyCode.append((char) ch);
 		}
 		System.out.println("verifyCode: " + ch);
 		login.login("redv", "wangjing", verifyCode.toString());

@@ -93,6 +93,13 @@ public class HttpDocument implements Serializable {
 	}
 
 	/**
+	 * @return the httpClient
+	 */
+	public HttpClient getHttpClient() {
+		return httpClient;
+	}
+
+	/**
 	 * @return Returns the encoding.
 	 */
 	public String getEncoding() {
