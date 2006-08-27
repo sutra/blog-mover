@@ -27,9 +27,9 @@ import com.redv.blogmover.util.DomNodeUtils;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
- * @author Joe
+ * @author <a href="zhoushuqun@gmail.com">Shutra Zhou</a>
  * @version 1.0
- * 
+ * @see 如何获得浏览器在登录CSDN时POST的参数呢，使用Winsock Expert可以轻松跟踪。
  */
 public class CSDNLogin {
 	private final Log log = LogFactory.getLog(CSDNLogin.class);
