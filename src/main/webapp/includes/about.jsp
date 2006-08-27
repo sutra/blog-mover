@@ -88,7 +88,7 @@
 			<a href="http://bloghoo.it.sohu.com/bspcenter.html">
 				http://bloghoo.it.sohu.com/bspcenter.html </a> 依次提供支持。 由于国内 BSP
 			众多，所以我们将各个 BSP 的支持加入了
-			<a href="blog-remover.png">开发计划</a>，你可以从中找到你所需要的 BSP
+			<a href="blog-mover.png">开发计划</a>，你可以从中找到你所需要的 BSP
 			的支持的开发进度。如果你所希望支持的 BSP 没有出现在开发计划中，请在
 			<a href="http://groups.google.com/group/blog-remover">这里</a>提出。
 		</div>
