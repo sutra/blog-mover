@@ -98,8 +98,6 @@
       <groupId>nekohtml</groupId>
       <artifactId>nekohtml</artifactId>
       <version>0.9.5</version>
-      <scope>system</scope>
-      <systemPath>${basedir}/lib/nekohtml-0.9.5/nekohtml.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
