@@ -21,7 +21,7 @@ DWREngine.setReverseAjax(false);
 	window.onbeforeunload = doClose;
 //}
 function doClose() {
-	var t = "───────────────────────\r\n您确定要离开 Blog Remover 吗？\r\n确定后未完成的操作你将无法控制。\r\n───────────────────────";
+	var t = "───────────────────────\r\n您确定要离开 Blog Mmover 吗？\r\n确定后未完成的操作你将无法控制。\r\n───────────────────────";
 	return t;
 }
 
