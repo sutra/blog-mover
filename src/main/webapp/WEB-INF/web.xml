@@ -51,6 +51,12 @@
 			com.redv.blogmover.web.IdentifyingCodeImageServlet
 		</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>download-file</servlet-name>
+		<servlet-class>
+			com.redv.blogmover.web.DownloadFileServlet
+		</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>blog-mover</servlet-name>
 		<url-pattern>*.jhtml</url-pattern>
@@ -62,6 +68,10 @@
 	<servlet-mapping>
 		<servlet-name>identifying-code-image</servlet-name>
 		<url-pattern>/identifying-code-image</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>download-file</servlet-name>
+		<url-pattern>/download-file</url-pattern>
 	</servlet-mapping>
 	<security-constraint>
 		<web-resource-collection>

@@ -8,12 +8,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.SystemUtils;
 
 import com.redv.blogmover.Attachment;
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogWriter;
+import com.sun.syndication.feed.synd.SyndContent;
+import com.sun.syndication.feed.synd.SyndContentImpl;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -22,13 +28,21 @@ import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedOutput;
 
 /**
- * @author Shutra
+ * 使用 <a href="https://rome.dev.java.net/">Rome</a> 将日志导出成下列格式：RSS 0.90, RSS
+ * 0.91 Netscape, RSS 0.91 Userland, RSS 0.92, RSS 0.93, RSS 0.94, RSS 1.0, RSS
+ * 2.0, Atom 0.3, and Atom 1.0。
+ * 
+ * @author <a href="zhoushuqun@gmail.com">Shutra Zhou</a>
  * 
  */
 public class RomeWriter extends AbstractBlogWriter {
+	private final Pattern pattern = Pattern.compile("[a-zA-Z0-9]+");
+
 	private SyndFeed feed;
 
 	private List<SyndEntry> entries;
+
+	private File outputFile;
 
 	private String feedType;
 
@@ -43,6 +57,36 @@ public class RomeWriter extends AbstractBlogWriter {
 	private String copyright;
 
 	private String author;
+
+	/**
+	 * @return the outputFile
+	 */
+	public File getOutputFile() {
+		return outputFile;
+	}
+
+	/**
+	 * @param outputFile
+	 *            the outputFile to set
+	 */
+	public void setOutputFile(File outputFile) {
+		this.outputFile = outputFile;
+	}
+
+	/**
+	 * 
+	 * @param filePath
+	 *            the outputFile's name to set
+	 */
+	public void setFilename(String filename) throws BlogMoverException {
+		if (!pattern.matcher(filename).matches()) {
+			throw new BlogMoverException(
+					"Parameter filename is not matched [a-zA-Z0-9]+.");
+		}
+
+		File tmpdir = new File(SystemUtils.JAVA_IO_TMPDIR);
+		this.outputFile = new File(tmpdir, filename);
+	}
 
 	/**
 	 * @param author
@@ -81,7 +125,7 @@ public class RomeWriter extends AbstractBlogWriter {
 	 *            the language to set
 	 */
 	public void setLanguage(String language) {
-		this.language = language;
+		this.language = StringUtils.replace(language, "_", "-");
 	}
 
 	/**
@@ -107,16 +151,17 @@ public class RomeWriter extends AbstractBlogWriter {
 	 */
 	@Override
 	protected void begin() throws BlogMoverException {
-		SyndFeedImpl feed = new SyndFeedImpl();
-		feed.setFeedType(this.feedType);
-		feed.setTitle(this.title);
-		feed.setLink(this.link);
-		feed.setDescription(this.description);
-		feed.setLanguage(this.language);
-		feed.setCopyright(this.copyright);
-		feed.setAuthor(this.author);
-		entries = new ArrayList<SyndEntry>();
-		feed.setEntries(entries);
+		this.feed = new SyndFeedImpl();
+		this.feed.setEncoding("UTF-8");
+		this.feed.setFeedType(this.feedType);
+		this.feed.setTitle(this.title);
+		this.feed.setLink(this.link);
+		this.feed.setDescription(this.description);
+		this.feed.setLanguage(this.language);
+		this.feed.setCopyright(this.copyright);
+		this.feed.setAuthor(this.author);
+		this.entries = new ArrayList<SyndEntry>();
+		this.feed.setEntries(this.entries);
 	}
 
 	/*
@@ -128,8 +173,7 @@ public class RomeWriter extends AbstractBlogWriter {
 	protected void end() throws BlogMoverException {
 		SyndFeedOutput output = new SyndFeedOutput();
 		try {
-			log.debug("............" + feed.getEntries().size());
-			output.output(feed, new File("C:\\tmp\\test.xml"));
+			output.output(feed, this.outputFile);
 		} catch (IOException e) {
 			throw new BlogMoverException(e);
 		} catch (FeedException e) {
@@ -156,14 +200,39 @@ public class RomeWriter extends AbstractBlogWriter {
 	@Override
 	protected void writeBlog(WebLog webLog, Map<Attachment, String> attachments)
 			throws BlogMoverException {
+		// 注意：格式 RSS 0.90, RSS 0.91 Netscape, RSS 0.91 Userland 的日志数量只能在1～15之间。
+		if ((this.feedType.equals("rss_0.9")
+				|| this.feedType.equals("rss_0.91N") || this.feedType
+				.equals("rss_0.91U"))
+				&& this.entries.size() >= 15) {
+			return;
+		}
 		SyndEntry entry = new SyndEntryImpl();
 		entry.setAuthor(this.author);
 		entry.setTitle(webLog.getTitle());
 		entry.setLink(webLog.getUrl());
 		entry.setPublishedDate(webLog.getPublishedDate());
 		entry.setUri(webLog.getUrl());
-		List<String> contents = new ArrayList<String>();
-		contents.add(webLog.getBody());
+
+		if (webLog.getExcerpt() != null) {
+			SyndContent description = new SyndContentImpl();
+			description.setType("text/html");
+			description.setValue(webLog.getExcerpt());
+			entry.setDescription(description);
+		} else if (this.feedType.equals("rss_2.0")) {
+			SyndContent description = new SyndContentImpl();
+			description.setType("text/html");
+			description.setValue("");
+			entry.setDescription(description);
+		} else {
+			// Do nothing.
+		}
+
+		List<SyndContent> contents = new ArrayList<SyndContent>();
+		SyndContentImpl sc = new SyndContentImpl();
+		sc.setType("text/html");
+		sc.setValue(webLog.getBody());
+		contents.add(sc);
 		entry.setContents(contents);
 
 		this.entries.add(entry);

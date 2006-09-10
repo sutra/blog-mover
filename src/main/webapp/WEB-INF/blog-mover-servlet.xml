@@ -40,7 +40,7 @@
 		class="com.redv.blogmover.web.WritersController">
 		<property name="writers">
 			<map>
-				<entry key="feed.atom-rss"
+				<entry key="feed.rss-atom"
 					value="com.redv.blogmover.feed.RomeWriter" />
 				<entry key="baidu"
 					value="com.redv.blogmover.bsps.baidu.BaiduWriter" />

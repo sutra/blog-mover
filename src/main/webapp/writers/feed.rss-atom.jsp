@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page
-	import="java.util.*,org.apache.commons.lang.StringUtils,com.redv.blogmover.util.LocaleComparator"%>
+	import="java.io.File,java.util.*,org.apache.commons.lang.*,com.redv.blogmover.util.LocaleComparator"%>
 <jsp:directive.page import="com.redv.blogmover.util.LocaleComparator;" />
 <table>
 	<tr>
@@ -36,10 +36,11 @@
 				<option value="atom_0.3">
 					Atom 0.3
 				</option>
-				<option value="atom_1.0">
+				<option value="atom_1.0" selected="selected">
 					Atom 1.0
 				</option>
 			</select>
+			注意：格式 RSS 0.90, RSS 0.91 Netscape, RSS 0.91 Userland 的日志数量只能在1～15之间。
 		</td>
 	</tr>
 	<tr>
@@ -87,7 +88,11 @@
 						
 							StringBuffer sb = new StringBuffer();
 							for (Locale locale : locales) {
-								sb.append("<option value='");
+								sb.append("<option");
+								if (locale.toString().equals("zh_CN")) {
+							sb.append(" selected='selected'");
+								}
+								sb.append(" value='");
 								sb.append(locale.toString()).append("'>");
 								sb.append(StringUtils.replace(StringUtils.rightPad(locale.toString(), 5, " "), " ", "&nbsp;"));
 								sb.append(" ");
@@ -119,3 +124,7 @@
 		</td>
 	</tr>
 </table>
+<input type="hidden" name="filename" value="<%=session.getId()%>" />
+<a
+	href="download-file?filename=<%=session.getId()%>&attachmentFilename=feed.rss-atom.xml">当写入结束后，单击这里下载
+	Atom/RSS 文件。</a>
