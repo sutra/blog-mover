@@ -126,5 +126,5 @@
 </table>
 <input type="hidden" name="filename" value="<%=session.getId()%>" />
 <a
-	href="download-file?filename=<%=session.getId()%>&attachmentFilename=feed.rss-atom.xml">当写入结束后，单击这里下载
-	Atom/RSS 文件。</a>
+	href="download-file?filename=<%=session.getId()%>&attachmentFilename=feed.rss-atom.xml"
+	target="_blank">当写入结束后，单击这里下载 Atom/RSS 文件。</a>
