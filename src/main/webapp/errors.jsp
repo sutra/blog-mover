@@ -21,7 +21,6 @@
 		<style type="text/css">
 		@import url("styles/blog-remover.css");
 		</style>
-		<jsp:directive.include file="includes/scripts.jsp" />
 	</head>
 	<body id="nicetabs">
 		<div id="welcome">

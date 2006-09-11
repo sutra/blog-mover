@@ -1,14 +1,29 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page
-	import="java.io.File,java.util.*,org.apache.commons.lang.*,com.redv.blogmover.util.LocaleComparator"%>
-<jsp:directive.page import="com.redv.blogmover.util.LocaleComparator;" />
+	import="java.io.File,java.util.*,com.redv.blogmover.util.LocaleComparator"%>
+<jsp:directive.page
+	import="org.apache.commons.lang.*,java.net.URLEncoder" />
+<%
+String filename = RandomStringUtils.randomNumeric(8);
+%>
 <table>
 	<tr>
 		<td>
 			Feed Type:
 		</td>
 		<td>
-			<select name="feedType">
+			<select id="feedType" name="feedType"
+				onchange='
+				var href = "download-file?filename=com/redv/blogmover/<%=session.getId()%>/<%=filename%>&attachmentFilename=feed.rss-atom.xml&contentType=";
+				var feedType = (this.options[this.options.selectedIndex].value);
+				var contentType;
+				if (feedType.substring(0, 3) == "rss") {
+					contentType="<%=URLEncoder.encode("application/rss+xml", "UTF-8")%>";
+				} else {
+					contentType="<%=URLEncoder.encode("application/atom+xml", "UTF-8")%>";
+				}
+				document.getElementById("downloadFileAnchor").href = href + contentType;
+				'>
 				<option value="rss_0.9">
 					RSS 0.90
 				</option>
@@ -88,13 +103,15 @@
 						
 							StringBuffer sb = new StringBuffer();
 							for (Locale locale : locales) {
+								String value = StringUtils.replace(locale.toString(), "_", "-");
 								sb.append("<option");
-								if (locale.toString().equals("zh_CN")) {
-							sb.append(" selected='selected'");
+								if (value.equals("zh-CN")) {
+									sb.append(" selected='selected'");
 								}
 								sb.append(" value='");
-								sb.append(locale.toString()).append("'>");
-								sb.append(StringUtils.replace(StringUtils.rightPad(locale.toString(), 5, " "), " ", "&nbsp;"));
+								sb.append(value);
+								sb.append("'>");
+								sb.append(StringUtils.replace(StringUtils.rightPad(value, 5, " "), " ", "&nbsp;"));
 								sb.append(" ");
 								sb.append(locale.getDisplayName());
 								sb.append("</option>");
@@ -124,11 +141,13 @@
 		</td>
 	</tr>
 </table>
-<%
-String filename = RandomStringUtils.randomNumeric(8);
-%>
 <input type="hidden" name="filename"
-	value="<%=session.getId() + "/" + filename%>" />
+	value="com/redv/blogmover/<%=session.getId() + "/" + filename%>" />
+当写入结束后，
+<a id="downloadFileAnchor"
+	href="download-file?filename=com/redv/blogmover/<%=session.getId()%>/<%=filename%>&attachmentFilename=feed.rss-atom.xml&contentType=<%=URLEncoder.encode("application/atom+xml", "UTF-8")%>"
+	target="_blank">单击这里查看 Atom/RSS 文件</a>，
 <a
-	href="download-file?filename=<%=session.getId() + "/" + filename%>&attachmentFilename=feed.rss-atom.xml"
-	target="_blank">当写入结束后，单击这里下载 Atom/RSS 文件。</a>
+	href="download-file?filename=com/redv/blogmover/<%=session.getId()%>/<%=filename%>&attachmentFilename=feed.rss-atom.xml&contentType=<%=URLEncoder.encode("application/oct-stream", "UTF-8")%>"
+	target="_blank">单击这里下载 Atom/RSS 文件</a>。
+

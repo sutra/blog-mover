@@ -9,9 +9,10 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.redv.blogmover.util.BlogMoverUtils;
 
 /**
  * @author Shutra
@@ -28,7 +29,7 @@ public class BlogMoverHttpSessionListener implements HttpSessionListener {
 	public void sessionCreated(HttpSessionEvent se) {
 		final HttpSession session = se.getSession();
 		if (session != null) {
-			File tmpdir = new File(SystemUtils.JAVA_IO_TMPDIR);
+			File tmpdir = BlogMoverServletContextListener.TMPDIR;
 			File file = new File(tmpdir, session.getId());
 			boolean made = file.mkdir();
 			log.debug("SessionId: " + session.getId() + ". Dir: "
@@ -48,9 +49,9 @@ public class BlogMoverHttpSessionListener implements HttpSessionListener {
 	public void sessionDestroyed(HttpSessionEvent se) {
 		final HttpSession session = se.getSession();
 		if (session != null) {
-			File tmpdir = new File(SystemUtils.JAVA_IO_TMPDIR);
+			File tmpdir = BlogMoverServletContextListener.TMPDIR;
 			File file = new File(tmpdir, session.getId());
-			boolean deleted = deleteDir(file);
+			boolean deleted = BlogMoverUtils.deleteDir(file);
 			log.debug("SessionId: " + session.getId() + ". Delete dir: "
 					+ file.getAbsolutePath());
 			if (!deleted) {
@@ -58,21 +59,6 @@ public class BlogMoverHttpSessionListener implements HttpSessionListener {
 						+ ". Delete dir failed: " + file.getAbsolutePath());
 			}
 		}
-	}
-
-	public static boolean deleteDir(File dir) {
-		if (dir.isDirectory()) {
-			String[] children = dir.list();
-			for (int i = 0; i < children.length; i++) {
-				boolean success = deleteDir(new File(dir, children[i]));
-				if (!success) {
-					return false;
-				}
-			}
-		}
-
-		// The directory is now empty so delete it
-		return dir.delete();
 	}
 
 }

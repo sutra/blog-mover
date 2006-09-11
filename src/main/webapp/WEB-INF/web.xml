@@ -27,6 +27,11 @@
 	</listener>
 	<listener>
 		<listener-class>
+			com.redv.blogmover.web.BlogMoverServletContextListener
+		</listener-class>
+	</listener>
+	<listener>
+		<listener-class>
 			com.redv.blogmover.web.BlogMoverHttpSessionListener
 		</listener-class>
 	</listener>

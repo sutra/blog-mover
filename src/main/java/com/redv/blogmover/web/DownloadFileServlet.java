@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,7 +34,7 @@ public class DownloadFileServlet extends HttpServlet {
 	private final Log log = LogFactory.getLog(this.getClass());
 
 	public static final Pattern TEMP_FILE_NAME_PATTERN = Pattern
-			.compile("^[a-zA-Z0-9]+/[0-9]+$");
+			.compile("^com/redv/blogmover/[a-zA-Z0-9]+/[0-9]+$");
 
 	/*
 	 * (non-Javadoc)
@@ -46,11 +47,17 @@ public class DownloadFileServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String filename = request.getParameter("filename");
 		String attachmentFilename = request.getParameter("attachmentFilename");
+		String contentType = request.getParameter("contentType");
+		if (StringUtils.isEmpty(contentType)) {
+			contentType = "application/oct-stream";
+		}
+
 		log.debug("filename: " + filename);
 		if (!TEMP_FILE_NAME_PATTERN.matcher(filename).matches()) {
 			throw new ServletException("Parameter filename is not matched "
 					+ TEMP_FILE_NAME_PATTERN.pattern() + ".");
 		}
+
 		File tmpdir = new File(SystemUtils.JAVA_IO_TMPDIR);
 		File downloadFile = new File(tmpdir, filename);
 		log.debug("donwloadFile: " + downloadFile.getAbsolutePath());
@@ -65,9 +72,15 @@ public class DownloadFileServlet extends HttpServlet {
 		int l;
 		FileInputStream fis = new FileInputStream(downloadFile);
 		ServletOutputStream sos = response.getOutputStream();
-		response.setContentType("application/oct-stream");
-		response.addHeader("Content-Disposition", "attachment; filename="
-				+ attachmentFilename);
+		
+		if (contentType.equals("application/oct-stream")) {
+			response.setContentType(contentType);
+			response.addHeader("Content-Disposition", "attachment; filename="
+					+ attachmentFilename);
+		} else {
+			response.setContentType(contentType + "; charset=UTF-8");	
+		}
+		
 		response.setContentLength((int) downloadFile.length());
 		try {
 			while ((l = fis.read(buffer)) != -1) {
