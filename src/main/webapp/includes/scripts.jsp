@@ -32,7 +32,7 @@ function doClose() {
 //	window.attachEvent("onunload", doLogout);
 //}
 //else {
-//	window.onunload = doLogout;
+	window.onunload = doLogout;
 //}
 // 发出退出指令。
 function doLogout() {

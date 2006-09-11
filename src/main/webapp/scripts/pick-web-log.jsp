@@ -37,6 +37,7 @@ function showWebLogs(p) {
 	setStatus("正在读取日志……");
 	$("firstButton").disabled = true;
 	$("previousButton").disabled = true;
+	$("refreshButton").disabled = true;
 	$("nextButton").disabled = true;
 	$("lastButton").disabled = true;
 	var fromIndex;
@@ -56,7 +57,11 @@ function showWebLogs(p) {
 			fromIndex = currentFromIndex + pageSize;
 			break;
 		case 2:
-			fromIndex = totalCount - (totalCount % pageSize);
+			var lastPageSize = totalCount % pageSize;
+			if (lastPageSize == 0) {
+				lastPageSize = pageSize;
+			}
+			fromIndex = totalCount - lastPageSize;
 			break;
 	}
 	getWebLogs(fromIndex, pageSize);
@@ -66,6 +71,7 @@ function showWebLogs(p) {
  * @param maxResults 获取的结果集的元素个数的最大数目。
  */
 function getWebLogs(firstResult, maxResults) {
+	debug("firstResult: " + firstResult + ", maxResults: " + maxResults + ".");
 	User.getWebLogs(
 		firstResult, 
 		maxResults, 
@@ -88,10 +94,13 @@ function getWebLogsReply(data) {
 	
 	currentFromIndex = fromIndex;
 	setStatus("读取成功。");
-	$("firstButton").disabled = false;
+	var previousButtonDisabled = (fromIndex == 0);
+	$("firstButton").disabled = previousButtonDisabled;
 	$("previousButton").disabled = (fromIndex == 0);
-	$("nextButton").disabled = (toIndex == totalCount);
-	$("lastButton").disabled = false;
+	$("refreshButton").disabled = false;
+	var nextButtonDisabled = (toIndex == totalCount);
+	$("nextButton").disabled = nextButtonDisabled;
+	$("lastButton").disabled = nextButtonDisabled;
 }
 /**
  * 获取日志发生错误时的处理。
@@ -101,6 +110,7 @@ function getWebLogsErrorHandler(errorString, exception) {
 	alert("读取失败：\r\n" + errorString + exception);
 	$("firstButton").disabled = false;
 	$("previousButton").disabled = false;
+	$("refreshButton").disabled = false;
 	$("nextButton").disabled = false;
 	$("lastButton").disabled = false;
 }

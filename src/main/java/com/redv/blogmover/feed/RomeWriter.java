@@ -18,6 +18,7 @@ import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogWriter;
+import com.redv.blogmover.web.DownloadFileServlet;
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndContentImpl;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -36,7 +37,7 @@ import com.sun.syndication.io.SyndFeedOutput;
  * 
  */
 public class RomeWriter extends AbstractBlogWriter {
-	private final Pattern pattern = Pattern.compile("[a-zA-Z0-9]+");
+	private final Pattern pattern = DownloadFileServlet.TEMP_FILE_NAME_PATTERN;
 
 	private SyndFeed feed;
 
@@ -80,8 +81,8 @@ public class RomeWriter extends AbstractBlogWriter {
 	 */
 	public void setFilename(String filename) throws BlogMoverException {
 		if (!pattern.matcher(filename).matches()) {
-			throw new BlogMoverException(
-					"Parameter filename is not matched [a-zA-Z0-9]+.");
+			throw new BlogMoverException("Parameter filename is not matched "
+					+ this.pattern.pattern() + ".");
 		}
 
 		File tmpdir = new File(SystemUtils.JAVA_IO_TMPDIR);

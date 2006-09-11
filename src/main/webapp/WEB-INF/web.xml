@@ -25,6 +25,11 @@
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
+	<listener>
+		<listener-class>
+			com.redv.blogmover.web.BlogMoverHttpSessionListener
+		</listener-class>
+	</listener>
 	<servlet>
 		<servlet-name>blog-mover</servlet-name>
 		<servlet-class>

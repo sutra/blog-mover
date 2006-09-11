@@ -124,7 +124,11 @@
 		</td>
 	</tr>
 </table>
-<input type="hidden" name="filename" value="<%=session.getId()%>" />
+<%
+String filename = RandomStringUtils.randomNumeric(8);
+%>
+<input type="hidden" name="filename"
+	value="<%=session.getId() + "/" + filename%>" />
 <a
-	href="download-file?filename=<%=session.getId()%>&attachmentFilename=feed.rss-atom.xml"
+	href="download-file?filename=<%=session.getId() + "/" + filename%>&attachmentFilename=feed.rss-atom.xml"
 	target="_blank">当写入结束后，单击这里下载 Atom/RSS 文件。</a>

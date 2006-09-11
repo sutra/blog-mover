@@ -32,7 +32,8 @@ public class DownloadFileServlet extends HttpServlet {
 
 	private final Log log = LogFactory.getLog(this.getClass());
 
-	private final Pattern pattern = Pattern.compile("[a-zA-Z0-9]+");
+	public static final Pattern TEMP_FILE_NAME_PATTERN = Pattern
+			.compile("^[a-zA-Z0-9]+/[0-9]+$");
 
 	/*
 	 * (non-Javadoc)
@@ -46,9 +47,9 @@ public class DownloadFileServlet extends HttpServlet {
 		String filename = request.getParameter("filename");
 		String attachmentFilename = request.getParameter("attachmentFilename");
 		log.debug("filename: " + filename);
-		if (!pattern.matcher(filename).matches()) {
-			throw new ServletException(
-					"Parameter filename is not matched [a-zA-Z0-9]+.");
+		if (!TEMP_FILE_NAME_PATTERN.matcher(filename).matches()) {
+			throw new ServletException("Parameter filename is not matched "
+					+ TEMP_FILE_NAME_PATTERN.pattern() + ".");
 		}
 		File tmpdir = new File(SystemUtils.JAVA_IO_TMPDIR);
 		File downloadFile = new File(tmpdir, filename);
