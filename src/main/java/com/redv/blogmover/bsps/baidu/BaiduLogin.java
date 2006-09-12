@@ -50,7 +50,7 @@ public class BaiduLogin {
 		boolean ok = false;
 		for (int i = 0; i < anchors.getLength(); i++) {
 			String s = DomNodeUtils.getTextContent(anchors.item(i));
-			if (s.equalsIgnoreCase(username)) {
+			if (s != null && s.equalsIgnoreCase(username)) {
 				ok = true;
 				break;
 			}
