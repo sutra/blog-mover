@@ -4,7 +4,11 @@
 package com.redv.blogmover.feed;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +42,8 @@ import com.sun.syndication.io.SyndFeedOutput;
  */
 public class RomeWriter extends AbstractBlogWriter {
 	private final Pattern pattern = DownloadFileServlet.TEMP_FILE_NAME_PATTERN;
+
+	private final String encoding = "UTF-8";
 
 	private SyndFeed feed;
 
@@ -153,7 +159,7 @@ public class RomeWriter extends AbstractBlogWriter {
 	@Override
 	protected void begin() throws BlogMoverException {
 		this.feed = new SyndFeedImpl();
-		this.feed.setEncoding("UTF-8");
+		this.feed.setEncoding(this.encoding);
 		this.feed.setFeedType(this.feedType);
 		this.feed.setTitle(this.title);
 		this.feed.setLink(this.link);
@@ -173,12 +179,31 @@ public class RomeWriter extends AbstractBlogWriter {
 	@Override
 	protected void end() throws BlogMoverException {
 		SyndFeedOutput output = new SyndFeedOutput();
+		OutputStream outputStream = null;
+		Writer writer = null;
 		try {
-			output.output(feed, this.outputFile);
+			outputStream = new FileOutputStream(this.outputFile);
+			writer = new OutputStreamWriter(outputStream, this.encoding);
+			output.output(feed, writer);
 		} catch (IOException e) {
 			throw new BlogMoverException(e);
 		} catch (FeedException e) {
 			throw new BlogMoverException(e);
+		} finally {
+			if (writer != null) {
+				try {
+					writer.close();
+				} catch (IOException e) {
+					log.warn(e);
+				}
+			}
+			if (outputStream != null) {
+				try {
+					outputStream.close();
+				} catch (IOException e) {
+					log.warn(e);
+				}
+			}
 		}
 	}
 
