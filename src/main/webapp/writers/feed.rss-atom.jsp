@@ -1,9 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page
-	import="java.io.File,java.util.*,com.redv.blogmover.util.LocaleComparator"%>
-<jsp:directive.page
-	import="org.apache.commons.lang.*,java.net.URLEncoder" />
-<%
+	import="java.io.File,java.util.*,com.redv.blogmover.util.*,org.apache.commons.lang.*,java.net.*"%>
+<%!
 String filename = RandomStringUtils.randomNumeric(8);
 %>
 <table>
@@ -106,7 +104,7 @@ String filename = RandomStringUtils.randomNumeric(8);
 								String value = StringUtils.replace(locale.toString(), "_", "-");
 								sb.append("<option");
 								if (value.equals("zh-CN")) {
-									sb.append(" selected='selected'");
+							sb.append(" selected='selected'");
 								}
 								sb.append(" value='");
 								sb.append(value);
@@ -146,8 +144,10 @@ String filename = RandomStringUtils.randomNumeric(8);
 当写入结束后，
 <a id="downloadFileAnchor"
 	href="download-file?filename=com/redv/blogmover/<%=session.getId()%>/<%=filename%>&attachmentFilename=feed.rss-atom.xml&contentType=<%=URLEncoder.encode("application/atom+xml", "UTF-8")%>"
-	target="_blank">单击这里查看 Atom/RSS 文件</a>，
+	target="_blank">单击这里查看 Atom/RSS 文件</a>
+，
 <a
 	href="download-file?filename=com/redv/blogmover/<%=session.getId()%>/<%=filename%>&attachmentFilename=feed.rss-atom.xml&contentType=<%=URLEncoder.encode("application/oct-stream", "UTF-8")%>"
-	target="_blank">单击这里下载 Atom/RSS 文件</a>。
+	target="_blank">单击这里下载 Atom/RSS 文件</a>
+。
 
