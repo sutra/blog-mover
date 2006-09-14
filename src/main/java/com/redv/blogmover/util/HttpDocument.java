@@ -47,6 +47,8 @@ public class HttpDocument implements Serializable {
 
 	private boolean manualCookie;
 
+	private boolean followRedirects;
+
 	private String encoding;
 
 	/**
@@ -121,16 +123,27 @@ public class HttpDocument implements Serializable {
 	}
 
 	/**
+	 * @return the followRedirects
+	 */
+	public boolean isFollowRedirects() {
+		return followRedirects;
+	}
+
+	/**
+	 * @param followRedirects
+	 *            the followRedirects to set
+	 */
+	public void setFollowRedirects(boolean followRedirects) {
+		this.followRedirects = followRedirects;
+	}
+
+	/**
 	 * 执行 get 方法。
 	 * 
 	 * @param url
 	 * @return
 	 */
 	public Document get(String url) {
-		return this.get(url, true);
-	}
-	
-	public Document get(String url, boolean followRedirects) {
 		GetMethod getMethod = new GetMethod(url);
 		getMethod.setFollowRedirects(followRedirects);
 		addRequestHeaderGroup(getMethod, requestHeaderGroup);
@@ -138,7 +151,7 @@ public class HttpDocument implements Serializable {
 			addCookies(getMethod, httpClient.getState().getCookies());
 		}
 		executeMethod(httpClient, getMethod);
-		return getDocument(getMethod);		
+		return getDocument(getMethod);
 	}
 
 	/**
@@ -229,11 +242,14 @@ public class HttpDocument implements Serializable {
 				}
 				org.apache.commons.httpclient.URI parentUri = method.getURI();
 				if (!newuri.startsWith(parentUri.getScheme())) {
-					newuri = new org.apache.commons.httpclient.URI(parentUri
-							.getScheme(), parentUri.getHost(), (newuri
-							.startsWith("/") ? newuri : parentUri
+					String s = newuri.startsWith("/") ? newuri : parentUri
 							.getAboveHierPath()
-							+ newuri), "").toString();
+							+ newuri;
+					// Really need to decode?
+					s = java.net.URLDecoder.decode(s, "UTF-8");
+					newuri = new org.apache.commons.httpclient.URI(parentUri
+							.getScheme(), parentUri.getHost(), (s), "")
+							.toString();
 				}
 				log.debug("Redirect: " + newuri);
 				method.releaseConnection();

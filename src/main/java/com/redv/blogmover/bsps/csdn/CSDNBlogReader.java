@@ -110,7 +110,9 @@ public class CSDNBlogReader extends AbstractBlogReader {
 		checkLogin();
 		String urlPrefix = "http://writeblog.csdn.net/PostList.aspx?pg=";
 		String firstPage = urlPrefix + 1;
-		Document document = httpDocument.get(firstPage, false);
+		httpDocument.setFollowRedirects(false);
+		Document document = httpDocument.get(firstPage);
+		httpDocument.setFollowRedirects(true);
 		// Parse page.
 		int totalPage = 0;
 		NodeList divs = document.getElementsByTagName("div");

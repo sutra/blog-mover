@@ -19,5 +19,5 @@ then
 fi
 cd csdn-passport
 java -classpath $cp org.apache.axis.wsdl.WSDL2Java $wsdlUrl
-javac -classpath $cp -Xlint:unchecked net/csdn/passport/*.java
+javac -classpath $cp net/csdn/passport/*.java
 jar cvf csdn-passport-1.0.jar net/csdn/passport/*.class
