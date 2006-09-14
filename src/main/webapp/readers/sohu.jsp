@@ -1,4 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<img src="images/bsps/sohublog.gif" alt="Sohu Blog" />
+<br />
 请填写必要信息，用于 Blog Remover 从 Sohu Blog 读取日志：
 <br />
 用户名：

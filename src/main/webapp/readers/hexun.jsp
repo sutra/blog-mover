@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<img src="images/bsps/hexun.gif" alt="Hexun" />
 <table>
 	<tr>
 		<th colspan="2" style="text-align:left;">
