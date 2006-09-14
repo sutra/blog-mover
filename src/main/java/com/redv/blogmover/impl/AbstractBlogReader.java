@@ -26,7 +26,6 @@ public abstract class AbstractBlogReader implements BlogReader {
 	 * 
 	 */
 	public AbstractBlogReader() {
-		super();
 		this.status = new StatusImpl();
 	}
 

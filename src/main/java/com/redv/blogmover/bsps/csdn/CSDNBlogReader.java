@@ -15,6 +15,7 @@ import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.lang.math.NumberUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogMoverException;
@@ -50,10 +51,9 @@ public class CSDNBlogReader extends AbstractBlogReader {
 	 * 
 	 */
 	public CSDNBlogReader() {
-		super();
 		this.httpClient = new HttpClient();
 		// 如果没有设定cookie模式将会有警告：Cookie rejected
-		httpClient.getParams().setCookiePolicy(
+		this.httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
 
 		HeaderGroup hg = new HeaderGroup();
@@ -72,7 +72,7 @@ public class CSDNBlogReader extends AbstractBlogReader {
 
 		this.httpDocument = new HttpDocument(httpClient, true);
 
-		csdnLogin = new CSDNLogin(httpClient);
+		this.csdnLogin = new CSDNLogin(httpClient);
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class CSDNBlogReader extends AbstractBlogReader {
 		checkLogin();
 		String urlPrefix = "http://writeblog.csdn.net/PostList.aspx?pg=";
 		String firstPage = urlPrefix + 1;
-		Document document = httpDocument.get(firstPage);
+		Document document = httpDocument.get(firstPage, false);
 		// Parse page.
 		int totalPage = 0;
 		NodeList divs = document.getElementsByTagName("div");
@@ -119,16 +119,20 @@ public class CSDNBlogReader extends AbstractBlogReader {
 			if ("Pager".equals(div.getAttribute("class"))) {
 				NodeList children = div.getChildNodes();
 				for (int j = 0; j < children.getLength(); j++) {
-					Element child = (Element) children.item(j);
-					if ("a".equalsIgnoreCase(child.getNodeName())) {
-						if ("最后".equals(DomNodeUtils.getTextContent(child))) {
-							String href = child.getAttribute("href");
-							Pattern pattern = Pattern
-									.compile("PostList.aspx?pg=([0-9]+)");
-							Matcher matcher = pattern.matcher(href);
-							boolean rs = matcher.find();
-							if (rs) {
-								totalPage = NumberUtils.toInt(matcher.group(1));
+					Node n = children.item(j);
+					if (n instanceof Element) {
+						Element child = (Element) n;
+						if ("a".equalsIgnoreCase(child.getNodeName())) {
+							if ("最后".equals(DomNodeUtils.getTextContent(child))) {
+								String href = child.getAttribute("href");
+								Pattern pattern = Pattern
+										.compile("PostList.aspx?pg=([0-9]+)");
+								Matcher matcher = pattern.matcher(href);
+								boolean rs = matcher.find();
+								if (rs) {
+									totalPage = NumberUtils.toInt(matcher
+											.group(1));
+								}
 							}
 						}
 					}

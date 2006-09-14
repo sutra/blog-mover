@@ -127,13 +127,18 @@ public class HttpDocument implements Serializable {
 	 * @return
 	 */
 	public Document get(String url) {
+		return this.get(url, true);
+	}
+	
+	public Document get(String url, boolean followRedirects) {
 		GetMethod getMethod = new GetMethod(url);
+		getMethod.setFollowRedirects(followRedirects);
 		addRequestHeaderGroup(getMethod, requestHeaderGroup);
 		if (manualCookie) {
 			addCookies(getMethod, httpClient.getState().getCookies());
 		}
 		executeMethod(httpClient, getMethod);
-		return getDocument(getMethod);
+		return getDocument(getMethod);		
 	}
 
 	/**
