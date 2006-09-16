@@ -3,6 +3,7 @@
 var writerBusy = false;
 var writing = false;
 function setWriter(className) {
+	$("writeButton").disabled = true;
 	setStatus("设置写入器……");
 	debug("设置写入器：" + className);
 	User.setWriter(
