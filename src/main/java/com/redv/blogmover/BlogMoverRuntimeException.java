@@ -4,6 +4,8 @@
 package com.redv.blogmover;
 
 /**
+ * 系统运行时发生异常时抛出此异常。此异常只做系统日志，而不通过 UI 呈现给用户。
+ * 
  * @author Joe
  * @version 1.0
  * 

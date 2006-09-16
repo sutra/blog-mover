@@ -36,8 +36,12 @@ import com.sun.syndication.io.SyndFeedOutput;
  * 使用 <a href="https://rome.dev.java.net/">Rome</a> 将日志导出成下列格式：RSS 0.90, RSS
  * 0.91 Netscape, RSS 0.91 Userland, RSS 0.92, RSS 0.93, RSS 0.94, RSS 1.0, RSS
  * 2.0, Atom 0.3, and Atom 1.0。
+ * <p>
+ * <a href="http://wiki.java.net/bin/view/Javawsxml/PoweredByRome">Powered by
+ * ROME</a>
+ * </p>
  * 
- * @author <a href="zhoushuqun@gmail.com">Shutra Zhou</a>
+ * @author <a href="mailto:zhoushuqun@gmail.com">Shutra Zhou</a>
  * 
  */
 public class RomeWriter extends AbstractBlogWriter {

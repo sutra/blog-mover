@@ -4,6 +4,8 @@
 package com.redv.blogmover;
 
 /**
+ * 当系统运行时发生用户异常时，抛出此异常。此异常应该在 UI 上体现给用户。
+ * 
  * @author Joe
  * @version 1.0
  * 

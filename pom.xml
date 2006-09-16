@@ -44,10 +44,46 @@
   </build>
   <dependencies>
     <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>activation</artifactId>
+      <version>1.0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.3.2</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.4</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.1.2</version>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>axis</groupId>
+      <artifactId>axis</artifactId>
+      <version>1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>axis</groupId>
+      <artifactId>axis-wsdl4j</artifactId>
+      <version>1.5.1</version>
+    </dependency>
+    <dependency>
+      <groupId>axis</groupId>
+      <artifactId>axis-schema</artifactId>
+      <version>1.3</version>
     </dependency>
     <dependency>
       <groupId>commons-httpclient</groupId>
@@ -74,17 +110,6 @@
       <systemPath>${basedir}/lib/htmlparser1_6/lib/htmlparser.jar</systemPath>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.4</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.1.2</version>
-    </dependency>
-    <dependency>
       <groupId>jtidy</groupId>
       <artifactId>jtidy</artifactId>
       <version>4aug2000r7-dev</version>
@@ -103,6 +128,11 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
       <version>2.0-rc1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.ws.xmlrpc</groupId>
+      <artifactId>xmlrpc</artifactId>
+      <version>3.0a1</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
@@ -125,6 +155,11 @@
       <version>2.0-rc1</version>
     </dependency>
     <dependency>
+      <groupId>rome</groupId>
+      <artifactId>rome</artifactId>
+      <version>0.8</version>
+    </dependency>
+    <dependency>
       <groupId>struts</groupId>
       <artifactId>struts</artifactId>
       <version>1.2.9</version>
@@ -135,11 +170,6 @@
       <version>1.1.2</version>
     </dependency>
     <dependency>
-      <groupId>xerces</groupId>
-      <artifactId>xercesImpl</artifactId>
-      <version>2.4.0</version>
-    </dependency>
-    <dependency>
       <groupId>uk.ltd.getahead</groupId>
       <artifactId>dwr</artifactId>
       <version>2.0.M2</version>
@@ -147,19 +177,9 @@
       <systemPath>${basedir}/lib/dwr-2.0.M2-src/dwr.jar</systemPath>
     </dependency>
     <dependency>
-      <groupId>axis</groupId>
-      <artifactId>axis</artifactId>
-      <version>1.3</version>
-    </dependency>
-    <dependency>
-      <groupId>axis</groupId>
-      <artifactId>axis-wsdl4j</artifactId>
-      <version>1.5.1</version>
-    </dependency>
-    <dependency>
-      <groupId>axis</groupId>
-      <artifactId>axis-schema</artifactId>
-      <version>1.3</version>
+      <groupId>xerces</groupId>
+      <artifactId>xercesImpl</artifactId>
+      <version>2.4.0</version>
     </dependency>
     <dependency>
       <groupId>net.csdn.passport</groupId>
@@ -167,21 +187,6 @@
       <version>1.0</version>
       <scope>system</scope>
       <systemPath>${basedir}/target/csdn-passport/csdn-passport-1.0.jar</systemPath>
-    </dependency>
-    <dependency>
-      <groupId>javax.mail</groupId>
-      <artifactId>mail</artifactId>
-      <version>1.3.2</version>
-    </dependency>
-    <dependency>
-      <groupId>javax.activation</groupId>
-      <artifactId>activation</artifactId>
-      <version>1.0.2</version>
-    </dependency>
-    <dependency>
-      <groupId>rome</groupId>
-      <artifactId>rome</artifactId>
-      <version>0.8</version>
     </dependency>
   </dependencies>
   <reporting>

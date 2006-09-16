@@ -1,9 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page
 	import="java.io.File,java.util.*,com.redv.blogmover.util.*,org.apache.commons.lang.*,java.net.*"%>
-<%!
-String filename = RandomStringUtils.randomNumeric(8);
-%>
+<%!String filename = RandomStringUtils.randomNumeric(8);%>
 <table>
 	<tr>
 		<td>
@@ -150,4 +148,6 @@ String filename = RandomStringUtils.randomNumeric(8);
 	href="download-file?filename=com/redv/blogmover/<%=session.getId()%>/<%=filename%>&attachmentFilename=feed.rss-atom.xml&contentType=<%=URLEncoder.encode("application/oct-stream", "UTF-8")%>"
 	target="_blank">单击这里下载 Atom/RSS 文件</a>
 。
-
+<div>
+	<img src="images/romepower04-anim-med.gif" />
+</div>
