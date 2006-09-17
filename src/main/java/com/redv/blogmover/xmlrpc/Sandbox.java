@@ -17,13 +17,17 @@ import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 public class Sandbox {
 	public static void main(String[] args) throws MalformedURLException, XmlRpcException {
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-		config.setServerURL(new URL("http://xpert.cn/xmlrpc"));
+		config.setServerURL(new URL("http://blogmover.iblog.cn/xmlrpc.php"));
+		//config.setServerURL(new URL("http://www.bokeland.com/xmlrpc.php"));
 		XmlRpcClient client = new XmlRpcClient();
 		client.setConfig(config);
-		Object[] params = new Object[] {"blogmover", "shutra", "********"};
+		Object[] params = new Object[] {"blogmover", "blogmover", "wangjing"};
 		Object ret = client.execute("metaWeblog.getCategories", params);
 		System.out.println(ret);
 		
+		params = new Object[] {"blogmover", "blogmover", "wangjing", "10"};
+		ret = client.execute("metaWeblog.getRecentPosts", params);
+		System.out.println(ret);
 		
 	}
 }
