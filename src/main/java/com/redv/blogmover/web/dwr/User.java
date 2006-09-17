@@ -82,10 +82,40 @@ public class User implements Serializable {
 		}
 	}
 
+	/**
+	 * @deprecated
+	 * @param property
+	 * @param value
+	 * @throws BlogMoverException
+	 */
+	public void setReaderProperty(String property, String value)
+			throws BlogMoverException {
+		try {
+			this.userDelegate.setReaderProperty(property, value);
+		} catch (RuntimeException e) {
+			log.error(e);
+		}
+	}
+
 	public void setReaderProperties(String[] properties, String[] values)
 			throws BlogMoverException {
 		try {
 			this.userDelegate.setReaderProperties(properties, values);
+		} catch (RuntimeException e) {
+			log.error(e);
+		}
+	}
+
+	/**
+	 * @deprecated
+	 * @param property
+	 * @param value
+	 * @throws BlogMoverException
+	 */
+	public void setWriterProperty(String property, String value)
+			throws BlogMoverException {
+		try {
+			this.userDelegate.setWriterProperty(property, value);
 		} catch (RuntimeException e) {
 			log.error(e);
 		}
