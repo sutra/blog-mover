@@ -21,6 +21,14 @@
       <timezone>+8</timezone>
     </developer>
   </developers>
+  <licenses>
+    <license>
+      <name>New BSD License</name>
+      <url>http://www.opensource.org/licenses/bsd-license.php</url>
+      <distribution>http://blog-mover.redv.com</distribution>
+      <comments></comments>
+    </license>
+  </licenses>
   <scm>
     <connection>scm:svn:http://blog-mover.googlecode.com/svn/trunk/</connection>
     <developerConnection>scm:svn:https://blog-mover.googlecode.com/svn/trunk/</developerConnection>
@@ -95,6 +103,7 @@
       <artifactId>commons-lang</artifactId>
       <version>2.1</version>
     </dependency>
+    <!-- 
     <dependency>
       <groupId>hotsax</groupId>
       <artifactId>hotsax</artifactId>
@@ -102,6 +111,8 @@
       <scope>system</scope>
       <systemPath>${basedir}/lib/HotSAX-0.1.2c/lib/hotsax.jar</systemPath>
     </dependency>
+     -->
+    <!-- 
     <dependency>
       <groupId>htmlparser</groupId>
       <artifactId>htmlparser</artifactId>
@@ -109,6 +120,7 @@
       <scope>system</scope>
       <systemPath>${basedir}/lib/htmlparser1_6/lib/htmlparser.jar</systemPath>
     </dependency>
+     -->
     <dependency>
       <groupId>jtidy</groupId>
       <artifactId>jtidy</artifactId>
@@ -173,8 +185,6 @@
       <groupId>uk.ltd.getahead</groupId>
       <artifactId>dwr</artifactId>
       <version>2.0.M2</version>
-      <scope>system</scope>
-      <systemPath>${basedir}/lib/dwr-2.0.M2-src/dwr.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>xerces</groupId>
