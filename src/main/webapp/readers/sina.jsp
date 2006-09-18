@@ -11,7 +11,7 @@
 			Sina Blog 帐号：
 		</td>
 		<td>
-			<input type="text" name="username" />
+			<input type="text" name="username" tabindex="100" />
 			（在这里填写你的 Sina Blog 帐号。）
 		</td>
 	</tr>
@@ -20,7 +20,7 @@
 			Sina Blog 密码：
 		</td>
 		<td>
-			<input type="password" name="password" />
+			<input type="password" name="password" tabindex="101" />
 			（在这里填写 Sina Blog 密码，我们不会记录您的密码，在搬家完成后就删除这些个人信息。）
 		</td>
 	</tr>

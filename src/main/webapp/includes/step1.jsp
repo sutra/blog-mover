@@ -12,5 +12,5 @@
 	<div id="selectedReaderDiv">
 		请从上面支持的 BSP 中选择一个来源 BSP。
 	</div>
-	<input type="button" id="readButton" value="读取" onclick="blogRead()" disabled="disabled" tabindex="200" />
+	<input type="button" id="readButton" value="读取(R)" onclick="blogRead()" disabled="disabled" tabindex="200" accesskey="R" />
 </div>

@@ -11,7 +11,7 @@
 			用户名：
 		</td>
 		<td>
-			<input type="text" name="username" />
+			<input type="text" name="username" tabindex="100" />
 		</td>
 	</tr>
 	<tr>
@@ -19,7 +19,7 @@
 			密码：
 		</td>
 		<td>
-			<input type="password" name="password" />
+			<input type="password" name="password" tabindex="101" />
 			（我们不会恶意记录您的密码，该密码用来给 Blog Remover 登录和迅后台抓取日志信息）
 		</td>
 	</tr>

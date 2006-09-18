@@ -12,5 +12,5 @@
 	<div id="selectedWriterDiv">
 		请从上面支持的 BSP 中选择目标 BSP。
 	</div>
-	<input type="button" id="writeButton" value="写入" onclick="blogWrite()" disabled="disabled" />
+	<input type="button" id="writeButton" value="写入(W)" onclick="blogWrite()" disabled="disabled" accesskey="W" />
 </div>

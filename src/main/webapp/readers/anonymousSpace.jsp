@@ -1,6 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 Space 地址: http://
-<input type="text" name="spaceName" onchange="$('reader_anonymousSpace_spaceName_preview').href='http://' + this.value + '.spaces.msn.com/blog/'" />
+<input type="text" name="spaceName" onchange="$('reader_anonymousSpace_spaceName_preview').href='http://' + this.value + '.spaces.msn.com/blog/'" tabindex="100" />
 .spaces.msn.com/blog/ （在这里把你的 MSN Space 地址填写完整。） 单击
 <a id="reader_anonymousSpace_spaceName_preview" href="#">
 	这里

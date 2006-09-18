@@ -4,8 +4,8 @@
 请填写必要信息，用于 Blog Remover 像 Sohu Blog 写入日志：
 <br />
 用户名：
-<input type="text" name="username" />
-<select name="maildomain">
+<input type="text" name="username" tabindex="100" />
+<select name="maildomain" tabindex="101">
 	<option value="@sohu.com">
 		@sohu.com
 	</option>
@@ -27,7 +27,7 @@
 </select>
 <br />
 密 码：
-<input type="password" name="passwd" />
+<input type="password" name="passwd" tabindex="102" />
 （我们不会恶意记录您的密码，该密码用于 Blog Remover 登录您的 Sohu Blog 后获取日志信息）
 <div class="attention">
 	将写入内容，不写入评论、图片、多媒体、日期等。

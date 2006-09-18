@@ -8,7 +8,7 @@
 			Feed Type:
 		</td>
 		<td>
-			<select id="feedType" name="feedType"
+			<select id="feedType" name="feedType" tabindex="100"
 				onchange='
 				var href = "download-file?filename=com/redv/blogmover/<%=session.getId()%>/<%=filename%>&attachmentFilename=feed.rss-atom.xml&contentType=";
 				var feedType = (this.options[this.options.selectedIndex].value);
@@ -59,7 +59,7 @@
 			Title:
 		</td>
 		<td>
-			<input type="text" name="title" />
+			<input type="text" name="title" tabindex="101" />
 		</td>
 	</tr>
 	<tr>
@@ -67,7 +67,7 @@
 			Link:
 		</td>
 		<td>
-			<input type="text" name="link" />
+			<input type="text" name="link" tabindex="102" />
 		</td>
 	</tr>
 	<tr>
@@ -75,14 +75,14 @@
 			Description:
 		</td>
 		<td>
-			<input type="text" name="description" />
+			<input type="text" name="description" tabindex="103" />
 		</td>
 	<tr>
 		<td>
 			Language:
 		</td>
 		<td>
-			<select name="language">
+			<select name="language" tabindex="104">
 				<%
 						String availableLocalesOptionsString;
 						availableLocalesOptionsString = (String) application.getAttribute("availableLocalesOptionsString");
@@ -125,7 +125,7 @@
 			Copyright:
 		</td>
 		<td>
-			<input type="text" name="copyright" />
+			<input type="text" name="copyright" tabindex="105" />
 		</td>
 	</tr>
 	<tr>
@@ -133,20 +133,20 @@
 			Author:
 		</td>
 		<td>
-			<input type="text" name="author" />
+			<input type="text" name="author" tabindex="106" />
 		</td>
 	</tr>
 </table>
-<input type="hidden" name="filename"
+<input type="hidden" name="filename" tabindex="107"
 	value="com/redv/blogmover/<%=session.getId() + "/" + filename%>" />
 当写入结束后，
 <a id="downloadFileAnchor"
 	href="download-file?filename=com/redv/blogmover/<%=session.getId()%>/<%=filename%>&attachmentFilename=feed.rss-atom.xml&contentType=<%=URLEncoder.encode("application/atom+xml", "UTF-8")%>"
-	target="_blank">单击这里查看 Atom/RSS 文件</a>
+	target="_blank" tabindex="108">单击这里查看 Atom/RSS 文件</a>
 ，
 <a
 	href="download-file?filename=com/redv/blogmover/<%=session.getId()%>/<%=filename%>&attachmentFilename=feed.rss-atom.xml&contentType=<%=URLEncoder.encode("application/oct-stream", "UTF-8")%>"
-	target="_blank">单击这里下载 Atom/RSS 文件</a>
+	target="_blank" tabindex="109">单击这里下载 Atom/RSS 文件</a>
 。
 <div>
 	<img src="images/romepower04-anim-med.gif" />

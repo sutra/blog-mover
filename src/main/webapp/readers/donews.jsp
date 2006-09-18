@@ -11,7 +11,7 @@
 			DoNews 帐号：
 		</td>
 		<td>
-			<input type="text" name="username" onchange="$('writer_donews_username_preview').href='http://blog.donews.com/' + this.value;" />
+			<input type="text" name="username" onchange="$('writer_donews_username_preview').href='http://blog.donews.com/' + this.value;" tabindex="100" />
 			（在这里填写你的 DoNews 帐号。） 你可以点击
 			<a id="writer_donews_username_preview" href="http://blog.donews.com/">
 				这里
@@ -24,7 +24,7 @@
 			DoNews 密码：
 		</td>
 		<td>
-			<input type="password" name="password" />
+			<input type="password" name="password" tabindex="101" />
 			（在这里填写 DoNews 密码，我们不会记录您的密码，在搬家完成后就删除这些个人信息。）
 		</td>
 	</tr>
