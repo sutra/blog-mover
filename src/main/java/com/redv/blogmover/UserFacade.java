@@ -179,6 +179,9 @@ public class UserFacade implements Serializable {
 	}
 
 	public void read() throws BlogMoverException {
+		if (reader == null) {
+			throw new BlogMoverException("尚未设置读取器。");
+		}
 		this.readerLock.readLock().lock();
 		try {
 			List<WebLog> webLogs = reader.read();
@@ -191,6 +194,9 @@ public class UserFacade implements Serializable {
 	}
 
 	public void write() throws BlogMoverException {
+		if (writer == null) {
+			throw new BlogMoverException("写入器尚未设置。");
+		}
 		this.writerLock.readLock().lock();
 		try {
 			List<WebLog> unmodifiableList = Collections

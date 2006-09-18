@@ -110,11 +110,14 @@ public class BaiduReader extends AbstractBlogReader {
 		return hasNextPage;
 	}
 
-	private void parseSetting() {
+	private void parseSetting() throws BlogMoverException {
 		String settingUrl = "http://hi.baidu.com/blogremover/modify/spbasic/0";
 		Document document = httpDocument.get(settingUrl);
 		// DispNum.
 		Element spConfigDispNum = document.getElementById("spConfigDispNum");
+		if (spConfigDispNum == null) {
+			throw new BlogMoverException("没有找到设置页面，请重试F。");
+		}
 		Node nextSibling = spConfigDispNum.getNextSibling();
 		log.debug("nextSibling" + nextSibling.getNodeName());
 		String textContent = DomNodeUtils.getTextContent(nextSibling);

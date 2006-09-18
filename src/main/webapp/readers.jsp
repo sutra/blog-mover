@@ -6,7 +6,7 @@
 	<ol>
 		<c:forEach var="reader" items="${readers}" varStatus="status">
 			<li>
-				<input type="radio" name="readerId" id="readerId${status.count}" accept="${status.count}" value="${reader[0]}" onclick="return selectReader(this.value, $('readerClassName${status.count}').value)" />
+				<input type="radio" name="readerId" id="readerId${status.count}" accesskey="${status.count}" value="${reader[0]}" onclick="return selectReader(this.value, $('readerClassName${status.count}').value)" tabindex="${status.count}" />
 				<input type="hidden" name="readerClassName" id="readerClassName${status.count}" value="${reader[1]}" />
 				<label for="readerId${status.count}">
 					<fmt:message key="${reader[0]}" />
