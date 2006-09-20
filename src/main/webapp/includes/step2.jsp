@@ -10,7 +10,7 @@
 	<div id="webLogs">
 		<div>
 			<input type="button" id="deleteButton" value="&#x2715;"
-				onclick="deleteWebLogs()" title="删除">
+				onclick="deleteWebLogs()" title="删除" />
 			<input type="button" id="clearButton" value="&#x2716;"
 				onclick="clearWebLogs()" title="清空" />
 			&nbsp;&nbsp; 页大/总数：

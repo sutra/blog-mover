@@ -23,43 +23,43 @@
 			</ol>
 		</div>
 		<div id="googleGroup">
-			<table style="border:1px solid #aa0033; font-size:small">
-				<tr>
-					<td rowspan="3">
-						<img src="http://groups.google.com/groups/img/groups_medium.gif"
-							height="58" width="150" alt="Google Groups">
-					</td>
-					<td colspan="2" align="center">
-						<b> Subscribe to Blog Mover（博客搬家工具） </b>
-					</td>
-				</tr>
-				<form
-					action="http://groups.google.com/group/blog-mover/boxsubscribe">
-				<tr>
-					<td>
-						Email:
-						<input type="text" name="email">
-					</td>
-					<td>
-						<table
-							style="background-color:#ffcc33;padding:2px;border:2px outset #ffcc33;">
-							<tr>
-								<td>
-									<input type="submit" name="sub" value="Subscribe">
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				</form>
-				<tr>
-					<td colspan="2" align="center">
-						<a href="http://groups.google.com/group/blog-mover"> Browse
-							Archives </a> at
-						<a href="http://groups.google.com/"> groups.google.com </a>
-					</td>
-				</tr>
-			</table>
+			<form action="http://groups.google.com/group/blog-mover/boxsubscribe">
+				<table style="border:1px solid #aa0033; font-size:small">
+					<tr>
+						<td rowspan="3">
+							<img src="http://groups.google.com/groups/img/groups_medium.gif"
+								height="58" width="150" alt="Google Groups" />
+						</td>
+						<td colspan="2" align="center">
+							<b> Subscribe to Blog Mover（博客搬家工具） </b>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Email:
+							<input type="text" name="email" />
+						</td>
+						<td>
+							<table
+								style="background-color:#ffcc33;padding:2px;border:2px outset #ffcc33;">
+								<tr>
+									<td>
+										<input type="submit" name="sub" value="Subscribe" />
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+
+					<tr>
+						<td colspan="2" align="center">
+							<a href="http://groups.google.com/group/blog-mover"> Browse
+								Archives </a> at
+							<a href="http://groups.google.com/"> groups.google.com </a>
+						</td>
+					</tr>
+				</table>
+			</form>
 		</div>
 		<div id="author">
 			程序设计：
@@ -88,8 +88,8 @@
 			<a href="http://bloghoo.it.sohu.com/bspcenter.html">
 				http://bloghoo.it.sohu.com/bspcenter.html </a> 依次提供支持。 由于国内 BSP
 			众多，所以我们将各个 BSP 的支持加入了
-			<a href="blog-mover.png">开发计划</a>，你可以从中找到你所需要的 BSP
-			的支持的开发进度。如果你所希望支持的 BSP 没有出现在开发计划中，请在
+			<a href="blog-mover.png">开发计划</a>，你可以从中找到你所需要的 BSP 的支持的开发进度。如果你所希望支持的
+			BSP 没有出现在开发计划中，请在
 			<a href="http://groups.google.com/group/blog-mover">这里</a>提出。
 		</div>
 	</div>

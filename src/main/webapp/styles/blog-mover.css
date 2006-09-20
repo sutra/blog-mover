@@ -21,6 +21,10 @@ h3 {
 	color: #f00;
 }
 
+.accesskey {
+	text-decoration: underline;
+}
+
 #blogRemoverHeader {
 	color: #776655;
 	padding: 20px;

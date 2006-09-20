@@ -9,6 +9,6 @@ urchinTracker();
 
 <div style="text-align:right;">
 <!-- 51 la -->
-<script language="javascript" type="text/javascript" src="http://js.users.51.la/500613.js"></script>
-<noscript><a href="http://www.51.la/?500613" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/500613.asp" style="border:none" /></a></noscript>
+<script type="text/javascript" src="http://js.users.51.la/500613.js"></script>
+<noscript><div><a href="http://www.51.la/?500613"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/500613.asp" style="border:none" /></a></div></noscript>
 </div>

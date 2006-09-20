@@ -19,7 +19,7 @@
 		<link rel="stylesheet" type="text/css" media="screen"
 			href="styles/nicetabs.css" />
 		<style type="text/css">
-		@import url("styles/blog-remover.css");
+		@import url("styles/blog-mover.css");
 		</style>
 		<jsp:directive.include file="includes/scripts.jsp" />
 	</head>
