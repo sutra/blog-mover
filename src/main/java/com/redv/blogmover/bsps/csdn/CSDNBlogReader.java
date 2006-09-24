@@ -204,4 +204,5 @@ public class CSDNBlogReader extends AbstractBlogReader {
 	public byte[] getIdentifyingCodeImage() throws BlogMoverException {
 		return csdnLogin.getIdentifyingCodeImage();
 	}
+
 }

@@ -3,7 +3,7 @@
 <script type="text/javascript" src="dwr/interface/User.js"></script>
 <script type="text/javascript" src="dwr/engine.js"></script>
 <script type="text/javascript" src="dwr/util.js"></script>
-<script type="text/javascript" src="scripts/blog-remover.jsp"></script>
+<script type="text/javascript" src="scripts/blog-mover.jsp"></script>
 <script type="text/javascript" src="scripts/reader.jsp"></script>
 <script type="text/javascript" src="scripts/writer.jsp"></script>
 <script type="text/javascript" src="scripts/pick-web-log.jsp"></script>

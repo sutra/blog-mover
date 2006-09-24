@@ -37,6 +37,10 @@ public class UserFacade implements Serializable {
 	private static final transient Log log = LogFactory
 			.getLog(UserFacade.class);
 
+	private RecentWebLogsCache history = new RecentWebLogsCache();
+
+	private String token;
+
 	private final ReadWriteLock readerLock = new ReentrantReadWriteLock();
 
 	private final ReadWriteLock writerLock = new ReentrantReadWriteLock();
@@ -49,6 +53,10 @@ public class UserFacade implements Serializable {
 
 	public UserFacade() {
 		webLogs = new Vector<WebLog>();
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	/**
@@ -206,6 +214,8 @@ public class UserFacade implements Serializable {
 			webLogsCopy.addAll(unmodifiableList);
 
 			writer.write(webLogsCopy);
+
+			history.put(token, webLogsCopy);
 		} finally {
 			this.writerLock.readLock().unlock();
 		}

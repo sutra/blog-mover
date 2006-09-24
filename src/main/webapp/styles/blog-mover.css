@@ -13,6 +13,14 @@ ul,ol {
 	margin-left: 4em;
 }
 
+h1 {
+	font: bold 22px/ 24px tahoma, times, serif, 宋体;
+}
+
+h2 {
+	font: bold 18px/ 20px tahoma, times, serif, 宋体;
+}
+
 h3 {
 	font: bold 16px/ 18px tahoma, times, serif, 宋体;
 }

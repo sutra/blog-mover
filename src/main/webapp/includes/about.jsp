@@ -21,6 +21,7 @@
 					你可以选择源 Blog 的部分日志进行搬迁。
 				</li>
 			</ol>
+			<a href="recent.jsp">最近搬迁的日志</a>
 		</div>
 		<div id="googleGroup">
 			<form action="http://groups.google.com/group/blog-mover/boxsubscribe">

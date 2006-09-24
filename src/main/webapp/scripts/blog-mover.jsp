@@ -1,6 +1,6 @@
 <%@ page contentType="text/javascript; charset=UTF-8"%>
 // Step selection.
-var tabs = new Array("step1", "step2", "step3", "option", "about");
+var tabs = new Array("step1", "step2", "step3", "option", "about", "recentMoving");
 function selectTab(tab) {
 	doSelect(tab);
 	for (var i = 0; i < tabs.length; i++) {

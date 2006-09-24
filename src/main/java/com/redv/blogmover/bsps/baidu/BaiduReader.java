@@ -298,4 +298,5 @@ public class BaiduReader extends AbstractBlogReader {
 		}
 		return cal.getTime();
 	}
+
 }

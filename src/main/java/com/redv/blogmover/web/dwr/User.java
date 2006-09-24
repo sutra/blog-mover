@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.directwebremoting.WebContextFactory;
-import org.springframework.web.util.WebUtils;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.BlogReader;
@@ -209,8 +208,16 @@ public class User implements Serializable {
 		 */
 		private UserFacade getUserFacade() {
 			HttpSession session = WebContextFactory.get().getSession(true);
-			return (UserFacade) WebUtils.getOrCreateSessionAttribute(session,
-					SESSION_NAME_USER_FACADE, UserFacade.class);
+			// return (UserFacade) WebUtils.getOrCreateSessionAttribute(session,
+			// SESSION_NAME_USER_FACADE, UserFacade.class);
+			UserFacade ret = (UserFacade) session
+					.getAttribute(SESSION_NAME_USER_FACADE);
+			if (ret == null) {
+				ret = new UserFacade();
+				ret.setToken(session.getId());
+				session.setAttribute(SESSION_NAME_USER_FACADE, ret);
+			}
+			return ret;
 		}
 
 		/**

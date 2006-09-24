@@ -103,24 +103,6 @@
       <artifactId>commons-lang</artifactId>
       <version>2.1</version>
     </dependency>
-    <!-- 
-    <dependency>
-      <groupId>hotsax</groupId>
-      <artifactId>hotsax</artifactId>
-      <version>0.1.2c</version>
-      <scope>system</scope>
-      <systemPath>${basedir}/lib/HotSAX-0.1.2c/lib/hotsax.jar</systemPath>
-    </dependency>
-     -->
-    <!-- 
-    <dependency>
-      <groupId>htmlparser</groupId>
-      <artifactId>htmlparser</artifactId>
-      <version>1.6</version>
-      <scope>system</scope>
-      <systemPath>${basedir}/lib/htmlparser1_6/lib/htmlparser.jar</systemPath>
-    </dependency>
-     -->
     <dependency>
       <groupId>jtidy</groupId>
       <artifactId>jtidy</artifactId>
@@ -135,6 +117,11 @@
       <groupId>nekohtml</groupId>
       <artifactId>nekohtml</artifactId>
       <version>0.9.5</version>
+    </dependency>
+    <dependency>
+      <groupId>opensymphony</groupId>
+      <artifactId>oscache</artifactId>
+      <version>2.3</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>

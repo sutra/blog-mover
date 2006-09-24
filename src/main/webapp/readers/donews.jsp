@@ -33,7 +33,7 @@
 			验证码：
 		</td>
 		<td>
-			<input type="text" name="identifyingCode" />
+			<input type="text" name="identifyingCode" tabindex="102" />
 			（请在这里填写后面这张图片上的文字，这个验证码是给搬家程序登录 DoNews Blog 用的。如果你看不清下面的图片，请单击图片重新获取一张。）
 			<br />
 			<img src="identifying-code-image?type=reader&now=donews" alt="验证码图片，单击重新获取新的验证码。" style="border:0px;" onclick="this.src='identifying-code-image?type=reader&now=' + new Date().getTime()" />
