@@ -48,28 +48,6 @@
           <target>1.5</target>
         </configuration>
       </plugin>
-      <!--
-      <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>generate-sources</phase>
-            <configuration>
-              <tasks>
-                <exec
-                  dir="${basedir}/src/main/assembly/"
-                  executable="${basedir}/src/main/assembly/csdn-passport.bat"
-                  failonerror="true">
-                </exec>
-              </tasks>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      -->
     </plugins>
   </build>
   <dependencies>
@@ -206,6 +184,11 @@
       <version>1.0</version>
       <scope>system</scope>
       <systemPath>${basedir}/target/csdn-passport/csdn-passport-1.0.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.xmlrpc</groupId>
+      <artifactId>xmlrpc-client</artifactId>
+      <version>3.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <reporting>

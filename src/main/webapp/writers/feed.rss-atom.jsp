@@ -77,6 +77,7 @@
 		<td>
 			<input type="text" name="description" tabindex="103" />
 		</td>
+	</tr>
 	<tr>
 		<td>
 			Language:

@@ -40,6 +40,8 @@
 		class="com.redv.blogmover.web.WritersController">
 		<property name="writers">
 			<map>
+				<entry key="metaWeblog"
+					value="com.redv.blogmover.metaWeblog.MetaWeblogWriter" />
 				<entry key="feed.rss-atom"
 					value="com.redv.blogmover.feed.RomeWriter" />
 				<entry key="baidu"
