@@ -37,7 +37,7 @@ public class UserFacade implements Serializable {
 	private static final transient Log log = LogFactory
 			.getLog(UserFacade.class);
 
-	private RecentWebLogsCache history = new RecentWebLogsCache();
+	private transient RecentWebLogsCache history = new RecentWebLogsCache();
 
 	private String token;
 
