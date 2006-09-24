@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <script type="text/javascript" src="scripts/prototype.js" charset="UTF-8"></script>
+<script type="text/javascript" src="scripts/cookie.js" charset="UTF-8"></script>
 <script type="text/javascript" src="dwr/interface/User.js"></script>
 <script type="text/javascript" src="dwr/engine.js"></script>
 <script type="text/javascript" src="dwr/util.js"></script>

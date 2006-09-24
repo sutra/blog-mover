@@ -39,7 +39,12 @@
 				<jsp:directive.include file="includes/about.jsp" />
 			</div>
 			<script type="text/javascript">
-			selectTab('about');
+			var selectedTab = getCookie("selectedTab");
+			if (selectedTab != null && selectedTab != '') {
+				selectTab(selectedTab);
+			} else {
+				selectTab('about');
+			}
 			</script>
 			<jsp:directive.include file="includes/status-bar.jsp" />
 			<jsp:directive.include file="includes/debug.jsp" />

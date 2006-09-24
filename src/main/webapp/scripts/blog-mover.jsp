@@ -8,6 +8,7 @@ function selectTab(tab) {
 			doUnSelect(tabs[i]);
 		}
 	}
+	setCookie ("selectedTab", tab);
 	return false;
 }
 function doSelect(tab) {
