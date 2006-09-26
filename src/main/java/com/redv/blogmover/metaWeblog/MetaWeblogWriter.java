@@ -14,6 +14,7 @@ import java.util.Map;
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
+import org.apache.xmlrpc.client.XmlRpcCommonsTransportFactory;
 
 import com.redv.blogmover.Attachment;
 import com.redv.blogmover.BlogMoverException;
@@ -84,8 +85,10 @@ public class MetaWeblogWriter extends AbstractBlogWriter {
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
 		config.setServerURL(serverURL);
 		config.setEnabledForExtensions(Boolean.TRUE);
+//		config.setEncoding("GBK");
 		client = new XmlRpcClient();
 		client.setConfig(config);
+		client.setTransportFactory(new XmlRpcCommonsTransportFactory(client));
 	}
 
 	/*
