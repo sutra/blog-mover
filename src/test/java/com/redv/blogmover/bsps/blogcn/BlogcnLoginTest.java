@@ -47,7 +47,7 @@ public class BlogcnLoginTest extends TestCase {
 		super.setUp();
 		httpClient = new HttpClient();
 		httpClient.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
-		httpDocument = new HttpDocument(httpClient, true);
+		httpDocument = new HttpDocument(httpClient, true, "GBK");
 		blogcnLogin = new BlogcnLogin(httpDocument);
 	}
 	

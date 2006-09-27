@@ -27,6 +27,9 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.util.HttpDocument;
@@ -58,8 +61,17 @@ public class BlogcnLogin {
 		param = new NameValuePair("CookieDate","0");
 		params.add(param);
 		Document document = httpDocument.post(action, params);
+		
 		boolean ok = false;
+		NodeList nodes = document.getElementsByTagName("title");
+		for (int i=0; i<nodes.getLength(); i++) {
+			Element element = (Element)nodes.item(i);
+			if (element.getFirstChild().getNodeValue().indexOf("用户管理后台")!=-1) {
+				ok = true;
+			}
+		}
 		if (!ok) {
+			
 			throw new BlogMoverException("用户名密码或者验证码有误，请重新输入");
 		}
 	}
