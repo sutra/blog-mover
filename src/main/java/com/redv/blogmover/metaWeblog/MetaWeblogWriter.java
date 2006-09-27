@@ -85,7 +85,7 @@ public class MetaWeblogWriter extends AbstractBlogWriter {
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
 		config.setServerURL(serverURL);
 		config.setEnabledForExtensions(Boolean.TRUE);
-//		config.setEncoding("GBK");
+		config.setEncoding("GBK");
 		client = new XmlRpcClient();
 		client.setConfig(config);
 		client.setTransportFactory(new XmlRpcCommonsTransportFactory(client));

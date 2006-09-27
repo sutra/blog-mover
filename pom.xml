@@ -129,11 +129,6 @@
       <version>2.0-rc1</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.ws.xmlrpc</groupId>
-      <artifactId>xmlrpc</artifactId>
-      <version>3.0a1</version>
-    </dependency>
-    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
       <version>2.0-rc1</version>

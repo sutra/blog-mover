@@ -3,14 +3,19 @@
  */
 package com.redv.blogmover.metaWeblog;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
@@ -26,6 +31,9 @@ import com.redv.blogmover.impl.WebLogImpl;
  * 
  */
 public class MetaWeblogWriterTest {
+	@SuppressWarnings("unused")
+	private static final Log log = LogFactory
+			.getLog(MetaWeblogWriterTest.class);
 
 	/**
 	 * Test method for
@@ -34,9 +42,8 @@ public class MetaWeblogWriterTest {
 	 * @throws BlogMoverException
 	 * @throws MalformedURLException
 	 */
-	//@Test
-	public void testWrite() throws BlogMoverException, MalformedURLException {
-		assertEquals("", "");
+	@Test
+	public void testWriteBokeland() throws BlogMoverException, MalformedURLException {
 		MetaWeblogWriter w = new MetaWeblogWriter();
 		w.setServerURL("http://www.bokeland.com/xmlrpc.php");
 		w.setBlogid("722");
@@ -45,52 +52,70 @@ public class MetaWeblogWriterTest {
 		List<WebLog> webLogs = new ArrayList<WebLog>();
 		WebLog webLog = new WebLogImpl();
 		webLog.setTitle("test");
-		webLog.setBody("test");
+		webLog.setBody(org.apache.commons.lang.StringEscapeUtils.escapeHtml("测试"));
 		webLog.setPublishedDate(new Date());
 		webLogs.add(webLog);
 		w.write(webLogs);
 	}
-	
-	@Test
-	public void testWriteToXpert() throws BlogMoverException, MalformedURLException {
-		MetaWeblogWriter w = new MetaWeblogWriter();
-		w.setServerURL("http://xpert.cn/xmlrpc");
-		w.setBlogid("shutra");
-		w.setUsername("shutra");
-		w.setPassword("wangjing");
-		List<WebLog> webLogs = new ArrayList<WebLog>();
-		WebLog webLog = new WebLogImpl();
-		webLog.setTitle("test");
-		webLog.setBody("test");
-		webLog.setPublishedDate(new Date());
-		webLogs.add(webLog);
-		w.write(webLogs);
-	}
-	
+
 	/**
 	 * Get all blogs of a user.
-	 * @throws MalformedURLException 
-	 * @throws XmlRpcException 
-	 *
+	 * 
+	 * @throws MalformedURLException
+	 * @throws XmlRpcException
+	 * 
 	 */
-	//@Test
-	public void getAllBlogs() throws MalformedURLException, XmlRpcException {
+	@SuppressWarnings("unchecked")
+	@Test
+	public void getAllBlogsFromBokeland() throws MalformedURLException, XmlRpcException {
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-		config.setServerURL(new URL("http://blog.csdn.net/blogremover/services/MetaBlogApi.aspx"));
-		config.setEnabledForExtensions(Boolean.TRUE);
+		config.setServerURL(new URL("http://www.bokeland.com/xmlrpc.php"));
+		config.setEnabledForExtensions(false);
 		XmlRpcClient client = new XmlRpcClient();
 		client.setConfig(config);
 		client.setTransportFactory(new XmlRpcCommonsTransportFactory(client));
-		Object[] params = new Object[] {"dummy", "blogremover", "blogremover"};
-		Object o = client.execute("blogger.getUsersBlogs", params);
-		System.out.println(o);
+		Object[] params = new Object[] { "dummy", "blogmover", "xpert.cn" };
+		Object o = client.execute(config, "blogger.getUsersBlogs", params);
+		Object[] result = (Object[]) o;
+		assertEquals(result.length, 1);
+		Map<String, String> m = (Map<String, String>) result[0];
+		assertEquals(m.get("blogid"), "722");
+		assertEquals(m.get("blogName"), "Blog Mover");
+
 	}
 	
-	//@Test
-	public void testIBlog() throws BlogMoverException, MalformedURLException {
+	@Test
+	public void getAllBlogsFromIBlog() throws MalformedURLException, XmlRpcException {
+		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
+		config.setServerURL(new URL("http://cn.iblog.com/xmlrpc.php"));
+		config.setEnabledForExtensions(false);
+		XmlRpcClient client = new XmlRpcClient();
+		client.setConfig(config);
+		client.setTransportFactory(new XmlRpcCommonsTransportFactory(client));
+		Object[] params = new Object[] { "dummy", "blogmover", "xpert.cn" };
+		Object o = client.execute(config, "blogger.getUsersBlogs", params);
+		Object[] result = (Object[]) o;
+		assertEquals(result.length, 1);
+		log.debug(result[0]);
+		Map<String, String> m = (Map<String, String>) result[0];
+		assertEquals(m.get("blogid"), "17392");
+		assertEquals(m.get("blogName"), "Blog Mover");		
+	}
+
+	@Test
+	public void testWriteIBlog() throws BlogMoverException, MalformedURLException {
 		MetaWeblogWriter w = new MetaWeblogWriter();
 		w.setServerURL("http://cn.iblog.com/xmlrpc.php");
-		w.setBlogid("");
+		w.setBlogid("17392");
+		w.setUsername("blogmover");
+		w.setPassword("xpert.cn");
+		List<WebLog> webLogs = new ArrayList<WebLog>();
+		WebLog webLog = new WebLogImpl();
+		webLog.setTitle("test");
+		webLog.setBody("测试");
+		webLog.setPublishedDate(new Date());
+		webLogs.add(webLog);
+		w.write(webLogs);
 	}
 
 }
