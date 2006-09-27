@@ -28,7 +28,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogMoverException;
@@ -66,7 +65,11 @@ public class BlogcnLogin {
 		NodeList nodes = document.getElementsByTagName("title");
 		for (int i=0; i<nodes.getLength(); i++) {
 			Element element = (Element)nodes.item(i);
-			if (element.getFirstChild().getNodeValue().indexOf("用户管理后台")!=-1) {
+			String title = element.getFirstChild().getNodeValue(); 
+			if (title.indexOf("用户管理后台")!=-1) {
+				if (log.isDebugEnabled()) {
+					log.debug("user:" + username + " login to www.blog.com.cn ok " + title);
+				}
 				ok = true;
 			}
 		}

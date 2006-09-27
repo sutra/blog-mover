@@ -246,6 +246,7 @@ public class HttpDocument implements Serializable {
 							.getAboveHierPath()
 							+ newuri;
 					// Really need to decode?
+					log.debug("before decode:" + s);
 					s = java.net.URLDecoder.decode(s, "UTF-8");
 					newuri = new org.apache.commons.httpclient.URI(parentUri
 							.getScheme(), parentUri.getHost(), (s), "")
