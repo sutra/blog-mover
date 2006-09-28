@@ -244,10 +244,10 @@ public class RomeWriter extends AbstractBlogWriter {
 		entry.setPublishedDate(webLog.getPublishedDate());
 		entry.setUri(webLog.getUrl());
 
-		if (webLog.getExcerpt() != null) {
+		if (webLog.getBody() != null) {
 			SyndContent description = new SyndContentImpl();
 			description.setType("text/html");
-			description.setValue(webLog.getExcerpt());
+			description.setValue(webLog.getBody());
 			entry.setDescription(description);
 		} else if (this.feedType.equals("rss_2.0")) {
 			SyndContent description = new SyndContentImpl();

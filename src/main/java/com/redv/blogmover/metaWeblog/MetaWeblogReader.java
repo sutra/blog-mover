@@ -6,21 +6,65 @@ package com.redv.blogmover.metaWeblog;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Vector;
+import java.util.Map;
 
 import org.apache.xmlrpc.XmlRpcException;
-//import org.apache.xmlrpc.XmlRpcClient;
+import org.apache.xmlrpc.client.XmlRpcClient;
+import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 
 import com.redv.blogmover.BlogMoverException;
+import com.redv.blogmover.BlogMoverRuntimeException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
+import com.redv.blogmover.impl.WebLogImpl;
 
 /**
  * @author Shutra
  * 
  */
 public class MetaWeblogReader extends AbstractBlogReader {
+	private URL serverURL;
+
+	private String blogid;
+
+	private String username;
+
+	private String password;
+
+	/**
+	 * @param blogid
+	 *            the blogid to set
+	 */
+	public void setBlogid(String blogid) {
+		this.blogid = blogid;
+	}
+
+	/**
+	 * @param password
+	 *            the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @param serverURL
+	 *            the serverURL to set
+	 * @throws MalformedURLException
+	 */
+	public void setServerURL(String serverURL) throws MalformedURLException {
+		this.serverURL = new URL(serverURL);
+	}
+
+	/**
+	 * @param username
+	 *            the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -29,31 +73,37 @@ public class MetaWeblogReader extends AbstractBlogReader {
 	 */
 	@Override
 	public List<WebLog> read() throws BlogMoverException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
+		config.setServerURL(serverURL);
+		config.setEnabledForExtensions(Boolean.TRUE);
 
-	public static void main(String[] args) throws MalformedURLException,
-			XmlRpcException {
-//		URL serverURL = new URL("http://blog.csdn.net/blogremover/services/MetaBlogApi.aspx");
-//		String blogid = "blogremover";
-//		String username = "blogremover";
-//		String password = "wangjing";
-//		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-//		config.setServerURL(serverURL);
-//		// config.setEnabledForExtensions(Boolean.TRUE);
-//		// config.setBasicEncoding("UTF-8");
-//
-//		XmlRpcClient client = new XmlRpcClient();
-//		client.setConfig(config);
-//		Object[] params = new Object[4];
-//		params[0] = blogid;
-//		params[1] = username;
-//		params[2] = password;
-//		params[3] = 10;
-//		Object o = client.execute("metaWeblog.getRecentPosts", params);
-//		Object[] a = (Object[]) o;
-//		System.out.println(a.length);
+		XmlRpcClient client = new XmlRpcClient();
+		client.setConfig(config);
+		Object[] params = new Object[4];
+		params[0] = blogid;
+		params[1] = username;
+		params[2] = password;
+		params[3] = Integer.MAX_VALUE;
+		Object o;
+		try {
+			o = client.execute("metaWeblog.getRecentPosts", params);
+		} catch (XmlRpcException e) {
+			throw new BlogMoverRuntimeException(e);
+		}
+		Object[] objects = (Object[]) o;
+		List<WebLog> webLogs = new ArrayList<WebLog>(objects.length);
+		for (Object obj : objects) {
+			Map m = (Map) obj;
+			WebLog webLog = new WebLogImpl();
+			webLog.setUrl(m.get("permaLink").toString());
+			// userid
+			webLog.setTitle(m.get("title").toString());
+			webLog.setBody(m.get("description").toString());
+			log.debug(webLog.getBody());
+			webLog.setPublishedDate((Date) m.get("pubDate"));
+			webLogs.add(webLog);
+		}
+		return webLogs;
 	}
 
 }

@@ -6,7 +6,7 @@
 <div>
 	一切支持
 	<a href="http://www.xmlrpc.com/metaWeblogApi">RFC: MetaWeblog API</a> 的
-	Blog 均可使用该写入器。
+	Blog 均可使用该读取器。
 </div>
 <div>
 	<table>
@@ -15,12 +15,12 @@
 				ServerURL:
 			</td>
 			<td>
-				<input type="text" id="writers.metaWeblog.serverURL" name="serverURL"
+				<input type="text" id="readers.metaWeblog.serverURL" name="serverURL"
 					tabindex="100" style="width: 200px;" />
 				这里填写你的博客服务器的 MetaWeblog 接口的 XML-RPC 地址。比如：
 				<a href="http://xpert.cn">专家博客</a>的接口地址为：
 				<a href="#"
-					onclick="$('writers.metaWeblog.serverURL').value='http://xpert.cn/xmlrpc';return false;"
+					onclick="$('readers.metaWeblog.serverURL').value='http://xpert.cn/xmlrpc';return false;"
 					title="单击填入">http://xpert.cn/xmlrpc</a>
 			</td>
 		</tr>
@@ -56,5 +56,5 @@
 	</table>
 </div>
 <div class="attention">
-	仅支持导入日志、日期，不支持导入评论、标签、多媒体。
+	仅支持读入日志、日期，不支持导入评论、标签、多媒体。
 </div>

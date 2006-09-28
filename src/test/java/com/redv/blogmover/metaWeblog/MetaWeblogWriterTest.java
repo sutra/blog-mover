@@ -5,12 +5,10 @@ package com.redv.blogmover.metaWeblog;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -42,8 +40,9 @@ public class MetaWeblogWriterTest {
 	 * @throws BlogMoverException
 	 * @throws MalformedURLException
 	 */
-	@Test
-	public void testWriteBokeland() throws BlogMoverException, MalformedURLException {
+	// @Test
+	public void testWriteBokeland() throws BlogMoverException,
+			MalformedURLException {
 		MetaWeblogWriter w = new MetaWeblogWriter();
 		w.setServerURL("http://www.bokeland.com/xmlrpc.php");
 		w.setBlogid("722");
@@ -52,7 +51,8 @@ public class MetaWeblogWriterTest {
 		List<WebLog> webLogs = new ArrayList<WebLog>();
 		WebLog webLog = new WebLogImpl();
 		webLog.setTitle("test");
-		webLog.setBody(org.apache.commons.lang.StringEscapeUtils.escapeHtml("测试"));
+		webLog.setBody(org.apache.commons.lang.StringEscapeUtils
+				.escapeHtml("测试"));
 		webLog.setPublishedDate(new Date());
 		webLogs.add(webLog);
 		w.write(webLogs);
@@ -66,8 +66,9 @@ public class MetaWeblogWriterTest {
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	@Test
-	public void getAllBlogsFromBokeland() throws MalformedURLException, XmlRpcException {
+	// @Test
+	public void getAllBlogsFromBokeland() throws MalformedURLException,
+			XmlRpcException {
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
 		config.setServerURL(new URL("http://www.bokeland.com/xmlrpc.php"));
 		config.setEnabledForExtensions(false);
@@ -83,9 +84,11 @@ public class MetaWeblogWriterTest {
 		assertEquals(m.get("blogName"), "Blog Mover");
 
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	@Test
-	public void getAllBlogsFromIBlog() throws MalformedURLException, XmlRpcException {
+	public void getAllBlogsFromIBlog() throws MalformedURLException,
+			XmlRpcException {
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
 		config.setServerURL(new URL("http://cn.iblog.com/xmlrpc.php"));
 		config.setEnabledForExtensions(false);
@@ -99,11 +102,12 @@ public class MetaWeblogWriterTest {
 		log.debug(result[0]);
 		Map<String, String> m = (Map<String, String>) result[0];
 		assertEquals(m.get("blogid"), "17392");
-		assertEquals(m.get("blogName"), "Blog Mover");		
+		assertEquals(m.get("blogName"), "Blog Mover");
 	}
 
 	@Test
-	public void testWriteIBlog() throws BlogMoverException, MalformedURLException {
+	public void testWriteIBlog() throws BlogMoverException,
+			MalformedURLException {
 		MetaWeblogWriter w = new MetaWeblogWriter();
 		w.setServerURL("http://cn.iblog.com/xmlrpc.php");
 		w.setBlogid("17392");

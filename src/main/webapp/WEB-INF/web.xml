@@ -53,6 +53,10 @@
 			<param-name>debug</param-name>
 			<param-value>true</param-value>
 		</init-param>
+		<init-param>
+			<param-name>classes</param-name>
+			<param-value>java.lang.Object</param-value>
+		</init-param>
 		<load-on-startup>20</load-on-startup>
 	</servlet>
 	<servlet>

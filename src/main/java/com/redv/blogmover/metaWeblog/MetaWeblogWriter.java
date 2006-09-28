@@ -5,7 +5,6 @@ package com.redv.blogmover.metaWeblog;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -29,8 +28,8 @@ import com.redv.blogmover.impl.AbstractBlogWriter;
  */
 public class MetaWeblogWriter extends AbstractBlogWriter {
 	// ISO.8601
-	private static final SimpleDateFormat sdf = new SimpleDateFormat(
-			"yyyyMMdd'T'HH:mm:ss");
+	// private static final SimpleDateFormat sdf = new SimpleDateFormat(
+	// "yyyyMMdd'T'HH:mm:ss");
 
 	private XmlRpcClient client;
 
@@ -123,11 +122,7 @@ public class MetaWeblogWriter extends AbstractBlogWriter {
 		Map<String, Object> content = new Hashtable<String, Object>();
 		content.put("title", webLog.getTitle());
 		content.put("description", webLog.getBody());
-		// ISO.8601
-		String s = sdf.format(webLog.getPublishedDate());
-		log.debug(s);
-		// TODO.
-		// content.put("dateCreated", s);
+		content.put("dateCreated", webLog.getPublishedDate());
 
 		List<Object> params = new ArrayList<Object>(5);
 		params.add(blogid);

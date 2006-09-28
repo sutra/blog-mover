@@ -17,6 +17,8 @@
 		class="com.redv.blogmover.web.ReadersController">
 		<property name="readers">
 			<map>
+				<entry key="metaWeblog"
+					value="com.redv.blogmover.metaWeblog.MetaWeblogReader" />
 				<entry key="anonymousSpace"
 					value="com.redv.blogmover.bsps.space.AnonymousSpaceReader" />
 				<entry key="baidu"
