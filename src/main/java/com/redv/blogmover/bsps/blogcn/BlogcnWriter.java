@@ -167,6 +167,9 @@ public class BlogcnWriter extends AbstractBlogWriter {
 		parameter = new NameValuePair("isencomment","1");
 		parameters.add(parameter);
 		
+		parameter = new NameValuePair("action","savelog");
+		parameters.add(parameter);
+		
 		/**
 		 * 设置发布时间
 		 */
@@ -203,6 +206,7 @@ public class BlogcnWriter extends AbstractBlogWriter {
 		HeaderGroup hg = new HeaderGroup();
 		hg.addHeader(new Header("Content-Type",
 				"application/x-www-form-urlencoded; charset=GB2312"));
+		hg.addHeader(new Header("Referer", "http://www.blog.com.cn/user_post.asp"));
 		httpDocument.post(action, parameters, hg);
 		
 	}
