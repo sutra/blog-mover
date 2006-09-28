@@ -26,6 +26,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HeaderGroup;
 import org.apache.commons.httpclient.HttpClient;
@@ -114,6 +115,7 @@ public class BlogcnWriter extends AbstractBlogWriter {
 				postchknum = value;
 			}
 		}
+		httpDocument.getHttpClient().getState().addCookie(new Cookie("blog.com.cn", "postchknum", postchknum));
 		
 		String action = "http://www.blog.com.cn/user_post.asp?action=savelog&t=0";
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
@@ -147,7 +149,19 @@ public class BlogcnWriter extends AbstractBlogWriter {
 			log.debug("postchknum:" + postchknum);
 		}
 		parameter = new NameValuePair("postchknum", postchknum);
+		parameters.add(parameter);
 		
+		parameter = new NameValuePair("face", "0");
+		parameters.add(parameter);
+		
+		parameter = new NameValuePair("showword", "500");
+		parameters.add(parameter);
+		
+		parameter = new NameValuePair("blogteam", "234541");
+		parameters.add(parameter);
+		
+		parameter = new NameValuePair("blogteamsubject", "");
+		parameters.add(parameter);
 		
 		parameter = new NameValuePair("topic", webLog.getTitle());
 		parameters.add(parameter);
@@ -165,6 +179,24 @@ public class BlogcnWriter extends AbstractBlogWriter {
 		parameters.add(parameter);
 		
 		parameter = new NameValuePair("isdraft", "0");
+		parameters.add(parameter);
+		
+		parameter = new NameValuePair("ispassword", "");
+		parameters.add(parameter);
+		
+		parameter = new NameValuePair("ishide", "");
+		parameters.add(parameter);
+		
+		parameter = new NameValuePair("istop", "");
+		parameters.add(parameter);
+		
+		parameter = new NameValuePair("tb", "");
+		parameters.add(parameter);
+		
+		parameter = new NameValuePair("filename", "自动编号");
+		parameters.add(parameter);
+		
+		parameter = new NameValuePair("log_pics", "");
 		parameters.add(parameter);
 		
 		parameter = new NameValuePair("isencomment","1");
