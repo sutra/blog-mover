@@ -152,6 +152,9 @@ public class BlogcnWriter extends AbstractBlogWriter {
 		parameter = new NameValuePair("topic", webLog.getTitle());
 		parameters.add(parameter);
 		
+		parameter = new NameValuePair("logtext", webLog.getBody());
+		parameters.add(parameter);
+		
 		parameter = new NameValuePair("logtags",StringUtils.join(webLog.getTags(), ","));
 		parameters.add(parameter);
 		
