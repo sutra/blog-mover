@@ -217,7 +217,7 @@ public class BlogcnWriter extends AbstractBlogWriter {
 		parameter = new NameValuePair("selecty",String.valueOf(cal.get(Calendar.YEAR)));
 		parameters.add(parameter);
 		
-		parameter = new NameValuePair("selectm",String.valueOf(cal.get(Calendar.MONTH)));
+		parameter = new NameValuePair("selectm",String.valueOf(cal.get(Calendar.MONTH) + 1));
 		parameters.add(parameter);
 		
 		parameter = new NameValuePair("selectd",String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
