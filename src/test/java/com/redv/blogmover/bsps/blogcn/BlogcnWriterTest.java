@@ -49,8 +49,8 @@ public class BlogcnWriterTest {
 	public void testWrite() throws BlogMoverException {
 		List<WebLog> webLogs = new ArrayList<WebLog>();
 		WebLog webLog = new WebLogImpl();
-		webLog.setTitle("我的第一篇Blog");
-		webLog.setBody("谢谢大家支持!");
+		webLog.setTitle("今天心情不错");
+		webLog.setBody("新Blog开通了。大家都来支持啊");
 		webLog.setPublishedDate(new Date());
 		webLog.setTags(new String[]{"First","Blog"});
 		webLogs.add(webLog);
