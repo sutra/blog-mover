@@ -56,6 +56,8 @@
 					value="com.redv.blogmover.bsps.sina.SinaWriter" />
 				<entry key="sohu"
 					value="com.redv.blogmover.bsps.sohu.SohuBlogWriter" />
+				<entry key="blogcn"
+					value="com.redv.blogmover.bsps.blogcn.BlogcnWriter" />
 			</map>
 		</property>
 	</bean>
