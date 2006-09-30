@@ -2,14 +2,21 @@
 <!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://www.getahead.ltd.uk/dwr/dwr20.dtd">
 <dwr>
 	<allow>
-		<create creator="spring" javascript="User">
+		<create javascript="User" creator="spring">
 			<param name="beanName" value="user" />
 		</create>
+		<!-- 
+			<create javascript="BloggerClient" creator="spring">
+			<param name="beanName" value="bloggerClient"></param>
+			</create>
+		-->
 		<convert converter="bean" match="com.redv.blogmover.Status" />
 		<convert converter="bean" match="com.redv.blogmover.WebLog" />
 		<convert converter="bean" match="com.redv.blogmover.Comment" />
 		<convert converter="bean" match="com.redv.blogmover.BSP" />
 		<convert converter="bean" match="com.redv.blogmover.BlogReader" />
 		<convert converter="bean" match="com.redv.blogmover.BlogWriter" />
+		<convert converter="bean"
+			match="com.redv.bloggerapi.client.Blog" />
 	</allow>
 </dwr>

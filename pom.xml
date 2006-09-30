@@ -185,6 +185,11 @@
       <artifactId>xmlrpc-client</artifactId>
       <version>3.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>com.redv.bloggerapi.client</groupId>
+      <artifactId>blogger-api-client</artifactId>
+      <version>1.0</version>
+    </dependency>
   </dependencies>
   <reporting>
     <plugins>

@@ -55,7 +55,9 @@
 		</init-param>
 		<init-param>
 			<param-name>classes</param-name>
-			<param-value>java.lang.Object</param-value>
+			<param-value>
+				com.redv.blogmover.web.dwr.BloggerClient
+			</param-value>
 		</init-param>
 		<load-on-startup>20</load-on-startup>
 	</servlet>
