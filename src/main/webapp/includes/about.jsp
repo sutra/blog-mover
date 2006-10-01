@@ -21,7 +21,35 @@
 					你可以选择源 Blog 的部分日志进行搬迁。
 				</li>
 			</ol>
+		</div>
+		<div id="help">
+			要了解更多关于 Blog Mover 的知识，或者获取帮助，请到
+			<a href="wiki">Blog Mover Wiki</a>.
+			<%--
 			<a href="recent.jsp">最近搬迁的日志</a>
+			--%>
+
+		</div>
+		<div>
+			Project Home:
+			<a href="http://code.google.com/p/blog-mover/">http://code.google.com/p/blog-mover/</a>
+		</div>
+		<div id="author">
+			联系 Blog Mover： ♨Shutra Zhou
+			<ul>
+				<li>
+					Email：
+					<img src="images/email-gmail.png" alt="Email address" />
+				</li>
+				<li style="padding-left:3px;">
+					MSN：
+					<img src="images/email-msn.png" alt="MSN" />
+				</li>
+				<li style="padding-left:8px;">
+					QQ：
+					<img src="images/email-qq.png" alt="QQ" />
+				</li>
+			</ul>
 		</div>
 		<div id="googleGroup">
 			<form action="http://groups.google.com/group/blog-mover/boxsubscribe">
@@ -62,28 +90,7 @@
 				</table>
 			</form>
 		</div>
-		<div id="author">
-			程序设计：
-			<a href="http://zhoushuqun.spaces.live.com">♨Shutra Zhou</a>
-			<ul>
-				<li>
-					Email：
-					<img src="images/email-gmail.png" alt="Email address" />
-				</li>
-				<li style="padding-left:3px;">
-					MSN：
-					<img src="images/email-msn.png" alt="MSN" />
-				</li>
-				<li style="padding-left:8px;">
-					QQ：
-					<img src="images/email-qq.png" alt="QQ" />
-				</li>
-			</ul>
-		</div>
-		<div>
-			Project Home:
-			<a href="http://code.google.com/p/blog-mover/">http://code.google.com/p/blog-mover/</a>
-		</div>
+		<%--
 		<div id="developProgress">
 			将按照 BSP排行中心：
 			<a href="http://bloghoo.it.sohu.com/bspcenter.html">
@@ -93,5 +100,6 @@
 			BSP 没有出现在开发计划中，请在
 			<a href="http://code.google.com/p/blog-mover/issues/list">这里</a>提出。
 		</div>
+		--%>
 	</div>
 </div>

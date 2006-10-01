@@ -54,8 +54,10 @@
 					value="com.redv.blogmover.feed.RomeWriter" />
 				<entry key="baidu"
 					value="com.redv.blogmover.bsps.baidu.BaiduWriter" />
-				<entry key="csdn"
+				<!-- 
+					<entry key="csdn"
 					value="com.redv.blogmover.bsps.csdn.CSDNBlogWriter" />
+				-->
 				<entry key="donews"
 					value="com.redv.blogmover.bsps.donews.DoNewsBlogWriter" />
 				<entry key="sina"

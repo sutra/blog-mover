@@ -118,21 +118,18 @@ div #webLogsBox {
 	border-left: none 0px #000;
 }
 
-#feature,#googleGroup {
+#feature, #help, #author {
 	margin: 5px 0px 5px 0px;
 	padding: 0px 0px 5px 0px;
 	background: url("../images/index_line1.gif") no-repeat bottom;
 }
 
 #googleGroup {
-	
+	margin: 5px 0px 5px 0px;
+	padding: 0px 0px 0px 0px;	
 }
 
 #developProgress {
-	
-}
-
-#author {
 	
 }
 
