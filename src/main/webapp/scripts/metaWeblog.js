@@ -16,7 +16,11 @@ function MetaWeblog() {
 		var serverURL = $("readers.metaWeblog.serverURL").value;
 		var username = $("readers.metaWeblog.username").value;
 		var password = $("readers.metaWeblog.password").value;
-		BloggerClient.getUsersBlogs(serverURL, username, password, this.reply0);
+		if (serverURL == "" || username == "") {
+			alert("ServerURL and username can't be empty.");
+		} else {
+			BloggerClient.getUsersBlogs(serverURL, username, password, this.reply0);
+		}
 		return false;
 	};
 }
