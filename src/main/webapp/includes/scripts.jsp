@@ -2,12 +2,14 @@
 <script type="text/javascript" src="scripts/prototype.js" charset="UTF-8"></script>
 <script type="text/javascript" src="scripts/cookie.js" charset="UTF-8"></script>
 <script type="text/javascript" src="dwr/interface/User.js"></script>
+<script type="text/javascript" src="dwr/interface/BloggerClient.js"></script>
 <script type="text/javascript" src="dwr/engine.js"></script>
 <script type="text/javascript" src="dwr/util.js"></script>
 <script type="text/javascript" src="scripts/blog-mover.jsp"></script>
 <script type="text/javascript" src="scripts/reader.jsp"></script>
 <script type="text/javascript" src="scripts/writer.jsp"></script>
 <script type="text/javascript" src="scripts/pick-web-log.jsp"></script>
+<script type="text/javascript" src="scripts/metaWeblog.js"></script>
 <script type="text/javascript">
 <!--
 DWREngine.setReverseAjax(false);

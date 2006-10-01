@@ -3,18 +3,18 @@
  * (shelley.powers@ne-dev.com)
  */
 function getCookie(name) {
-	var search = name + "="
+	var search = name + "=";
 	var returnValue = null;
 	if (document.cookie.length > 0) {
-		offset = document.cookie.indexOf(search)
+		var offset = document.cookie.indexOf(search);
 		// if cookie exists
 		if (offset != -1) {
-			offset += search.length
+			offset += search.length;
 			// set index of beginning of value
 			end = document.cookie.indexOf(";", offset);
 			// set index of end of cookie value
-			if (end == -1) end = document.cookie.length;
-			returnValue=unescape(document.cookie.substring(offset, end))
+			if (end == -1) {end = document.cookie.length;}
+			returnValue=unescape(document.cookie.substring(offset, end));
 		}
 	}
 	return returnValue;
@@ -37,8 +37,8 @@ function setCookie (name, value) {
 	var domain = (argc > 4) ? argv[4] : null;
 	var secure = (argc > 5) ? argv[5] : false;
 	document.cookie = name + "=" + escape (value) +
-		((expires == null) ? "" : ("; expires=" + expires.toGMTString())) +
-		((path == null) ? "" : ("; path=" + path)) +
-		((domain == null) ? "" : ("; domain=" + domain)) +
-		((secure == true) ? "; secure" : "");
+		((expires === null) ? "" : ("; expires=" + expires.toGMTString())) +
+		((path === null) ? "" : ("; path=" + path)) +
+		((domain === null) ? "" : ("; domain=" + domain)) +
+		((secure === true) ? "; secure" : "");
 }

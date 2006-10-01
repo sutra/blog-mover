@@ -135,3 +135,33 @@ div #webLogsBox {
 #author {
 	
 }
+
+.mockButton {
+	text-decoration: none;
+	color: black;;
+	background-color: #E0DFE3;
+	border-top: 1px #ddd solid;
+	border-right: 1px #000 solid;
+	border-bottom: 1px #000 solid;
+	border-left: 1px #ddd solid;;
+}
+
+.mockButtonOver {
+	text-decoration: none;
+	color: black;
+	background-color: #F8F8F4;
+	border-top: 1px #888 solid;
+	border-right: 1px #888 solid;
+	border-bottom: 1px #888 solid;
+	border-left: 1px #888 solid;;
+}
+
+.mockButtonDown {
+	text-decoration: none;
+	color: black;
+	background-color: #E7E6E0;
+	border-top: 1px #000 solid;
+	border-right: 1px #ddd solid;
+	border-bottom: 1px #ddd solid;
+	border-left: 1px #000 solid;
+}

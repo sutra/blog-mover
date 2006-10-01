@@ -10,10 +10,7 @@
 		http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
 	default-lazy-init="false">
-	<bean id="user" class="com.redv.blogmover.web.dwr.User"></bean>
-	<!-- 
-		<bean id="bloggerClient"
-		class="com.redv.blogmover.web.dwr.BloggerClient">
-		</bean>
-	-->
+	<bean id="user" class="com.redv.blogmover.web.dwr.User" />
+	<bean id="bloggerClient"
+		class="com.redv.blogmover.web.dwr.BloggerClient" />
 </beans>
