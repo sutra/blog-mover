@@ -24,7 +24,7 @@
 		</div>
 		<div id="help">
 			要了解更多关于 Blog Mover 的知识，或者获取帮助，请到
-			<a href="wiki">Blog Mover Wiki</a>.
+			<a href="help">Blog Mover Help Wiki</a>.
 			<%--
 			<a href="recent.jsp">最近搬迁的日志</a>
 			--%>
