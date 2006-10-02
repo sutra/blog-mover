@@ -23,7 +23,11 @@
 		<li id="menu_about">
 			<a href="#" title="关于 Blog Remover"
 				onclick="return selectTab('about')" accesskey="A"> 关于 Blog
-				Remover(<span class="accesskey">A</span>) </a>
+				Mover(<span class="accesskey">A</span>) </a>
+		</li>
+		<li>
+			<a href="wiki" title="帮助" accesskey="H" target="_blank">帮助(<span
+				class="accesskey">H</span>)</a>
 		</li>
 	</ul>
 </div>
