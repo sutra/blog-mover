@@ -26,7 +26,7 @@
 				Mover(<span class="accesskey">A</span>) </a>
 		</li>
 		<li>
-			<a href="wiki" title="帮助" accesskey="H" target="_blank">帮助(<span
+			<a href="wiki" title="帮助" accesskey="H">帮助(<span
 				class="accesskey">H</span>)</a>
 		</li>
 	</ul>
