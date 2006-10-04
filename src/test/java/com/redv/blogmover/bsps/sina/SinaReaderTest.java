@@ -36,7 +36,8 @@ public class SinaReaderTest extends TestCase {
 		}
 		String str = sb.toString();
 		log.debug(str);
-		sinaReader.parse(str);
+		// sinaReader.parse(str);
+		// TODO.
 	}
 
 }

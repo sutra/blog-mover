@@ -3,8 +3,10 @@
  */
 package com.redv.blogmover.util;
 
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
 
 /**
  * @author Joe
@@ -38,6 +40,32 @@ public class DomNodeUtils {
 			break;
 		}
 		return ret;
+	}
+
+	public static String toString(Node node) {
+		StringBuffer sb = new StringBuffer();
+		if (node instanceof Text) {
+			sb.append(node.getNodeValue());
+		} else {
+			sb.append("<").append(node.getNodeName());
+			NamedNodeMap attrs = node.getAttributes();
+			for (int j = 0; j < attrs.getLength(); j++) {
+				sb.append(" ").append(attrs.item(j).getNodeName())
+						.append("=\"").append(attrs.item(j).getNodeValue())
+						.append("\"");
+			}
+			sb.append(">");
+			if (node.hasChildNodes()) {
+				NodeList children = node.getChildNodes();
+				for (int i = 0; i < children.getLength(); i++) {
+					sb.append(toString(children.item(i)));
+				}
+			} else {
+				sb.append(node.getNodeValue());
+			}
+			sb.append("</").append(node.getNodeName()).append(">");
+		}
+		return sb.toString();
 	}
 
 	/**

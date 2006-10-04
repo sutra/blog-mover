@@ -41,7 +41,7 @@ public class BokeeWriterTest extends TestCase {
 		webLogs.add(webLog);
 		bokeeWriter.setUsername("blogremover");
 		bokeeWriter.setPassword("wangjing");
-		bokeeWriter.write(webLogs);
+		// bokeeWriter.write(webLogs);
 	}
 
 }
