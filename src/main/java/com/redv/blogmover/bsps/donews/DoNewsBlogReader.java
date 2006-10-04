@@ -27,7 +27,7 @@ import com.redv.blogmover.util.HttpDocument;
 
 /**
  * @author Shutra
- * 
+ * @author <a href="mailto:rory.cn@gmail.com">Rory</a>
  */
 public class DoNewsBlogReader extends AbstractBlogReader {
 	private HttpClient httpClient;
@@ -106,7 +106,18 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 			}
 		}
 		if (last == null) {
-			throw new BlogMoverException("没有找到最后一页标识，无法继续。");
+			/**
+			 * bug fix @author <a href="mailto:rory.cn@gmail.com">Rory</a>
+			 * 修改如果用户日志不超过9页的时候不会出现最后文字。
+			 */
+			for (int i=0; i<children.getLength(); i++) {
+				Node node = children.item(i);
+				if (node.getFirstChild() == null) {
+					continue;
+				}
+				last = node;
+			}
+//			throw new BlogMoverException("没有找到最后一页标识，无法继续。");
 		}
 		String href = last.getAttributes().getNamedItem("href").getNodeValue();
 		String pageString = href.substring("EditPosts.aspx?pg=".length(), href
