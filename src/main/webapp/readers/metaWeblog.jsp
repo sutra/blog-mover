@@ -1,9 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<script type="text/javascript">
-<!--
-var metaWeblog = new MetaWeblog();
-//-->
-</script>
 <div>
 	MetaWeblog
 	<a href="http://www.xmlrpc.com/metaWeblogApi">RFC: MetaWeblog API</a>

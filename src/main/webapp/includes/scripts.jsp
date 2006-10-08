@@ -47,3 +47,10 @@ function doLogout() {
 
 //-->
 </script>
+
+
+<script type="text/javascript">
+<!--
+var metaWeblog = new MetaWeblog();
+//-->
+</script>
