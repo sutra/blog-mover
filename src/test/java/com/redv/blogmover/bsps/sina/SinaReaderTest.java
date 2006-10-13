@@ -14,6 +14,7 @@ import junit.framework.TestCase;
 public class SinaReaderTest extends TestCase {
 	private Log log = LogFactory.getLog(SinaReaderTest.class);
 
+	@SuppressWarnings("unused")
 	private SinaReader sinaReader;
 
 	protected void setUp() throws Exception {
