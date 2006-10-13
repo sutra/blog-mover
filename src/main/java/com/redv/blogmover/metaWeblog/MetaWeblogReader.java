@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
@@ -33,6 +34,8 @@ public class MetaWeblogReader extends AbstractBlogReader {
 	private String username;
 
 	private String password;
+
+	private int numberOfPosts = Integer.MAX_VALUE;
 
 	/**
 	 * @param blogid
@@ -67,6 +70,15 @@ public class MetaWeblogReader extends AbstractBlogReader {
 		this.username = username;
 	}
 
+	/**
+	 * @param numberOfPosts
+	 *            the numberOfPosts to set
+	 */
+	public void setNumberOfPosts(String numberOfPosts) {
+		this.numberOfPosts = NumberUtils
+				.toInt(numberOfPosts, Integer.MAX_VALUE);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -81,10 +93,10 @@ public class MetaWeblogReader extends AbstractBlogReader {
 		XmlRpcClient client = new XmlRpcClient();
 		client.setConfig(config);
 		Object[] params = new Object[4];
-		params[0] = blogid;
-		params[1] = username;
-		params[2] = password;
-		params[3] = Integer.MAX_VALUE;
+		params[0] = this.blogid;
+		params[1] = this.username;
+		params[2] = this.password;
+		params[3] = this.numberOfPosts;
 		Object o;
 		try {
 			o = client.execute("metaWeblog.getRecentPosts", params);

@@ -46,13 +46,21 @@
 		</tr>
 		<tr>
 			<td>
+				numberOfPosts:
+			</td>
+			<td>
+				<input type="text" name="numberOfPosts" tabindex="103" />
+			</td>
+		</tr>
+		<tr>
+			<td>
 				blogid:
 			</td>
 			<td>
 				<!--
 				<input type="text" name="blogid" tabindex="103" onfocus="" />
 				-->
-				<select name="blogid" id="readers.metaWeblog.blogid" tabindex="103"></select>
+				<select name="blogid" id="readers.metaWeblog.blogid" tabindex="104"></select>
 				<a href="#" onclick="metaWeblog.getUsersBlogs()" class="mockButton"
 					onfocus="this.blur();"
 					onmouseover="this.className='mockButtonOver'"
