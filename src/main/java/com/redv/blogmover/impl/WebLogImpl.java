@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.redv.blogmover.Attachment;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.WebLog;
@@ -152,13 +154,24 @@ public class WebLogImpl implements WebLog {
 		if (!_hashCodeCalc) {
 			synchronized (this) {
 				if (!_hashCodeCalc) {
-					_hashCode = this.getPublishedDate().hashCode()
+					_hashCode = (this.getPublishedDate() == null ? new Date()
+							: this.getPublishedDate()).hashCode()
 							^ this.getTitle().hashCode();
 					_hashCodeCalc = true;
 				}
 			}
 		}
 		return _hashCode;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

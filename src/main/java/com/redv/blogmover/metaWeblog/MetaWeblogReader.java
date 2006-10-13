@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
@@ -95,7 +96,7 @@ public class MetaWeblogReader extends AbstractBlogReader {
 		for (Object obj : objects) {
 			Map m = (Map) obj;
 			WebLog webLog = new WebLogImpl();
-			webLog.setUrl(m.get("permaLink").toString());
+			webLog.setUrl(ObjectUtils.toString(m.get("permaLink"), null));
 			// userid
 			webLog.setTitle(m.get("title").toString());
 			webLog.setBody(m.get("description").toString());
