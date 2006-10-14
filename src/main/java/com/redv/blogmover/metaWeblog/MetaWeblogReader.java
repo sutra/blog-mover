@@ -103,18 +103,22 @@ public class MetaWeblogReader extends AbstractBlogReader {
 		} catch (XmlRpcException e) {
 			throw new BlogMoverRuntimeException(e);
 		}
-		Object[] objects = (Object[]) o;
-		List<WebLog> webLogs = new ArrayList<WebLog>(objects.length);
-		for (Object obj : objects) {
-			Map m = (Map) obj;
-			WebLog webLog = new WebLogImpl();
-			webLog.setUrl(ObjectUtils.toString(m.get("permaLink"), null));
-			// userid
-			webLog.setTitle(m.get("title").toString());
-			webLog.setBody(m.get("description").toString());
-			log.debug(webLog.getBody());
-			webLog.setPublishedDate((Date) m.get("pubDate"));
-			webLogs.add(webLog);
+		List<WebLog> webLogs = null;
+		log.debug(o);
+		if (o instanceof Object[]) {
+			Object[] objects = (Object[]) o;
+			webLogs = new ArrayList<WebLog>(objects.length);
+			for (Object obj : objects) {
+				Map m = (Map) obj;
+				WebLog webLog = new WebLogImpl();
+				webLog.setUrl(ObjectUtils.toString(m.get("permaLink"), null));
+				// userid
+				webLog.setTitle(m.get("title").toString());
+				webLog.setBody(m.get("description").toString());
+				log.debug(webLog.getBody());
+				webLog.setPublishedDate((Date) m.get("pubDate"));
+				webLogs.add(webLog);
+			}
 		}
 		return webLogs;
 	}
