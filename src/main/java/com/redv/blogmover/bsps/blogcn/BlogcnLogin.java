@@ -36,7 +36,7 @@ import com.redv.blogmover.util.HttpDocument;
 /**
  * @author <a href="mailto:rory.cn@gmail.com">somebody</a>
  * @since 2006-9-26 下午06:38:05
- * @version $Id: BlogcnLogin.java$
+ * @version $Id: BlogcnLogin.java, Rory.CN Exp $
  */
 public class BlogcnLogin {
 	private static final Log log = LogFactory.getLog(BlogcnLogin.class);
