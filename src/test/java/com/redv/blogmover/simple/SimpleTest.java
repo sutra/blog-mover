@@ -23,7 +23,7 @@ package com.redv.blogmover.simple;
 /**
  * @author <a href="rory.cn@gmail.com">somebody</a>
  * @since 19/10/2006 10:53:12 AM
- * @version $Id: SimpleTest.java,v Exp $
+ * @version $Id: SimpleTest.java $
  */
 public class SimpleTest {
 
