@@ -61,7 +61,7 @@
 				<input type="text" name="blogid" tabindex="103" onfocus="" />
 				-->
 				<select name="blogid" id="readers.metaWeblog.blogid" tabindex="104"></select>
-				<a href="#" onclick="metaWeblog.getUsersBlogs()" class="mockButton"
+				<a href="#" onclick="metaWeblogReader.getUsersBlogs()" class="mockButton"
 					onfocus="this.blur();"
 					onmouseover="this.className='mockButtonOver'"
 					onmousedown="this.className='mockButtonDown'"

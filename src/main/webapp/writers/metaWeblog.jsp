@@ -29,7 +29,7 @@
 				username:
 			</td>
 			<td>
-				<input type="text" name="username" tabindex="101" />
+				<input type="text" id="writers.metaWeblog.username" name="username" tabindex="101" />
 				登录你的 Blog 的帐号。
 			</td>
 		</tr>
@@ -38,7 +38,7 @@
 				password:
 			</td>
 			<td>
-				<input type="password" name="password" tabindex="102" />
+				<input type="password" id="writers.metaWeblog.password" name="password" tabindex="102" />
 				登录你的 Blog 的密码。
 			</td>
 		</tr>
@@ -47,8 +47,8 @@
 				blogid:
 			</td>
 			<td>
-				<select name="blogid" id="readers.metaWeblog.blogid" tabindex="103"></select>
-				<a href="#" onclick="metaWeblog.getUsersBlogs()" class="mockButton"
+				<select name="blogid" id="writers.metaWeblog.blogid" tabindex="103"></select>
+				<a href="#" onclick="metaWeblogWriter.getUsersBlogs()" class="mockButton"
 					onfocus="this.blur();"
 					onmouseover="this.className='mockButtonOver'"
 					onmousedown="this.className='mockButtonDown'"

@@ -51,6 +51,7 @@ function doLogout() {
 
 <script type="text/javascript">
 <!--
-var metaWeblog = new MetaWeblog();
+var metaWeblogReader = new MetaWeblog("readers");
+var metaWeblogWriter = new MetaWeblog("writers");
 //-->
 </script>
