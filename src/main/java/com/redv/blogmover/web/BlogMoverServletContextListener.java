@@ -49,7 +49,7 @@ public class BlogMoverServletContextListener implements ServletContextListener {
 	 */
 	public void contextInitialized(ServletContextEvent sce) {
 		boolean made = dir.mkdirs();
-		if (!made) {
+		if (!made && !dir.exists()) {
 			log.fatal("Made tmpdir: " + TMPDIR.getAbsolutePath() + " failed.");
 		}
 	}

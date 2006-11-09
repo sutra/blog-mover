@@ -72,6 +72,11 @@
 	<!-- URL Mapping -->
 	<bean id="secureHandlerMapping"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref local="localChangeInterceptor" />
+			</list>
+		</property>
 		<property name="urlMap">
 			<map>
 				<entry key="/logout.jhtml">
