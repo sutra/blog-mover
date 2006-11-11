@@ -2,54 +2,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redv.blogmover</groupId>
   <artifactId>blog-mover</artifactId>
+  <version>1.0</version>
   <packaging>war</packaging>
   <name>Blog Mover</name>
-  <version>1.0</version>
-  <url>http://blog-mover.redv.com</url>
-  <inceptionYear>2006</inceptionYear>
-  <developers>
-    <developer>
-      <id>zhoushuqun</id>
-      <name>Shutra, Zhou</name>
-      <email>zhoushuqun@gmail.com</email>
-      <organization>Redv Soft</organization>
-      <organizationUrl>http://www.redv.com</organizationUrl>
-      <roles>
-        <role>Administrator</role>
-        <role>Developer</role>
-      </roles>
-      <timezone>+8</timezone>
-    </developer>
-  </developers>
-  <licenses>
-    <license>
-      <name>New BSD License</name>
-      <url>http://www.opensource.org/licenses/bsd-license.php</url>
-      <distribution>http://blog-mover.redv.com</distribution>
-      <comments></comments>
-    </license>
-  </licenses>
-  <scm>
-    <connection>scm:svn:http://blog-mover.googlecode.com/svn/trunk/</connection>
-    <developerConnection>scm:svn:https://blog-mover.googlecode.com/svn/trunk/</developerConnection>
-    <url>http://blog-mover.googlecode.com/svn/</url>
-  </scm>
-  <organization>
-    <name>Redv Soft</name>
-    <url>http://www.redv.com/</url>
-  </organization>
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <encoding>UTF-8</encoding>
-          <source>1.5</source>
-          <target>1.5</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
   <dependencies>
     <dependency>
       <groupId>javax.activation</groupId>
@@ -185,7 +140,46 @@
       <artifactId>blogger-api-client</artifactId>
       <version>1.0</version>
     </dependency>
+    <!-- 
+        com.google.gdata:gdata-client:jar:1.0
+        Try downloading the file manually from the project website:
+        http://code.google.com/apis/gdata/authsub.html.
+        Then, install it using the command: 
+            mvn install:install-file -DgroupId=com.google.gdata -DartifactId=gdata-client \
+                -Dversion=1.0 -Dpackaging=jar -Dfile=/path/to/file
+    -->
+    <dependency>
+      <groupId>com.google.gdata</groupId>
+      <artifactId>gdata-client</artifactId>
+      <version>1.0</version>
+    </dependency>
+
+    <!-- 
+        com.google.gdata:gdata-calendar:jar:1.0
+        Try downloading the file manually from the project website:
+        http://code.google.com/apis/gdata/authsub.html.
+        Then, install it using the command:
+            mvn install:install-file -DgroupId=com.google.gdata -DartifactId=gdata-calendar \
+                -Dversion=1.0 -Dpackaging=jar -Dfile=/path/to/file
+    -->
+    <dependency>
+      <groupId>com.google.gdata</groupId>
+      <artifactId>gdata-calendar</artifactId>
+      <version>1.0</version>
+    </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <encoding>UTF-8</encoding>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
   <reporting>
     <plugins>
       <plugin>
@@ -205,4 +199,37 @@
       </plugin>
     </plugins>
   </reporting>
+  <url>http://blog-mover.redv.com</url>
+  <inceptionYear>2006</inceptionYear>
+  <licenses>
+    <license>
+      <name>New BSD License</name>
+      <url>http://www.opensource.org/licenses/bsd-license.php</url>
+      <distribution>http://blog-mover.redv.com</distribution>
+      <comments></comments>
+    </license>
+  </licenses>
+  <organization>
+    <name>Redv Soft</name>
+    <url>http://www.redv.com/</url>
+  </organization>
+  <developers>
+    <developer>
+      <id>zhoushuqun</id>
+      <name>Shutra, Zhou</name>
+      <email>zhoushuqun@gmail.com</email>
+      <organization>Redv Soft</organization>
+      <organizationUrl>http://www.redv.com</organizationUrl>
+      <roles>
+        <role>Administrator</role>
+        <role>Developer</role>
+      </roles>
+      <timezone>+8</timezone>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:svn:http://blog-mover.googlecode.com/svn/trunk/</connection>
+    <developerConnection>scm:svn:https://blog-mover.googlecode.com/svn/trunk/</developerConnection>
+    <url>http://blog-mover.googlecode.com/svn/</url>
+  </scm>
 </project>

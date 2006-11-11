@@ -56,18 +56,26 @@ function initWriter() {
 	var inputs = $("selectedWriterDiv").getElementsByTagName("input");
 	var properties1 = new Array();
 	var values1 = new Array();
+	var index1 = 0;
 	for (var i = 0; i < inputs.length; i++) {
-		properties1[i] = inputs[i].name;
-		values1[i] = inputs[i].value;
+		if (inputs[i].name.length != 0) {
+			properties1[index1] = inputs[i].name;
+			values1[index1] = inputs[i].value;
+			index1++;
+		}
 	}
 
 	// selects
 	var selects = $("selectedWriterDiv").getElementsByTagName("select");
 	var properties2 = new Array();
 	var values2 = new Array();
+	var index2 = 0;
 	for (var i = 0; i < selects.length; i++) {
-		properties2[i] = selects[i].name;
-		values2[i] = DWRUtil.getValue(selects[i]);
+		if (selects[i].name.length == 0) {
+			properties2[index2] = selects[i].name;
+			values2[index2] = DWRUtil.getValue(selects[i]);
+			index2++;
+		}
 	}
 
 	//

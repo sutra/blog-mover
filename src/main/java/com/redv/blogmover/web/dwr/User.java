@@ -332,7 +332,9 @@ public class User implements Serializable {
 			for (int i = 0; i < properties.length; i++) {
 				log.debug("Setting reader property: " + properties[i]
 						+ ", value: " + values[i]);
-				facade.setReaderProperty(properties[i], values[i]);
+				if (properties[i] != null) {
+					facade.setReaderProperty(properties[i], values[i]);
+				}
 			}
 		}
 
@@ -355,7 +357,9 @@ public class User implements Serializable {
 			for (int i = 0; i < properties.length; i++) {
 				log.debug("Setting writer property: " + properties[i]
 						+ ", value: " + values[i]);
-				facade.setWriterProperty(properties[i], values[i]);
+				if (properties[i] != null) {
+					facade.setWriterProperty(properties[i], values[i]);
+				}
 			}
 		}
 

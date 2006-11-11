@@ -10,6 +10,7 @@
 <script type="text/javascript" src="scripts/writer.jsp"></script>
 <script type="text/javascript" src="scripts/pick-web-log.jsp"></script>
 <script type="text/javascript" src="scripts/metaWeblog.js"></script>
+<script type="text/javascript" src="scripts/blogger.js"></script>
 <script type="text/javascript">
 <!--
 DWREngine.setReverseAjax(false);
@@ -53,5 +54,6 @@ function doLogout() {
 <!--
 var metaWeblogReader = new MetaWeblog("readers");
 var metaWeblogWriter = new MetaWeblog("writers");
+var blogger = new Blogger("writers");
 //-->
 </script>

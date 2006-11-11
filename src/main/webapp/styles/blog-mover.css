@@ -58,6 +58,10 @@ h3 {
 	margin: 10px 0px 10px 0px;
 }
 
+#readers li,#writers li {
+	line-height: 200%;
+}
+
 #statusBar {
 	padding: 5px 10px 0px 10px;
 	background: #eee url("../images/index_line.gif") repeat-x bottom;
@@ -118,7 +122,7 @@ div #webLogsBox {
 	border-left: none 0px #000;
 }
 
-#feature, #help, #author {
+#feature,#help,#author {
 	margin: 5px 0px 5px 0px;
 	padding: 0px 0px 5px 0px;
 	background: url("../images/index_line1.gif") no-repeat bottom;
@@ -126,7 +130,7 @@ div #webLogsBox {
 
 #googleGroup {
 	margin: 5px 0px 5px 0px;
-	padding: 0px 0px 0px 0px;	
+	padding: 0px 0px 0px 0px;
 }
 
 #developProgress {

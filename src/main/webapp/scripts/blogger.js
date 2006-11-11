@@ -1,13 +1,13 @@
 /**
- * This is the javascript for reader/writer of metaWeblog.
- * @see blogger.js
+ * This is the javascript for reader/writer of blogger(http://www.blogger.com/).
+ * @see metaWeblog.js
  */
-function MetaWeblog(w) {
+function Blogger(w) {
 	this.w = w;
 	this.reply0 = function (data) {
 		if (data !== null && typeof data == "object") {
 		// alert(DWRUtil.toDescriptiveString(data, 2));
-			var id = w + ".metaWeblog.blogid";
+			var id = w + ".blogger.blogid";
 			DWRUtil.removeAllOptions(id);
 			for (var i = 0; i < data.length; i += 1) {
 				DWRUtil.addOptions(id, [{name:data[i].blogid, text:data[i].blogName}], "name", "text");
@@ -17,9 +17,9 @@ function MetaWeblog(w) {
 		}
 	};
 	this.getUsersBlogs = function () {
-		var serverURL = $(w + ".metaWeblog.serverURL").value;
-		var username = $(w + ".metaWeblog.username").value;
-		var password = $(w + ".metaWeblog.password").value;
+		var serverURL = $(w + ".blogger.serverURL").value;
+		var username = $(w + ".blogger.username").value;
+		var password = $(w + ".blogger.password").value;
 		if (serverURL === "" || username === "") {
 			alert("ServerURL and username can't be empty.");
 		} else {
@@ -28,4 +28,3 @@ function MetaWeblog(w) {
 		return false;
 	};
 }
-

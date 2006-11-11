@@ -48,10 +48,16 @@
 		class="com.redv.blogmover.web.WritersController">
 		<property name="writers">
 			<map>
-				<entry key="metaWeblog"
-					value="com.redv.blogmover.metaWeblog.MetaWeblogWriter" />
 				<entry key="feed.rss-atom"
 					value="com.redv.blogmover.feed.RomeWriter" />
+				<entry key="metaWeblog"
+					value="com.redv.blogmover.metaWeblog.MetaWeblogWriter" />
+
+				<!-- The writer for http://www.blogger.com/ -->
+				<entry key="blogger"
+					value="com.redv.blogmover.bsps.blogger.GDataWriter" />
+
+				<!-- The writer for http://hi.baidu.com/ -->
 				<entry key="baidu"
 					value="com.redv.blogmover.bsps.baidu.BaiduWriter" />
 				<!-- 
