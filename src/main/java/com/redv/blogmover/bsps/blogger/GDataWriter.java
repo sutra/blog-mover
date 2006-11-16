@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
+import java.util.TimeZone;
 
 import com.google.gdata.client.GoogleService;
 import com.google.gdata.data.DateTime;
@@ -107,7 +108,8 @@ public class GDataWriter extends AbstractBlogWriter {
 		entry.setTitle(new PlainTextConstruct(webLog.getTitle()));
 		entry.setSummary(new HtmlTextConstruct(webLog.getExcerpt()));
 		entry.setContent(new HtmlTextConstruct(webLog.getBody()));
-		entry.setPublished(new DateTime(webLog.getPublishedDate()));
+		entry.setPublished(new DateTime(webLog.getPublishedDate(), TimeZone
+				.getDefault()));
 
 		GoogleService gs = new GoogleService("blogger", "blog-mover");
 		try {
