@@ -118,6 +118,10 @@
       <artifactId>standard</artifactId>
       <version>1.1.2</version>
     </dependency>
+    
+    <!--
+     http://getahead.ltd.uk/dwr
+     -->
     <dependency>
       <groupId>uk.ltd.getahead</groupId>
       <artifactId>dwr</artifactId>
@@ -135,32 +139,37 @@
       <scope>system</scope>
       <systemPath>${basedir}/target/csdn-passport/csdn-passport-1.0.jar</systemPath>
     </dependency>
+
+    <!--
+     http://code.google.com/p/blogger-api-client/
+     -->
     <dependency>
       <groupId>com.redv.bloggerapi.client</groupId>
       <artifactId>blogger-api-client</artifactId>
       <version>1.0</version>
     </dependency>
-    <!-- 
-        com.google.gdata:gdata-client:jar:1.0
-        Try downloading the file manually from the project website:
-        http://code.google.com/apis/gdata/authsub.html.
-        Then, install it using the command: 
-            mvn install:install-file -DgroupId=com.google.gdata -DartifactId=gdata-client \
-                -Dversion=1.0 -Dpackaging=jar -Dfile=/path/to/file
-    -->
+
+    <!--
+     com.google.gdata:gdata-client:jar:1.0
+     Try downloading the file manually from the project website:
+     http://code.google.com/apis/gdata/authsub.html.
+     Then, install it using the command: 
+        mvn install:install-file -DgroupId=com.google.gdata -DartifactId=gdata-client \
+            -Dversion=1.0 -Dpackaging=jar -Dfile=/path/to/file
+     -->
     <dependency>
       <groupId>com.google.gdata</groupId>
       <artifactId>gdata-client</artifactId>
       <version>1.0</version>
     </dependency>
 
-    <!-- 
-        com.google.gdata:gdata-calendar:jar:1.0
-        Try downloading the file manually from the project website:
-        http://code.google.com/apis/gdata/authsub.html.
-        Then, install it using the command:
-            mvn install:install-file -DgroupId=com.google.gdata -DartifactId=gdata-calendar \
-                -Dversion=1.0 -Dpackaging=jar -Dfile=/path/to/file
+    <!--
+     com.google.gdata:gdata-calendar:jar:1.0
+     Try downloading the file manually from the project website:
+     http://code.google.com/apis/gdata/authsub.html.
+     Then, install it using the command:
+        mvn install:install-file -DgroupId=com.google.gdata -DartifactId=gdata-calendar \
+            -Dversion=1.0 -Dpackaging=jar -Dfile=/path/to/file
     -->
     <dependency>
       <groupId>com.google.gdata</groupId>
