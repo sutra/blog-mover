@@ -61,19 +61,24 @@ function initWriter() {
 		if (inputs[i].name.length != 0) {
 			properties1[index1] = inputs[i].name;
 			values1[index1] = inputs[i].value;
+			debug("parameter: " + properties1[index1] + "=" + values1[index1]);
 			index1++;
 		}
 	}
 
 	// selects
 	var selects = $("selectedWriterDiv").getElementsByTagName("select");
+	debug("selects.length: " + selects.length);
 	var properties2 = new Array();
 	var values2 = new Array();
 	var index2 = 0;
 	for (var i = 0; i < selects.length; i++) {
-		if (selects[i].name.length == 0) {
+		debug("selects[" + i + "].name: " + selects[i].name);
+		debug("selects[" + i + "].name.length: " + selects[i].name.length);
+		if (selects[i].name.length != 0) {
 			properties2[index2] = selects[i].name;
 			values2[index2] = DWRUtil.getValue(selects[i]);
+			debug("parameter: " + properties2[index2] + "=" + values2[index2]);
 			index2++;
 		}
 	}
@@ -81,6 +86,8 @@ function initWriter() {
 	//
 	var properties = properties1.concat(properties2);
 	var values = values1.concat(values2);
+	
+	debug("parameters count: " + properties.length);
 
 	//
 	User.setWriterProperties(
