@@ -65,7 +65,7 @@ public class SohuBlogWriter extends AbstractBlogWriter {
 		this.requestHeaderGroup.addHeader(new Header("User-Agent",
 				ManageUrlConstants.USER_AGENT));
 		httpDocument = new HttpDocument(httpClient, requestHeaderGroup, false,
-				null);
+				"GBK");
 		sohuBlogLogin = new SohuBlogLogin(this.httpClient);
 	}
 
@@ -141,7 +141,12 @@ public class SohuBlogWriter extends AbstractBlogWriter {
 		parameters.add(new NameValuePair("allowComment", "0"));
 		parameters.add(new NameValuePair("perm", "0"));
 		parameters.add(new NameValuePair("save", "发表日志"));
-		httpDocument.post(action, parameters);
+		
+		HeaderGroup hg = new HeaderGroup();
+		hg.addHeader(new Header("Content-Type",
+				"application/x-www-form-urlencoded; charset=GB2312"));
+
+		httpDocument.post(action, parameters, hg);
 	}
 
 	/*
