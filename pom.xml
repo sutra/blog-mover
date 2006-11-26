@@ -187,6 +187,31 @@
           <target>1.5</target>
         </configuration>
       </plugin>
+
+      <!--
+       http://maven.apache.org/guides/mini/guide-using-ant.html
+       http://ant.apache.org/manual/
+       -->
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <configuration>
+              <tasks>
+                <exec
+                  dir="${basedir}"
+                  executable="${basedir}/src/main/assembly/csdn-passport.bat"
+                  failonerror="true">
+                </exec>
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
   <reporting>
