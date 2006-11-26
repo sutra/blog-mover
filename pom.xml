@@ -192,6 +192,7 @@
        http://maven.apache.org/guides/mini/guide-using-ant.html
        http://ant.apache.org/manual/
        -->
+      <!--
       <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
         <executions>
@@ -200,7 +201,7 @@
             <configuration>
               <tasks>
                 <exec
-                  dir="${basedir}"
+                  dir="${basedir}/src/main/assembly/"
                   executable="${basedir}/src/main/assembly/csdn-passport.bat"
                   failonerror="true">
                 </exec>
@@ -212,6 +213,7 @@
           </execution>
         </executions>
       </plugin>
+      -->
     </plugins>
   </build>
   <reporting>
