@@ -75,8 +75,9 @@ public class BaiduReader extends AbstractBlogReader {
 	public List<WebLog> read() throws BlogMoverException {
 		webLogs = new ArrayList<WebLog>();
 		checkLogin();
-		parseSetting();
-		String url = "http://hi.baidu.com/" + username + "/blog/index/";
+		String blogHandle = this.findBlogHandle();
+		parseSetting(blogHandle);
+		String url = "http://hi.baidu.com/" + blogHandle + "/blog/index/";
 		for (int i = 0; i < Integer.MAX_VALUE; i++) {
 			Document document = httpDocument.get(url + i);
 			parse(document);
@@ -97,21 +98,59 @@ public class BaiduReader extends AbstractBlogReader {
 	private boolean hasNextPage(Document document) {
 		boolean hasNextPage = false;
 		Element page = document.getElementById("page");
-		NodeList pageChildren = page.getChildNodes();
-		for (int j = 0; j < pageChildren.getLength(); j++) {
-			Node child = pageChildren.item(j);
-			if (StringUtils.equalsIgnoreCase(child.getNodeName(), "a")) {
-				if (StringUtils.equals(DomNodeUtils.getTextContent(child),
-						"[下一页]")) {
-					hasNextPage = true;
+		if (page != null) {
+			NodeList pageChildren = page.getChildNodes();
+			for (int j = 0; j < pageChildren.getLength(); j++) {
+				Node child = pageChildren.item(j);
+				if (StringUtils.equalsIgnoreCase(child.getNodeName(), "a")) {
+					if (StringUtils.equals(DomNodeUtils.getTextContent(child),
+							"[下一页]")) {
+						hasNextPage = true;
+					}
 				}
 			}
 		}
 		return hasNextPage;
 	}
 
-	private void parseSetting() throws BlogMoverException {
-		String settingUrl = "http://hi.baidu.com/blogremover/modify/spbasic/0";
+	private String findBlogHandle() {
+		String ret = null;
+		Document document = httpDocument.get("http://hi.baidu.com/");
+		NodeList inputs = document.getElementsByTagName("input");
+		for (int i = 0; i < inputs.getLength(); i++) {
+			Node input = inputs.item(i);
+			String name = null;
+			// Catched the null pointer exception, as the sometime the element
+			// is not exists.
+			try {
+				name = input.getAttributes().getNamedItem("name")
+						.getNodeValue();
+			} catch (NullPointerException e) {
+				// Yes, just do nothing.
+			}
+			String value = null;
+			try {
+				value = input.getAttributes().getNamedItem("value")
+						.getNodeValue();
+			} catch (NullPointerException e) {
+				// Yes, just do nothing.
+			}
+			if ("".equals(name) && "立即进入我的空间".equals(value)) {
+				String onclick = input.getAttributes().getNamedItem("onclick")
+						.getNodeValue();
+				Pattern p = Pattern.compile("window.location.href='/([^/']+)'");
+				Matcher m = p.matcher(onclick);
+				if (m.matches()) {
+					ret = m.group(1);
+				}
+			}
+		}
+		return ret;
+	}
+
+	private void parseSetting(String blogHandle) throws BlogMoverException {
+		String settingUrl = "http://hi.baidu.com/" + blogHandle
+				+ "/modify/spbasic/0";
 		Document document = httpDocument.get(settingUrl);
 		// DispNum.
 		Element spConfigDispNum = document.getElementById("spConfigDispNum");

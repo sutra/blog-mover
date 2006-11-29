@@ -10,26 +10,44 @@ import junit.framework.TestCase;
 
 /**
  * @author Shutra
- *
+ * 
  */
 public class BaiduReaderTest extends TestCase {
-	private BaiduReader baiduReader;
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
-		baiduReader = new BaiduReader();
-		baiduReader.setUsername("blogremover");
-		baiduReader.setPassword("wangjing");
 	}
 
 	/**
 	 * Test method for {@link com.redv.blogmover.bsps.baidu.BaiduReader#read()}.
-	 * @throws BlogMoverException 
+	 * 
+	 * @throws BlogMoverException
 	 */
-	public void testRead() throws BlogMoverException {
+	public void testReadUsernameEqualsBlogHandlerWithBlogEntities()
+			throws BlogMoverException {
+		BaiduReader baiduReader = new BaiduReader();
+		baiduReader.setUsername("blogremover");
+		baiduReader.setPassword("wangjing");
+		baiduReader.read();
+	}
+
+	public void testReadUsernameEqualsBlogHandleWithoutBlogEntities()
+			throws BlogMoverException {
+		BaiduReader baiduReader = new BaiduReader();
+		baiduReader.setUsername("blogmover1");
+		baiduReader.setPassword("blogmover1");
+		baiduReader.read();
+	}
+
+	public void testReadUsernameNotEqualsBlogHandleWithoutBlogEnties()
+			throws BlogMoverException {
+		BaiduReader baiduReader = new BaiduReader();
+		baiduReader.setUsername("blogmover2");
+		baiduReader.setPassword("blogmover2");
 		baiduReader.read();
 	}
 
