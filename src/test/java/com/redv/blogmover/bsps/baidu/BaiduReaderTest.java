@@ -30,7 +30,7 @@ public class BaiduReaderTest extends TestCase {
 	public void testReadUsernameEqualsBlogHandlerWithBlogEntities()
 			throws BlogMoverException {
 		BaiduReader baiduReader = new BaiduReader();
-		baiduReader.setUsername("blogremover");
+		baiduReader.setUsername("blogremover");// blogHandle: blogremover
 		baiduReader.setPassword("wangjing");
 		baiduReader.read();
 	}
@@ -38,7 +38,7 @@ public class BaiduReaderTest extends TestCase {
 	public void testReadUsernameEqualsBlogHandleWithoutBlogEntities()
 			throws BlogMoverException {
 		BaiduReader baiduReader = new BaiduReader();
-		baiduReader.setUsername("blogmover1");
+		baiduReader.setUsername("blogmover1");// blogHandle: blogmover1
 		baiduReader.setPassword("blogmover1");
 		baiduReader.read();
 	}
@@ -46,9 +46,9 @@ public class BaiduReaderTest extends TestCase {
 	public void testReadUsernameNotEqualsBlogHandleWithoutBlogEnties()
 			throws BlogMoverException {
 		BaiduReader baiduReader = new BaiduReader();
-		baiduReader.setUsername("blogmover2");
+		baiduReader.setUsername("blogmover2");// blogHandler: blogmover3
 		baiduReader.setPassword("blogmover2");
-		baiduReader.read();
+		assertTrue(0 < baiduReader.read().size());
 	}
 
 }

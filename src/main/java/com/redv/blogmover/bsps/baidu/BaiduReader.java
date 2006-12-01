@@ -51,6 +51,12 @@ public class BaiduReader extends AbstractBlogReader {
 
 	private String password;
 
+	/**
+	 * the handle of user's blog.<br />
+	 * http://hi.baidu.com/BLOGHANDLE/
+	 */
+	private String blogHandle;
+
 	public BaiduReader() {
 		super();
 		HttpClient httpClient = new HttpClient();
@@ -69,17 +75,19 @@ public class BaiduReader extends AbstractBlogReader {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.redv.blogremover.impl.AbstractBlogReader#read()
+	 * @see com.redv.blogmover.impl.AbstractBlogReader#read()
 	 */
 	@Override
 	public List<WebLog> read() throws BlogMoverException {
 		webLogs = new ArrayList<WebLog>();
 		checkLogin();
-		String blogHandle = this.findBlogHandle();
+		blogHandle = BaiduUtils.findBlogHandle(this.httpDocument);
 		parseSetting(blogHandle);
 		String url = "http://hi.baidu.com/" + blogHandle + "/blog/index/";
 		for (int i = 0; i < Integer.MAX_VALUE; i++) {
-			Document document = httpDocument.get(url + i);
+			String u = url + i;
+			log.debug("u: " + u);
+			Document document = httpDocument.get(u);
 			parse(document);
 			// Page.
 			if (!hasNextPage(document)) {
@@ -111,41 +119,6 @@ public class BaiduReader extends AbstractBlogReader {
 			}
 		}
 		return hasNextPage;
-	}
-
-	private String findBlogHandle() {
-		String ret = null;
-		Document document = httpDocument.get("http://hi.baidu.com/");
-		NodeList inputs = document.getElementsByTagName("input");
-		for (int i = 0; i < inputs.getLength(); i++) {
-			Node input = inputs.item(i);
-			String name = null;
-			// Catched the null pointer exception, as the sometime the element
-			// is not exists.
-			try {
-				name = input.getAttributes().getNamedItem("name")
-						.getNodeValue();
-			} catch (NullPointerException e) {
-				// Yes, just do nothing.
-			}
-			String value = null;
-			try {
-				value = input.getAttributes().getNamedItem("value")
-						.getNodeValue();
-			} catch (NullPointerException e) {
-				// Yes, just do nothing.
-			}
-			if ("".equals(name) && "立即进入我的空间".equals(value)) {
-				String onclick = input.getAttributes().getNamedItem("onclick")
-						.getNodeValue();
-				Pattern p = Pattern.compile("window.location.href='/([^/']+)'");
-				Matcher m = p.matcher(onclick);
-				if (m.matches()) {
-					ret = m.group(1);
-				}
-			}
-		}
-		return ret;
 	}
 
 	private void parseSetting(String blogHandle) throws BlogMoverException {
@@ -230,9 +203,10 @@ public class BaiduReader extends AbstractBlogReader {
 				Element a = (Element) div.getFirstChild();
 				String href = a.getAttribute("href");
 				log.debug("href: " + href);
-				if (href.startsWith("/blogremover/blog/item/")) {
-					String id = href.substring("/blogremover/blog/item/"
-							.length(), href.length() - ".html".length());
+				if (href.startsWith("/" + this.blogHandle + "/blog/item/")) {
+					String id = href.substring(
+							("/" + this.blogHandle + "/blog/item/").length(),
+							href.length() - ".html".length());
 					log.debug("id: " + id);
 					WebLog webLog = detail(id);
 					log.debug("webLog.title: " + webLog.getTitle());
@@ -250,8 +224,8 @@ public class BaiduReader extends AbstractBlogReader {
 	private WebLog detail(String id) {
 		WebLog webLog = new WebLogImpl();
 		Document document;
-		document = httpDocument
-				.get("http://hiup.baidu.com/blogremover/modify/blog/" + id);
+		document = httpDocument.get("http://hiup.baidu.com/" + this.blogHandle
+				+ "/modify/blog/" + id);
 		// Title.
 		webLog.setTitle(document.getElementById("spBlogTitle").getAttribute(
 				"value"));
@@ -259,8 +233,8 @@ public class BaiduReader extends AbstractBlogReader {
 		webLog.setBody(DomNodeUtils.getTextContent(document
 				.getElementById("midstatus")));
 
-		String url = "http://hi.baidu.com/blogremover/blog/item/" + id
-				+ ".html";
+		String url = "http://hi.baidu.com/" + this.blogHandle + "/blog/item/"
+				+ id + ".html";
 		webLog.setUrl(url);
 
 		document = httpDocument.get(url);

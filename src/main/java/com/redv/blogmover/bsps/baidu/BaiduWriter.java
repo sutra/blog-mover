@@ -11,6 +11,10 @@ import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HeaderGroup;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.Attachment;
 import com.redv.blogmover.BlogMoverException;
@@ -36,6 +40,8 @@ public class BaiduWriter extends AbstractBlogWriter {
 	private String username;
 
 	private String password;
+
+	private String blogHandle;
 
 	/**
 	 * @param password
@@ -70,6 +76,7 @@ public class BaiduWriter extends AbstractBlogWriter {
 	@Override
 	protected void begin() throws BlogMoverException {
 		new BaiduLogin(httpDocument).login(username, password);
+		this.blogHandle = BaiduUtils.findBlogHandle(this.httpDocument);
 	}
 
 	/*
@@ -91,7 +98,7 @@ public class BaiduWriter extends AbstractBlogWriter {
 	@Override
 	protected void writeBlog(WebLog webLog, Map<Attachment, String> attachments)
 			throws BlogMoverException {
-		String action = "http://hi.baidu.com/blogremover/commit";
+		String action = "http://hi.baidu.com/" + blogHandle + "/commit";
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 
 		NameValuePair parameter = new NameValuePair("ct", "1");
@@ -121,7 +128,25 @@ public class BaiduWriter extends AbstractBlogWriter {
 		HeaderGroup hg = new HeaderGroup();
 		hg.addHeader(new Header("Content-Type",
 				"application/x-www-form-urlencoded; charset=GB2312"));
-		httpDocument.post(action, parameters, hg);
+		Document document = httpDocument.post(action, parameters, hg);
+		NodeList scripts = document.getElementsByTagName("script");
+		String expectMessage = "恭喜,您的文章已经发表成功。";
+		boolean ok = false;
+		for (int i = 0; i < scripts.getLength(); i++) {
+			Element script = (Element) scripts.item(i);
+			Node firstChild = script.getFirstChild();
+			if (firstChild != null) {
+				String actualMessage = firstChild.getNodeValue();
+				log.debug("actualMessage: " + actualMessage);
+				if (actualMessage != null
+						&& actualMessage.indexOf(expectMessage) != -1) {
+					ok = true;
+				}
+			}
+		}
+		if (!ok) {
+			throw new BlogMoverException("写入错误。");
+		}
 	}
 
 	/*
