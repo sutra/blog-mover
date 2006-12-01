@@ -372,6 +372,10 @@ public class SohuBlogReader extends AbstractBlogReader {
 				webLog.setDateString(StringUtils.trim(dateString));
 				// title node
 				Node titleNode = tds.item(3);
+				if (titleNode == null) {
+					// No web log yet.
+					break;
+				}
 				NodeList titleChildNodes = titleNode.getChildNodes();
 				Node aNode = titleChildNodes.item(1);
 				// uri

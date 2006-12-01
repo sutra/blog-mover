@@ -1,7 +1,9 @@
 package com.redv.blogmover.bsps.donews;
 
 import org.apache.commons.httpclient.HttpClient;
+import org.w3c.dom.DOMException;
 
+import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.BlogMoverRuntimeException;
 import com.redv.blogmover.bsps.donews.DoNewsLogin;
 import com.redv.blogmover.util.HttpDocument;
@@ -16,11 +18,6 @@ public class DonewsLoginTest extends TestCase {
 		HttpClient httpClient = new HttpClient();
 		HttpDocument httpDocument = new HttpDocument(httpClient);
 		donewsLogin = new DoNewsLogin(httpClient, httpDocument);
-		try {
-			donewsLogin.login("blogremover", "wangjing", "");
-		} catch (BlogMoverRuntimeException ex) {
-			assertEquals(ex.getMessage(), "请输入验证码。");
-		}
 	}
 
 	/*
@@ -28,8 +25,27 @@ public class DonewsLoginTest extends TestCase {
 	 * 'com.redv.blogremover.bsps.donews.DonewsLogin.login(String, String,
 	 * String)'
 	 */
-	public void testLogin() {
+	public void testLogin() throws DOMException, BlogMoverException {
+		try {
+			donewsLogin.login("blogremover", "wangjing", "");
+		} catch (BlogMoverRuntimeException ex) {
+			assertEquals(ex.getMessage(), "请输入验证码。");
+		}
+	}
 
+	/**
+	 * Test login by another user.
+	 * 
+	 * @throws DOMException
+	 * @throws BlogMoverExcetption
+	 */
+	public void testLoginByAnotherUsernamePasswordPair() throws DOMException,
+			BlogMoverException {
+		try {
+			donewsLogin.login("blogremover", "wangjing", "");
+		} catch (BlogMoverRuntimeException ex) {
+			assertEquals(ex.getMessage(), "请输入验证码。");
+		}
 	}
 
 }
