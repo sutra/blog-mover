@@ -16,13 +16,9 @@ public class HexunReaderTest extends TestCase {
 
 	private HexunReader hexunReader;
 
-	public HexunReaderTest(String name) {
-		super(name);
-		hexunReader = new HexunReader();
-	}
-
 	protected void setUp() throws Exception {
 		super.setUp();
+		hexunReader = new HexunReader();
 	}
 
 	/*

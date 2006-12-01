@@ -12,18 +12,14 @@ import com.redv.blogmover.util.HttpDocument;
 public class HexunLoginTest extends TestCase {
 	HexunLogin hexunLogin;
 
-	public HexunLoginTest(String name) {
-		super(name);
+	protected void setUp() throws Exception {
+		super.setUp();
 		HttpClient httpClient = new HttpClient();
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
 		HttpDocument httpDocument = new HttpDocument(httpClient, null, true,
 				"GBK");
 		hexunLogin = new HexunLogin(httpDocument);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
 	}
 
 	/*

@@ -20,7 +20,7 @@
 		</td>
 		<td>
 			<input type="password" name="password" tabindex="101" />
-			（我们不会恶意记录您的密码，该密码用来给 Blog Remover 登录和迅后台抓取日志信息）
+			（我们不会恶意记录您的密码，该密码用来给 Blog Mover 登录和迅后台抓取日志信息）
 		</td>
 	</tr>
 </table>
