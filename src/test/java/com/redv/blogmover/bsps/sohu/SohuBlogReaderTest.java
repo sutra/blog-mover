@@ -45,6 +45,7 @@ public class SohuBlogReaderTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
+		this.sohuBlogReader = null;
 	}
 
 	/**
