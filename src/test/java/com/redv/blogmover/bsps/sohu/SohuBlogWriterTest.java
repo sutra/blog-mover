@@ -46,8 +46,6 @@ public class SohuBlogWriterTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		this.sohuBlogWriter = new SohuBlogWriter();
-		this.sohuBlogReader = new SohuBlogReader();
 	}
 
 	/**
@@ -65,6 +63,9 @@ public class SohuBlogWriterTest {
 	 */
 	@Test
 	public void testWrite() throws BlogMoverException {
+		this.sohuBlogWriter = new SohuBlogWriter();
+		this.sohuBlogReader = new SohuBlogReader();
+
 		String username = "blogmover";
 		String passwd = "blogmover";
 		String maildomain = "@sohu.com";

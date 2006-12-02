@@ -40,7 +40,7 @@ public class MetaWeblogWriterTest {
 	 * @throws BlogMoverException
 	 * @throws MalformedURLException
 	 */
-	// @Test
+	@Test
 	public void testWriteBokeland() throws BlogMoverException,
 			MalformedURLException {
 		MetaWeblogWriter w = new MetaWeblogWriter();
@@ -66,7 +66,7 @@ public class MetaWeblogWriterTest {
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	// @Test
+	@Test
 	public void getAllBlogsFromBokeland() throws MalformedURLException,
 			XmlRpcException {
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
@@ -90,7 +90,7 @@ public class MetaWeblogWriterTest {
 	public void getAllBlogsFromIBlog() throws MalformedURLException,
 			XmlRpcException {
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-		config.setServerURL(new URL("http://cn.iblog.com/xmlrpc.php"));
+		config.setServerURL(new URL("http://www.iblog.com/xmlrpc.php"));
 		config.setEnabledForExtensions(false);
 		XmlRpcClient client = new XmlRpcClient();
 		client.setConfig(config);
@@ -109,7 +109,7 @@ public class MetaWeblogWriterTest {
 	public void testWriteIBlog() throws BlogMoverException,
 			MalformedURLException {
 		MetaWeblogWriter w = new MetaWeblogWriter();
-		w.setServerURL("http://cn.iblog.com/xmlrpc.php");
+		w.setServerURL("http://www.iblog.com/xmlrpc.php");
 		w.setBlogid("17392");
 		w.setUsername("blogmover");
 		w.setPassword("xpert.cn");

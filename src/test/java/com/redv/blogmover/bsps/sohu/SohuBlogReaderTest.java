@@ -37,7 +37,6 @@ public class SohuBlogReaderTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		this.sohuBlogReader = new SohuBlogReader();
 	}
 
 	/**
@@ -45,7 +44,6 @@ public class SohuBlogReaderTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		this.sohuBlogReader = null;
 	}
 
 	/**
@@ -56,6 +54,7 @@ public class SohuBlogReaderTest {
 	 */
 	@Test
 	public void testRead() throws BlogMoverException {
+		this.sohuBlogReader = new SohuBlogReader();
 		this.sohuBlogReader.setUsername("blogmover");
 		this.sohuBlogReader.setPasswd("blogmover");
 		this.sohuBlogReader.setMaildomain("@sohu.com");
@@ -64,6 +63,7 @@ public class SohuBlogReaderTest {
 
 	@Test
 	public void testReadChinaren() throws BlogMoverException {
+		this.sohuBlogReader = new SohuBlogReader();
 		this.sohuBlogReader.setUsername("blogmover");
 		this.sohuBlogReader.setPasswd("blogmover");
 		this.sohuBlogReader.setMaildomain("@chinaren.com");
@@ -72,6 +72,7 @@ public class SohuBlogReaderTest {
 
 	@Test
 	public void testReadSogou() throws BlogMoverException {
+		this.sohuBlogReader = new SohuBlogReader();
 		this.sohuBlogReader.setUsername("blogmover");
 		this.sohuBlogReader.setPasswd("blogmover");
 		this.sohuBlogReader.setMaildomain("@sogou.com");

@@ -187,7 +187,19 @@
           <target>1.5</target>
         </configuration>
       </plugin>
-
+      <plugin>
+        <groupId>net.unto.maven.plugins</groupId>
+        <artifactId>maven-junit4-plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <!--
        http://maven.apache.org/guides/mini/guide-using-ant.html
        http://ant.apache.org/manual/
@@ -216,6 +228,20 @@
       -->
     </plugins>
   </build>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>unto.net</id>
+      <url>http://repository.unto.net/maven/</url>
+      <releases>
+        <updatePolicy>daily</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <snapshots>
+        <updatePolicy>daily</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
   <reporting>
     <plugins>
       <plugin>

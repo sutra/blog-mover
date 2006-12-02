@@ -50,8 +50,6 @@ public class BaiduWriterTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		this.baiduWriter = new BaiduWriter();
-		this.baiduReader = new BaiduReader();
 	}
 
 	/**
@@ -69,6 +67,8 @@ public class BaiduWriterTest {
 	 */
 	@Test
 	public void testWrite() throws BlogMoverException {
+		this.baiduWriter = new BaiduWriter();
+		this.baiduReader = new BaiduReader();
 		String username = "blogmover2";
 		String password = "blogmover2";
 		this.baiduReader.setUsername(username);

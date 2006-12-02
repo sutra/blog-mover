@@ -20,8 +20,8 @@
 				这里填写你的博客服务器的 MetaWeblog 接口的 XML-RPC 地址。比如：
 				<a href="http://xpert.cn">专家博客</a>的接口地址为：
 				<a href="#"
-					onclick="$('readers.metaWeblog.serverURL').value='http://xpert.cn/xmlrpc';return false;"
-					title="单击填入">http://xpert.cn/xmlrpc</a>
+					onclick="$('readers.metaWeblog.serverURL').value='http://xpert.cn/roller-services/xmlrpc';return false;"
+					title="单击填入">http://xpert.cn/roller-services/xmlrpc</a>
 			</td>
 		</tr>
 		<tr>

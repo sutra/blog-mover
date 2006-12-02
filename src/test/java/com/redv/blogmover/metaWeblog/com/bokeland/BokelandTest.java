@@ -3,7 +3,7 @@
  */
 package com.redv.blogmover.metaWeblog.com.bokeland;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.net.MalformedURLException;
 import java.util.List;
@@ -40,6 +40,6 @@ public class BokelandTest {
 		metaWeblogReader.setPassword("xpert.cn");
 		metaWeblogReader.setBlogid("722");
 		List<WebLog> webLogs = metaWeblogReader.read();
-		assertEquals(webLogs.size(), 9);
+		assertTrue(webLogs.size() > 0);
 	}
 }

@@ -31,6 +31,24 @@ public class RomeWriterTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+	}
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	/**
+	 * Test method for
+	 * {@link com.redv.blogmover.impl.AbstractBlogWriter#write(java.util.List)}.
+	 * 
+	 * @throws BlogMoverException
+	 * 
+	 */
+	@Test
+	public void testWrite() throws BlogMoverException {
 		outputFile = new File(SystemUtils.getJavaIoTmpDir(),
 				"RomeWriterTest.xml");
 
@@ -43,27 +61,7 @@ public class RomeWriterTest {
 		writer.setLanguage("zh-CN");
 		writer.setLink("http://shutra.xpert.cn");
 		writer.setTitle("Shutra's");
-	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-		if (!this.outputFile.delete()) {
-			this.outputFile.deleteOnExit();
-		}
-	}
-
-	/**
-	 * Test method for
-	 * {@link com.redv.blogmover.impl.AbstractBlogWriter#write(java.util.List)}.
-	 * 
-	 * @throws BlogMoverException
-	 * 
-	 */
-	@Test
-	public void testWrite() throws BlogMoverException {
 		List<WebLog> webLogs = new ArrayList<WebLog>();
 		WebLog webLog = new WebLogImpl();
 		webLog.setTitle("标题");
@@ -71,6 +69,10 @@ public class RomeWriterTest {
 		webLog.setUrl("permaLink");
 		webLogs.add(webLog);
 		writer.write(webLogs);
+
+		if (!this.outputFile.delete()) {
+			this.outputFile.deleteOnExit();
+		}
 	}
 
 }
