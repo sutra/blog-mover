@@ -28,7 +28,7 @@
 <br />
 密码：
 <input type="password" name="passwd" tabindex="102" />
-（我们不会恶意记录您的密码，该密码用于 Blog Mmover 登录您的 Sohu Blog 后获取日志信息）
+（我们不会恶意记录您的密码，该密码用于 Blog Mover 登录您的 Sohu Blog 后获取日志信息）
 <div class="attention">
 	将读取日期、内容，不读取评论、图片、多媒体等。
 </div>
