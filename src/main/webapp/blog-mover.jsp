@@ -16,6 +16,9 @@
 			content="blog, weblog, 博客, mover, remover, 搬家, 备份, 博客搬家, 博客搬家通用工具, 博客搬家服务, 博客搬家软件, metaWeblog, metaWeblogApi" />
 		<meta name="description"
 			content="Blog Mover （博客搬家通用工具）可以帮你的博客搬家（备份），可以在任意 BSP 之前自由地搬迁。" />
+		<%-- FavIcon from Pics: http://www.chami.com/html-kit/services/favicon/ --%>
+		<link rel="shortcut icon" href="<c:url value="/favicon.ico" />" type="image/x-icon" />
+		<link rel="icon" href="<c:url value="/favicon.ico" />" type="image/x-icon" />
 		<link rel="stylesheet" type="text/css" media="screen"
 			href="styles/nicetabs.css" />
 		<style type="text/css">
