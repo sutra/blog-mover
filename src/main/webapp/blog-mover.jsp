@@ -25,7 +25,7 @@
 	</head>
 	<body id="nicetabs">
 		<div>
-			<div id="blogRemoverHeader">
+			<div id="blogMoverHeader">
 				<h1>
 					Blog Mover （博客搬家通用工具）
 				</h1>

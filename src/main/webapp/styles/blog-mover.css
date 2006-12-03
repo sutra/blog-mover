@@ -33,14 +33,18 @@ h3 {
 	text-decoration: underline;
 }
 
-#blogRemoverHeader {
+#blogMoverHeader {
 	color: #776655;
 	padding: 20px;
 	text-align: center;
-	background: #dbe1d3;
+	/*
+	 * Logo generator: http://www.logomaker.cn/famouslogo/Google.aspx?text=BlogMover&font=Google
+	 */
+	background: #dbe1d3 url("../images/logo.png") no-repeat 10px 10px;
 }
 
-#blogRemoverHeader h1 {
+#blogMoverHeader h1 {
+	margin-top: 10px;
 	font: bold 18pt/ 20pt tahoma, times, serif, 宋体;
 }
 
