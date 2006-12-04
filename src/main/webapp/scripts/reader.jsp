@@ -122,6 +122,11 @@ function readReply() {
 	reading = false;
 	readerBusy = false;
 	setStatus("读取完毕。");
+
+	// Refresh the web log list.
+	setStatus("正在刷新 Step 2 中的日志列表……");
+	showWebLogs(0)
+
 	$("readButton").disabled = false;
 }
 function readErrorHandler(msg, exception) {
