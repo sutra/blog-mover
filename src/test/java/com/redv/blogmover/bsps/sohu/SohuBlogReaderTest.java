@@ -3,6 +3,7 @@
  */
 package com.redv.blogmover.bsps.sohu;
 
+import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -79,4 +80,17 @@ public class SohuBlogReaderTest {
 		this.sohuBlogReader.read();
 	}
 
+	@Test
+	public void testUsernamePasswordNotCorrect() {
+		this.sohuBlogReader = new SohuBlogReader();
+		this.sohuBlogReader.setUsername("blogmover");
+		this.sohuBlogReader.setPasswd("errorpassword");
+		this.sohuBlogReader.setMaildomain("@sogou.com");
+		try {
+			this.sohuBlogReader.read();
+			fail("Username password not correct, should throw a exception.");
+		} catch (BlogMoverException e) {
+			assertEquals("登录失败。", e.getMessage());
+		}
+	}
 }
