@@ -21,6 +21,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogMoverException;
+import com.redv.blogmover.LoginFailedException;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
@@ -96,11 +97,11 @@ class DoNewsLogin implements Serializable {
 		Element vKValidator = loginResultDocument.getElementById("VKValidator");
 		Element message = loginResultDocument.getElementById("Message");
 		if (vKValidator != null) {
-			throw new BlogMoverException("验证码输入有误："
+			throw new LoginFailedException("验证码输入有误："
 					+ vKValidator.getNodeValue());
 		} else if (message != null
 				&& StringUtils.isNotEmpty(message.getNodeValue())) {
-			throw new BlogMoverException("登录失败：" + message.getNodeValue());
+			throw new LoginFailedException("登录失败：" + message.getNodeValue());
 		}
 	}
 
