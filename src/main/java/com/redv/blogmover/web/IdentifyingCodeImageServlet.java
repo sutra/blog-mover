@@ -51,6 +51,9 @@ public class IdentifyingCodeImageServlet extends HttpServlet {
 		} else {
 			readerOrWriter = userFacade.getWriter();
 		}
+		if (readerOrWriter == null) {
+			throw new ServletException("readerOrWriter is null.");
+		}
 		Method m = null;
 		try {
 			m = readerOrWriter.getClass().getMethod("getIdentifyingCodeImage");
