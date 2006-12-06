@@ -19,6 +19,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogMoverException;
+import com.redv.blogmover.LoginFailedException;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
@@ -72,7 +73,7 @@ public class SinaLogin {
 			}
 		}
 		if (!ok) {
-			throw new BlogMoverException("用户名密码或者验证码有误，请重新输入，或者重新获取验证码。");
+			throw new LoginFailedException("用户名密码或者验证码有误，请重新输入，或者重新获取验证码。");
 		}
 	}
 
