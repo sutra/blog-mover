@@ -12,6 +12,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogMoverException;
+import com.redv.blogmover.LoginFailedException;
 import com.redv.blogmover.util.DomNodeUtils;
 import com.redv.blogmover.util.HttpDocument;
 
@@ -56,7 +57,7 @@ public class BaiduLogin {
 			}
 		}
 		if (!ok) {
-			throw new BlogMoverException("登录失败，用户名或者密码错误。");
+			throw new LoginFailedException("登录失败，用户名或者密码错误。");
 		}
 	}
 }

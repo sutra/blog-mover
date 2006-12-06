@@ -25,25 +25,25 @@ public class BlogMoverException extends Exception {
 	}
 
 	/**
-	 * @param arg0
+	 * @param message
 	 */
-	public BlogMoverException(String arg0) {
-		super(arg0);
+	public BlogMoverException(String message) {
+		super(message);
 	}
 
 	/**
-	 * @param arg0
-	 * @param arg1
+	 * @param message
+	 * @param cause
 	 */
-	public BlogMoverException(String arg0, Throwable arg1) {
-		super(arg0, arg1);
+	public BlogMoverException(String message, Throwable cause) {
+		super(message, cause);
 	}
 
 	/**
-	 * @param arg0
+	 * @param cause
 	 */
-	public BlogMoverException(Throwable arg0) {
-		super(arg0);
+	public BlogMoverException(Throwable cause) {
+		super(cause);
 	}
 
 }
