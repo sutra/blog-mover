@@ -14,6 +14,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogMoverRuntimeException;
+import com.redv.blogmover.LoginFailedException;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
@@ -31,7 +32,8 @@ class HexunLogin {
 		this.httpDocument = httpDocument;
 	}
 
-	void login(String username, String password, String gourl) {
+	void login(String username, String password, String gourl)
+			throws LoginFailedException {
 		String url = "http://blog.hexun.com/group/inc/login.aspx";
 		Document document = httpDocument.get(url);
 		NodeList forms = document.getElementsByTagName("form");
@@ -69,7 +71,7 @@ class HexunLogin {
 		for (int i = 0; i < scripts.getLength(); i++) {
 			String alert = scripts.item(i).getFirstChild().getNodeValue();
 			if (alert.startsWith("alert")) {
-				throw new BlogMoverRuntimeException("用户名或密码错误。");
+				throw new LoginFailedException("用户名或密码错误。");
 			}
 		}
 	}

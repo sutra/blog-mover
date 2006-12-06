@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.redv.blogmover.BlogMoverException;
+import com.redv.blogmover.LoginFailedException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.bsps.hexun.HexunReader;
 
@@ -36,6 +37,17 @@ public class HexunReaderTest extends TestCase {
 			log.debug("body: " + webLog.getBody());
 		}
 
+	}
+
+	public void testLoginFailed() throws BlogMoverException {
+		hexunReader.setUsername("blogremover");
+		hexunReader.setPassword("anErrorPassword");
+		try {
+			hexunReader.read();
+			fail("A LoginFailedException should be thrown.");
+		} catch (LoginFailedException ex) {
+			// Good.
+		}
 	}
 
 	/*
