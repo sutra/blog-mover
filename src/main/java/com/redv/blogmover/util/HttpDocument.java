@@ -28,6 +28,8 @@ import org.xml.sax.SAXException;
 import com.redv.blogmover.BlogMoverRuntimeException;
 
 /**
+ * The http utility functions for returning document.
+ * 
  * @author Joe
  * @version 1.0
  * 
@@ -58,22 +60,56 @@ public class HttpDocument implements Serializable {
 		this.httpClient = httpClient;
 	}
 
+	/**
+	 * 
+	 * @param httpClient
+	 * @param requestHeaderGroup
+	 */
 	public HttpDocument(final HttpClient httpClient,
 			final HeaderGroup requestHeaderGroup) {
 		this(httpClient);
 		this.requestHeaderGroup = requestHeaderGroup;
 	}
 
+	/**
+	 * 
+	 * @param httpClient
+	 * @param requestHeaderGroup
+	 * @param encoding
+	 */
+	public HttpDocument(final HttpClient httpClient,
+			final HeaderGroup requestHeaderGroup, String encoding) {
+		this(httpClient);
+		this.requestHeaderGroup = requestHeaderGroup;
+		this.encoding = encoding;
+	}
+
+	/**
+	 * 
+	 * @param httpClient
+	 * @param manualCookie
+	 */
 	public HttpDocument(final HttpClient httpClient, final boolean manualCookie) {
 		this(httpClient);
 		this.manualCookie = manualCookie;
 	}
 
+	/**
+	 * 
+	 * @param httpClient
+	 * @param encoding
+	 */
 	public HttpDocument(final HttpClient httpClient, final String encoding) {
 		this(httpClient);
 		this.encoding = encoding;
 	}
 
+	/**
+	 * 
+	 * @param httpClient
+	 * @param manualCookie
+	 * @param encoding
+	 */
 	public HttpDocument(final HttpClient httpClient,
 			final boolean manualCookie, final String encoding) {
 		this(httpClient);
@@ -81,12 +117,25 @@ public class HttpDocument implements Serializable {
 		this.manualCookie = manualCookie;
 	}
 
+	/**
+	 * 
+	 * @param httpClient
+	 * @param requestHeaderGroup
+	 * @param manualCookie
+	 */
 	public HttpDocument(final HttpClient httpClient,
 			final HeaderGroup requestHeaderGroup, final boolean manualCookie) {
 		this(httpClient, requestHeaderGroup);
 		this.manualCookie = manualCookie;
 	}
 
+	/**
+	 * 
+	 * @param httpClient
+	 * @param requestHeaderGroup
+	 * @param manualCookie
+	 * @param encoding
+	 */
 	public HttpDocument(final HttpClient httpClient,
 			final HeaderGroup requestHeaderGroup, final boolean manualCookie,
 			final String encoding) {
@@ -138,7 +187,7 @@ public class HttpDocument implements Serializable {
 	}
 
 	/**
-	 * 执行 get 方法。
+	 * Execute `get' method.
 	 * 
 	 * @param url
 	 * @return
@@ -155,7 +204,7 @@ public class HttpDocument implements Serializable {
 	}
 
 	/**
-	 * 执行 post 方法。
+	 * Execute `post' method.
 	 * 
 	 * @param action
 	 * @param parameters
@@ -165,6 +214,14 @@ public class HttpDocument implements Serializable {
 		return post(action, parameters, null);
 	}
 
+	/**
+	 * Execute `post' method.
+	 * 
+	 * @param action
+	 * @param parameters
+	 * @param requestHeaderGroup
+	 * @return
+	 */
 	public Document post(String action, NameValuePair[] parameters,
 			HeaderGroup requestHeaderGroup) {
 		PostMethod postMethod = new PostMethod(action);
@@ -181,7 +238,7 @@ public class HttpDocument implements Serializable {
 	}
 
 	/**
-	 * 执行 post 方法。
+	 * Execute `post' method.
 	 * 
 	 * @param action
 	 * @param parameters
@@ -191,6 +248,14 @@ public class HttpDocument implements Serializable {
 		return post(action, parameters, null);
 	}
 
+	/**
+	 * Execute `post' method.
+	 * 
+	 * @param action
+	 * @param parameters
+	 * @param requestHeaderGroup
+	 * @return
+	 */
 	public Document post(String action, List<NameValuePair> parameters,
 			HeaderGroup requestHeaderGroup) {
 		NameValuePair[] nvps = null;
@@ -202,6 +267,7 @@ public class HttpDocument implements Serializable {
 	}
 
 	/**
+	 * Get response document from method.
 	 * 
 	 * @param method
 	 * @return
@@ -217,7 +283,7 @@ public class HttpDocument implements Serializable {
 	}
 
 	/**
-	 * 获取指定方法的 Document。
+	 * Get response document from a method.
 	 * 
 	 * @param method
 	 * @return
@@ -289,7 +355,7 @@ public class HttpDocument implements Serializable {
 	}
 
 	/**
-	 * 将 Cookies 转换成 Header 格式。
+	 * Convert the cookies to header format.
 	 * 
 	 * @param cookies
 	 * @return
@@ -306,7 +372,7 @@ public class HttpDocument implements Serializable {
 	}
 
 	/**
-	 * 向 HttpMethod 中添加 Header。
+	 * Add headers to http method.
 	 * 
 	 * @param method
 	 * @param requestHeaderGroup
@@ -321,7 +387,7 @@ public class HttpDocument implements Serializable {
 	}
 
 	/**
-	 * 执行 HttpMethod。
+	 * Execute http method.
 	 * 
 	 * @param httpClient
 	 * @param method
@@ -337,7 +403,7 @@ public class HttpDocument implements Serializable {
 	}
 
 	/**
-	 * 向方法中添加 cookie。
+	 * Add cookies to http method.
 	 * 
 	 * @param method
 	 * @param cookies

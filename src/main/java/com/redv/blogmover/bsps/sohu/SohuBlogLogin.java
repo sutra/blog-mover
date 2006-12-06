@@ -3,17 +3,26 @@
  */
 package com.redv.blogmover.bsps.sohu;
 
-import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.Header;
+import org.apache.commons.httpclient.HeaderGroup;
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import com.redv.blogmover.BlogMoverRuntimeException;
+import com.redv.blogmover.LoginFailedException;
+import com.redv.blogmover.util.HttpDocument;
 
 /**
  * @author Joe
@@ -28,75 +37,76 @@ class SohuBlogLogin implements Serializable {
 
 	private static final Log log = LogFactory.getLog(SohuBlogLogin.class);
 
-	private HttpClient httpClient;
+	private HttpDocument httpDocument;
+
+	/**
+	 * The form action of the login form.
+	 */
+	private final String action = "http://blog.sohu.com/loginProxy";
 
 	/**
 	 * 
 	 */
 	public SohuBlogLogin(HttpClient httpClient) {
-		this.httpClient = httpClient;
+		HeaderGroup requestHeaderGroup = new HeaderGroup();
+		requestHeaderGroup.addHeader(new Header("User-Agent",
+				ManageUrlConstants.USER_AGENT));
+		this.httpDocument = new HttpDocument(httpClient, requestHeaderGroup,
+				"GBK");
 	}
 
-	public boolean login(String username, String maildomain, String passwd)
-			throws HttpException, IOException {
-		boolean ret = false;
-		PostMethod pm = new PostMethod("http://passport.sohu.com/login.jsp");
-		httpClient.getParams().setParameter("User-Agent",
-				ManageUrlConstants.USER_AGENT);
-		pm.addRequestHeader("User-Agent", ManageUrlConstants.USER_AGENT);
-		// pm.addRequestHeader("Cookie", BlogRemoverUtils
-		// .cookieToHeaderString(httpClient.getState().getCookies()));
-		pm.addParameter("loginid", username + maildomain);
-		pm.addParameter("username", username);
-		pm.addParameter("maildomain", maildomain);
-		pm.addParameter("passwd", passwd);
-		pm
-				.addParameter(
-						"extend",
-						"function%28object%29+%7B%0D%0A++return+Object.extend.apply%28this%2C+%5Bthis%2C+object%5D%29%3B%0D%0A%7D");
-		pm.addParameter("appid", "1019");
-		pm
-				.addParameter("ru",
-						"http://blog.sohu.com/login/logon.do?bru=http://blog-remover.blog.sohu.com/");
-		pm.addParameter("fl", "0");
-		pm.addParameter("vr", "1|1");
-		pm.addParameter("ct", "1151790259469000");
-		pm.addParameter("sg", "b179d8b2f1680b23b35d3bed335b9280");
-		pm.addParameter("eru", "http://blog.sohu.com/login/logon.do");
-		httpClient.executeMethod(pm);
-
-		log.debug("StatusCode = " + pm.getStatusCode());
-		if (pm.getStatusCode() == 302) {
-			if (pm.getResponseBodyAsString().indexOf("errMsg") != -1) {
-				ret = false;
+	public void login(String username, String mailDomain, String password)
+			throws LoginFailedException {
+		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+		parameters.add(new NameValuePair("loginid", username + mailDomain));
+		parameters.add(new NameValuePair("username", username));
+		parameters.add(new NameValuePair("maildomain", mailDomain));
+		parameters.add(new NameValuePair("passwd", password));
+		parameters.add(new NameValuePair("Submit", ""));
+		Document document = this.httpDocument.post(action, parameters);
+		NodeList titles = document.getElementsByTagName("title");
+		if (titles.getLength() != 0
+				&& titles.item(0).getFirstChild().getNodeValue().equals("错误")) {
+			// System error returned.
+			throw new BlogMoverRuntimeException("请求失败");
+		} else {
+			NodeList forms = document.getElementsByTagName("form");
+			if (forms.getLength() == 0) {
+				throw new BlogMoverRuntimeException(
+						"No redirecting form found.");
 			}
-		}
-
-		Header header = pm.getResponseHeader("location");
-		pm.releaseConnection();
-		if (header != null) {
-			String newuri = header.getValue();
-			if (newuri == null || newuri.equals("")) {
+			Element form = (Element) forms.item(0);
+			String action = StringUtils.trimToNull(form.getAttribute("action"));
+			NodeList inputs = document.getElementsByTagName("input");
+			parameters = new ArrayList<NameValuePair>(inputs.getLength());
+			for (int i = 0; i < inputs.getLength(); i++) {
+				Element input = (Element) inputs.item(i);
+				String name = input.getAttribute("name");
+				String value = input.getAttribute("value");
+				parameters.add(new NameValuePair(name, value));
+			}
+			document = this.httpDocument.post(action, parameters);
+			Element blogUrlElement = document.getElementById("blogUrl");
+			if (blogUrlElement == null) {
+				throw new LoginFailedException("登录失败，用户名或者密码输入有误。");
+			}
+			String blogUrl = blogUrlElement.getFirstChild().getAttributes()
+					.getNamedItem("href").getNodeValue();
+			log.debug("blogUrl: " + blogUrl);
+			Pattern p = Pattern.compile("http://([^.]+).blog.sohu.com/");
+			Matcher m = p.matcher(blogUrl);
+			if (m.find()) {
+				String blogDomain = m.group(1);
+				log.debug("blogDomain: " + blogDomain);
 			} else {
-				log.debug("Redirect target: " + newuri);
-				GetMethod redirect = new GetMethod(newuri);
-				redirect.addRequestHeader("User-Agent",
-						ManageUrlConstants.USER_AGENT);
-				// redirect.addRequestHeader("Cookie", BlogRemoverUtils
-				// .cookieToHeaderString(httpClient.getState()
-				// .getCookies()));
-				int statusCode = httpClient.executeMethod(redirect);
-				// log.debug(redirect.getResponseBodyAsString());
-				redirect.releaseConnection();
-				if (statusCode == HttpStatus.SC_FORBIDDEN) {
-					ret = false;
-				} else {
-					ret = true;
-				}
+				throw new BlogMoverRuntimeException(
+						"No blog domain group(group 1) found.");
 			}
 		}
-
-		return ret;
 	}
 
+	public static void main(String[] args) throws LoginFailedException {
+		new SohuBlogLogin(new HttpClient()).login("zhoushuqun2000",
+				"@chinaren.com", "wangjing");
+	}
 }

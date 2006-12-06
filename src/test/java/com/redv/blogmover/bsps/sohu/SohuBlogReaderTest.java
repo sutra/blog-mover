@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.redv.blogmover.BlogMoverException;
+import com.redv.blogmover.LoginFailedException;
 
 /**
  * @author shutra
@@ -81,7 +82,21 @@ public class SohuBlogReaderTest {
 	}
 
 	@Test
-	public void testUsernamePasswordNotCorrect() {
+	public void testMailDomainNotCorrect() throws BlogMoverException {
+		this.sohuBlogReader = new SohuBlogReader();
+		this.sohuBlogReader.setUsername("blogmover");
+		this.sohuBlogReader.setPasswd("blogmover");
+		this.sohuBlogReader.setMaildomain("@error.com");
+		try {
+			this.sohuBlogReader.read();
+			fail("A LoginFailedException should be throwed.");
+		} catch (LoginFailedException ex) {
+			// Good.
+		}
+	}
+
+	@Test
+	public void testPasswordNotCorrect() throws BlogMoverException {
 		this.sohuBlogReader = new SohuBlogReader();
 		this.sohuBlogReader.setUsername("blogmover");
 		this.sohuBlogReader.setPasswd("errorpassword");
@@ -89,8 +104,9 @@ public class SohuBlogReaderTest {
 		try {
 			this.sohuBlogReader.read();
 			fail("Username password not correct, should throw a exception.");
-		} catch (BlogMoverException e) {
-			assertEquals("登录失败。", e.getMessage());
+		} catch (LoginFailedException e) {
+			// Good.
 		}
 	}
+
 }

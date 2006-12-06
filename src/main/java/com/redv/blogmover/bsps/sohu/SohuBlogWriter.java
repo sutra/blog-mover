@@ -3,7 +3,6 @@
  */
 package com.redv.blogmover.bsps.sohu;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,6 @@ import java.util.Map;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HeaderGroup;
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.lang.StringUtils;
@@ -76,13 +74,7 @@ public class SohuBlogWriter extends AbstractBlogWriter {
 	 */
 	@Override
 	protected void begin() throws BlogMoverException {
-		try {
-			sohuBlogLogin.login(username, maildomain, passwd);
-		} catch (HttpException e) {
-			throw new BlogMoverException(e);
-		} catch (IOException e) {
-			throw new BlogMoverException(e);
-		}
+		sohuBlogLogin.login(username, maildomain, passwd);
 	}
 
 	/*
@@ -141,7 +133,7 @@ public class SohuBlogWriter extends AbstractBlogWriter {
 		parameters.add(new NameValuePair("allowComment", "0"));
 		parameters.add(new NameValuePair("perm", "0"));
 		parameters.add(new NameValuePair("save", "发表日志"));
-		
+
 		HeaderGroup hg = new HeaderGroup();
 		hg.addHeader(new Header("Content-Type",
 				"application/x-www-form-urlencoded; charset=GB2312"));

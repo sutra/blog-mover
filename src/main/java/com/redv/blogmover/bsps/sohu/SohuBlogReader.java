@@ -16,7 +16,6 @@ import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HeaderGroup;
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -73,20 +72,12 @@ public class SohuBlogReader extends AbstractBlogReader {
 	 */
 	public SohuBlogReader() {
 		super();
-		// System.setProperty("apache.commons.httpclient.cookiespec",
-		// "COMPATIBILITY");
 		httpClient = new HttpClient();
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
 		this.requestHeaderGroup = new HeaderGroup();
 		this.requestHeaderGroup.addHeader(new Header("User-Agent",
 				ManageUrlConstants.USER_AGENT));
-		// httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(
-		// 10000);
-		// HttpClientParams params = new HttpClientParams();
-		// httpClient.setParams(params);
-		// httpClient.getParams().setCookiePolicy(
-		// CookiePolicy.BROWSER_COMPATIBILITY);
 		httpDocument = new HttpDocument(httpClient, requestHeaderGroup, false,
 				null);
 	}
@@ -143,17 +134,8 @@ public class SohuBlogReader extends AbstractBlogReader {
 	 */
 	private void checkLogin() throws BlogMoverException {
 		if (!loggedIn) {
-			try {
-				boolean b = new SohuBlogLogin(this.httpClient).login(username,
-						maildomain, passwd);
-				if (!b) {
-					throw new BlogMoverException("Login failed.");
-				}
-			} catch (HttpException e) {
-				throw new BlogMoverException(e);
-			} catch (IOException e) {
-				throw new BlogMoverException(e);
-			}
+			new SohuBlogLogin(this.httpClient).login(username, maildomain,
+					passwd);
 		}
 	}
 
