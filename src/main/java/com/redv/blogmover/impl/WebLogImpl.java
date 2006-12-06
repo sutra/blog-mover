@@ -113,8 +113,17 @@ public class WebLogImpl implements WebLog {
 	public int compareTo(Object o) {
 		if (!(o instanceof WebLog))
 			return 0;
-		Date publishedDate2 = ((WebLog) o).getPublishedDate();
-		return this.publishedDate.compareTo(publishedDate2);
+		WebLog another = (WebLog) o;
+		Date publishedDate2 = another.getPublishedDate();
+		if (this.publishedDate != null) {
+			return this.publishedDate.compareTo(publishedDate2);
+		} else if (this.title != null) {
+			return this.title.compareTo(another.getTitle());
+		} else if (this.body != null) {
+			return this.body.compareTo(another.getBody());
+		} else {
+			return 0;
+		}
 	}
 
 	/*
