@@ -21,6 +21,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogMoverException;
+import com.redv.blogmover.BlogMoverRuntimeException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.impl.WebLogImpl;
@@ -268,7 +269,7 @@ public class BaiduReader extends AbstractBlogReader {
 			Date date = this.dateMod.parse(ss[0]);
 			cal.setTime(date);
 		} catch (ParseException e) {
-			log.error(e);
+			throw new BlogMoverRuntimeException(e);
 		}
 		String t = ss[1];
 		switch (timeMod) {
