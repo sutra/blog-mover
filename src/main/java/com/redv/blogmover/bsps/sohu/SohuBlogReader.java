@@ -26,6 +26,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.redv.blogmover.BlogMoverException;
+import com.redv.blogmover.BlogMoverRuntimeException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.util.DomNodeUtils;
@@ -203,7 +204,7 @@ public class SohuBlogReader extends AbstractBlogReader {
 			}
 		}
 		if (node == null) {
-			throw new BlogMoverException("No setting form found.");
+			throw new BlogMoverRuntimeException("No setting form found.");
 		}
 		NodeList inputs = doc.getElementsByTagName("input");
 		for (int i = 0; i < inputs.getLength(); i++) {
