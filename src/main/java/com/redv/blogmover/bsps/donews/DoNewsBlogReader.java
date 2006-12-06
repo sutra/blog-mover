@@ -89,6 +89,7 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 			}
 		}
 		if (pager == null) {
+			// TODO??
 			throw new BlogMoverException("没有找到分页部分代码，无法继续。");
 		}
 		NodeList children = pager.getChildNodes().item(0).getChildNodes().item(
