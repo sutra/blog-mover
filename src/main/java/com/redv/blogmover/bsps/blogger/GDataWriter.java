@@ -36,6 +36,14 @@ public class GDataWriter extends AbstractBlogWriter {
 	private String password;
 
 	/**
+	 * @param blogid
+	 *            the blogid to set
+	 */
+	public void setBlogid(String blogid) {
+		this.blogid = blogid;
+	}
+
+	/**
 	 * @param password
 	 *            the password to set
 	 */
