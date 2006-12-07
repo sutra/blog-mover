@@ -51,12 +51,14 @@ public class BlogMoverHttpSessionListener implements HttpSessionListener {
 		if (session != null) {
 			File tmpdir = BlogMoverServletContextListener.TMPDIR;
 			File file = new File(tmpdir, session.getId());
-			boolean deleted = BlogMoverUtils.deleteDir(file);
-			log.debug("SessionId: " + session.getId() + ". Delete dir: "
-					+ file.getAbsolutePath());
-			if (!deleted) {
-				log.warn("SessionId: " + session.getId()
-						+ ". Delete dir failed: " + file.getAbsolutePath());
+			if (file.exists()) {
+				boolean deleted = BlogMoverUtils.deleteDir(file);
+				log.debug("SessionId: " + session.getId() + ". Delete dir: "
+						+ file.getAbsolutePath());
+				if (!deleted) {
+					log.warn("SessionId: " + session.getId()
+							+ ". Delete dir failed: " + file.getAbsolutePath());
+				}
 			}
 		}
 	}
