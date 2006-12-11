@@ -3,6 +3,9 @@
  */
 package com.redv.blogmover.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -45,7 +48,25 @@ public class DomNodeUtils {
 	public static String toString(Node node) {
 		StringBuffer sb = new StringBuffer();
 		if (node instanceof Text) {
-			sb.append(node.getNodeValue());
+			if(node.getNodeValue()!=null){
+				byte[] bytes = node.getNodeValue().getBytes();
+				List<Byte> newBytes = new ArrayList<Byte>();
+				for(int i=0; i<bytes.length; i++) {
+					if (bytes[i]==63){
+						byte[] bs = "&nbsp;".getBytes();
+						for(byte b:bs) {
+							newBytes.add(b);
+						}
+					}else{
+						newBytes.add(bytes[i]);
+					}
+				}
+				byte[] valueBytes = new byte[newBytes.size()];
+				for(int i=0; i<newBytes.size(); i++) {
+					valueBytes[i] = newBytes.get(i).byteValue();
+				}
+				sb.append(new String(valueBytes));
+			}
 		} else {
 			sb.append("<").append(node.getNodeName());
 			NamedNodeMap attrs = node.getAttributes();
@@ -58,7 +79,9 @@ public class DomNodeUtils {
 			if (node.hasChildNodes()) {
 				NodeList children = node.getChildNodes();
 				for (int i = 0; i < children.getLength(); i++) {
-					sb.append(toString(children.item(i)));
+					String str = toString(children.item(i));
+					if (str!=null)
+						sb.append(str);
 				}
 			} else {
 				sb.append(node.getNodeValue());
@@ -67,6 +90,7 @@ public class DomNodeUtils {
 		}
 		return sb.toString();
 	}
+	
 
 	/**
 	 * 获取某节点下的子节点（包括孙子……节点）的标签名为tagName的节点。
