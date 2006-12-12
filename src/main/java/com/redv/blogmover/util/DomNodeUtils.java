@@ -3,8 +3,15 @@
  */
 package com.redv.blogmover.util;
 
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -45,24 +52,30 @@ public class DomNodeUtils {
 		return ret;
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 * @deprecated Use {@link #getXmlAsString(Node)} instead. 
+	 */
 	public static String toString(Node node) {
 		StringBuffer sb = new StringBuffer();
 		if (node instanceof Text) {
-			if(node.getNodeValue()!=null){
+			if (node.getNodeValue() != null) {
 				byte[] bytes = node.getNodeValue().getBytes();
 				List<Byte> newBytes = new ArrayList<Byte>();
-				for(int i=0; i<bytes.length; i++) {
-					if (bytes[i]==63){
+				for (int i = 0; i < bytes.length; i++) {
+					if (bytes[i] == 63) {
 						byte[] bs = "&nbsp;".getBytes();
-						for(byte b:bs) {
+						for (byte b : bs) {
 							newBytes.add(b);
 						}
-					}else{
+					} else {
 						newBytes.add(bytes[i]);
 					}
 				}
 				byte[] valueBytes = new byte[newBytes.size()];
-				for(int i=0; i<newBytes.size(); i++) {
+				for (int i = 0; i < newBytes.size(); i++) {
 					valueBytes[i] = newBytes.get(i).byteValue();
 				}
 				sb.append(new String(valueBytes));
@@ -80,7 +93,7 @@ public class DomNodeUtils {
 				NodeList children = node.getChildNodes();
 				for (int i = 0; i < children.getLength(); i++) {
 					String str = toString(children.item(i));
-					if (str!=null)
+					if (str != null)
 						sb.append(str);
 				}
 			} else {
@@ -90,7 +103,30 @@ public class DomNodeUtils {
 		}
 		return sb.toString();
 	}
-	
+
+	private static Transformer getTransformer() throws TransformerException {
+		TransformerFactory factory = TransformerFactory.newInstance();
+		Transformer transformer = factory.newTransformer();
+		transformer.setOutputProperty(javax.xml.transform.OutputKeys.INDENT,
+				"yes");
+		transformer.setOutputProperty(
+				javax.xml.transform.OutputKeys.STANDALONE, "yes");
+		return transformer;
+	}
+
+	/**
+	 * @param node
+	 * @return output of the node's xml string.
+	 * @throws TransformerException
+	 */
+	public static String getXmlAsString(Node node) throws TransformerException {
+		Transformer transformer = getTransformer();
+		DOMSource source = new DOMSource(node);
+		StringWriter xmlString = new StringWriter();
+		StreamResult streamResult = new StreamResult(xmlString);
+		transformer.transform(source, streamResult);
+		return xmlString.toString();
+	}
 
 	/**
 	 * 获取某节点下的子节点（包括孙子……节点）的标签名为tagName的节点。
