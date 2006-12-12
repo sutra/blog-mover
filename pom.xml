@@ -5,6 +5,12 @@
   <version>1.1</version>
   <packaging>war</packaging>
   <name>Blog Mover</name>
+  <repositories>
+        <repository>
+            <id>java.net</id>
+            <url>https://maven2-repository.dev.java.net/nonav/repository</url>
+        </repository>
+  </repositories>
   <dependencies>
     <dependency>
       <groupId>javax.activation</groupId>
@@ -292,6 +298,15 @@
         <role>Developer</role>
       </roles>
       <timezone>+8</timezone>
+    </developer>
+    <developer>
+      <id>somebody</id>
+      <name>Rory,Ye</name>
+      <email>rory.cn@gmail.com</email>
+      <organizationUrl>http://jdkcn.com</organizationUrl>
+      <roles>
+      	<role>Developer</role>
+      </roles>
     </developer>
   </developers>
   <scm>
