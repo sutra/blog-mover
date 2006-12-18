@@ -17,7 +17,6 @@ import com.redv.bloggerapi.client.Blogger;
 import com.redv.bloggerapi.client.BloggerImpl;
 import com.redv.bloggerapi.client.Fault;
 import com.redv.blogmover.BlogMoverException;
-import com.redv.blogmover.BlogReader;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.metaWeblog.MetaWeblogReader;
 
