@@ -6,6 +6,8 @@ package com.redv.blogmover;
 import java.util.List;
 
 /**
+ * The writer to write web log entries to blog engine.
+ * 
  * @author Joe
  * @version 1.0
  */

@@ -6,6 +6,8 @@ package com.redv.blogmover;
 import java.util.List;
 
 /**
+ * The reader to read web log entries from a blog engine.
+ * 
  * @author Joe
  * @version 1.0
  */

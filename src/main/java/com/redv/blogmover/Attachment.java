@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.io.Serializable;
 
 /**
+ * The attachment of a web log entry.
+ * 
  * @author Joe
  * @version 1.0
  * 

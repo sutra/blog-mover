@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The web log entry.
+ * 
  * @author Joe
  * @version 1.0
  * 

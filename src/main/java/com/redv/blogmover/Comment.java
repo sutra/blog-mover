@@ -3,6 +3,12 @@ package com.redv.blogmover;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * The comment of a web log entry.
+ * 
+ * @author shutra
+ * 
+ */
 public interface Comment extends Serializable, Comparable {
 
 	/**
