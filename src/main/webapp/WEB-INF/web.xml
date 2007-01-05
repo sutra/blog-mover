@@ -17,20 +17,27 @@
 		<param-value>com.redv.blogmover.root</param-value>
 	</context-param>
 	<context-param>
+		<description>Configuration for spring.</description>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/applicationContext.xml</param-value>
+		<param-value>
+			/WEB-INF/applicationContext.xml
+			/WEB-INF/dataAccessContext-hibernate.xml
+		</param-value>
 	</context-param>
 	<listener>
+		<description>Context loader for spring.</description>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
 	<listener>
+		<description>Context listener for blog mover.</description>
 		<listener-class>
 			com.redv.blogmover.web.BlogMoverServletContextListener
 		</listener-class>
 	</listener>
 	<listener>
+		<description>Session listener for blog mover.</description>
 		<listener-class>
 			com.redv.blogmover.web.BlogMoverHttpSessionListener
 		</listener-class>
