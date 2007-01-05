@@ -13,10 +13,12 @@ import java.util.Vector;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.redv.blogmover.logging.Moving;
+import com.redv.blogmover.logging.dao.MovingLogDao;
 
 /**
  * Blog Remover User Facade.
@@ -51,12 +53,18 @@ public class UserFacade implements Serializable {
 
 	private List<WebLog> webLogs;
 
+	private MovingLogDao movingLogDao;
+
 	public UserFacade() {
 		webLogs = new Vector<WebLog>();
 	}
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public void setMovingLogDao(MovingLogDao movingLogDao) {
+		this.movingLogDao = movingLogDao;
 	}
 
 	/**
@@ -216,12 +224,11 @@ public class UserFacade implements Serializable {
 			writer.write(webLogsCopy);
 
 			history.put(token, webLogsCopy);
+
+			Moving moving = new Moving(webLogsCopy, webLogsCopy);// TODO.
+			this.movingLogDao.insertMoving(moving);
 		} finally {
 			this.writerLock.readLock().unlock();
 		}
-	}
-
-	public static void main(String args[]) {
-		log.debug(RandomStringUtils.randomNumeric(200));
 	}
 }

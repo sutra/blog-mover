@@ -80,6 +80,13 @@ public abstract class AbstractBlogWriter implements BlogWriter {
 		return status;
 	}
 
+	/**
+	 * Write a web log entry to the target BSP.
+	 * 
+	 * @param webLog
+	 * @param attachments
+	 * @throws BlogMoverException
+	 */
 	@SuppressWarnings("unchecked")
 	private void write(WebLog webLog, Map<Attachment, String> attachments)
 			throws BlogMoverException {

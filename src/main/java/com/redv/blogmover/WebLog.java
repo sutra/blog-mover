@@ -15,6 +15,7 @@ import java.util.List;
  * 
  */
 public interface WebLog extends Serializable, Comparable {
+
 	/**
 	 * 获取固定链接。
 	 * 

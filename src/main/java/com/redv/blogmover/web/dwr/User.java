@@ -11,7 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.directwebremoting.WebContext;
 import org.directwebremoting.WebContextFactory;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.BlogReader;
@@ -19,6 +21,7 @@ import com.redv.blogmover.BlogWriter;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.UserFacade;
 import com.redv.blogmover.WebLog;
+import com.redv.blogmover.logging.dao.MovingLogDao;
 
 /**
  * DWR 用户接口。
@@ -192,6 +195,8 @@ public class User implements Serializable {
 
 		private final Log log = LogFactory.getLog(User.class);
 
+		private MovingLogDao movingLogDao;
+
 		public static final String SESSION_NAME_USER_FACADE = "com.redv.blogremover.web.dwr.User.userFacade";
 
 		/**
@@ -207,7 +212,8 @@ public class User implements Serializable {
 		 * @return 用户门面。
 		 */
 		private UserFacade getUserFacade() {
-			HttpSession session = WebContextFactory.get().getSession(true);
+			WebContext webContext = WebContextFactory.get();
+			HttpSession session = webContext.getSession(true);
 			// return (UserFacade) WebUtils.getOrCreateSessionAttribute(session,
 			// SESSION_NAME_USER_FACADE, UserFacade.class);
 			UserFacade ret = (UserFacade) session
@@ -216,6 +222,13 @@ public class User implements Serializable {
 				ret = new UserFacade();
 				ret.setToken(session.getId());
 				session.setAttribute(SESSION_NAME_USER_FACADE, ret);
+
+				this.movingLogDao = (MovingLogDao) WebApplicationContextUtils
+						.getWebApplicationContext(
+								WebContextFactory.get().getServletContext())
+						.getBean("movingLogDao");
+
+				ret.setMovingLogDao(movingLogDao);
 			}
 			return ret;
 		}
