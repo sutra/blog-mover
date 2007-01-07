@@ -91,6 +91,9 @@ public class Moving implements Serializable {
 	 */
 	public void setMovingLogs(List<MovingLog> movingLogs) {
 		this.movingLogs = movingLogs;
+		for (MovingLog movingLog : movingLogs) {
+			movingLog.setMoving(this);
+		}
 	}
 
 }

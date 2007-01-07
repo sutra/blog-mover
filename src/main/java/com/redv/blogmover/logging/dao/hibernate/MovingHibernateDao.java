@@ -3,8 +3,12 @@
  */
 package com.redv.blogmover.logging.dao.hibernate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.redv.blogmover.logging.BSP;
@@ -19,6 +23,9 @@ import com.redv.blogmover.logging.dao.MovingLogDao;
  */
 public class MovingHibernateDao extends HibernateDaoSupport implements
 		MovingLogDao {
+	@SuppressWarnings("unused")
+	private static final Log log = LogFactory.getLog(MovingHibernateDao.class);
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -92,5 +99,32 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 		if (bsp != null && this.getBsp(bsp.getId()) == null) {
 			this.insertBsp(bsp);
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.logging.dao.MovingLogDao#getFromStatistic()
+	 */
+	public Map<BSP, Long> getFromStatistic() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.logging.dao.MovingLogDao#getToStatistic()
+	 */
+	@SuppressWarnings("unchecked")
+	public Map<BSP, Long> getToStatistic() {
+		String hql = "select toBsp.id, count(toBsp) from MovingLog group by toBsp";
+		Map<BSP, Long> ret = new HashMap<BSP, Long>();
+		List<Object[]> counts = (List<Object[]>) this.getHibernateTemplate()
+				.find(hql);
+		for (Object[] count : counts) {
+			ret.put(this.getBsp((String) count[0]), (Long) count[1]);
+		}
+		return ret;
 	}
 }

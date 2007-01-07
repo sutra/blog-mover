@@ -3,6 +3,8 @@
  */
 package com.redv.blogmover.logging.dao;
 
+import java.util.Map;
+
 import com.redv.blogmover.logging.BSP;
 import com.redv.blogmover.logging.Moving;
 import com.redv.blogmover.logging.MovingEntry;
@@ -24,4 +26,18 @@ public interface MovingLogDao {
 	String insertMoving(Moving moving);
 
 	String insertBsp(BSP bsp);
+
+	/**
+	 * Read the moving from statistic.
+	 * 
+	 * @return
+	 */
+	Map<BSP, Long> getFromStatistic();
+
+	/**
+	 * Read the moving to statistic.
+	 * 
+	 * @return
+	 */
+	Map<BSP, Long> getToStatistic();
 }
