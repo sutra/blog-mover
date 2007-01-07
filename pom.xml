@@ -294,6 +294,10 @@
           <charset>UTF-8</charset>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+      </plugin>
     </plugins>
   </reporting>
   <url>http://blog-mover.redv.com</url>
