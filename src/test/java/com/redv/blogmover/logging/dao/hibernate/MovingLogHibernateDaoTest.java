@@ -57,12 +57,14 @@ public class MovingLogHibernateDaoTest extends
 	 */
 	public void testInsertBsp() {
 		BSP bsp = new BSP();
+		bsp.setId("test");
 		bsp.setName("xpert");
 		bsp.setDescription("xpert.cn is a good BSP.");
 		bsp.setServerURL("http://xpert.cn");
 
-		assertNull(bsp.getId());
-		this.movingLogDao.insertBsp(bsp);
-		assertNotNull(bsp.getId());
+		assertEquals("test", bsp.getId());
+		String ret = this.movingLogDao.insertBsp(bsp);
+		assertEquals("test", ret);
+		assertEquals("test", bsp.getId());
 	}
 }

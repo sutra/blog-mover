@@ -43,6 +43,21 @@ public class SohuBlogWriter extends AbstractBlogWriter {
 
 	private String username;
 
+	public SohuBlogWriter() {
+		bsp.setName("搜狐博客");
+		bsp.setServerURL("http://blog.sohu.com/");
+
+		httpClient = new HttpClient();
+		httpClient.getParams().setCookiePolicy(
+				CookiePolicy.BROWSER_COMPATIBILITY);
+		this.requestHeaderGroup = new HeaderGroup();
+		this.requestHeaderGroup.addHeader(new Header("User-Agent",
+				ManageUrlConstants.USER_AGENT));
+		httpDocument = new HttpDocument(httpClient, requestHeaderGroup, false,
+				"GBK");
+		sohuBlogLogin = new SohuBlogLogin(this.httpClient);
+	}
+
 	public void setMaildomain(String maildomain) {
 		this.maildomain = maildomain;
 	}
@@ -53,18 +68,6 @@ public class SohuBlogWriter extends AbstractBlogWriter {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public SohuBlogWriter() {
-		httpClient = new HttpClient();
-		httpClient.getParams().setCookiePolicy(
-				CookiePolicy.BROWSER_COMPATIBILITY);
-		this.requestHeaderGroup = new HeaderGroup();
-		this.requestHeaderGroup.addHeader(new Header("User-Agent",
-				ManageUrlConstants.USER_AGENT));
-		httpDocument = new HttpDocument(httpClient, requestHeaderGroup, false,
-				"GBK");
-		sohuBlogLogin = new SohuBlogLogin(this.httpClient);
 	}
 
 	/*

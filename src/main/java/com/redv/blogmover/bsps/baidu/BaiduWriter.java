@@ -44,6 +44,19 @@ public class BaiduWriter extends AbstractBlogWriter {
 	private String blogHandle;
 
 	/**
+	 * 
+	 */
+	public BaiduWriter() {
+		super();
+		bsp.setName("百度空间");
+		bsp.setDescription("百度空间");
+		bsp.setServerURL("http://hi.baidu.com/");
+
+		HttpClient httpClient = new HttpClient();
+		httpDocument = new HttpDocument(httpClient, "GB2312");
+	}
+
+	/**
 	 * @param password
 	 *            The password to set.
 	 */
@@ -57,15 +70,6 @@ public class BaiduWriter extends AbstractBlogWriter {
 	 */
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	/**
-	 * 
-	 */
-	public BaiduWriter() {
-		super();
-		HttpClient httpClient = new HttpClient();
-		httpDocument = new HttpDocument(httpClient, "GB2312");
 	}
 
 	/*
@@ -170,5 +174,4 @@ public class BaiduWriter extends AbstractBlogWriter {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

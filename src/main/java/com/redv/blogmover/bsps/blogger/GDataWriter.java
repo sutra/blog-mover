@@ -35,6 +35,12 @@ public class GDataWriter extends AbstractBlogWriter {
 
 	private String password;
 
+	public GDataWriter() {
+		super();
+		bsp.setName("Blogger");
+		bsp.setServerURL("http://www.blogger.com/");
+	}
+
 	/**
 	 * @param blogid
 	 *            the blogid to set

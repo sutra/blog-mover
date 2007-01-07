@@ -202,6 +202,11 @@ public class UserFacade implements Serializable {
 		try {
 			List<WebLog> webLogs = reader.read();
 			if (webLogs != null) {
+				// Set the WebLog's BSP.
+				for (WebLog webLog : webLogs) {
+					webLog.setBsp(reader.getBsp());
+				}
+
 				this.webLogs.addAll(webLogs);
 			}
 		} finally {
@@ -225,7 +230,7 @@ public class UserFacade implements Serializable {
 
 			history.put(token, webLogsCopy);
 
-			Moving moving = new Moving(webLogsCopy, webLogsCopy);// TODO.
+			Moving moving = new Moving(webLogsCopy, this.writer.getBsp());
 			this.movingLogDao.insertMoving(moving);
 		} finally {
 			this.writerLock.readLock().unlock();

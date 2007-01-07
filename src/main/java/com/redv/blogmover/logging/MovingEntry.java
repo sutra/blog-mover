@@ -33,6 +33,7 @@ public class MovingEntry implements Serializable {
 	public MovingEntry(WebLog webLog) {
 		this.permalink = webLog.getUrl();
 		this.title = webLog.getTitle();
+		this.bsp = webLog.getBsp();
 	}
 
 	/**

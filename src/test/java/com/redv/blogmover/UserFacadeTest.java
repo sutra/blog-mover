@@ -90,7 +90,7 @@ public class UserFacadeTest extends TestCase {
 		userFacade.setWriterProperty("link", "http://redv.com");
 		userFacade.setWriterProperty("title", "Sutra's");
 		userFacade.write();
-
+		
 		if (!outputFile.delete()) {
 			outputFile.deleteOnExit();
 		}

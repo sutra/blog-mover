@@ -67,8 +67,11 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 		List<MovingLog> movingLogs = moving.getMovingLogs();
 		if (movingLogs != null) {
 			for (MovingLog movingLog : movingLogs) {
+				addBsp(movingLog.getToBsp());
+				if (movingLog.getFrom() != null) {
+					addBsp(movingLog.getFrom().getBsp());
+				}
 				this.getHibernateTemplate().save(movingLog.getFrom());
-				this.getHibernateTemplate().save(movingLog.getTo());
 				this.getHibernateTemplate().save(movingLog);
 			}
 		}
@@ -83,5 +86,11 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 	 */
 	public String insertBsp(BSP bsp) {
 		return (String) this.getHibernateTemplate().save(bsp);
+	}
+
+	private void addBsp(BSP bsp) {
+		if (bsp != null && this.getBsp(bsp.getId()) == null) {
+			this.insertBsp(bsp);
+		}
 	}
 }

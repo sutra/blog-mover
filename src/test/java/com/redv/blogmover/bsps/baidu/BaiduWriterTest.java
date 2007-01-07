@@ -51,6 +51,7 @@ public class BaiduWriterTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		this.baiduWriter = new BaiduWriter();
 	}
 
 	/**
@@ -86,6 +87,12 @@ public class BaiduWriterTest {
 		List<WebLog> _new = this.baiduReader.read();
 		log.debug("_new.size(): " + _new.size());
 		assertEquals(1, _new.size() - old.size());
+	}
+
+	@Test
+	public void testGetBsp() {
+		assertEquals("com.redv.blogmover.bsps.baidu.BaiduWriter",
+				this.baiduWriter.getBsp().getId());
 	}
 
 	@Test

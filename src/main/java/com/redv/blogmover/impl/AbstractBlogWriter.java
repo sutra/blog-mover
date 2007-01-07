@@ -18,14 +18,18 @@ import com.redv.blogmover.BlogWriter;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.WebLog;
+import com.redv.blogmover.logging.BSP;
 
 /**
  * @author Joe
  * @version 1.0
+ * @version 2.0
  * 
  */
 public abstract class AbstractBlogWriter implements BlogWriter {
 	protected Log log = LogFactory.getLog(this.getClass());
+
+	protected BSP bsp;
 
 	protected Status status;
 
@@ -34,7 +38,13 @@ public abstract class AbstractBlogWriter implements BlogWriter {
 	 */
 	public AbstractBlogWriter() {
 		super();
+		bsp = new BSP();
+		bsp.setId(this.getClass().getName());
 		this.status = new StatusImpl();
+	}
+
+	public BSP getBsp() {
+		return bsp;
 	}
 
 	/*
@@ -146,5 +156,4 @@ public abstract class AbstractBlogWriter implements BlogWriter {
 	 * @return 写入到新的位置后的 URL。
 	 */
 	protected abstract String writeAttachment(Attachment att);
-
 }

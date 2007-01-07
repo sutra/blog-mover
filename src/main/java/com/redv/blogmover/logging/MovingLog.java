@@ -20,7 +20,7 @@ public class MovingLog implements Serializable {
 
 	private MovingEntry from;
 
-	private MovingEntry to;
+	private BSP toBsp;
 
 	private Moving moving;
 
@@ -55,18 +55,18 @@ public class MovingLog implements Serializable {
 	}
 
 	/**
-	 * @return the to
+	 * @return the toBsp
 	 */
-	public MovingEntry getTo() {
-		return to;
+	public BSP getToBsp() {
+		return toBsp;
 	}
 
 	/**
-	 * @param to
-	 *            the to to set
+	 * @param toBsp
+	 *            the toBsp to set
 	 */
-	public void setTo(MovingEntry to) {
-		this.to = to;
+	public void setToBsp(BSP toBsp) {
+		this.toBsp = toBsp;
 	}
 
 	/**

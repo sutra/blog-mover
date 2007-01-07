@@ -24,6 +24,7 @@ import com.redv.blogmover.BlogWriter;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.StatusImpl;
+import com.redv.blogmover.logging.BSP;
 
 /**
  * http://blog.csdn.net
@@ -45,6 +46,8 @@ public class CSDNBlogWriter implements BlogWriter {
 	private static final Log log = LogFactory.getLog(CSDNBlogWriter.class);
 
 	static final String SET_COOKIE_HEADER_NAME = "Set-Cookie";
+
+	private BSP bsp;
 
 	private Status status;
 
@@ -70,6 +73,11 @@ public class CSDNBlogWriter implements BlogWriter {
 	 */
 	public CSDNBlogWriter() throws HttpException, IOException, SAXException {
 		super();
+		bsp = new BSP();
+		bsp.setId(this.getClass().getName());
+		bsp.setName("CSDN Blog");
+		bsp.setServerURL("http://blog.csdn.net/");
+
 		this.status = new StatusImpl();
 		this.httpClient = new HttpClient();
 		// 如果没有设定cookie模式将会有警告：Cookie rejected
@@ -205,6 +213,15 @@ public class CSDNBlogWriter implements BlogWriter {
 		// System.in.read(buffer, 0, 5);
 		// this.checkCode = new String(buffer);
 		return bytes;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.BlogWriter#getBsp()
+	 */
+	public BSP getBsp() {
+		return bsp;
 	}
 
 }

@@ -56,6 +56,9 @@ public class SinaWriter extends AbstractBlogWriter {
 	 */
 	public SinaWriter() {
 		super();
+		bsp.setName("新浪BLOG");
+		bsp.setServerURL("http://blog.sina.com.cn/");
+
 		httpClient = new HttpClient();
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);

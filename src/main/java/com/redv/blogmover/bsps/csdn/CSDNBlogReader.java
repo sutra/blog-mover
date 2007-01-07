@@ -22,6 +22,7 @@ import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.impl.WebLogImpl;
+import com.redv.blogmover.logging.BSP;
 import com.redv.blogmover.util.DomNodeUtils;
 import com.redv.blogmover.util.HttpDocument;
 
@@ -51,6 +52,11 @@ public class CSDNBlogReader extends AbstractBlogReader {
 	 * 
 	 */
 	public CSDNBlogReader() {
+		bsp = new BSP();
+		bsp.setId(this.getClass().getName());
+		bsp.setName("CSDN Blog");
+		bsp.setServerURL("http://blog.csdn.net/");
+
 		this.httpClient = new HttpClient();
 		// 如果没有设定cookie模式将会有警告：Cookie rejected
 		this.httpClient.getParams().setCookiePolicy(

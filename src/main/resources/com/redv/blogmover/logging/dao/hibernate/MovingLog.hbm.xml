@@ -7,8 +7,8 @@
 			length="32">
 			<generator class="uuid" />
 		</id>
-		<property name="from" column="fromEntry" insert="true" />
-		<property name="to" column="toEntry" insert="true" />
+		<many-to-one name="from" column="fromEntry" />
+		<many-to-one name="toBsp" />
 		<many-to-one name="moving" class="Moving" column="movingId" />
 	</class>
 </hibernate-mapping>

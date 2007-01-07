@@ -11,7 +11,7 @@
 		<convert converter="bean" match="com.redv.blogmover.Status" />
 		<convert converter="bean" match="com.redv.blogmover.WebLog" />
 		<convert converter="bean" match="com.redv.blogmover.Comment" />
-		<convert converter="bean" match="com.redv.blogmover.BSP" />
+		<convert converter="bean" match="com.redv.blogmover.logging.BSP" />
 		<convert converter="bean" match="com.redv.blogmover.BlogReader" />
 		<convert converter="bean" match="com.redv.blogmover.BlogWriter" />
 		<convert converter="bean"

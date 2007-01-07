@@ -37,6 +37,9 @@ public class BokeeWriter extends AbstractBlogWriter {
 	private String password;
 
 	public BokeeWriter() {
+		bsp.setName("博客网");
+		bsp.setServerURL("http://www.bokee.com/");
+
 		httpClient = new HttpClient();
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);

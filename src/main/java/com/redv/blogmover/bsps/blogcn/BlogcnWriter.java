@@ -41,6 +41,7 @@ import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogWriter;
+import com.redv.blogmover.logging.BSP;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
@@ -49,12 +50,23 @@ import com.redv.blogmover.util.HttpDocument;
  * @version $Id BlogcnWriter.java$
  */
 public class BlogcnWriter extends AbstractBlogWriter {
-	
 	private HttpDocument httpDocument;
-	
+
 	private String username;
-	
+
 	private String password;
+
+	/**
+	 * 
+	 */
+	public BlogcnWriter() {
+		super();
+		bsp.setName("博客天下");
+		bsp.setServerURL("http://www.blog.com.cn/");
+
+		HttpClient httpClient = new HttpClient();
+		httpDocument = new HttpDocument(httpClient, true, "GBK");
+	}
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -63,17 +75,10 @@ public class BlogcnWriter extends AbstractBlogWriter {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	/**
-	 * 
-	 */
-	public BlogcnWriter() {
-		super();
-		HttpClient httpClient  = new HttpClient();
-		httpDocument = new HttpDocument(httpClient, true, "GBK");
-	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.redv.blogmover.impl.AbstractBlogWriter#begin()
 	 */
 	@Override
@@ -81,15 +86,19 @@ public class BlogcnWriter extends AbstractBlogWriter {
 		new BlogcnLogin(httpDocument).login(username, password);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.redv.blogmover.impl.AbstractBlogWriter#end()
 	 */
 	@Override
 	protected void end() throws BlogMoverException {
-		
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.redv.blogmover.impl.AbstractBlogWriter#writeAttachment(com.redv.blogmover.Attachment)
 	 */
 	@Override
@@ -98,16 +107,20 @@ public class BlogcnWriter extends AbstractBlogWriter {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.redv.blogmover.impl.AbstractBlogWriter#writeBlog(com.redv.blogmover.WebLog, java.util.Map)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.impl.AbstractBlogWriter#writeBlog(com.redv.blogmover.WebLog,
+	 *      java.util.Map)
 	 */
 	@Override
 	protected void writeBlog(WebLog webLog, Map<Attachment, String> attachments)
 			throws BlogMoverException {
-		Document document = httpDocument.get("http://www.blog.com.cn/user_post.asp");
+		Document document = httpDocument
+				.get("http://www.blog.com.cn/user_post.asp");
 		String postchknum = null;
 		NodeList inputs = document.getElementsByTagName("input");
-		for (int i=0; i<inputs.getLength(); i++) {
+		for (int i = 0; i < inputs.getLength(); i++) {
 			Element input = (Element) inputs.item(i);
 			String name = input.getAttribute("name");
 			String value = input.getAttribute("value");
@@ -115,22 +128,21 @@ public class BlogcnWriter extends AbstractBlogWriter {
 				postchknum = value;
 			}
 		}
-		httpDocument.getHttpClient().getState().addCookie(new Cookie("blog.com.cn", "postchknum", postchknum));
-		
+		httpDocument.getHttpClient().getState().addCookie(
+				new Cookie("blog.com.cn", "postchknum", postchknum));
+
 		String action = "http://www.blog.com.cn/user_post.asp?action=savelog&t=0";
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 		/**
-		 * 设置一个默认类别,或许应该提供用户选择
-		 * <code>
+		 * 设置一个默认类别,或许应该提供用户选择 <code>
 		 * <option value='1'>情感私语</option>
 		 * </code>
 		 */
-		NameValuePair parameter = new NameValuePair("classid","1");
+		NameValuePair parameter = new NameValuePair("classid", "1");
 		parameters.add(parameter);
-		
+
 		/**
-		 * 个人分类默认不选择
-		 * <code>
+		 * 个人分类默认不选择 <code>
 		 * <select name="subjectid" id="subjectid">
 		 *    <option value="0">不选择</option>
 		 * </select>
@@ -138,10 +150,9 @@ public class BlogcnWriter extends AbstractBlogWriter {
 		 */
 		parameter = new NameValuePair("subjectid", "0");
 		parameters.add(parameter);
-		
+
 		/**
-		 * 这个东西好像是随机生成的。还要做一些处理才行
-		 * <code>
+		 * 这个东西好像是随机生成的。还要做一些处理才行 <code>
 		 * <input type="hidden" name="postchknum" value="1492" />
 		 * </code>
 		 */
@@ -150,103 +161,113 @@ public class BlogcnWriter extends AbstractBlogWriter {
 		}
 		parameter = new NameValuePair("postchknum", postchknum);
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("face", "0");
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("showword", "500");
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("blogteam", "234541");
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("blogteamsubject", "");
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("topic", webLog.getTitle());
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("logtext", webLog.getBody());
 		parameters.add(parameter);
-		
-		parameter = new NameValuePair("logtags",StringUtils.join(webLog.getTags(), ","));
+
+		parameter = new NameValuePair("logtags", StringUtils.join(webLog
+				.getTags(), ","));
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("edit", "");
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("isubb", "0");
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("isdraft", "0");
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("ispassword", "");
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("ishide", "");
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("istop", "");
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("tb", "");
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("filename", "自动编号");
 		parameters.add(parameter);
-		
+
 		parameter = new NameValuePair("log_pics", "");
 		parameters.add(parameter);
-		
-		parameter = new NameValuePair("isencomment","1");
+
+		parameter = new NameValuePair("isencomment", "1");
 		parameters.add(parameter);
-		
-		parameter = new NameValuePair("action","savelog");
+
+		parameter = new NameValuePair("action", "savelog");
 		parameters.add(parameter);
-		
+
 		/**
 		 * 设置发布时间
 		 */
 		Calendar cal = new GregorianCalendar();
 		cal.setTime(webLog.getPublishedDate());
-		
+
 		if (log.isDebugEnabled()) {
 			log.debug("设置发送时间:" + webLog.getPublishedDate());
 		}
-		parameter = new NameValuePair("selecty",String.valueOf(cal.get(Calendar.YEAR)));
+		parameter = new NameValuePair("selecty", String.valueOf(cal
+				.get(Calendar.YEAR)));
 		parameters.add(parameter);
-		
-		parameter = new NameValuePair("selectm",String.valueOf(cal.get(Calendar.MONTH) + 1));
+
+		parameter = new NameValuePair("selectm", String.valueOf(cal
+				.get(Calendar.MONTH) + 1));
 		parameters.add(parameter);
-		
-		parameter = new NameValuePair("selectd",String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
+
+		parameter = new NameValuePair("selectd", String.valueOf(cal
+				.get(Calendar.DAY_OF_MONTH)));
 		parameters.add(parameter);
-		
-		parameter = new NameValuePair("selecth",String.valueOf(cal.get(Calendar.HOUR_OF_DAY)));
+
+		parameter = new NameValuePair("selecth", String.valueOf(cal
+				.get(Calendar.HOUR_OF_DAY)));
 		parameters.add(parameter);
-		
-		parameter = new NameValuePair("selectmi",String.valueOf(cal.get(Calendar.MINUTE)));
+
+		parameter = new NameValuePair("selectmi", String.valueOf(cal
+				.get(Calendar.MINUTE)));
 		parameters.add(parameter);
-		
-		parameter = new NameValuePair("selects",String.valueOf(cal.get(Calendar.SECOND)));
+
+		parameter = new NameValuePair("selects", String.valueOf(cal
+				.get(Calendar.SECOND)));
 		parameters.add(parameter);
-		
-		parameter = new NameValuePair("logid","0");
+
+		parameter = new NameValuePair("logid", "0");
 		parameters.add(parameter);
-		
-		parameter = new NameValuePair("oldisdraft","0");
+
+		parameter = new NameValuePair("oldisdraft", "0");
 		parameters.add(parameter);
-		
+
 		HeaderGroup hg = new HeaderGroup();
 		hg.addHeader(new Header("Content-Type",
 				"application/x-www-form-urlencoded; charset=GB2312"));
-		hg.addHeader(new Header("Referer", "http://www.blog.com.cn/user_post.asp"));
+		hg.addHeader(new Header("Referer",
+				"http://www.blog.com.cn/user_post.asp"));
 		httpDocument.post(action, parameters, hg);
-		
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.redv.blogmover.impl.AbstractBlogWriter#writeComment(com.redv.blogmover.Comment)
 	 */
 	@Override
@@ -255,4 +276,12 @@ public class BlogcnWriter extends AbstractBlogWriter {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.BlogWriter#getBsp()
+	 */
+	public BSP getBsp() {
+		return bsp;
+	}
 }

@@ -49,6 +49,9 @@ public class HexunReader extends AbstractBlogReader {
 	 */
 	public HexunReader() {
 		super();
+		bsp.setName("和讯博客");
+		bsp.setServerURL("http://blog.hexun.com/");
+
 		httpClient = new HttpClient();
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);

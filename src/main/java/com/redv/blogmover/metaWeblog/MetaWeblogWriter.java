@@ -64,6 +64,10 @@ public class MetaWeblogWriter extends AbstractBlogWriter {
 	 */
 	public void setServerURL(String serverURL) throws MalformedURLException {
 		this.serverURL = new URL(serverURL);
+
+		this.bsp.setId(serverURL);
+		this.bsp.setName(serverURL);
+		this.bsp.setServerURL(serverURL);
 	}
 
 	/**

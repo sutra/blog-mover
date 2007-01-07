@@ -34,6 +34,17 @@ public class BokeeReader extends AbstractBlogReader {
 
 	private String password;
 
+	public BokeeReader() {
+		bsp.setName("博客网");
+		bsp.setServerURL("http://www.bokee.com/");
+
+		httpClient = new HttpClient();
+		httpClient.getParams().setCookiePolicy(
+				CookiePolicy.BROWSER_COMPATIBILITY);
+		httpDocument = new HttpDocument(httpClient, "GBK");
+		bokeeLogin = new BokeeLogin(httpClient, httpDocument);
+	}
+
 	/**
 	 * @param password
 	 *            the password to set
@@ -48,14 +59,6 @@ public class BokeeReader extends AbstractBlogReader {
 	 */
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public BokeeReader() {
-		httpClient = new HttpClient();
-		httpClient.getParams().setCookiePolicy(
-				CookiePolicy.BROWSER_COMPATIBILITY);
-		httpDocument = new HttpDocument(httpClient, "GBK");
-		bokeeLogin = new BokeeLogin(httpClient, httpDocument);
 	}
 
 	/*

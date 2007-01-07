@@ -12,10 +12,12 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import com.redv.blogmover.Attachment;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.WebLog;
+import com.redv.blogmover.logging.BSP;
 
 /**
  * @author Joe
  * @version 1.0
+ * @version 2.0
  * 
  */
 public class WebLogImpl implements WebLog {
@@ -40,74 +42,177 @@ public class WebLogImpl implements WebLog {
 
 	private List<Attachment> attachments;
 
+	private BSP bsp;
+
+	/**
+	 * 
+	 */
 	public WebLogImpl() {
 		super();
 		this.publishedDate = new Date();
 		this.comments = new ArrayList<Comment>(1);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#getUrl()
+	 */
 	public String getUrl() {
 		return url;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#setUrl(java.lang.String)
+	 */
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#getPublishedDate()
+	 */
 	public Date getPublishedDate() {
 		return publishedDate;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#setPublishedDate(java.util.Date)
+	 */
 	public void setPublishedDate(Date publishedDate) {
 		this.publishedDate = publishedDate;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#getTitle()
+	 */
 	public String getTitle() {
 		return title;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#setTitle(java.lang.String)
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#getExcerpt()
+	 */
 	public String getExcerpt() {
 		return excerpt;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#setExcerpt(java.lang.String)
+	 */
 	public void setExcerpt(String excerpt) {
 		this.excerpt = excerpt;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#getBody()
+	 */
 	public String getBody() {
 		return body;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#setBody(java.lang.String)
+	 */
 	public void setBody(String body) {
 		this.body = body;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#getTags()
+	 */
 	public String[] getTags() {
 		return tags;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#setTags(java.lang.String[])
+	 */
 	public void setTags(String[] tags) {
 		this.tags = tags;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#getComments()
+	 */
 	public List<Comment> getComments() {
 		return comments;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#setComments(java.util.List)
+	 */
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#getAttachments()
+	 */
 	public List<Attachment> getAttachments() {
 		return this.attachments;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#setAttachments(java.util.List)
+	 */
 	public void setAttachments(List<Attachment> attachments) {
 		this.attachments = attachments;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#getBsp()
+	 */
+	public BSP getBsp() {
+		return bsp;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#setBsp(com.redv.blogmover.logging.BSP)
+	 */
+	public void setBsp(BSP bsp) {
+		this.bsp = bsp;
 	}
 
 	public int compareTo(Object o) {

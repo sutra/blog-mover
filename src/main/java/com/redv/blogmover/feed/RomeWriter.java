@@ -69,6 +69,11 @@ public class RomeWriter extends AbstractBlogWriter {
 
 	private String author;
 
+	public RomeWriter() {
+		super();
+		bsp.setName("Rome");
+	}
+
 	/**
 	 * @return the outputFile
 	 */

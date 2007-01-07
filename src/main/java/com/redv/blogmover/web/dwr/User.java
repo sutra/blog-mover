@@ -172,6 +172,7 @@ public class User implements Serializable {
 		} catch (BlogMoverException ex) {
 			throw ex;
 		} catch (RuntimeException e) {
+			log.error(e);
 			throw e;
 		}
 	}
@@ -182,6 +183,7 @@ public class User implements Serializable {
 		} catch (BlogMoverException ex) {
 			throw ex;
 		} catch (RuntimeException e) {
+			log.error(e);
 			throw e;
 		}
 	}

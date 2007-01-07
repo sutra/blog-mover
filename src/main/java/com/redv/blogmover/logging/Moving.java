@@ -36,14 +36,14 @@ public class Moving implements Serializable {
 		this.movingLogs = movingLogs;
 	}
 
-	public Moving(List<WebLog> fromWebLogs, List<WebLog> toWebLogs) {
+	public Moving(List<WebLog> fromWebLogs, BSP toBsp) {
 		this();
 		this.movingLogs = new ArrayList<MovingLog>(fromWebLogs.size());
 		for (int i = 0; i < fromWebLogs.size(); i++) {
 			MovingLog movingLog = new MovingLog();
 			movingLog.setMoving(this);
 			movingLog.setFrom(new MovingEntry(fromWebLogs.get(i)));
-			movingLog.setTo(new MovingEntry(toWebLogs.get(i)));
+			movingLog.setToBsp(toBsp);
 			movingLogs.add(movingLog);
 		}
 	}

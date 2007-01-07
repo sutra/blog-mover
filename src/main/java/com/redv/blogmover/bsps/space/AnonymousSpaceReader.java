@@ -19,6 +19,7 @@ import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.StatusImpl;
+import com.redv.blogmover.logging.BSP;
 
 /**
  * 微软提供的 Space 服务，匿名读取器。
@@ -41,6 +42,8 @@ public class AnonymousSpaceReader implements BlogReader {
 
 	private static final AnonymousSpaceReaderUtil readerUtil = new AnonymousSpaceReaderUtil();
 
+	private BSP bsp;
+
 	private Status status;
 
 	private String startUrl = "http://zhoushuqun.spaces.msn.com/blog/";
@@ -57,7 +60,21 @@ public class AnonymousSpaceReader implements BlogReader {
 	 */
 	public AnonymousSpaceReader() {
 		super();
+		this.bsp = new BSP();
+		this.bsp.setId(this.getClass().getName());
+		this.bsp.setName("Live Space");
+		this.bsp.setServerURL("http://spaces.live.com");
+
 		this.status = new StatusImpl();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.BlogReader#getBsp()
+	 */
+	public BSP getBsp() {
+		return bsp;
 	}
 
 	/**

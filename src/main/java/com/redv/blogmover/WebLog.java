@@ -7,11 +7,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.redv.blogmover.logging.BSP;
+
 /**
  * The web log entry.
  * 
  * @author Joe
  * @version 1.0
+ * @version 2.0
  * 
  */
 public interface WebLog extends Serializable, Comparable {
@@ -128,4 +131,20 @@ public interface WebLog extends Serializable, Comparable {
 	 * @param tags
 	 */
 	void setTags(String[] tags);
+
+	/**
+	 * 获取 Blog Service Provider。
+	 * 
+	 * @return
+	 * @since 2.0
+	 */
+	BSP getBsp();
+
+	/**
+	 * 设置 Blog Service Provider.
+	 * 
+	 * @param bsp
+	 * @since 2.0
+	 */
+	void setBsp(BSP bsp);
 }

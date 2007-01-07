@@ -12,13 +12,17 @@ import com.redv.blogmover.BlogReader;
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.WebLog;
+import com.redv.blogmover.logging.BSP;
 
 /**
  * @author Joe
  * @version 1.0
+ * @version 2.0
  */
 public abstract class AbstractBlogReader implements BlogReader {
 	protected Log log = LogFactory.getLog(this.getClass());
+
+	protected BSP bsp;
 
 	protected Status status;
 
@@ -26,7 +30,19 @@ public abstract class AbstractBlogReader implements BlogReader {
 	 * 
 	 */
 	public AbstractBlogReader() {
+		this.bsp = new BSP();
+		this.bsp.setId(this.getClass().getName());
+
 		this.status = new StatusImpl();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.BlogReader#getBsp()
+	 */
+	public BSP getBsp() {
+		return bsp;
 	}
 
 	/*
