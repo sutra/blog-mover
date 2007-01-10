@@ -2,13 +2,13 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.redv.blogmover.logging">
-	<class name="MovingLog" table="movinglog">
+	<class name="MovingLog" table="moving_log">
 		<id name="id" unsaved-value="null" type="java.lang.String"
 			length="32">
 			<generator class="uuid" />
 		</id>
-		<many-to-one name="from" column="fromEntry" />
-		<many-to-one name="toBsp" />
-		<many-to-one name="moving" class="Moving" column="movingId" />
+		<many-to-one name="from" column="from_entry_id" lazy="false" index="moving_log_from_entry_id" />
+		<many-to-one name="toBsp" column="to_bsp_id" lazy="false" index="moving_log_to_bsp_id" />
+		<many-to-one name="moving" column="moving_id" lazy="false" index="moving_log_moving_id" />
 	</class>
 </hibernate-mapping>

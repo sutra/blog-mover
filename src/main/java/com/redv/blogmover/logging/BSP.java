@@ -4,6 +4,10 @@
 package com.redv.blogmover.logging;
 
 import java.io.Serializable;
+import java.util.Set;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
  * The model of Blog Service Provider.
@@ -24,6 +28,8 @@ public class BSP implements Serializable {
 	private String serverURL;
 
 	private String description;
+
+	private Set<MovingEntry> movingEntries;
 
 	/**
 	 * @return the description
@@ -85,6 +91,21 @@ public class BSP implements Serializable {
 		this.serverURL = serverURL;
 	}
 
+	/**
+	 * @return the movingEntries
+	 */
+	public Set<MovingEntry> getMovingEntries() {
+		return movingEntries;
+	}
+
+	/**
+	 * @param movingEntries
+	 *            the movingEntries to set
+	 */
+	public void setMovingEntries(Set<MovingEntry> movingEntries) {
+		this.movingEntries = movingEntries;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -92,10 +113,8 @@ public class BSP implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		final int PRIME = 31;
-		int result = 1;
-		result = PRIME * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+		return new HashCodeBuilder().append(id).append(name).append(serverURL)
+				.append(description).toHashCode();
 	}
 
 	/*
@@ -112,12 +131,9 @@ public class BSP implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		final BSP other = (BSP) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+		return new EqualsBuilder().append(id, other.id)
+				.append(name, other.name).append(serverURL, other.serverURL)
+				.append(description, other.description).isEquals();
 	}
 
 }

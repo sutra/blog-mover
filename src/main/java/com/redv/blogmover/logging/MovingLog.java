@@ -5,6 +5,9 @@ package com.redv.blogmover.logging;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 /**
  * @author shutra
  * 
@@ -82,6 +85,35 @@ public class MovingLog implements Serializable {
 	 */
 	public void setMoving(Moving moving) {
 		this.moving = moving;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(from).append(id).append(toBsp)
+				.toHashCode();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final MovingLog other = (MovingLog) obj;
+		return new EqualsBuilder().append(from, other.from)
+				.append(id, other.id).append(toBsp, other.toBsp).isEquals();
 	}
 
 }

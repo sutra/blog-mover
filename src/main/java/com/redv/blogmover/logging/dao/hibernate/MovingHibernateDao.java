@@ -3,12 +3,14 @@
  */
 package com.redv.blogmover.logging.dao.hibernate;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Query;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.redv.blogmover.logging.BSP;
@@ -38,6 +40,15 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.redv.blogmover.logging.dao.MovingLogDao#insertBsp(com.redv.blogmover.logging.BSP)
+	 */
+	public String insertBsp(BSP bsp) {
+		return (String) this.getHibernateTemplate().save(bsp);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.redv.blogmover.logging.dao.MovingLogDao#getMovingEntry(java.lang.String)
 	 */
 	public MovingEntry getMovingEntry(String id) {
@@ -48,10 +59,37 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.redv.blogmover.logging.dao.MovingLogDao#insertMovingEntry(com.redv.blogmover.logging.MovingEntry)
+	 */
+	public String insertMovingEntry(MovingEntry movingEntry) {
+		if (movingEntry.getBsp() != null) {
+			this.insertBsp(movingEntry.getBsp());
+		}
+		return (String) this.getHibernateTemplate().save(movingEntry);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.redv.blogmover.logging.dao.MovingLogDao#getMovingLog(java.lang.String)
 	 */
 	public MovingLog getMovingLog(String id) {
 		return (MovingLog) this.getHibernateTemplate().get(MovingLog.class, id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.logging.dao.MovingLogDao#insertMovingLog(com.redv.blogmover.logging.MovingLog)
+	 */
+	public String insertMovingLog(MovingLog movingLog) {
+		if (movingLog.getFrom() != null) {
+			this.insertMovingEntry(movingLog.getFrom());
+		}
+		if (movingLog.getToBsp() != null) {
+			this.insertBsp(movingLog.getToBsp());
+		}
+		return (String) this.getHibernateTemplate().save(movingLog);
 	}
 
 	/*
@@ -69,36 +107,12 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 	 * @see com.redv.blogmover.logging.dao.MovingLogDao#insertMoving(com.redv.blogmover.logging.Moving)
 	 */
 	public String insertMoving(Moving moving) {
-		String id = (String) this.getHibernateTemplate().save(moving);
-
-		List<MovingLog> movingLogs = moving.getMovingLogs();
-		if (movingLogs != null) {
-			for (MovingLog movingLog : movingLogs) {
-				addBsp(movingLog.getToBsp());
-				if (movingLog.getFrom() != null) {
-					addBsp(movingLog.getFrom().getBsp());
-				}
-				this.getHibernateTemplate().save(movingLog.getFrom());
-				this.getHibernateTemplate().save(movingLog);
+		if (moving.getMovingLogs() != null) {
+			for (MovingLog movingLog : moving.getMovingLogs()) {
+				this.insertMovingLog(movingLog);
 			}
 		}
-
-		return id;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.redv.blogmover.logging.dao.MovingLogDao#insertBsp(com.redv.blogmover.logging.BSP)
-	 */
-	public String insertBsp(BSP bsp) {
-		return (String) this.getHibernateTemplate().save(bsp);
-	}
-
-	private void addBsp(BSP bsp) {
-		if (bsp != null && this.getBsp(bsp.getId()) == null) {
-			this.insertBsp(bsp);
-		}
+		return (String) this.getHibernateTemplate().save(moving);
 	}
 
 	/*
@@ -127,4 +141,53 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 		}
 		return ret;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.logging.dao.MovingLogDao#getFromCount(java.lang.String)
+	 */
+	public long getFromCount(String id) {
+		String hql = "select count(*) from Moving where id in(select moving.id from MovingLog where toBsp.id = :id)";
+		Query query = this.getSession().createQuery(hql);
+		query.setString("id", id);
+		return (Long) query.uniqueResult();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.logging.dao.MovingLogDao#getFromCount(java.lang.String,
+	 *      java.util.Date, java.util.Date)
+	 */
+	public long getFromCount(String id, Date beginDate, Date endDate) {
+		String hql = "select count(*) from Moving where id in(select moving.id from MovingLog where toBsp.id = :id) and date between :beginDate and :endDate";
+		Query query = this.getSession().createQuery(hql);
+		query.setString("id", id);
+		query.setDate("beginDate", beginDate);
+		query.setDate("endDate", endDate);
+		return (Long) query.uniqueResult();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.logging.dao.MovingLogDao#getToCount(java.lang.String)
+	 */
+	public long getToCount(String id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.logging.dao.MovingLogDao#getToCount(java.lang.String,
+	 *      java.util.Date, java.util.Date)
+	 */
+	public long getToCount(String id, Date beginDate, Date endDate) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
