@@ -186,7 +186,7 @@ public class MovingLogHibernateDaoTest extends
 		MovingLog ml = moving.getMovingLogs().iterator().next();
 		MovingLog dbMl = dbMoving.getMovingLogs().iterator().next();
 		assertEquals(ml, dbMl);
-		
+
 		MovingLog selfml = moving.getMovingLogs().iterator().next();
 		MovingLog selfdbMl = moving.getMovingLogs().iterator().next();
 		assertEquals(selfml, selfdbMl);
@@ -282,6 +282,16 @@ public class MovingLogHibernateDaoTest extends
 		set1.add(string2);
 		set2.add(string2);
 		set2.add(string1);
+
+		assertEquals(set1, set2);
+	}
+
+	public void testSetMovingLogs() {
+		Set<MovingLog> set1 = new HashSet<MovingLog>();
+		Set<MovingLog> set2 = new HashSet<MovingLog>();
+		MovingLog ml = this.buildSimpleMovingLog();
+		set1.add(ml);
+		set2.add(ml);
 
 		assertEquals(set1, set2);
 	}
