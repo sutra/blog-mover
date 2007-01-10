@@ -186,6 +186,10 @@ public class MovingLogHibernateDaoTest extends
 		MovingLog ml = moving.getMovingLogs().iterator().next();
 		MovingLog dbMl = dbMoving.getMovingLogs().iterator().next();
 		assertEquals(ml, dbMl);
+		
+		MovingLog selfml = moving.getMovingLogs().iterator().next();
+		MovingLog selfdbMl = moving.getMovingLogs().iterator().next();
+		assertEquals(selfml, selfdbMl);
 		assertEquals(moving.getMovingLogs(), moving.getMovingLogs());
 		assertEquals(moving.getMovingLogs(), dbMoving.getMovingLogs());
 		assertEquals(moving, dbMoving);
