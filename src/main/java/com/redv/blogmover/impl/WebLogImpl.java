@@ -220,14 +220,15 @@ public class WebLogImpl implements WebLog {
 			return 0;
 		WebLog another = (WebLog) o;
 		Date publishedDate2 = another.getPublishedDate();
-		if (this.publishedDate != null) {
-			return this.publishedDate.compareTo(publishedDate2);
-		} else if (this.title != null) {
-			return this.title.compareTo(another.getTitle());
-		} else if (this.body != null) {
-			return this.body.compareTo(another.getBody());
-		} else {
+
+		if (this.publishedDate == null && publishedDate2 == null) {
 			return 0;
+		} else if (this.publishedDate == null) {
+			return 1;
+		} else if (publishedDate2 == null) {
+			return -1;
+		} else {
+			return this.publishedDate.compareTo(publishedDate2);
 		}
 	}
 
