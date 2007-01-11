@@ -30,6 +30,12 @@ public class LoggingServiceImpl implements LoggingService {
 	 *      com.redv.blogmover.logging.BSP)
 	 */
 	public void log(List<WebLog> webLogs, BSP toBsp) {
+		if (webLogs == null) {
+			throw new IllegalArgumentException("webLogs can't be null.");
+		}
+		if (toBsp == null) {
+			throw new IllegalArgumentException("toBsp can't be null.");
+		}
 		this.movingLogDao.insertBsp(toBsp);
 
 		Moving moving = new Moving();
@@ -37,7 +43,9 @@ public class LoggingServiceImpl implements LoggingService {
 
 		for (WebLog webLog : webLogs) {
 			MovingEntry movingEntry = new MovingEntry();
-			this.movingLogDao.insertBsp(webLog.getBsp());
+			if (webLog.getBsp() != null) {
+				this.movingLogDao.insertBsp(webLog.getBsp());
+			}
 			movingEntry.setBsp(webLog.getBsp());
 			movingEntry.setPermalink(webLog.getUrl());
 			movingEntry.setTitle(webLog.getTitle());
