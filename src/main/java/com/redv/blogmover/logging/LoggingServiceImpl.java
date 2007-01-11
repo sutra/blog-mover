@@ -6,8 +6,6 @@ package com.redv.blogmover.logging;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
-
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.logging.dao.MovingLogDao;
 
@@ -46,7 +44,7 @@ public class LoggingServiceImpl implements LoggingService {
 
 		try {
 			this.movingLogDao.insertBsp(toBsp);
-		} catch (DataAccessException ex) {
+		} catch (Exception ex) {
 
 		}
 
@@ -55,7 +53,7 @@ public class LoggingServiceImpl implements LoggingService {
 			if (webLog.getBsp() != null) {
 				try {
 					this.movingLogDao.insertBsp(webLog.getBsp());
-				} catch (DataAccessException ex) {
+				} catch (Exception ex) {
 
 				}
 			}
