@@ -17,8 +17,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.redv.blogmover.logging.Moving;
-import com.redv.blogmover.logging.dao.MovingLogDao;
+import com.redv.blogmover.logging.LoggingService;
 
 /**
  * Blog Remover User Facade.
@@ -53,7 +52,7 @@ public class UserFacade implements Serializable {
 
 	private List<WebLog> webLogs;
 
-	private MovingLogDao movingLogDao;
+	private LoggingService loggingService;
 
 	public UserFacade() {
 		webLogs = new Vector<WebLog>();
@@ -63,8 +62,12 @@ public class UserFacade implements Serializable {
 		this.token = token;
 	}
 
-	public void setMovingLogDao(MovingLogDao movingLogDao) {
-		this.movingLogDao = movingLogDao;
+	/**
+	 * @param loggingService
+	 *            the loggingService to set
+	 */
+	public void setLoggingService(LoggingService loggingService) {
+		this.loggingService = loggingService;
 	}
 
 	/**
@@ -230,8 +233,7 @@ public class UserFacade implements Serializable {
 
 			history.put(token, webLogsCopy);
 
-			Moving moving = new Moving(webLogsCopy, this.writer.getBsp());
-			this.movingLogDao.insertMoving(moving);
+			this.loggingService.log(webLogsCopy, this.writer.getBsp());
 		} finally {
 			this.writerLock.readLock().unlock();
 		}

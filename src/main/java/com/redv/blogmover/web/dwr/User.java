@@ -21,7 +21,7 @@ import com.redv.blogmover.BlogWriter;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.UserFacade;
 import com.redv.blogmover.WebLog;
-import com.redv.blogmover.logging.dao.MovingLogDao;
+import com.redv.blogmover.logging.LoggingService;
 
 /**
  * DWR 用户接口。
@@ -197,8 +197,6 @@ public class User implements Serializable {
 
 		private final Log log = LogFactory.getLog(User.class);
 
-		private MovingLogDao movingLogDao;
-
 		public static final String SESSION_NAME_USER_FACADE = "com.redv.blogremover.web.dwr.User.userFacade";
 
 		/**
@@ -225,12 +223,12 @@ public class User implements Serializable {
 				ret.setToken(session.getId());
 				session.setAttribute(SESSION_NAME_USER_FACADE, ret);
 
-				this.movingLogDao = (MovingLogDao) WebApplicationContextUtils
+				LoggingService loggingService = (LoggingService) WebApplicationContextUtils
 						.getWebApplicationContext(
 								WebContextFactory.get().getServletContext())
-						.getBean("movingLogDao");
+						.getBean("loggingService");
 
-				ret.setMovingLogDao(movingLogDao);
+				ret.setLoggingService(loggingService);
 			}
 			return ret;
 		}

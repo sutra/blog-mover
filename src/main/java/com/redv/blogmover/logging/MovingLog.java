@@ -94,8 +94,9 @@ public class MovingLog implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(from).append(id).append(toBsp)
+		int hc = new HashCodeBuilder().append(from).append(id).append(toBsp)
 				.toHashCode();
+		return hc;
 	}
 
 	/*

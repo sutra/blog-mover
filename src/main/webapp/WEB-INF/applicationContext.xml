@@ -14,4 +14,23 @@
 	<bean id="user" class="com.redv.blogmover.web.dwr.User" />
 	<bean id="bloggerClient"
 		class="com.redv.blogmover.web.dwr.BloggerClient" />
+	<bean id="baseTransactionProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		abstract="true">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="log">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="loggingService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.redv.blogmover.logging.LoggingServiceImpl">
+				<property name="movingLogDao" ref="movingLogDao" />
+			</bean>
+		</property>
+	</bean>
 </beans>

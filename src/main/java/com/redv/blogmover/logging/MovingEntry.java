@@ -8,8 +8,6 @@ import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import com.redv.blogmover.WebLog;
-
 /**
  * @author shutra
  * 
@@ -31,12 +29,6 @@ public class MovingEntry implements Serializable {
 
 	public MovingEntry() {
 
-	}
-
-	public MovingEntry(WebLog webLog) {
-		this.permalink = webLog.getUrl();
-		this.title = webLog.getTitle();
-		this.bsp = webLog.getBsp();
 	}
 
 	/**

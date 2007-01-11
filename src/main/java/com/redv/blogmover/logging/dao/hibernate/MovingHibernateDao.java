@@ -62,9 +62,6 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 	 * @see com.redv.blogmover.logging.dao.MovingLogDao#insertMovingEntry(com.redv.blogmover.logging.MovingEntry)
 	 */
 	public String insertMovingEntry(MovingEntry movingEntry) {
-		if (movingEntry.getBsp() != null) {
-			this.insertBsp(movingEntry.getBsp());
-		}
 		return (String) this.getHibernateTemplate().save(movingEntry);
 	}
 
@@ -83,12 +80,6 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 	 * @see com.redv.blogmover.logging.dao.MovingLogDao#insertMovingLog(com.redv.blogmover.logging.MovingLog)
 	 */
 	public String insertMovingLog(MovingLog movingLog) {
-		if (movingLog.getFrom() != null) {
-			this.insertMovingEntry(movingLog.getFrom());
-		}
-		if (movingLog.getToBsp() != null) {
-			this.insertBsp(movingLog.getToBsp());
-		}
 		return (String) this.getHibernateTemplate().save(movingLog);
 	}
 
@@ -107,11 +98,6 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 	 * @see com.redv.blogmover.logging.dao.MovingLogDao#insertMoving(com.redv.blogmover.logging.Moving)
 	 */
 	public String insertMoving(Moving moving) {
-		if (moving.getMovingLogs() != null) {
-			for (MovingLog movingLog : moving.getMovingLogs()) {
-				this.insertMovingLog(movingLog);
-			}
-		}
 		return (String) this.getHibernateTemplate().save(moving);
 	}
 

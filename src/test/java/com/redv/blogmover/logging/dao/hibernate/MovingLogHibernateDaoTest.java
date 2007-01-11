@@ -3,9 +3,7 @@
  */
 package com.redv.blogmover.logging.dao.hibernate;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -27,6 +25,7 @@ import com.redv.blogmover.test.TestUtils;
  */
 public class MovingLogHibernateDaoTest extends
 		AbstractTransactionalDataSourceSpringContextTests {
+	@SuppressWarnings("unused")
 	private static final Log log = LogFactory
 			.getLog(MovingLogHibernateDaoTest.class);
 
@@ -46,38 +45,17 @@ public class MovingLogHibernateDaoTest extends
 		this.movingLogDao = movingLogDao;
 	}
 
-	private BSP buildSimpleBsp() {
+	/**
+	 * Test method for
+	 * {@link com.redv.blogmover.logging.dao.hibernate.MovingHibernateDao#InsertBsp(com.redv.blogmover.logging.BSP)}.
+	 */
+	public void testInsertBsp() {
 		BSP bsp = new BSP();
 		bsp.setId(UUID.randomUUID().toString());
 		bsp.setName("xpert");
 		bsp.setDescription("xpert.cn is a good BSP.");
 		bsp.setServerURL("http://xpert.cn");
 
-		return bsp;
-	}
-
-	private MovingEntry buildSimpleMovingEntry() {
-		MovingEntry movingEntry = new MovingEntry();
-		movingEntry.setBsp(this.buildSimpleBsp());
-		movingEntry
-				.setPermalink("http://xpert.cn/shutra/entry/my-test-entry);");
-		movingEntry.setTitle("My test entry");
-		return movingEntry;
-	}
-
-	private MovingLog buildSimpleMovingLog() {
-		MovingLog movingLog = new MovingLog();
-		movingLog.setFrom(this.buildSimpleMovingEntry());
-		movingLog.setToBsp(this.buildSimpleBsp());
-		return movingLog;
-	}
-
-	/**
-	 * Test method for
-	 * {@link com.redv.blogmover.logging.dao.hibernate.MovingHibernateDao#InsertBsp(com.redv.blogmover.logging.BSP)}.
-	 */
-	public void testInsertBsp() {
-		BSP bsp = this.buildSimpleBsp();
 		String id = this.movingLogDao.insertBsp(bsp);
 
 		this.transactionManager.commit(this.transactionStatus);
@@ -91,10 +69,18 @@ public class MovingLogHibernateDaoTest extends
 	}
 
 	public void testInsertMovingEntry() {
-		MovingEntry movingEntry = buildSimpleMovingEntry();
+		BSP bsp = new BSP();
+		bsp.setId(UUID.randomUUID().toString());
+		bsp.setName("xpert");
+		bsp.setDescription("xpert.cn is a good BSP.");
+		bsp.setServerURL("http://xpert.cn");
+		this.movingLogDao.insertBsp(bsp);
 
-		// this.movingLogDao.insertBsp(movingEntry.getBsp());
-
+		MovingEntry movingEntry = new MovingEntry();
+		movingEntry.setBsp(bsp);
+		movingEntry
+				.setPermalink("http://xpert.cn/shutra/entry/my-test-entry);");
+		movingEntry.setTitle("My test entry");
 		String id = this.movingLogDao.insertMovingEntry(movingEntry);
 
 		this.transactionManager.commit(this.transactionStatus);
@@ -109,11 +95,31 @@ public class MovingLogHibernateDaoTest extends
 	}
 
 	public void testInsertMovingLog() {
-		MovingLog movingLog = this.buildSimpleMovingLog();
+		BSP bsp = new BSP();
+		bsp.setId(UUID.randomUUID().toString());
+		bsp.setName("xpert");
+		bsp.setDescription("xpert.cn is a good BSP.");
+		bsp.setServerURL("http://xpert.cn");
+		this.movingLogDao.insertBsp(bsp);
 
-		// this.movingLogDao.insertBsp(movingLog.getFrom().getBsp());
-		// this.movingLogDao.insertMovingEntry(movingLog.getFrom());
-		// this.movingLogDao.insertBsp(movingLog.getToBsp());
+		MovingEntry movingEntry = new MovingEntry();
+		movingEntry.setBsp(bsp);
+		movingEntry
+				.setPermalink("http://xpert.cn/shutra/entry/my-test-entry);");
+		movingEntry.setTitle("My test entry");
+		this.movingLogDao.insertMovingEntry(movingEntry);
+
+		BSP anotherBsp = new BSP();
+		anotherBsp.setId(UUID.randomUUID().toString());
+		anotherBsp.setName("xpert");
+		anotherBsp.setDescription("xpert.cn is a good BSP.");
+		anotherBsp.setServerURL("http://xpert.cn");
+		this.movingLogDao.insertBsp(anotherBsp);
+
+		MovingLog movingLog = new MovingLog();
+		movingLog.setFrom(movingEntry);
+		movingLog.setToBsp(anotherBsp);
+
 		String id = this.movingLogDao.insertMovingLog(movingLog);
 
 		this.transactionManager.commit(this.transactionStatus);
@@ -140,21 +146,25 @@ public class MovingLogHibernateDaoTest extends
 		// From BSP.
 		BSP fromBsp = new BSP();
 		fromBsp.setId("from-bsp");
+		this.movingLogDao.insertBsp(fromBsp);
 
 		// To BSP.
 		BSP toBsp = new BSP();
 		toBsp.setId("to-bsp");
+		this.movingLogDao.insertBsp(toBsp);
 
 		// Moving entry.
 		MovingEntry movingEntry = new MovingEntry();
 		movingEntry.setBsp(fromBsp);
 		movingEntry.setPermalink("http://xpert.cn/shutra/entry/my-test-entry");
 		movingEntry.setTitle("My test entry");
+		this.movingLogDao.insertMovingEntry(movingEntry);
 
 		// Moving log.
 		MovingLog movingLog = new MovingLog();
 		movingLog.setFrom(movingEntry);
 		movingLog.setToBsp(toBsp);
+		this.movingLogDao.insertMovingLog(movingLog);
 
 		// Moving logs.
 		Set<MovingLog> movingLogs = new HashSet<MovingLog>();
@@ -167,6 +177,7 @@ public class MovingLogHibernateDaoTest extends
 
 		assertNull(moving.getId());
 		assertEquals(1, moving.getMovingLogs().size());
+		assertEquals(moving.getMovingLogs(), moving.getMovingLogs());
 
 		// Insert moving.
 		String id = this.movingLogDao.insertMoving(moving);
@@ -183,116 +194,27 @@ public class MovingLogHibernateDaoTest extends
 		assertEquals(moving.getDate(), dbMoving.getDate());
 		assertEquals(moving.getMovingLogs().size(), dbMoving.getMovingLogs()
 				.size());
-		MovingLog ml = moving.getMovingLogs().iterator().next();
-		MovingLog dbMl = dbMoving.getMovingLogs().iterator().next();
-		assertEquals(ml, dbMl);
 
-		MovingLog selfml = moving.getMovingLogs().iterator().next();
-		MovingLog selfdbMl = moving.getMovingLogs().iterator().next();
-		assertEquals(selfml, selfdbMl);
+		assertTrue(moving.getMovingLogs() == moving.getMovingLogs());
+
+		Set set1 = moving.getMovingLogs();
+		Set set2 = moving.getMovingLogs();
+
+		assertEquals(1, set1.size());
+		assertEquals(1, set2.size());
+
+		MovingLog ml1 = (MovingLog) set1.iterator().next();
+		MovingLog ml2 = (MovingLog) set2.iterator().next();
+		assertEquals(ml1, ml2);
+		assertEquals(ml1.hashCode(), ml2.hashCode());
+		assertEquals(ml1.hashCode(), ml1.hashCode());
+
+		assertTrue(set1.contains(ml1));
+		assertTrue(set1.contains(ml2));
+
 		assertEquals(moving.getMovingLogs(), moving.getMovingLogs());
 		assertEquals(moving.getMovingLogs(), dbMoving.getMovingLogs());
 		assertEquals(moving, dbMoving);
 	}
 
-	private BSP buildBsp(String id) {
-		BSP bsp = new BSP();
-		bsp.setId(id);
-		bsp.setName(id + "-name");
-		return bsp;
-	}
-
-	private Moving buildMoving(String fromBsp, String toBsp) {
-		BSP bspFrom = this.buildBsp(fromBsp);
-		BSP bspTo = this.buildBsp(toBsp);
-
-		Moving moving = new Moving();
-		moving.setDate(new Date());
-		Set<MovingLog> movingLogs = new HashSet<MovingLog>();
-		MovingLog movingLog = new MovingLog();
-
-		MovingEntry movingEntry = new MovingEntry();
-		movingEntry.setBsp(bspFrom);
-		movingEntry.setPermalink("http://example.com");
-		movingEntry.setTitle("A test blog");
-
-		movingLog.setFrom(movingEntry);
-		movingLog.setToBsp(bspTo);
-
-		movingLogs.add(movingLog);
-		moving.setMovingLogs(movingLogs);
-		return moving;
-	}
-
-	public void _testGetFromCount() {
-
-		log.debug("start to insert");
-		Moving moving = this.buildMoving("from-test-1", "to-test-1");
-		this.movingLogDao.insertMoving(moving);
-
-		moving = this.buildMoving("from-test-2", "to-test-2");
-		this.movingLogDao.insertMoving(moving);
-
-		moving = this.buildMoving("from-test-3", "to-test-1");
-		this.movingLogDao.insertMoving(moving);
-
-		this.transactionManager.commit(this.transactionStatus);
-
-		Date dateMin = new GregorianCalendar(1970, 1, 1).getTime();
-		Calendar c = new GregorianCalendar();
-		c.setTime(new Date());
-		c.add(Calendar.DATE, 1);
-		Date dateMax = c.getTime();
-
-		//
-		// Now check.
-		//
-		assertEquals(1, moving.getMovingLogs().size());
-
-		// Get a moving from db, and check it.
-		Moving dbMoving = this.movingLogDao.getMoving(moving.getId());
-		assertEquals(1, dbMoving.getMovingLogs().size());
-
-		assertNotNull(this.movingLogDao.getBsp("from-test-1"));
-		assertNull(this.movingLogDao.getBsp("not aviable"));
-
-		MovingLog movingLog = (MovingLog) dbMoving.getMovingLogs().toArray()[0];
-		assertEquals("from-test-3", movingLog.getFrom().getBsp().getId());
-		assertEquals("to-test-1", movingLog.getToBsp().getId());
-		assertEquals(moving.getId(), movingLog.getMoving().getId());
-
-		// 
-		assertEquals(5, this.countRowsInTable("bsp"));
-		assertEquals(3, this.countRowsInTable("moving"));
-		assertEquals(3, this.countRowsInTable("movinglog"));
-		assertEquals(3, this.countRowsInTable("movingentry"));
-		long count = this.movingLogDao.getFromCount("from-test-1");
-		assertEquals(1, count);
-
-		// count = this.movingLogDao.getToCount("to-test-1", dateMin, dateMax);
-		// assertEquals(2, count);
-	}
-
-	public void testSet() {
-		Set<String> set1 = new HashSet<String>();
-		Set<String> set2 = new HashSet<String>();
-		String string1 = new String("string1");
-		String string2 = new String("string2");
-		set1.add(string1);
-		set1.add(string2);
-		set2.add(string2);
-		set2.add(string1);
-
-		assertEquals(set1, set2);
-	}
-
-	public void testSetMovingLogs() {
-		Set<MovingLog> set1 = new HashSet<MovingLog>();
-		Set<MovingLog> set2 = new HashSet<MovingLog>();
-		MovingLog ml = this.buildSimpleMovingLog();
-		set1.add(ml);
-		set2.add(ml);
-
-		assertEquals(set1, set2);
-	}
 }

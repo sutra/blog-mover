@@ -16,7 +16,7 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 
 import com.redv.blogmover.bsps.baidu.BaiduReader;
 import com.redv.blogmover.feed.RomeWriter;
-import com.redv.blogmover.logging.dao.MovingLogDao;
+import com.redv.blogmover.logging.LoggingService;
 import com.redv.blogmover.test.TestUtils;
 
 /**
@@ -28,7 +28,7 @@ public class UserFacadeTest extends TestCase {
 
 	private UserFacade userFacade;
 
-	private MovingLogDao movingLogDao;
+	private LoggingService loggingService;
 
 	private MockHttpServletRequest request;
 
@@ -48,14 +48,14 @@ public class UserFacadeTest extends TestCase {
 		ctx.setServletContext(new MockServletContext(""));
 		ctx.refresh();
 
-		movingLogDao = (MovingLogDao) ctx.getBean("movingLogDao");
+		loggingService = (LoggingService) ctx.getBean("loggingService");
 
 		request = new MockHttpServletRequest();
 		session = (MockHttpSession) request.getSession(true);
 
 		userFacade = new UserFacade();
 		userFacade.setToken(session.getId());
-		userFacade.setMovingLogDao(movingLogDao);
+		userFacade.setLoggingService(loggingService);
 	}
 
 	/*
@@ -90,7 +90,7 @@ public class UserFacadeTest extends TestCase {
 		userFacade.setWriterProperty("link", "http://redv.com");
 		userFacade.setWriterProperty("title", "Sutra's");
 		userFacade.write();
-		
+
 		if (!outputFile.delete()) {
 			outputFile.deleteOnExit();
 		}
