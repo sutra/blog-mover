@@ -134,7 +134,7 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 	 * @see com.redv.blogmover.logging.dao.MovingLogDao#getFromCount(java.lang.String)
 	 */
 	public long getFromCount(String id) {
-		String hql = "select count(*) from Moving where id in(select moving.id from MovingLog where toBsp.id = :id)";
+		String hql = "select count(*) from Moving where id in(select moving.id from MovingLog where fromEntry.bsp.id = :id)";
 		Query query = this.getSession().createQuery(hql);
 		query.setString("id", id);
 		return (Long) query.uniqueResult();
@@ -147,11 +147,9 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 	 *      java.util.Date, java.util.Date)
 	 */
 	public long getFromCount(String id, Date beginDate, Date endDate) {
-		String hql = "select count(*) from Moving where id in(select moving.id from MovingLog where toBsp.id = :id) and date between :beginDate and :endDate";
+		String hql = "select count(*) from Moving where id in(select moving.id from MovingLog where fromEntry.bsp.id = :id) and date between :beginDate and :endDate";
 		Query query = this.getSession().createQuery(hql);
 		query.setString("id", id);
-		query.setDate("beginDate", beginDate);
-		query.setDate("endDate", endDate);
 		return (Long) query.uniqueResult();
 	}
 
@@ -161,8 +159,10 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 	 * @see com.redv.blogmover.logging.dao.MovingLogDao#getToCount(java.lang.String)
 	 */
 	public long getToCount(String id) {
-		// TODO Auto-generated method stub
-		return 0;
+		String hql = "select count(*) from Moving where id in (select moving.id from MovingLog where toBsp.id = :id)";
+		Query query = this.getSession().createQuery(hql);
+		query.setString("id", id);
+		return (Long) query.uniqueResult();
 	}
 
 	/*
@@ -172,8 +172,12 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 	 *      java.util.Date, java.util.Date)
 	 */
 	public long getToCount(String id, Date beginDate, Date endDate) {
-		// TODO Auto-generated method stub
-		return 0;
+		String hql = "select count(*) from Moving where id in(select moving.id from MovingLog where toBsp.id = :id) and date between :beginDate and :endDate";
+		Query query = this.getSession().createQuery(hql);
+		query.setString("id", id);
+		query.setDate("beginDate", beginDate);
+		query.setDate("endDate", endDate);
+		return (Long) query.uniqueResult();
 	}
 
 }

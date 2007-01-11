@@ -3,6 +3,7 @@
  */
 package com.redv.blogmover.logging;
 
+import java.util.Date;
 import java.util.List;
 
 import com.redv.blogmover.WebLog;
@@ -53,10 +54,48 @@ public class LoggingServiceImpl implements LoggingService {
 
 			MovingLog movingLog = new MovingLog();
 			movingLog.setMoving(moving);
-			movingLog.setFrom(movingEntry);
+			movingLog.setFromEntry(movingEntry);
 			movingLog.setToBsp(toBsp);
 			this.movingLogDao.insertMovingLog(movingLog);
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.logging.LoggingService#getFromCount(java.lang.String)
+	 */
+	public long getFromCount(String bspId) {
+		return this.movingLogDao.getFromCount(bspId);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.logging.LoggingService#getFromCount(java.lang.String,
+	 *      java.util.Date, java.util.Date)
+	 */
+	public long getFromCount(String bspId, Date beginDate, Date endDate) {
+		return this.movingLogDao.getFromCount(bspId, beginDate, endDate);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.logging.LoggingService#getToCount(java.lang.String)
+	 */
+	public long getToCount(String bspId) {
+		return this.movingLogDao.getToCount(bspId);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.logging.LoggingService#getToCount(java.lang.String,
+	 *      java.util.Date, java.util.Date)
+	 */
+	public long getToCount(String bspId, Date beginDate, Date endDate) {
+		return this.movingLogDao.getToCount(bspId, beginDate, endDate);
 	}
 
 }

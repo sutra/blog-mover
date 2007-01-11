@@ -117,7 +117,7 @@ public class MovingLogHibernateDaoTest extends
 		this.movingLogDao.insertBsp(anotherBsp);
 
 		MovingLog movingLog = new MovingLog();
-		movingLog.setFrom(movingEntry);
+		movingLog.setFromEntry(movingEntry);
 		movingLog.setToBsp(anotherBsp);
 
 		String id = this.movingLogDao.insertMovingLog(movingLog);
@@ -162,7 +162,7 @@ public class MovingLogHibernateDaoTest extends
 
 		// Moving log.
 		MovingLog movingLog = new MovingLog();
-		movingLog.setFrom(movingEntry);
+		movingLog.setFromEntry(movingEntry);
 		movingLog.setToBsp(toBsp);
 		this.movingLogDao.insertMovingLog(movingLog);
 
@@ -215,6 +215,15 @@ public class MovingLogHibernateDaoTest extends
 		assertEquals(moving.getMovingLogs(), moving.getMovingLogs());
 		assertEquals(moving.getMovingLogs(), dbMoving.getMovingLogs());
 		assertEquals(moving, dbMoving);
+	}
+
+	public void testGetFromCount() {
+		assertEquals(0, this.movingLogDao.getFromCount("test"));
+
+	}
+
+	public void testGetToCount() {
+		assertEquals(0, this.movingLogDao.getToCount("test"));
 	}
 
 }

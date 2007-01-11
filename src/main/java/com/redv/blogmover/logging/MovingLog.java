@@ -21,7 +21,7 @@ public class MovingLog implements Serializable {
 
 	private String id;
 
-	private MovingEntry from;
+	private MovingEntry fromEntry;
 
 	private BSP toBsp;
 
@@ -43,18 +43,18 @@ public class MovingLog implements Serializable {
 	}
 
 	/**
-	 * @return the from
+	 * @return the fromEntry
 	 */
-	public MovingEntry getFrom() {
-		return from;
+	public MovingEntry getFromEntry() {
+		return fromEntry;
 	}
 
 	/**
 	 * @param from
-	 *            the from to set
+	 *            the fromEntry to set
 	 */
-	public void setFrom(MovingEntry from) {
-		this.from = from;
+	public void setFromEntry(MovingEntry from) {
+		this.fromEntry = from;
 	}
 
 	/**
@@ -94,8 +94,8 @@ public class MovingLog implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		int hc = new HashCodeBuilder().append(from).append(id).append(toBsp)
-				.toHashCode();
+		int hc = new HashCodeBuilder().append(fromEntry).append(id).append(
+				toBsp).toHashCode();
 		return hc;
 	}
 
@@ -113,8 +113,8 @@ public class MovingLog implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		final MovingLog other = (MovingLog) obj;
-		return new EqualsBuilder().append(from, other.from)
-				.append(id, other.id).append(toBsp, other.toBsp).isEquals();
+		return new EqualsBuilder().append(fromEntry, other.fromEntry).append(
+				id, other.id).append(toBsp, other.toBsp).isEquals();
 	}
 
 }
