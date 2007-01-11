@@ -27,10 +27,6 @@ public class Moving implements Serializable {
 
 	private Set<MovingLog> movingLogs;
 
-	public Moving() {
-		this.date = new Date();
-	}
-
 	/**
 	 * @return the id
 	 */

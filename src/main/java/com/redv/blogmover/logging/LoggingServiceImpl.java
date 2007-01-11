@@ -6,6 +6,8 @@ package com.redv.blogmover.logging;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.logging.dao.MovingLogDao;
 
@@ -37,15 +39,25 @@ public class LoggingServiceImpl implements LoggingService {
 		if (toBsp == null) {
 			throw new IllegalArgumentException("toBsp can't be null.");
 		}
-		this.movingLogDao.insertBsp(toBsp);
 
 		Moving moving = new Moving();
+		moving.setDate(new Date());
 		this.movingLogDao.insertMoving(moving);
+
+		try {
+			this.movingLogDao.insertBsp(toBsp);
+		} catch (DataAccessException ex) {
+
+		}
 
 		for (WebLog webLog : webLogs) {
 			MovingEntry movingEntry = new MovingEntry();
 			if (webLog.getBsp() != null) {
-				this.movingLogDao.insertBsp(webLog.getBsp());
+				try {
+					this.movingLogDao.insertBsp(webLog.getBsp());
+				} catch (DataAccessException ex) {
+
+				}
 			}
 			movingEntry.setBsp(webLog.getBsp());
 			movingEntry.setPermalink(webLog.getUrl());

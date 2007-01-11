@@ -68,6 +68,29 @@ public class MovingLogHibernateDaoTest extends
 		this.deleteFromTables(new String[] { "bsp" });
 	}
 
+	public void testDuplicateInsert() {
+		BSP bsp = new BSP();
+		bsp.setId("test");
+		bsp.setName("xpert");
+		bsp.setDescription("xpert.cn is a good BSP.");
+		bsp.setServerURL("http://xpert.cn");
+
+		this.movingLogDao.insertBsp(bsp);
+
+		this.transactionManager.commit(this.transactionStatus);
+
+		try {
+			this.movingLogDao.insertBsp(bsp);
+			fail("Should catch a exception.");
+		} catch (Exception ex) {
+			// Do nothing.
+		}
+
+		assertEquals(1, this.countRowsInTable("bsp"));
+
+		this.deleteFromTables(new String[] { "bsp" });
+	}
+
 	public void testInsertMovingEntry() {
 		BSP bsp = new BSP();
 		bsp.setId(UUID.randomUUID().toString());
