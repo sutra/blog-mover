@@ -4,7 +4,9 @@
 package com.redv.blogmover.logging;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.logging.dao.MovingLogDao;
@@ -42,21 +44,27 @@ public class LoggingServiceImpl implements LoggingService {
 		moving.setDate(new Date());
 		this.movingLogDao.insertMoving(moving);
 
-		try {
-			this.movingLogDao.insertBsp(toBsp);
-		} catch (Exception ex) {
+		// Add all bsps to a set.
+		Set<BSP> bsps = new HashSet<BSP>();
 
+		bsps.add(toBsp);
+
+		for (WebLog webLog : webLogs) {
+			BSP bsp = webLog.getBsp();
+			if (bsp != null && bsps.contains(bsp) == false) {
+				bsps.add(bsp);
+			}
+		}
+
+		// Insert the bsps in the set into database.
+		for (BSP bsp : bsps) {
+			if (this.movingLogDao.getBsp(bsp.getId()) == null) {
+				this.movingLogDao.insertBsp(bsp);
+			}
 		}
 
 		for (WebLog webLog : webLogs) {
 			MovingEntry movingEntry = new MovingEntry();
-			if (webLog.getBsp() != null) {
-				try {
-					this.movingLogDao.insertBsp(webLog.getBsp());
-				} catch (Exception ex) {
-
-				}
-			}
 			movingEntry.setBsp(webLog.getBsp());
 			movingEntry.setPermalink(webLog.getUrl());
 			movingEntry.setTitle(webLog.getTitle());
