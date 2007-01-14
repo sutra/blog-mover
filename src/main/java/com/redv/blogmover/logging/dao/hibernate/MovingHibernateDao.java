@@ -40,6 +40,16 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.redv.blogmover.logging.dao.MovingLogDao#getBsps()
+	 */
+	@SuppressWarnings("unchecked")
+	public List<BSP> getBsps() {
+		return this.getHibernateTemplate().find("from BSP");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.redv.blogmover.logging.dao.MovingLogDao#insertBsp(com.redv.blogmover.logging.BSP)
 	 */
 	public String insertBsp(BSP bsp) {

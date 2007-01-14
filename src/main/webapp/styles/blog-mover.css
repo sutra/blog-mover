@@ -58,6 +58,35 @@ h3 {
 	background: url("../images/index_line1.gif") no-repeat bottom;
 }
 
+/* The tip on top right.*/
+#blogMoverTopRight {
+	width: 20%;
+	float: left;
+}
+
+#blogMoverTopRightContainer {
+	float: right;
+	margin-top: 10px;
+}
+
+#blogMoverTopRight a {
+	background: none;
+	display: inline;
+	margin: 0px;
+	padding: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-weight: normal;
+	color: #000;
+	height: 10px;
+	border-right: 1px solid grey;;
+	font-weight: normal;
+}
+
+#blogMoverTopRight a.blogMoverTopRightLast {
+	border: 0px;
+}
+
 #readers,#webLogs,#writers,#options,#explanation {
 	margin: 10px 0px 10px 0px;
 }

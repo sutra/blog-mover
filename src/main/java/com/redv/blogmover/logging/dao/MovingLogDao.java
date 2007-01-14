@@ -4,6 +4,7 @@
 package com.redv.blogmover.logging.dao;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.redv.blogmover.logging.BSP;
@@ -23,6 +24,13 @@ public interface MovingLogDao {
 	 * @return
 	 */
 	BSP getBsp(String id);
+
+	/**
+	 * Retrive all BSPs.
+	 * 
+	 * @return
+	 */
+	List<BSP> getBsps();
 
 	/**
 	 * Insert a BSP.

@@ -27,6 +27,13 @@ public interface LoggingService {
 	void log(List<WebLog> webLogs, BSP toBsp);
 
 	/**
+	 * Retrive all BSPs.
+	 * 
+	 * @return
+	 */
+	List<BSP> getBsps();
+
+	/**
 	 * Get a bsp's moving times that be moved out.
 	 * 
 	 * @param bspId

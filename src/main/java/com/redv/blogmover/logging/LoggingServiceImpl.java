@@ -81,6 +81,15 @@ public class LoggingServiceImpl implements LoggingService {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.redv.blogmover.logging.LoggingService#getBsps()
+	 */
+	public List<BSP> getBsps() {
+		return this.movingLogDao.getBsps();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.redv.blogmover.logging.LoggingService#getFromCount(java.lang.String)
 	 */
 	public long getFromCount(String bspId) {

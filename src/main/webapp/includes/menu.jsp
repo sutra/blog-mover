@@ -25,9 +25,17 @@
 				onclick="return selectTab('about')" accesskey="A"> 关于 Blog
 				Mover(<span class="accesskey">A</span>) </a>
 		</li>
+		<%--
 		<li>
 			<a href="help" title="帮助" accesskey="H">帮助(<span
 				class="accesskey">H</span>)</a>
 		</li>
+		--%>
 	</ul>
+	<div id="blogMoverTopRight">
+		<div id="blogMoverTopRightContainer">
+			<a href="report">搬迁报告</a>
+			<a href="help" class="blogMoverTopRightLast">帮助</a>
+		</div>
+	</div>
 </div>
