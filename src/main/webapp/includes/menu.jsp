@@ -34,8 +34,8 @@
 	</ul>
 	<div id="blogMoverTopRight">
 		<div id="blogMoverTopRightContainer">
-			<a href="report">搬迁报告</a>
-			<a href="help" class="blogMoverTopRightLast">帮助</a>
+			<a href="report.jsp">搬迁报告</a>
+			<a href="http://blog-mover.redv.com/help/" class="blogMoverTopRightLast">帮助</a>
 		</div>
 	</div>
 </div>

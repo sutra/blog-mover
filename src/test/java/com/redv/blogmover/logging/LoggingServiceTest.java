@@ -80,8 +80,9 @@ public class LoggingServiceTest extends
 
 		this.transactionManager.commit(this.transactionStatus);
 
-		assertEquals(times, this.loggingService.getFromCount(fromBsp.getId()));
-		assertEquals(times, this.loggingService.getToCount(toBsp.getId()));
+		assertEquals(times, this.loggingService.getMovedOutCount(fromBsp
+				.getId()));
+		assertEquals(times, this.loggingService.getMovedInCount(toBsp.getId()));
 
 		assertEquals(total, this.countRowsInTable("moving_log"));
 

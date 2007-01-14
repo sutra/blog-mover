@@ -90,38 +90,38 @@ public class LoggingServiceImpl implements LoggingService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.redv.blogmover.logging.LoggingService#getFromCount(java.lang.String)
+	 * @see com.redv.blogmover.logging.LoggingService#getMovedOutCount(java.lang.String)
 	 */
-	public long getFromCount(String bspId) {
+	public long getMovedOutCount(String bspId) {
 		return this.movingLogDao.getFromCount(bspId);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.redv.blogmover.logging.LoggingService#getFromCount(java.lang.String,
+	 * @see com.redv.blogmover.logging.LoggingService#getMovedOutCount(java.lang.String,
 	 *      java.util.Date, java.util.Date)
 	 */
-	public long getFromCount(String bspId, Date beginDate, Date endDate) {
+	public long getMovedOutCount(String bspId, Date beginDate, Date endDate) {
 		return this.movingLogDao.getFromCount(bspId, beginDate, endDate);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.redv.blogmover.logging.LoggingService#getToCount(java.lang.String)
+	 * @see com.redv.blogmover.logging.LoggingService#getMovedInCount(java.lang.String)
 	 */
-	public long getToCount(String bspId) {
+	public long getMovedInCount(String bspId) {
 		return this.movingLogDao.getToCount(bspId);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.redv.blogmover.logging.LoggingService#getToCount(java.lang.String,
+	 * @see com.redv.blogmover.logging.LoggingService#getMovedInCount(java.lang.String,
 	 *      java.util.Date, java.util.Date)
 	 */
-	public long getToCount(String bspId, Date beginDate, Date endDate) {
+	public long getMovedInCount(String bspId, Date beginDate, Date endDate) {
 		return this.movingLogDao.getToCount(bspId, beginDate, endDate);
 	}
 

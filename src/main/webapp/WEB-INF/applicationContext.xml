@@ -33,4 +33,8 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="reportBuilder"
+		class="com.redv.blogmover.logging.ReportBuilder">
+		<property name="loggingService" ref="loggingService" />
+	</bean>
 </beans>

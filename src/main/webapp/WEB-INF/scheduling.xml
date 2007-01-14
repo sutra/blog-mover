@@ -19,12 +19,10 @@
 			</map>
 		</property>
 	</bean>
-	<bean id="reportBuilder"
-		class="com.redv.blogmover.logging.ReportBuilder" />
 	<bean id="jobDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="reportBuilder" />
-		<property name="targetMethod" value="build" />
+		<property name="targetMethod" value="buildStatistic" />
 		<property name="concurrent" value="false" />
 	</bean>
 	<bean id="simpleTrigger"

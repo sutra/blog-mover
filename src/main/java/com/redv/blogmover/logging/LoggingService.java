@@ -39,7 +39,7 @@ public interface LoggingService {
 	 * @param bspId
 	 * @return
 	 */
-	long getFromCount(String bspId);
+	long getMovedOutCount(String bspId);
 
 	/**
 	 * Get a bsp's moving times that be moved out between beginDate and endDate.
@@ -49,7 +49,7 @@ public interface LoggingService {
 	 * @param endDate
 	 * @return
 	 */
-	long getFromCount(String bspId, Date beginDate, Date endDate);
+	long getMovedOutCount(String bspId, Date beginDate, Date endDate);
 
 	/**
 	 * Get a bsp's moving times that be moved in.
@@ -57,7 +57,7 @@ public interface LoggingService {
 	 * @param bspId
 	 * @return
 	 */
-	long getToCount(String bspId);
+	long getMovedInCount(String bspId);
 
 	/**
 	 * Get a bsp's moving times that be moved in between beginDate and endDate.
@@ -67,5 +67,5 @@ public interface LoggingService {
 	 * @param endDate
 	 * @return
 	 */
-	long getToCount(String bspId, Date beginDate, Date endDate);
+	long getMovedInCount(String bspId, Date beginDate, Date endDate);
 }

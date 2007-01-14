@@ -3,7 +3,9 @@
  */
 package com.redv.blogmover.logging;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author shutra
@@ -20,17 +22,16 @@ public class ReportBuilder {
 		this.loggingService = loggingService;
 	}
 
-	public void build() {
-		long[][] data = new long[2][];
+	public Map<BSP, long[]> buildStatistic() {
 		List<BSP> bsps = loggingService.getBsps();
+		Map<BSP, long[]> statistic = new HashMap<BSP, long[]>(bsps.size());
 		for (int i = 0; i < bsps.size(); i++) {
-			data[i] = new long[2];
+			long[] movedInOut = new long[2];
 			BSP bsp = bsps.get(i);
-			long from = loggingService.getFromCount(bsp.getId());
-			long to = loggingService.getToCount(bsp.getId());
-			data[i][0] = from;
-			data[i][1] = to;
+			movedInOut[0] = loggingService.getMovedInCount(bsp.getId());
+			movedInOut[1] = loggingService.getMovedOutCount(bsp.getId());
+			statistic.put(bsp, movedInOut);
 		}
-		
+		return statistic;
 	}
 }
