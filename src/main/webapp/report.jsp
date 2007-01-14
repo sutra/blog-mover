@@ -8,7 +8,7 @@
 <jsp:directive.page import="org.apache.commons.lang.StringUtils" />
 <html>
 	<head>
-	<title>搬迁次数 - Blog Mover</title>
+	<title>搬迁报告 - Blog Mover</title>
 		<style>
 	.movedIn {
 	background-color:green;
