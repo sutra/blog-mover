@@ -60,27 +60,18 @@ h3 {
 
 /* The tip on top right.*/
 #blogMoverTopRight {
-	width: 20%;
-	float: left;
 }
 
 #blogMoverTopRightContainer {
-	float: right;
-	margin-top: 10px;
 }
 
-#blogMoverTopRight a {
+#blogMoverTopRightContainer li {
 	background: none;
 	display: inline;
-	margin: 0px;
-	padding: 0px;
-	padding-left: 5px;
-	padding-right: 5px;
-	font-weight: normal;
-	color: #000;
-	height: 10px;
-	border-right: 1px solid grey;;
-	font-weight: normal;
+}
+
+#blogMoverTopRightContainer a {
+	background: none;
 }
 
 #blogMoverTopRight a.blogMoverTopRightLast {
