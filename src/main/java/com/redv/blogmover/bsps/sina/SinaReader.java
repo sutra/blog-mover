@@ -56,8 +56,6 @@ public class SinaReader extends AbstractBlogReader {
 
 	public SinaReader() {
 		super();
-		bsp.setName("新浪BLOG");
-		bsp.setServerURL("http://blog.sina.com.cn/");
 
 		httpClient = new HttpClient();
 		httpClient.getParams().setCookiePolicy(

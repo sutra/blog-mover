@@ -48,8 +48,6 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 
 	public DoNewsBlogReader() {
 		super();
-		bsp.setName("DoNews");
-		bsp.setServerURL("http://blog.donews.com/");
 
 		httpClient = new HttpClient();
 		httpClient.getParams().setCookiePolicy(

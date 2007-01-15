@@ -62,8 +62,6 @@ public class MetaWeblogReader extends AbstractBlogReader {
 		this.serverURL = new URL(serverURL);
 
 		this.bsp.setId(serverURL);
-		this.bsp.setName(serverURL);
-		this.bsp.setServerURL(serverURL);
 	}
 
 	/**

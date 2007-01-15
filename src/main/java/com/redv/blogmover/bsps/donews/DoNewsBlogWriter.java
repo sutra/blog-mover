@@ -57,8 +57,6 @@ public class DoNewsBlogWriter extends AbstractBlogWriter {
 	 */
 	public DoNewsBlogWriter() {
 		super();
-		bsp.setName("DoNews");
-		bsp.setServerURL("http://blog.donews.com/");
 		
 		httpClient = new HttpClient();
 		httpClient.getParams().setCookiePolicy(

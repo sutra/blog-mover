@@ -61,8 +61,6 @@ public class BlogcnWriter extends AbstractBlogWriter {
 	 */
 	public BlogcnWriter() {
 		super();
-		bsp.setName("博客天下");
-		bsp.setServerURL("http://www.blog.com.cn/");
 
 		HttpClient httpClient = new HttpClient();
 		httpDocument = new HttpDocument(httpClient, true, "GBK");

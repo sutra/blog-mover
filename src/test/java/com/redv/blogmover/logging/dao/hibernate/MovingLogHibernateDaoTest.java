@@ -52,9 +52,6 @@ public class MovingLogHibernateDaoTest extends
 	public void testInsertBsp() {
 		BSP bsp = new BSP();
 		bsp.setId(UUID.randomUUID().toString());
-		bsp.setName("xpert");
-		bsp.setDescription("xpert.cn is a good BSP.");
-		bsp.setServerURL("http://xpert.cn");
 
 		String id = this.movingLogDao.insertBsp(bsp);
 
@@ -71,9 +68,6 @@ public class MovingLogHibernateDaoTest extends
 	public void testDuplicateInsert() {
 		BSP bsp = new BSP();
 		bsp.setId("test");
-		bsp.setName("xpert");
-		bsp.setDescription("xpert.cn is a good BSP.");
-		bsp.setServerURL("http://xpert.cn");
 
 		this.movingLogDao.insertBsp(bsp);
 
@@ -94,9 +88,6 @@ public class MovingLogHibernateDaoTest extends
 	public void testInsertMovingEntry() {
 		BSP bsp = new BSP();
 		bsp.setId(UUID.randomUUID().toString());
-		bsp.setName("xpert");
-		bsp.setDescription("xpert.cn is a good BSP.");
-		bsp.setServerURL("http://xpert.cn");
 		this.movingLogDao.insertBsp(bsp);
 
 		MovingEntry movingEntry = new MovingEntry();
@@ -120,9 +111,6 @@ public class MovingLogHibernateDaoTest extends
 	public void testInsertMovingLog() {
 		BSP bsp = new BSP();
 		bsp.setId(UUID.randomUUID().toString());
-		bsp.setName("xpert");
-		bsp.setDescription("xpert.cn is a good BSP.");
-		bsp.setServerURL("http://xpert.cn");
 		this.movingLogDao.insertBsp(bsp);
 
 		MovingEntry movingEntry = new MovingEntry();
@@ -134,9 +122,6 @@ public class MovingLogHibernateDaoTest extends
 
 		BSP anotherBsp = new BSP();
 		anotherBsp.setId(UUID.randomUUID().toString());
-		anotherBsp.setName("xpert");
-		anotherBsp.setDescription("xpert.cn is a good BSP.");
-		anotherBsp.setServerURL("http://xpert.cn");
 		this.movingLogDao.insertBsp(anotherBsp);
 
 		MovingLog movingLog = new MovingLog();

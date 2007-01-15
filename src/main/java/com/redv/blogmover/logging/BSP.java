@@ -33,6 +33,7 @@ public class BSP implements Serializable {
 
 	/**
 	 * @return the description
+	 * @deprecated
 	 */
 	public String getDescription() {
 		return description;
@@ -41,6 +42,7 @@ public class BSP implements Serializable {
 	/**
 	 * @param description
 	 *            the description to set
+	 * @deprecated
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -63,6 +65,7 @@ public class BSP implements Serializable {
 
 	/**
 	 * @return the name
+	 * @deprecated
 	 */
 	public String getName() {
 		return name;
@@ -71,6 +74,7 @@ public class BSP implements Serializable {
 	/**
 	 * @param name
 	 *            the name to set
+	 * @deprecated
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -78,6 +82,7 @@ public class BSP implements Serializable {
 
 	/**
 	 * @return the serverURL
+	 * @deprecated
 	 */
 	public String getServerURL() {
 		return serverURL;
@@ -86,6 +91,7 @@ public class BSP implements Serializable {
 	/**
 	 * @param serverURL
 	 *            the serverURL to set
+	 * @deprecated
 	 */
 	public void setServerURL(String serverURL) {
 		this.serverURL = serverURL;
@@ -113,8 +119,7 @@ public class BSP implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(id).append(name).append(serverURL)
-				.append(description).toHashCode();
+		return new HashCodeBuilder().append(id).toHashCode();
 	}
 
 	/*
@@ -131,9 +136,7 @@ public class BSP implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		final BSP other = (BSP) obj;
-		return new EqualsBuilder().append(id, other.id)
-				.append(name, other.name).append(serverURL, other.serverURL)
-				.append(description, other.description).isEquals();
+		return new EqualsBuilder().append(id, other.id).isEquals();
 	}
 
 }

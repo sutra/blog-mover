@@ -7,9 +7,11 @@
 			length="255">
 			<generator class="assigned" />
 		</id>
+		<!-- 
 		<property name="name" />
 		<property name="serverURL" />
 		<property name="description" />
+		 -->
 		<set name="movingEntries" inverse="true">
 			<key column="bsp_id" />
 			<one-to-many class="MovingEntry" />

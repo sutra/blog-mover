@@ -18,6 +18,7 @@ import com.redv.blogmover.BlogWriter;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.WebLog;
+import com.redv.blogmover.bsps.BSPIDUtils;
 import com.redv.blogmover.logging.BSP;
 
 /**
@@ -39,7 +40,7 @@ public abstract class AbstractBlogWriter implements BlogWriter {
 	public AbstractBlogWriter() {
 		super();
 		bsp = new BSP();
-		bsp.setId(this.getClass().getName());
+		bsp.setId(BSPIDUtils.getId(this.getClass()));
 		this.status = new StatusImpl();
 	}
 

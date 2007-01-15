@@ -73,8 +73,6 @@ public class SohuBlogReader extends AbstractBlogReader {
 	 */
 	public SohuBlogReader() {
 		super();
-		bsp.setName("搜狐博客");
-		bsp.setServerURL("http://blog.sohu.com/");
 
 		httpClient = new HttpClient();
 		httpClient.getParams().setCookiePolicy(

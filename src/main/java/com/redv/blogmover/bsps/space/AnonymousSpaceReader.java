@@ -62,8 +62,6 @@ public class AnonymousSpaceReader implements BlogReader {
 		super();
 		this.bsp = new BSP();
 		this.bsp.setId(this.getClass().getName());
-		this.bsp.setName("Live Space");
-		this.bsp.setServerURL("http://spaces.live.com");
 
 		this.status = new StatusImpl();
 	}

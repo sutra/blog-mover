@@ -23,6 +23,7 @@ import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.BlogWriter;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.WebLog;
+import com.redv.blogmover.bsps.BSPIDUtils;
 import com.redv.blogmover.impl.StatusImpl;
 import com.redv.blogmover.logging.BSP;
 
@@ -74,9 +75,7 @@ public class CSDNBlogWriter implements BlogWriter {
 	public CSDNBlogWriter() throws HttpException, IOException, SAXException {
 		super();
 		bsp = new BSP();
-		bsp.setId(this.getClass().getName());
-		bsp.setName("CSDN Blog");
-		bsp.setServerURL("http://blog.csdn.net/");
+		bsp.setId(BSPIDUtils.getId(this.getClass()));
 
 		this.status = new StatusImpl();
 		this.httpClient = new HttpClient();

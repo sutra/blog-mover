@@ -48,9 +48,6 @@ public class BaiduWriter extends AbstractBlogWriter {
 	 */
 	public BaiduWriter() {
 		super();
-		bsp.setName("百度空间");
-		bsp.setDescription("百度空间");
-		bsp.setServerURL("http://hi.baidu.com/");
 
 		HttpClient httpClient = new HttpClient();
 		httpDocument = new HttpDocument(httpClient, "GB2312");

@@ -35,9 +35,6 @@ public class BokeeReader extends AbstractBlogReader {
 	private String password;
 
 	public BokeeReader() {
-		bsp.setName("博客网");
-		bsp.setServerURL("http://www.bokee.com/");
-
 		httpClient = new HttpClient();
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);

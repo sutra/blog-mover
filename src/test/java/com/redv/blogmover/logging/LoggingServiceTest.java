@@ -108,8 +108,6 @@ public class LoggingServiceTest extends
 	private BSP buildBsp(String bspId) {
 		BSP toBsp = new BSP();
 		toBsp.setId(bspId);
-		toBsp.setName("test");
-		toBsp.setServerURL("http://xpert.cn/shutra/");
 		return toBsp;
 	}
 

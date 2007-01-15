@@ -12,6 +12,7 @@ import com.redv.blogmover.BlogReader;
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.WebLog;
+import com.redv.blogmover.bsps.BSPIDUtils;
 import com.redv.blogmover.logging.BSP;
 
 /**
@@ -31,7 +32,7 @@ public abstract class AbstractBlogReader implements BlogReader {
 	 */
 	public AbstractBlogReader() {
 		this.bsp = new BSP();
-		this.bsp.setId(this.getClass().getName());
+		this.bsp.setId(BSPIDUtils.getId(this.getClass()));
 
 		this.status = new StatusImpl();
 	}

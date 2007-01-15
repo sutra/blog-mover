@@ -37,8 +37,6 @@ public class GDataWriter extends AbstractBlogWriter {
 
 	public GDataWriter() {
 		super();
-		bsp.setName("Blogger");
-		bsp.setServerURL("http://www.blogger.com/");
 	}
 
 	/**

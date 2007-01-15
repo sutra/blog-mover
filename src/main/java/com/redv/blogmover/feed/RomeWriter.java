@@ -71,7 +71,6 @@ public class RomeWriter extends AbstractBlogWriter {
 
 	public RomeWriter() {
 		super();
-		bsp.setName("Rome");
 	}
 
 	/**

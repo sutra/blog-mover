@@ -44,9 +44,6 @@ public class SohuBlogWriter extends AbstractBlogWriter {
 	private String username;
 
 	public SohuBlogWriter() {
-		bsp.setName("搜狐博客");
-		bsp.setServerURL("http://blog.sohu.com/");
-
 		httpClient = new HttpClient();
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
