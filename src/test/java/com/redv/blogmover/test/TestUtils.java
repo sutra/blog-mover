@@ -20,11 +20,11 @@ public class TestUtils {
 		String[] paths;
 		try {
 			paths = new String[] {
-					new File(userDir, "applicationContext.xml").toURL()
+					new File(userDir, "applicationContext.xml").toURI().toURL()
 							.toExternalForm(),
 					new File(userDir, "dataAccessContext-hibernate.xml")
-							.toURL().toExternalForm(),
-					new File(userDir, "blog-mover-servlet.xml").toURL()
+							.toURI().toURL().toExternalForm(),
+					new File(userDir, "blog-mover-servlet.xml").toURI().toURL()
 							.toExternalForm() };
 			return paths;
 		} catch (MalformedURLException e) {
