@@ -88,8 +88,7 @@ public class ReportTag extends TagSupport {
 			long w1 = movedInOut[1];
 			out.print("<tr>");
 			out.print("<td>");
-			out.print(bsp.getId());
-			// <fmt:message key="com.redv.blogmover.bsps.${bsp.id}" />
+			out.print(BSPNameMessages.getString(bsp.getId()));
 			out.print("</td>");
 			out.print("<td>");
 			out.print("<div class='movedIn' style='width:" + w0
