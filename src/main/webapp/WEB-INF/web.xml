@@ -7,6 +7,7 @@
 	<description>
 		Our goal is allowing your blog moving freely between each BSP.
 	</description>
+
 	<context-param>
 		<description>
 			该 web application 的根目录的绝对文件路径作为属性保存在 System 的属性列表中。该属性的名字，由
@@ -24,6 +25,7 @@
 			/WEB-INF/dataAccessContext-hibernate.xml
 		</param-value>
 	</context-param>
+
 	<listener>
 		<description>Context loader for spring.</description>
 		<listener-class>
@@ -42,6 +44,7 @@
 			com.redv.blogmover.web.BlogMoverHttpSessionListener
 		</listener-class>
 	</listener>
+
 	<servlet>
 		<servlet-name>blog-mover</servlet-name>
 		<servlet-class>
@@ -78,6 +81,22 @@
 			com.redv.blogmover.web.DownloadFileServlet
 		</servlet-class>
 	</servlet>
+
+	<filter>
+		<filter-name>ApplicationCacheFilter</filter-name>
+		<filter-class>
+			com.opensymphony.oscache.web.filter.CacheFilter
+		</filter-class>
+		<init-param>
+			<param-name>time</param-name>
+			<param-value>86400</param-value>
+		</init-param>
+		<init-param>
+			<param-name>scope</param-name>
+			<param-value>application</param-value>
+		</init-param>
+	</filter>
+
 	<servlet-mapping>
 		<servlet-name>blog-mover</servlet-name>
 		<url-pattern>*.jhtml</url-pattern>
@@ -94,6 +113,20 @@
 		<servlet-name>download-file</servlet-name>
 		<url-pattern>/download-file</url-pattern>
 	</servlet-mapping>
+
+	<filter-mapping>
+		<filter-name>ApplicationCacheFilter</filter-name>
+		<url-pattern>/report.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>ApplicationCacheFilter</filter-name>
+		<url-pattern>/readers.jhtml</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>ApplicationCacheFilter</filter-name>
+		<url-pattern>/writers.jhtml</url-pattern>
+	</filter-mapping>
+
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>deny</web-resource-name>
