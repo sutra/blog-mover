@@ -128,4 +128,12 @@
 		<location>/</location>
 	</error-page>
 
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://blogmover.redv.com/</taglib-uri>
+			<taglib-location>
+				/WEB-INF/tlds/blog-mover.tld
+			</taglib-location>
+		</taglib>
+	</jsp-config>
 </web-app>
