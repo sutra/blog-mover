@@ -13,6 +13,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.redv.blogmover.logging.BSP;
@@ -92,8 +93,9 @@ public class ReportTag extends TagSupport {
 			float w0 = (float) movedInOut[0] / (float) max[0] * 100;
 			float w1 = (float) movedInOut[1] / (float) max[1] * 100;
 			out.print("<tr>");
-			out.print("<td>");
-			out.print(BSPNameMessages.getString(bsp.getId()));
+			out.print("<td style='width: 10%;'>");
+			out.print(StringUtils.abbreviate(BSPNameMessages.getString(bsp
+					.getId()), 40));
 			out.print("</td>");
 			out.print("<td>");
 			out.print("<div class='movedIn' style='width:" + w0
