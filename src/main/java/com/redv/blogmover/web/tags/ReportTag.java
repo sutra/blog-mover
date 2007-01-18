@@ -97,7 +97,7 @@ public class ReportTag extends TagSupport {
 			out.print(StringUtils.abbreviate(BSPNameMessages.getString(bsp
 					.getId()), 40));
 			out.print("</td>");
-			out.print("<td style='width: 95%;'>");
+			out.print("<td style='width: 85%;'>");
 			out.print("<div class='movedIn' style='width:" + w0
 					+ "%;'>&nbsp;</div>");
 			out.print("<div class='movedOut' style='width:" + w1
