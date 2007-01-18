@@ -47,7 +47,7 @@ public class ReportTag extends TagSupport {
 	private void render() throws IOException {
 		JspWriter out = this.pageContext.getOut();
 		out
-				.println("<table style=\"border: 1px solid #333;background-color: #eee;\">");
+				.println("<table style=\"width: 100%;border: 1px solid #333;background-color: #eee;\">");
 		out.println("<thead>");
 		out.println("<tr>");
 		out.println("<th>");
@@ -85,25 +85,41 @@ public class ReportTag extends TagSupport {
 				.getWebApplicationContext(this.pageContext.getServletContext())
 				.getBean("reportBuilder");
 		Map<BSP, long[]> statistic = reportBuilder.buildStatistic();
+		long[] max = this.getMax(statistic);
 		for (Iterator<BSP> iter = statistic.keySet().iterator(); iter.hasNext();) {
 			BSP bsp = iter.next();
 			long[] movedInOut = statistic.get(bsp);
-			long w0 = movedInOut[0];
-			long w1 = movedInOut[1];
+			float w0 = (float) movedInOut[0] / (float) max[0] * 100;
+			float w1 = (float) movedInOut[1] / (float) max[1] * 100;
 			out.print("<tr>");
 			out.print("<td>");
 			out.print(BSPNameMessages.getString(bsp.getId()));
 			out.print("</td>");
 			out.print("<td>");
 			out.print("<div class='movedIn' style='width:" + w0
-					+ "px;'>&nbsp;</div>");
+					+ "%;'>&nbsp;</div>");
 			out.print("<div class='movedOut' style='width:" + w1
-					+ "px;'>&nbsp;</div>");
+					+ "%;'>&nbsp;</div>");
 			out.print("</td>");
-			out.print("<td>" + w0 + "<br />" + w1 + "</td>");
+			out.print("<td>" + movedInOut[0] + "<br />" + movedInOut[1]
+					+ "</td>");
 			out.print("</tr>\n");
 		}
 
 	}
 
+	private long[] getMax(Map<BSP, long[]> statistic) {
+		long[] max = new long[2];
+		for (Iterator<long[]> iter = statistic.values().iterator(); iter
+				.hasNext();) {
+			long[] movedInOut = iter.next();
+			if (movedInOut[0] > max[0]) {
+				max[0] = movedInOut[0];
+			}
+			if (movedInOut[1] > max[1]) {
+				max[1] = movedInOut[1];
+			}
+		}
+		return max;
+	}
 }
