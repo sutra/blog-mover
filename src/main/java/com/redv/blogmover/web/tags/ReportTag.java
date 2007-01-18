@@ -4,6 +4,8 @@
 package com.redv.blogmover.web.tags;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -71,6 +73,8 @@ public class ReportTag extends TagSupport {
 		out.println("搬出次数");
 		out.println("</td>");
 		out.println("</tr>");
+		out.println(String.format("<tr><td>报表生成时间：%1$s</td></tr>", DateFormat
+				.getDateTimeInstance().format(new Date())));
 		out.println("</tfoot>");
 		out.println("</table>");
 	}
