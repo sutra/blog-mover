@@ -86,18 +86,18 @@ public class ReportTag extends TagSupport {
 				.getWebApplicationContext(this.pageContext.getServletContext())
 				.getBean("reportBuilder");
 		Map<BSP, long[]> statistic = reportBuilder.buildStatistic();
-		long[] max = this.getMax(statistic);
+		long max = this.getMax(statistic);
 		for (Iterator<BSP> iter = statistic.keySet().iterator(); iter.hasNext();) {
 			BSP bsp = iter.next();
 			long[] movedInOut = statistic.get(bsp);
-			float w0 = (float) movedInOut[0] / (float) max[0] * 100;
-			float w1 = (float) movedInOut[1] / (float) max[1] * 100;
+			float w0 = (float) movedInOut[0] / (float) max * 100;
+			float w1 = (float) movedInOut[1] / (float) max * 100;
 			out.print("<tr>");
 			out.print("<td style='width: 10%;'>");
 			out.print(StringUtils.abbreviate(BSPNameMessages.getString(bsp
 					.getId()), 40));
 			out.print("</td>");
-			out.print("<td>");
+			out.print("<td style='width: 95%;'>");
 			out.print("<div class='movedIn' style='width:" + w0
 					+ "%;'>&nbsp;</div>");
 			out.print("<div class='movedOut' style='width:" + w1
@@ -110,16 +110,16 @@ public class ReportTag extends TagSupport {
 
 	}
 
-	private long[] getMax(Map<BSP, long[]> statistic) {
-		long[] max = new long[2];
+	private long getMax(Map<BSP, long[]> statistic) {
+		long max = 0;
 		for (Iterator<long[]> iter = statistic.values().iterator(); iter
 				.hasNext();) {
 			long[] movedInOut = iter.next();
-			if (movedInOut[0] > max[0]) {
-				max[0] = movedInOut[0];
+			if (movedInOut[0] > max) {
+				max = movedInOut[0];
 			}
-			if (movedInOut[1] > max[1]) {
-				max[1] = movedInOut[1];
+			if (movedInOut[1] > max) {
+				max = movedInOut[1];
 			}
 		}
 		return max;
