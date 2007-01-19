@@ -4,7 +4,7 @@
 package com.redv.blogmover.web.tags;
 
 import java.io.IOException;
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
@@ -30,6 +30,9 @@ public class ReportTag extends TagSupport {
 	 */
 	private static final long serialVersionUID = 744369341150491624L;
 
+	private static SimpleDateFormat sdf = new SimpleDateFormat(
+			"yyyy-MM-dd HH:mm:ss");
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -47,35 +50,29 @@ public class ReportTag extends TagSupport {
 
 	private void render() throws IOException {
 		JspWriter out = this.pageContext.getOut();
-		out
-				.println("<table style=\"width: 100%;border: 1px solid #333;background-color: #eee;\">");
-		out.println("<thead>");
-		out.println("<tr>");
-		out.println("<th>");
-		out.println("搬迁统计");
-		out.println("</th>");
-		out.println("</tr>");
+		out.println("<table cellpadding='0' cellspacing='0' class='report'>");
+		out.print("<thead>");
+		out.print("<tr>");
+		out.print("<th colspan='2'>");
+		out.print("搬迁统计");
+		out.print("</th>");
+		out.print("</tr>");
 		out.println("</thead>");
-		out.println("<tbody>");
+		out.print("<tbody>");
 		this.renderLines();
 		out.println("</tbody>");
-		out.println("<tfoot>");
-		out.println("<tr>");
-		out.println("<td>");
-		out
-				.println("<div class=\"movedIn\" style=\"width: 40px;display: inline;\">");
-		out.println("&nbsp;");
-		out.println("</div>");
-		out.println("搬入次数");
-		out
-				.println("<div class=\"movedOut\" style=\"width: 40px;display: inline;\">");
-		out.println("&nbsp;");
-		out.println("</div>");
-		out.println("搬出次数");
-		out.println("</td>");
-		out.println("</tr>");
-		out.println(String.format("<tr><td>报表生成时间：%1$s</td></tr>", DateFormat
-				.getDateTimeInstance().format(new Date())));
+		out.print("<tfoot>");
+		out.print("<tr>");
+		out.print("<td>");
+		out.print("<div class=\"movedIn\" style='width: 60%;'>");
+		out.print("搬入次数");
+		out.print("</div>");
+		out.print("<div class=\"movedOut\" style='width: 60%;'>");
+		out.print("搬出次数");
+		out.print("</div></td>");
+		out.print("<td style='text-align: right;'>");
+		out.print(String
+				.format("报表生成时间：%1$s</td></tr>", sdf.format(new Date())));
 		out.println("</tfoot>");
 		out.println("</table>");
 	}
@@ -93,19 +90,17 @@ public class ReportTag extends TagSupport {
 			float w0 = (float) movedInOut[0] / (float) max * 100;
 			float w1 = (float) movedInOut[1] / (float) max * 100;
 			out.print("<tr>");
-			out.print("<td style='width: 10%;'>");
+			out.print("<td style='width: 10%;text-align: right;'>");
 			out.print(StringUtils.abbreviate(BSPNameMessages.getString(bsp
-					.getId()), 40));
+					.getId()), 20));
 			out.print("</td>");
 			out.print("<td style='width: 85%;'>");
-			out.print("<div class='movedIn' style='width:" + w0
-					+ "%;'>&nbsp;</div>");
-			out.print("<div class='movedOut' style='width:" + w1
-					+ "%;'>&nbsp;</div>");
+			out.print("<div class='movedIn' style='width:" + w0 + "%;'>"
+					+ movedInOut[0] + "</div>");
+			out.print("<div class='movedOut' style='width:" + w1 + "%;'>"
+					+ movedInOut[1] + "</div>");
 			out.print("</td>");
-			out.print("<td>" + movedInOut[0] + "<br />" + movedInOut[1]
-					+ "</td>");
-			out.print("</tr>\n");
+			out.println("</tr>");
 		}
 
 	}

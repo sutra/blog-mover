@@ -13,6 +13,20 @@
 	background-color:red;
 	}
 	.movedIn, .movedOut {
+	display: block;
+	text-align: right;
+	}
+	.report {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	border: 1px solid #333;
+	background-color: #eee;
+	}
+	.report th, td{
+	margin: 0px;
+	padding: 0px;
+	border-bottom: 1px solid #333;
 	}
 	</style>
 	</head>
