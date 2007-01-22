@@ -30,6 +30,12 @@
 	</head>
 	<body id="nicetabs">
 		<div>
+			<noscript>
+				<div class="noscriptError">
+					应启用 JavaScript，才能使用 Blog Mover。然而，JavaScript 似乎已被禁用，要么就是您的浏览器不支持
+					JavaScript。要使用 Blog Mover，请更改您的浏览器选项以启用 JavaScript，然后重试。
+				</div>
+			</noscript>
 			<div id="blogMoverHeader">
 				<h1>
 					Blog Mover （博客搬家通用工具）

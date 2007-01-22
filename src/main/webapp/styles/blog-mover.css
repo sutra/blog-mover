@@ -193,3 +193,14 @@ div #webLogsBox {
 	border-bottom: 1px #ddd solid;
 	border-left: 1px #000 solid;
 }
+
+.noscriptError {
+	clear: both;
+	background: #ffffe1;
+	border: 1px solid #ccc;
+	margin: auto;
+	font-size: 14px;
+	display: block;
+	color: red;
+	font-weight: bold;
+}
