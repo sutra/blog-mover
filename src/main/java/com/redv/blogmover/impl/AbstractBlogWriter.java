@@ -34,6 +34,8 @@ public abstract class AbstractBlogWriter implements BlogWriter {
 
 	protected Status status;
 
+	private long operationInterval;
+
 	/**
 	 * 
 	 */
@@ -46,6 +48,14 @@ public abstract class AbstractBlogWriter implements BlogWriter {
 
 	public BSP getBsp() {
 		return bsp;
+	}
+
+	/**
+	 * @param operationInterval
+	 *            the operationInterval to set
+	 */
+	public void setOperationInterval(long operationInterval) {
+		this.operationInterval = operationInterval;
 	}
 
 	/*
@@ -76,6 +86,14 @@ public abstract class AbstractBlogWriter implements BlogWriter {
 				}
 				write(webLog, attachments);
 				this.status.setCurrentCount(++i);
+
+				if (this.operationInterval != 0) {
+					try {
+						Thread.sleep(this.operationInterval);
+					} catch (InterruptedException e) {
+						log.warn(e);
+					}
+				}
 			}
 		} finally {
 			end();

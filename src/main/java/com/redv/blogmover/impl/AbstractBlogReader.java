@@ -27,6 +27,8 @@ public abstract class AbstractBlogReader implements BlogReader {
 
 	protected Status status;
 
+	protected long operationInterval;
+
 	/**
 	 * 
 	 */
@@ -44,6 +46,14 @@ public abstract class AbstractBlogReader implements BlogReader {
 	 */
 	public BSP getBsp() {
 		return bsp;
+	}
+
+	/**
+	 * @param operationInterval
+	 *            the operationInterval to set
+	 */
+	public void setOperationInterval(long operationInterval) {
+		this.operationInterval = operationInterval;
 	}
 
 	/*
