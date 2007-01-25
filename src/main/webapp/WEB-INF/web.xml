@@ -81,6 +81,12 @@
 			com.redv.blogmover.web.DownloadFileServlet
 		</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>chart</servlet-name>
+		<servlet-class>
+			com.redv.blogmover.web.ChartServlet
+		</servlet-class>
+	</servlet>
 
 	<filter>
 		<filter-name>ApplicationCacheFilter</filter-name>
@@ -112,6 +118,10 @@
 	<servlet-mapping>
 		<servlet-name>download-file</servlet-name>
 		<url-pattern>/download-file</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>chart</servlet-name>
+		<url-pattern>/chart</url-pattern>
 	</servlet-mapping>
 
 	<filter-mapping>
