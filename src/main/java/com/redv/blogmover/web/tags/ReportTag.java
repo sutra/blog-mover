@@ -91,7 +91,7 @@ public class ReportTag extends TagSupport {
 			float w0 = (float) movedInOut[0] / (float) max * 100;
 			float w1 = (float) movedInOut[1] / (float) max * 100;
 			out.print("<tr>");
-			out.print("<td style='width: 10%;text-align: right;' title='ID:"
+			out.print("<td style='width: 10%;text-align: right;' title='ID: "
 					+ bsp.getId() + ", Name: "
 					+ BSPNameMessages.getString(bsp.getId()) + "'>");
 			out.print(StringUtils.abbreviate(BSPNameMessages.getString(bsp
