@@ -16,6 +16,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.redv.blogmover.bsps.BSPNameMessages;
 import com.redv.blogmover.logging.BSP;
 import com.redv.blogmover.logging.ReportBuilder;
 

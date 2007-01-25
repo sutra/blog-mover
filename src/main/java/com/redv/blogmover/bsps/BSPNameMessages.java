@@ -1,7 +1,7 @@
 /**
  * Created on 2007-1-17 下午05:14:50
  */
-package com.redv.blogmover.web.tags;
+package com.redv.blogmover.bsps;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
