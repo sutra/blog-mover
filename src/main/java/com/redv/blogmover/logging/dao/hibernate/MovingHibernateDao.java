@@ -160,6 +160,8 @@ public class MovingHibernateDao extends HibernateDaoSupport implements
 		String hql = "select count(*) from Moving where id in(select moving.id from MovingLog where fromEntry.bsp.id = :id) and date between :beginDate and :endDate";
 		Query query = this.getSession().createQuery(hql);
 		query.setString("id", id);
+		query.setDate("beginDate", beginDate);
+		query.setDate("endDate", endDate);
 		return (Long) query.uniqueResult();
 	}
 

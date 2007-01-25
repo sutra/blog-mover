@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartUtilities;
@@ -46,6 +47,8 @@ public class ChartServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		String movedDirection = StringUtils.defaultIfEmpty(request
+				.getParameter("movedDirection"), "in");
 		String beginDateString = request.getParameter("beginDate");
 		String endDateString = request.getParameter("endDate");
 		Date beginDate = null, endDate = null;
@@ -83,11 +86,19 @@ public class ChartServlet extends HttpServlet {
 		ReportBuilder reportBuilder = (ReportBuilder) WebApplicationContextUtils
 				.getWebApplicationContext(this.getServletContext()).getBean(
 						"reportBuilder");
-		JFreeChart chart = reportBuilder.createChart(reportBuilder
-				.buildDateset(beginDate, endDate));
+		JFreeChart chart;
+		if (movedDirection.equals("in")) {
+			chart = reportBuilder.createChart(reportBuilder
+					.buildMovedInDataset(beginDate, endDate), "Moved in times",
+					"Date", "Times");
+		} else {
+			chart = reportBuilder.createChart(reportBuilder
+					.buildMovedOutDataset(beginDate, endDate),
+					"Moved out times", "Date", "Times");
+		}
 		response.setContentType("image/png");
-		ChartUtilities.writeChartAsPNG(response.getOutputStream(), chart, 400,
-				300);
+		ChartUtilities.writeChartAsPNG(response.getOutputStream(), chart, 800,
+				600);
 	}
 
 }

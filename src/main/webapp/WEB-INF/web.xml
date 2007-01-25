@@ -130,6 +130,10 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>ApplicationCacheFilter</filter-name>
+		<servlet-name>chart</servlet-name>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>ApplicationCacheFilter</filter-name>
 		<url-pattern>/readers.jhtml</url-pattern>
 	</filter-mapping>
 	<filter-mapping>

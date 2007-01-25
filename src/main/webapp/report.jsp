@@ -31,6 +31,16 @@
 	</style>
 	</head>
 	<body>
-		<blog-mover:report />
+		<div>
+			<blog-mover:report />
+
+			<div>
+				<img src="chart?movedDirection=in" alt="Moved in times" />
+			</div>
+
+			<div>
+				<img src="chart?movedDirection=out" alt="Moved out times" />
+			</div>
+		</div>
 	</body>
 </html>
