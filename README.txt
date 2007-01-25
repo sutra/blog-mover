@@ -15,3 +15,5 @@ __zh__
 
 
 http://blogmover.redv.com
+
+User help: http://blogmover.redv.com/help
