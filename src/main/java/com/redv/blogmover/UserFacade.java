@@ -4,8 +4,6 @@
 package com.redv.blogmover;
 
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,11 +11,11 @@ import java.util.Vector;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.redv.blogmover.logging.LoggingService;
+import com.redv.blogmover.util.PropertySetter;
 
 /**
  * Blog Remover User Facade.
@@ -144,19 +142,7 @@ public class UserFacade implements Serializable {
 			if (this.reader == null) {
 				throw new NullPointerException("读取器为空。请设置读取器。");
 			}
-			Method m = this.reader.getClass().getMethod(
-					"set" + StringUtils.capitalize(property), String.class);
-			m.invoke(this.reader, value);
-		} catch (SecurityException e) {
-			throw new BlogMoverException(e);
-		} catch (NoSuchMethodException e) {
-			throw new BlogMoverException(e);
-		} catch (IllegalArgumentException e) {
-			throw new BlogMoverException(e);
-		} catch (IllegalAccessException e) {
-			throw new BlogMoverException(e);
-		} catch (InvocationTargetException e) {
-			throw new BlogMoverException(e);
+			new PropertySetter(this.reader).setProperty(property, value);
 		} finally {
 			this.readerLock.writeLock().unlock();
 		}
@@ -179,19 +165,7 @@ public class UserFacade implements Serializable {
 			if (this.writer == null) {
 				throw new NullPointerException("写入器为空。请设置写入器。");
 			}
-			Method m = this.writer.getClass().getMethod(
-					"set" + StringUtils.capitalize(property), String.class);
-			m.invoke(this.writer, value);
-		} catch (SecurityException e) {
-			throw new BlogMoverException(e);
-		} catch (NoSuchMethodException e) {
-			throw new BlogMoverException(e);
-		} catch (IllegalArgumentException e) {
-			throw new BlogMoverException(e);
-		} catch (IllegalAccessException e) {
-			throw new BlogMoverException(e);
-		} catch (InvocationTargetException e) {
-			throw new BlogMoverException(e);
+			new PropertySetter(this.writer).setProperty(property, value);
 		} finally {
 			this.writerLock.writeLock().unlock();
 		}

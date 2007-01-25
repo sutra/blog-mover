@@ -67,6 +67,13 @@ public class UserFacadeTest extends TestCase {
 		super.tearDown();
 	}
 
+	public void testSetReaderProperty() throws BlogMoverException {
+		userFacade.setReader(new BaiduReader());
+		userFacade.setReaderProperty("username", "test");
+		userFacade.setReaderProperty("password", "test");
+		userFacade.setReaderProperty("operationInterval", String.valueOf(1000));
+	}
+
 	public void test1() throws BlogMoverException {
 		userFacade.setReader(new BaiduReader());
 		userFacade.setReaderProperty("username", "blogremover");
