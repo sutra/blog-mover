@@ -89,13 +89,43 @@
 	</servlet>
 
 	<filter>
-		<filter-name>ApplicationCacheFilter</filter-name>
+		<filter-name>ApplicationOneDayCacheFilter</filter-name>
 		<filter-class>
 			com.opensymphony.oscache.web.filter.CacheFilter
 		</filter-class>
 		<init-param>
+			<description>
+				1 day = (24 hours/day * 60 minutes/hour * 60
+				seconds/minute) seconds
+			</description>
 			<param-name>time</param-name>
 			<param-value>86400</param-value>
+		</init-param>
+		<init-param>
+			<param-name>expires</param-name>
+			<param-value>time</param-value>
+		</init-param>
+		<init-param>
+			<param-name>scope</param-name>
+			<param-value>application</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>ApplicationOneMonthCacheFilter</filter-name>
+		<filter-class>
+			com.opensymphony.oscache.web.filter.CacheFilter
+		</filter-class>
+		<init-param>
+			<description>
+				1 month = (30 days/month * 24 hours/day * 60
+				minutes/hour * 60 seconds/minute) seconds
+			</description>
+			<param-name>time</param-name>
+			<param-value>2592000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>expires</param-name>
+			<param-value>time</param-value>
 		</init-param>
 		<init-param>
 			<param-name>scope</param-name>
@@ -124,21 +154,16 @@
 		<url-pattern>/chart</url-pattern>
 	</servlet-mapping>
 
+	<!-- Cache the report.jsp a day in the application scope. -->
 	<filter-mapping>
-		<filter-name>ApplicationCacheFilter</filter-name>
+		<filter-name>ApplicationOneDayCacheFilter</filter-name>
 		<url-pattern>/report.jsp</url-pattern>
 	</filter-mapping>
+
+	<!-- Cache the monthly report chart a month in the application scope. -->
 	<filter-mapping>
-		<filter-name>ApplicationCacheFilter</filter-name>
+		<filter-name>ApplicationOneMonthCacheFilter</filter-name>
 		<servlet-name>chart</servlet-name>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>ApplicationCacheFilter</filter-name>
-		<url-pattern>/readers.jhtml</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>ApplicationCacheFilter</filter-name>
-		<url-pattern>/writers.jhtml</url-pattern>
 	</filter-mapping>
 
 	<security-constraint>
