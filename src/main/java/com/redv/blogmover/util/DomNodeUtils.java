@@ -56,7 +56,7 @@ public class DomNodeUtils {
 	 * 
 	 * @param node
 	 * @return
-	 * @deprecated Use {@link #getXmlAsString(Node)} instead. 
+	 * @deprecated Use {@link #getXmlAsString(Node)} instead.
 	 */
 	public static String toString(Node node) {
 		StringBuffer sb = new StringBuffer();
