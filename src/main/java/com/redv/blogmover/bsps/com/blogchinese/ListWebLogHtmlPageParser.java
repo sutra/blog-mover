@@ -35,6 +35,8 @@ public class ListWebLogHtmlPageParser {
 
 	private int totalCount;
 
+	private int currentPageNumber;
+
 	private int lastPageNumber;
 
 	private List<String> webLogIds;
@@ -52,6 +54,13 @@ public class ListWebLogHtmlPageParser {
 	 * @param document
 	 */
 	public void parse() {
+		if (log.isDebugEnabled()) {
+			try {
+				log.debug(DomNodeUtils.getXmlAsString(document));
+			} catch (TransformerException e) {
+				log.debug(e);
+			}
+		}
 		this.webLogIds = new ArrayList<String>(20);
 		this.urls = new ArrayList<String>(20);
 
@@ -71,6 +80,10 @@ public class ListWebLogHtmlPageParser {
 		// The last page number.
 		NodeList as = showPageDiv.getElementsByTagName("a");
 		this.lastPageNumber = getLastPageNumber(as);
+
+		if (this.lastPageNumber == 0) {
+			this.lastPageNumber = currentPageNumber;
+		}
 
 		// The web logs id and url.
 		List<Element> listContentUlNodes = this.findListContentUlNodes();
@@ -192,6 +205,14 @@ public class ListWebLogHtmlPageParser {
 	 */
 	public void setDocument(Document document) {
 		this.document = document;
+	}
+
+	/**
+	 * @param currentPageNumber
+	 *            the currentPageNumber to set
+	 */
+	public void setCurrentPageNumber(int currentPageNumber) {
+		this.currentPageNumber = currentPageNumber;
 	}
 
 	/**

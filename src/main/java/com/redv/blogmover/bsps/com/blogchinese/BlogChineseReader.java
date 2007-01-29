@@ -64,8 +64,10 @@ public class BlogChineseReader extends AbstractBlogReader {
 		ListWebLogHtmlPageParser listParser = new ListWebLogHtmlPageParser();
 		String url = String.format(listUrlFormat, 1);
 		Document document = httpDocument.get(url);
+		listParser.setCurrentPageNumber(1);
 		listParser.setDocument(document);
 		listParser.parse();
+
 		this.status.setTotalCount(listParser.getTotalCount());
 		int lastPageNumber = listParser.getLastPageNumber();
 
@@ -74,11 +76,13 @@ public class BlogChineseReader extends AbstractBlogReader {
 		for (int i = 2; i <= lastPageNumber; i++) {
 			url = String.format(listUrlFormat, i);
 			document = httpDocument.get(url);
+			listParser.setCurrentPageNumber(i);
 			listParser.setDocument(document);
 			listParser.parse();
 			detail(listParser.getWebLogIds(), listParser.getUrls());
 		}
 
+		log.debug("webLogs.size(): " + webLogs.size());
 		return webLogs;
 	}
 

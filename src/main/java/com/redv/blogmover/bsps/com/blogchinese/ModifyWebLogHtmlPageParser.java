@@ -75,7 +75,9 @@ public class ModifyWebLogHtmlPageParser {
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, getValue("selecty"));
 		cal.set(Calendar.MONTH, getValue("selectm") - 1);
-		cal.set(Calendar.DATE, getValue("selectd"));
+		int date = getValue("selectd");
+		log.debug("date: " + date);
+		cal.set(Calendar.DATE, date);
 		cal.set(Calendar.HOUR, getValue("selecth"));
 		cal.set(Calendar.MINUTE, getValue("selectmi"));
 		cal.set(Calendar.SECOND, getValue("selects"));
