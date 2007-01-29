@@ -61,7 +61,7 @@ public class BlogChineseReader extends AbstractBlogReader {
 	public List<WebLog> read() throws BlogMoverException {
 		new BlogChineseLogin(httpDocument).login(username, password);
 
-		ListParser listParser = new ListParser();
+		ListWebLogHtmlPageParser listParser = new ListWebLogHtmlPageParser();
 		String url = String.format(listUrlFormat, 1);
 		Document document = httpDocument.get(url);
 		listParser.parse(document);
@@ -87,9 +87,23 @@ public class BlogChineseReader extends AbstractBlogReader {
 	 * @param webLogIds
 	 */
 	private void detail(List<String> webLogIds) {
-		// TODO.
-		this.status.setCurrentCount(this.webLogs.size());
-		// this.status.setCurrentWebLog(webLog);
+		for (String webLogId : webLogIds) {
+			WebLog webLog = detail(webLogId);
+			this.webLogs.add(webLog);
+			this.status.setCurrentWebLog(webLog);
+			this.status.setCurrentCount(this.webLogs.size());
+		}
+	}
+
+	private WebLog detail(String webLogId) {
+		ModifyWebLogHtmlPageParser parser = new ModifyWebLogHtmlPageParser();
+		String url = String.format(
+				"http://www.blogchinese.com/user_post.asp?logid=%1$s&t=0",
+				webLogId);
+		Document document = httpDocument.get(url);
+		parser.setDocument(document);
+		WebLog webLog = parser.getWebLog();
+		return webLog;
 	}
 
 }

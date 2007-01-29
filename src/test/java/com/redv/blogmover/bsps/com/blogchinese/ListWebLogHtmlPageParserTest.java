@@ -5,28 +5,24 @@ package com.redv.blogmover.bsps.com.blogchinese;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
 
-import org.cyberneko.html.parsers.DOMParser;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 /**
  * @author shutra
  * 
  */
-public class ListParserTest {
-	private ListParser listParser;
+public class ListWebLogHtmlPageParserTest {
+	private ListWebLogHtmlPageParser listParser;
 
 	private Document document;
 
@@ -49,12 +45,12 @@ public class ListParserTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		listParser = new ListParser();
+		listParser = new ListWebLogHtmlPageParser();
 		InputStream inputStream = this.getClass().getResourceAsStream(
 				"user_blogmanage.asp");
 		try {
 			Reader reader = new InputStreamReader(inputStream, "UTF-8");
-			document = getDocument(reader);
+			document = new HtmlFileToDocument().getDocument(reader);
 		} finally {
 			inputStream.close();
 		}
@@ -69,7 +65,7 @@ public class ListParserTest {
 
 	/**
 	 * Test method for
-	 * {@link com.redv.blogmover.bsps.com.blogchinese.ListParser#parse(org.w3c.dom.Document)}.
+	 * {@link com.redv.blogmover.bsps.com.blogchinese.ListWebLogHtmlPageParser#parse(org.w3c.dom.Document)}.
 	 */
 	@Test
 	public void testParse() {
@@ -87,26 +83,4 @@ public class ListParserTest {
 		}
 	}
 
-	/**
-	 * Get the xml dom document from a reader.
-	 * 
-	 * @param characterStream
-	 * @return the xml dom of the character stream.
-	 * @throws SAXException
-	 * @throws IOException
-	 */
-	public static Document getDocument(Reader characterStream)
-			throws SAXException, IOException {
-		DOMParser parser = new DOMParser();
-		parser
-				.setFeature(
-						"http://cyberneko.org/html/features/scanner/notify-builtin-refs",
-						true);
-		parser.setProperty("http://cyberneko.org/html/properties/names/elems",
-				"lower");
-		InputSource inputSource = new InputSource();
-		inputSource.setCharacterStream(characterStream);
-		parser.parse(inputSource);
-		return parser.getDocument();
-	}
 }

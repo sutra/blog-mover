@@ -13,6 +13,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -24,6 +27,8 @@ import org.w3c.dom.Text;
  * 
  */
 public class DomNodeUtils {
+	private static final Log log = LogFactory.getLog(DomNodeUtils.class);
+
 	public static String getTextContent(Node node) {
 		String ret = null;
 		switch (node.getNodeType()) {
@@ -141,10 +146,35 @@ public class DomNodeUtils {
 	}
 
 	/**
-	 * @param args
+	 * A <code>select</code> html element, parse it, and return the html form
+	 * select. pair.
+	 * 
+	 * @param select
+	 *            a <code>select</code> html element.
+	 * @return the html form select.
 	 */
-	public static void main(String[] args) {
-
+	public static HtmlFormSelect getSelect(Element select) {
+		HtmlFormSelect hfs = new HtmlFormSelect();
+		try {
+			log.debug(getXmlAsString(select));
+		} catch (TransformerException e) {
+			log.warn(e);
+		}
+		hfs.setName(select.getAttribute("name"));
+		NodeList options = select.getElementsByTagName("option");
+		List<String> values = new ArrayList<String>();
+		for (int i = 0; i < options.getLength(); i++) {
+			Element option = (Element) options.item(i);
+			Node selectedNode = option.getAttributes().getNamedItem("selected");
+			log.debug("is selectedNode null: " + (selectedNode == null));
+			if (selectedNode != null) {
+				values.add(option.getAttribute("value"));
+			}
+		}
+		String[] valueStrings = new String[values.size()];
+		values.toArray(valueStrings);
+		hfs.setValues(valueStrings);
+		return hfs;
 	}
 
 }

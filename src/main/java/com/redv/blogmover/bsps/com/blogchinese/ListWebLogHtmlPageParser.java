@@ -19,11 +19,14 @@ import org.w3c.dom.NodeList;
 import com.redv.blogmover.util.DomNodeUtils;
 
 /**
+ * Parse the document and find the web log list. The document is getting from
+ * "http://www.blogchinese.com/user_blogmanage.asp".
+ * 
  * @author shutra
  * 
  */
-public class ListParser {
-	private static final Log log = LogFactory.getLog(ListParser.class);
+public class ListWebLogHtmlPageParser {
+	private static final Log log = LogFactory.getLog(ListWebLogHtmlPageParser.class);
 
 	private int totalCount;
 
@@ -31,7 +34,7 @@ public class ListParser {
 
 	private List<String> webLogIds;
 
-	public ListParser() {
+	public ListWebLogHtmlPageParser() {
 		super();
 	}
 
