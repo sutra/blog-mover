@@ -64,18 +64,19 @@ public class BlogChineseReader extends AbstractBlogReader {
 		ListWebLogHtmlPageParser listParser = new ListWebLogHtmlPageParser();
 		String url = String.format(listUrlFormat, 1);
 		Document document = httpDocument.get(url);
-		listParser.parse(document);
+		listParser.setDocument(document);
+		listParser.parse();
 		this.status.setTotalCount(listParser.getTotalCount());
 		int lastPageNumber = listParser.getLastPageNumber();
 
-		detail(listParser.getWebLogIds());
+		detail(listParser.getWebLogIds(), listParser.getUrls());
 
 		for (int i = 2; i <= lastPageNumber; i++) {
 			url = String.format(listUrlFormat, i);
 			document = httpDocument.get(url);
-			listParser.parse(document);
-			detail(listParser.getWebLogIds());
-
+			listParser.setDocument(document);
+			listParser.parse();
+			detail(listParser.getWebLogIds(), listParser.getUrls());
 		}
 
 		return webLogs;
@@ -86,23 +87,25 @@ public class BlogChineseReader extends AbstractBlogReader {
 	 * 
 	 * @param webLogIds
 	 */
-	private void detail(List<String> webLogIds) {
+	private void detail(List<String> webLogIds, List<String> urls) {
+		int i = 0;
 		for (String webLogId : webLogIds) {
-			WebLog webLog = detail(webLogId);
+			WebLog webLog = detail(webLogId, urls.get(i++));
 			this.webLogs.add(webLog);
 			this.status.setCurrentWebLog(webLog);
 			this.status.setCurrentCount(this.webLogs.size());
 		}
 	}
 
-	private WebLog detail(String webLogId) {
+	private WebLog detail(String webLogId, String url) {
 		ModifyWebLogHtmlPageParser parser = new ModifyWebLogHtmlPageParser();
-		String url = String.format(
+		String modifyUrl = String.format(
 				"http://www.blogchinese.com/user_post.asp?logid=%1$s&t=0",
 				webLogId);
-		Document document = httpDocument.get(url);
+		Document document = httpDocument.get(modifyUrl);
 		parser.setDocument(document);
 		WebLog webLog = parser.getWebLog();
+		webLog.setUrl("http://www.blogchinese.com/" + url);
 		return webLog;
 	}
 
