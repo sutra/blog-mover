@@ -85,12 +85,9 @@ public class HtmlFileToDocument {
 	public Document getDocument(Reader characterStream) throws SAXException,
 			IOException {
 		DOMParser parser = new DOMParser();
-		parser
-				.setFeature(
-						"http://cyberneko.org/html/features/scanner/notify-builtin-refs",
-						true);
-		parser.setProperty("http://cyberneko.org/html/properties/names/elems",
-				"lower");
+		// parser.setFeature(
+		// "http://apache.org/xml/features/scanner/notify-builtin-refs",
+		// true);
 		InputSource inputSource = new InputSource();
 		inputSource.setCharacterStream(characterStream);
 		parser.parse(inputSource);

@@ -6,65 +6,34 @@ package com.redv.blogmover.bsps.com.blogchinese;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.io.InputStream;
+import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.cyberneko.html.parsers.DOMParser;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-
-import com.redv.blogmover.util.DomNodeUtils;
+import org.xml.sax.SAXException;
 
 /**
  * @author shutra
  * 
  */
 public class LoginResponseParserTest {
+	@SuppressWarnings("unused")
 	private static final Log log = LogFactory
 			.getLog(LoginResponseParserTest.class);
 
 	private LoginResponseParser parser;
-
-	private static Document loginSuccessResponseDocument;
-
-	private static Document loginFailResponseDocument;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		InputStream inputStream = LoginResponseParserTest.class
-				.getResourceAsStream("login-success-response.html");
-		DOMParser parser = new DOMParser();
-		InputSource inputSource = new InputSource();
-		inputSource.setByteStream(inputStream);
-		try {
-			parser.parse(inputSource);
-			loginSuccessResponseDocument = parser.getDocument();
-		} finally {
-			inputStream.close();
-		}
-
-		inputStream = LoginResponseParserTest.class
-				.getResourceAsStream("login-fail-response.html");
-		inputSource = new InputSource();
-		inputSource.setByteStream(inputStream);
-		try {
-			parser.parse(inputSource);
-			parser.parse(inputSource);
-			loginFailResponseDocument = parser.getDocument();
-		} finally {
-			inputStream.close();
-		}
-
-		log.debug(DomNodeUtils.getXmlAsString(loginSuccessResponseDocument));
 	}
 
 	/**
@@ -92,17 +61,26 @@ public class LoginResponseParserTest {
 	/**
 	 * Test method for
 	 * {@link com.redv.blogmover.bsps.com.blogchinese.LoginResponseParser#checkLoginSuccess(org.w3c.dom.Document)}.
+	 * 
+	 * @throws SAXException
+	 * @throws IOException
 	 */
 	@Test
-	public void testCheckLoginSuccess() {
+	public void testCheckLoginSuccess() throws IOException, SAXException {
+		Document loginSuccessResponseDocument = new HtmlFileToDocument()
+				.getDocument(this.getClass().getResource(
+						"login-success-response.html"), "gb2312");
 		boolean ret = parser.checkLoginSuccess(loginSuccessResponseDocument);
-		assertTrue(ret);
+		assertTrue("true expected, but was false.", ret);
 	}
 
 	@Test
-	public void testCheckLoginFailed() {
+	public void testCheckLoginFailed() throws IOException, SAXException {
+		Document loginFailResponseDocument = new HtmlFileToDocument()
+				.getDocument(this.getClass().getResource(
+						"login-fail-response.html"), "gb2312");
 		boolean ret = parser.checkLoginSuccess(loginFailResponseDocument);
-		assertFalse(ret);
+		assertFalse("false expected, but was true", ret);
 	}
 
 }

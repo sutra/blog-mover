@@ -3,6 +3,8 @@
  */
 package com.redv.blogmover.bsps.com.blogchinese;
 
+import javax.xml.transform.TransformerException;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,6 +30,14 @@ public class LoginResponseParser {
 	 * @return if is login OK, return true, otherwise false.
 	 */
 	public boolean checkLoginSuccess(Document document) {
+		if (log.isDebugEnabled()) {
+			try {
+				log.debug("checkLoginSuccess(Document): "
+						+ DomNodeUtils.getXmlAsString(document));
+			} catch (TransformerException e) {
+				log.debug(e);
+			}
+		}
 		boolean ret = false;
 		NodeList titles = document.getElementsByTagName("title");
 		if (titles.getLength() == 1) {
