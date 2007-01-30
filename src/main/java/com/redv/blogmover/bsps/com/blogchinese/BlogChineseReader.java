@@ -3,6 +3,7 @@
  */
 package com.redv.blogmover.bsps.com.blogchinese;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.httpclient.HttpClient;
@@ -59,6 +60,8 @@ public class BlogChineseReader extends AbstractBlogReader {
 	 */
 	@Override
 	public List<WebLog> read() throws BlogMoverException {
+		this.webLogs = new ArrayList<WebLog>();
+
 		new BlogChineseLogin(httpDocument).login(username, password);
 
 		ListWebLogHtmlPageParser listParser = new ListWebLogHtmlPageParser();
@@ -108,6 +111,7 @@ public class BlogChineseReader extends AbstractBlogReader {
 				webLogId);
 		Document document = httpDocument.get(modifyUrl);
 		parser.setDocument(document);
+		parser.parse();
 		WebLog webLog = parser.getWebLog();
 		webLog.setUrl("http://www.blogchinese.com/" + url);
 		return webLog;
