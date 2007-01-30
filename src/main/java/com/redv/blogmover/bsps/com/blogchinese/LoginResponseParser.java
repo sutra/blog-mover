@@ -39,7 +39,7 @@ public class LoginResponseParser {
 			}
 		}
 		boolean ret = false;
-		NodeList titles = document.getElementsByTagName("title");
+		NodeList titles = document.getElementsByTagName("TITLE");
 		if (titles.getLength() == 1) {
 			Element title = (Element) titles.item(0);
 			String titleString = DomNodeUtils.getTextContent(title);

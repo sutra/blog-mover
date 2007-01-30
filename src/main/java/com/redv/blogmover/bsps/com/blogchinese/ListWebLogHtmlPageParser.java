@@ -78,7 +78,7 @@ public class ListWebLogHtmlPageParser {
 		}
 
 		// The last page number.
-		NodeList as = showPageDiv.getElementsByTagName("a");
+		NodeList as = showPageDiv.getElementsByTagName("A");
 		this.lastPageNumber = getLastPageNumber(as);
 
 		if (this.lastPageNumber == 0) {
@@ -89,7 +89,7 @@ public class ListWebLogHtmlPageParser {
 		List<Element> listContentUlNodes = this.findListContentUlNodes();
 
 		for (Element ul : listContentUlNodes) {
-			NodeList inputs = ul.getElementsByTagName("input");
+			NodeList inputs = ul.getElementsByTagName("INPUT");
 			for (int j = 0; j < inputs.getLength(); j++) {
 				Element input = (Element) inputs.item(j);
 				String name = input.getAttribute("name");
@@ -98,7 +98,7 @@ public class ListWebLogHtmlPageParser {
 				}
 			}
 
-			NodeList lis = ul.getElementsByTagName("li");
+			NodeList lis = ul.getElementsByTagName("LI");
 			log.debug("lis.getLength(): " + lis.getLength());
 			for (int j = 0; j < lis.getLength(); j++) {
 				Element li = (Element) lis.item(j);
@@ -111,7 +111,7 @@ public class ListWebLogHtmlPageParser {
 				}
 				String styleClass = li.getAttribute("class");
 				if (StringUtils.equals(styleClass, "t3")) {
-					NodeList li_as = li.getElementsByTagName("a");
+					NodeList li_as = li.getElementsByTagName("A");
 					if (li_as.getLength() == 1) {
 						Element li_a = (Element) li_as.item(0);
 						String href = li_a.getAttribute("href");
@@ -188,7 +188,7 @@ public class ListWebLogHtmlPageParser {
 	private List<Element> findListContentUlNodes() {
 		List<Element> ret = new ArrayList<Element>(20);
 		Element list = document.getElementById("list");
-		NodeList uls = list.getElementsByTagName("ul");
+		NodeList uls = list.getElementsByTagName("UL");
 		for (int i = 0; i < uls.getLength(); i++) {
 			Element ul = (Element) uls.item(i);
 			if (StringUtils.equals(ul.getAttribute("class"), "list_content")) {

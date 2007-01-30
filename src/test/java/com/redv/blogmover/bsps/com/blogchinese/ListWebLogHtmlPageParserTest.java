@@ -130,4 +130,14 @@ public class ListWebLogHtmlPageParserTest {
 		urls.toArray(actualUrls);
 		ArrayAssert.assertEquals(expectUrls, actualUrls);
 	}
+
+	@Test
+	public void test() throws IOException, SAXException {
+		Document document = new HtmlFileToDocument().getDocument(this
+				.getClass().getResource("user_blogmanage.asp.html"), "gb2312");
+		junitx.framework.Assert.assertNull(document.getElementById("showpage")
+				.getElementsByTagName("a").item(0));
+		junitx.framework.Assert.assertNotNull(document.getElementById(
+				"showpage").getElementsByTagName("A").item(0));
+	}
 }
