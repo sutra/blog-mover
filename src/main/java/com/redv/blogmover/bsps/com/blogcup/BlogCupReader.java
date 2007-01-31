@@ -11,9 +11,6 @@ import org.w3c.dom.Document;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
-import com.redv.blogmover.bsps.com.blogchinese.ModifyWebLogHtmlPageParser;
-import com.redv.blogmover.bsps.com.blogcup.BlogCupLogin;
-import com.redv.blogmover.bsps.com.blogcup.ListWebLogHtmlParser;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.util.HttpDocument;
 
@@ -112,7 +109,7 @@ public class BlogCupReader extends AbstractBlogReader {
 	}
 
 	private WebLog detail(String webLogId, String url) {
-		ModifyWebLogHtmlPageParser parser = new ModifyWebLogHtmlPageParser();
+		ModifyWebLogHtmlParser parser = new ModifyWebLogHtmlParser();
 		String modifyUrl = String.format(MODIFY_URL_FORMAT, webLogId);
 		Document document = httpDocument.get(modifyUrl);
 		parser.setDocument(document);

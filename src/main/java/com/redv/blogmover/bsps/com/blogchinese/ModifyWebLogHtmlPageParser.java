@@ -110,8 +110,8 @@ public class ModifyWebLogHtmlPageParser {
 	 * @return
 	 */
 	private String[] parseTags() {
-		NodeList inputs = document.getElementById("list").getElementsByTagName(
-				"input");
+		Element list = document.getElementById("list");
+		NodeList inputs = list.getElementsByTagName("input");
 		for (int i = 0; i < inputs.getLength(); i++) {
 			Element input = (Element) inputs.item(i);
 			if (StringUtils.equals(input.getAttribute("name"), "logtags")) {
