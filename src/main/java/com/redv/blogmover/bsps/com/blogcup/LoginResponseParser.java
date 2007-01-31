@@ -3,6 +3,8 @@
  */
 package com.redv.blogmover.bsps.com.blogcup;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -13,6 +15,8 @@ import com.redv.blogmover.util.DomNodeUtils;
  * 
  */
 public class LoginResponseParser {
+	private static final Log log = LogFactory.getLog(LoginResponseParser.class);
+
 	private Document document;
 
 	private boolean loggedIn;
@@ -38,12 +42,14 @@ public class LoginResponseParser {
 			loggedIn = false;
 		} else {
 			String titleString = DomNodeUtils.getTextContent(titles.item(0));
-			if (titleString.indexOf("的BlogCup管理站台") != -1) {
+			log.debug("titleString: " + titleString);
+			int index = titleString.indexOf("的BlogCup管理站台");
+			log.debug("index: " + index);
+			if (index != -1) {
 				loggedIn = true;
 			} else {
 				loggedIn = false;
 			}
 		}
 	}
-
 }
