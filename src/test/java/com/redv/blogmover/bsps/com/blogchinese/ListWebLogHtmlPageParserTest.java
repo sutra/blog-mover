@@ -63,24 +63,11 @@ public class ListWebLogHtmlPageParserTest {
 	 */
 	@Test
 	public void testParse() throws IOException, SAXException {
-		Document document = new HtmlFileToDocument().getDocument(this
-				.getClass().getResource("user_blogmanage.asp.html"), "gb2312");
-
-		listParser.setCurrentPageNumber(1);
-		listParser.setDocument(document);
-		listParser.parse();
-		assertEquals(2, listParser.getLastPageNumber());
-		assertEquals(21, listParser.getTotalCount());
-		String[] expectIds = new String[] { "939711", "939712", "939713",
-				"939714", "939718", "939722", "939724", "939727", "939730",
-				"939736", "939739", "939741", "939742", "939743", "939745",
-				"939751", "939753", "939755", "939756", "939703" };
-		List<String> webLogIds = listParser.getWebLogIds();
-		String[] actualIds = new String[webLogIds.size()];
-		webLogIds.toArray(actualIds);
-		junitx.framework.ArrayAssert.assertEquals(expectIds, actualIds);
-
-		String[] expectUrls = new String[] {
+		testParse("user_blogmanage.asp.html", "gb2312", 1, 2, 21, new String[] {
+				"939711", "939712", "939713", "939714", "939718", "939722",
+				"939724", "939727", "939730", "939736", "939739", "939741",
+				"939742", "939743", "939745", "939751", "939753", "939755",
+				"939756", "939703" }, new String[] {
 				"06091/260430/archives/2007/2007127212020.shtml",
 				"06091/260430/archives/2007/2007127212644.shtml",
 				"06091/260430/archives/2007/2007127212710.shtml",
@@ -100,35 +87,42 @@ public class ListWebLogHtmlPageParserTest {
 				"06091/260430/archives/2007/2007127213234.shtml",
 				"06091/260430/archives/2007/2007127213255.shtml",
 				"06091/260430/archives/2007/2007127213320.shtml",
-				"06091/260430/archives/2007/2007127211931.shtml" };
-		List<String> urls = listParser.getUrls();
-		String[] actualUrls = new String[urls.size()];
-		urls.toArray(actualUrls);
-		ArrayAssert.assertEquals(expectUrls, actualUrls);
+				"06091/260430/archives/2007/2007127211931.shtml" });
 	}
 
 	@Test
 	public void testParsePage2() throws IOException, SAXException {
-		Document document = new HtmlFileToDocument().getDocument(this
-				.getClass().getResource("user_blogmanage.asp_page_2.html"),
-				"gb2312");
+		testParse(
+				"user_blogmanage.asp_page_2.html",
+				"gb2312",
+				2,
+				2,
+				21,
+				new String[] { "939693" },
+				new String[] { "06091/260430/archives/2007/2007127201826.shtml" });
+	}
 
-		listParser.setCurrentPageNumber(2);
+	private void testParse(String htmlFile, String encoding,
+			int currentPageNumber, int expectedLastPageNumber,
+			int expectedTotalCount, String[] expectedIds, String[] expectedUrls)
+			throws IOException, SAXException {
+		Document document = new HtmlFileToDocument().getDocument(this
+				.getClass().getResource(htmlFile), encoding);
+
+		listParser.setCurrentPageNumber(currentPageNumber);
 		listParser.setDocument(document);
 		listParser.parse();
-		assertEquals(2, listParser.getLastPageNumber());
-		assertEquals(21, listParser.getTotalCount());
-		String[] expectIds = new String[] { "939693" };
+		assertEquals(expectedLastPageNumber, listParser.getLastPageNumber());
+		assertEquals(expectedTotalCount, listParser.getTotalCount());
 		List<String> webLogIds = listParser.getWebLogIds();
 		String[] actualIds = new String[webLogIds.size()];
 		webLogIds.toArray(actualIds);
-		junitx.framework.ArrayAssert.assertEquals(expectIds, actualIds);
+		junitx.framework.ArrayAssert.assertEquals(expectedIds, actualIds);
 
-		String[] expectUrls = new String[] { "06091/260430/archives/2007/2007127201826.shtml" };
 		List<String> urls = listParser.getUrls();
 		String[] actualUrls = new String[urls.size()];
 		urls.toArray(actualUrls);
-		ArrayAssert.assertEquals(expectUrls, actualUrls);
+		ArrayAssert.assertEquals(expectedUrls, actualUrls);
 	}
 
 	@Test

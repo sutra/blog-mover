@@ -70,7 +70,7 @@ public class ListWebLogHtmlPageParser {
 		String nodeValue = showPageDiv.getFirstChild().getNodeValue();
 		log.debug(nodeValue);
 
-		Pattern p = Pattern.compile("共([0-9]+)篇日志.*");
+		Pattern p = Pattern.compile("共([0-9]+)篇(日志|BLOG).*");
 		Matcher m = p.matcher(nodeValue);
 		if (m.find()) {
 			this.totalCount = Integer.parseInt(m.group(1));
