@@ -18,6 +18,8 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import com.redv.blogmover.util.HtmlFileToDocument;
+
 /**
  * @author shutra
  * 

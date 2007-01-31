@@ -1,0 +1,530 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>用户 blogmover 的BlogCup管理站台</title>
+<link href="/BlogCupStyle/bup/css/common.css" rel="stylesheet" type="text/css" />
+<script src="inc/function.js" type="text/javascript"></script>
+<script type="text/javascript">
+//Css
+var arrCSS=[["Forest","/BlogCupStyle/bup/css/forest.css"],["Ocean","/BlogCupStyle/bup/css/ocean.css"],""];
+writeCSS();
+setStyleSheet(readCookie("stylesheet"));
+</script>
+</head>
+<body onUnload="chkcopy();">
+<div id="utop">
+	<div id="isitenews">[ <a href="http://x.blogcup.com/feedback/2006-2-25/1.shtml" target="_blank">用户反馈</a> ]</div>
+
+	<div id="logininfo"><div id="imysite"><img src="BlogCupStyle/bup/i/imysite.gif" alt="打开我的站点" align="left" /><a href="b4/blogmover/index.shtml" target="_blank">http://blogmover.blogcup.com</a></div> 
+		<div id="imes"><a href="user_pmmanage.asp"><img src="BlogCupStyle/bup/i/imes.gif" alt="短讯息" border="0" align="left" />0</a></div>
+	    &nbsp;<a href="user_index.asp?t=logout"><img src="BlogCupStyle/bup/i/ilogout.gif" alt="清除登陆信息，安全退出系统" border="0" /></a></div>
+</div>
+<div id="ulefttop"><a href="user_index.asp"><img src="BlogCupStyle/bup/i/i1.png" alt="BlogCup用户站台首页" width="42" height="160" border="0" /></a>
+    					<script type="text/javascript">writeCSSLinks();</script></div>
+<!--contain -->
+<div id="uright">
+	<div class="urightbg">
+	<div class="r3t"><div class="t2"><div class="t1"><img src="BlogCupStyle/bup/i/space.png" alt="" /></div></div></div>
+
+	<div class="r34"><div class="r32">
+	<!--r3 -->
+	<div class="mright"><ul id="menu">
+<!--userhelp -->
+<li class="tico"><a href="user_post.asp" title="撰写日志">[ 撰&nbsp;写 ] <span>开始撰写新日志!</span></a></li>
+<li class="tico"><a href="BBBAlbumConfig.asp" target="_blank" title="巴巴变相册" style="font-size:12px">[ BBB相册 <em style="font-size:9px">beta</em> ] <span>绑定巴巴变相册,上传照片显示到Blog上。巴巴变相册每个月分配给您50mb图片上传空间！</span></a></li>
+
+<li class="tico"><a href="user_blogmanage.asp?t=0" title="编辑日志">[ 编&nbsp;辑 ] <span>编辑管理现有日志</span></a></li>
+<li class="tico"><a href="user_comments.asp?t=0" title="察看评论">[ 评&nbsp;论 ] <span>察看答复管理评论</span></a></li>
+<li class="tico"><a href="user_messages.asp" title="察看留言">[ 留&nbsp;言 ] <span>察看和管理留言板</span></a></li>
+<li class="tico"><a href="user_files.asp" title="我的文件">[ 文&nbsp;件 ] <span>管理我的文件和照片</span></a></li>
+<li class="tico tico3"><a href="user_setting.asp" title="站点配置">[ 配&nbsp;置 ] <span>配置站点信息,发布公告管理链接</span></a></li>
+
+<li class="tico"><a href="user_template.asp" title="界面设定" >[ 界&nbsp;面 ] <span>选择修改站点界面 编辑CSS样式表</span></a></li>
+<li class="tico"><a href="user_music.asp" title="音乐播放器" >[ 播放器 ] <span>设定站点框架式音乐播放器</span></a></li>
+		<!--<li class="mt"><a href="javascript:v()" class="down" onclick="hord(this,'mm3')">使用帮助</a>
+          <ul id="mm3" style="display:none">
+            <li><a href="">&raquo;&nbsp;新手入门</a></li>
+          </ul>
+		</li>
+							
+		<li class="mt"><a href="javascript:v()" class="up" onclick="hord(this,'mm6')">Adver.</a><ul id="mm6"><li class="adsa"></li></ul></li> -->
+	</ul></div>
+	<div class="mleft">
+<!--//////////////////////////////////////top////////////////////////////////////////// --><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<div class="td_inner_a">
+	<div id="tabs">
+
+		<ul>
+			<li id="tnow"><a href="user_post.asp?t=0"><span>创建</span></a></li>
+		<li ><a href="user_blogmanage.asp?usersearch=5&t=0"><span>草稿</span></a></li>
+		<li><a href="user_blogmanage.asp?t=0"><span>编辑</span></a></li>
+			<li ><a href="user_comments.asp?t=0"><span>评论</span></a></li>
+		<li><a href="user_subject.asp?t=0"><span>类别</span></a></li>
+
+		<li ><a href="user_blogmanage.asp?action=downlog&t=0"><span>备份</span></a></li>
+		</ul>
+	</div>
+	<h2><a href="javascript:v()" class="up" onClick="hord(this,'prompt')"><img src="BlogCupStyle/bup/i/ip.gif" alt="" align="left" />创建BLOG</a></h2>
+	
+<script language="javascript">
+function chkfilename()
+{
+	var filename=del_space(document.oblogform.filename.value);
+	if (filename=="自动编号"){document.oblogform.filename.value=""}
+	if (filename==""){document.oblogform.filename.value="自动编号"}
+}
+function checkerr(string)
+{
+var i=0;
+for (i=0; i<string.length; i++)
+{
+if((string.charAt(i) < '0' || string.charAt(i) > '9') && (string.charAt(i) < 'a' || string.charAt(i) > 'z')&& (string.charAt(i) < 'A' || string.charAt(i) > 'Z')&& (string.charAt(i)!='-')&& (string.charAt(i)!='_')) 
+{
+return 1;
+}
+}
+return 0;//pass
+}
+function setdraft()
+{
+	document.oblogform.isdraft.value='1';
+}
+function VerifySubmit()
+{
+	submits(); 
+	topic = del_space(document.oblogform.topic.value);
+     if (topic.length == 0)
+     {
+        alert("您忘了填写题目!");
+		document.getElementById('postbutton').style.display='block';
+		document.getElementById('submes').style.display='none';
+	return false;
+     }
+	 
+	 var needclassid=0
+	 if (needclassid==1) {
+	 if (document.oblogform.classid.value == 0)
+     {
+        alert("请选择BLOG的类别!");
+		document.getElementById('postbutton').style.display='block';
+		document.getElementById('submes').style.display='none';
+	return false;
+     }
+	 }
+	 
+	 var filename=del_space(document.oblogform.filename.value);
+	if ((checkerr(filename) == "1")&&(filename!="")&&(filename!="自动编号")){
+		alert("文件名称请用0-9的数字和a-z的半角字母及下划线,不允许中文和怪字符（如!@#$%^等）；")
+			document.getElementById('postbutton').style.display='block';
+		document.getElementById('submes').style.display='none';
+	return false
+	}
+	
+	 showword = del_space(document.oblogform.showword.value);
+      for(i = 0; i < showword.length; i++){
+	  if(showword.charAt(i) < "0" || showword.charAt(i) > "9"){
+	  alert("请输入正确的显示字数！");
+	  		document.getElementById('postbutton').style.display='block';
+		document.getElementById('submes').style.display='none';
+	  return false;  
+		 }
+     }
+	
+ 	if (document.oblogform.edit.value == "")
+     {
+        alert("请输入BLOG内容!");
+			document.getElementById('postbutton').style.display='block';
+		document.getElementById('submes').style.display='none';
+	return false;
+     }
+	var date=document.oblogform.selecty.value+"-"+document.oblogform.selectm.value+"-"+document.oblogform.selectd.value
+	var datereg=/^(\d{4})-(\d{1,2})-(\d{1,2})$/
+	var datareg=/^(\d){1,2}$/
+	if (!datereg.test(date)){
+	  alert("BLOG时间输入格式错误");
+	  		document.getElementById('postbutton').style.display='block';
+		document.getElementById('submes').style.display='none';
+	   return false;
+	 }
+	var r=date.match(datereg)
+	var d=new Date(r[1],r[2]-1,r[3])
+	if (!(d.getFullYear()==r[1]&&d.getMonth()==r[2]-1&&d.getDate()==r[3])){
+	  alert("BLOG时间输入格式错误");
+	   		document.getElementById('postbutton').style.display='block';
+		document.getElementById('submes').style.display='none';
+	   return false;
+	 }
+	 
+  var FormLimit = 51100
+  var TempVar = new String
+  TempVar = document.oblogform.edit.value
+  if (TempVar.length > FormLimit)
+	{
+	if (confirm("您要发布的BLOG太长，建议您拆分为几部分分别发布。\n如果您坚持提交，注意需要较长时间才能提交成功。\n\n是否坚持提交？") == false)
+			document.getElementById('postbutton').style.display='block';
+		document.getElementById('submes').style.display='none';
+	return false;
+	}
+	
+	  if (TempVar.length > FormLimit)
+  {
+    document.oblogform.edit.value = TempVar.substr(0, FormLimit)
+    TempVar = TempVar.substr(FormLimit)
+    while (TempVar.length > 0)
+    {
+      var objTEXTAREA = document.createElement("hidden")
+      objTEXTAREA.name = "logtext"
+      objTEXTAREA.value = TempVar.substr(0, FormLimit)
+      document.oblogform.appendChild(objTEXTAREA)
+      
+      TempVar = TempVar.substr(FormLimit)
+    }
+  }	
+ return true;
+}
+
+function setSort(s1,s2)
+{
+param=s1.selectedIndex-1;
+if(param>=0)
+	{
+	s2.options.length=0;						
+		for(i=0;i<p_array[param].length;i++)
+		{
+			s2.options.length++;
+			s2.options[i].text=p_array[param][i];
+			s2.options[i].value=p_array_id[param][i];
+		}
+
+	}else
+	{
+	s2.options.length=0;
+	s2.options.length++;
+	s2.options[0].text="我的专题";
+	s2.options[0].value="0";
+	}
+}
+</script> 
+<form action="user_post.asp?action=savelog&t=0" method="post" name="oblogform" id="oblogform" onSubmit="return VerifySubmit()">
+<div class="i2border">
+	<ul id="prompt" class="pt">
+
+		<li><select name="classid" id="classid">
+				<option value='0'>公共标签</option><option value='1'>随笔</option><option value='2'>生活</option><option value='3'>科技</option><option value='6'>学习</option><option value='8'>心得</option><option value='9'>文学</option><option value='10'>旅游</option><option value='11'>教育</option><option value='12'>照片</option><option value='13'>音乐</option><option value='15'>人文</option><option value='18'>其他</option><option value='19'>艺术</option><option value='20'>理论</option><option value='21'>数码</option><option value='22'>杂货铺</option>
+
+			</select>
+			&nbsp;
+			<input name="topic" type="text" id="topic" size="30" maxlength="250" value="昨天用了一下Commons-launcher，感觉不错" />
+			&nbsp;
+			<select name="subjectid" id="subjectid">
+				<option value="0">我的类目</option>
+				
+			</select>
+			<input type="hidden" name="postchknum" value="1615" />
+
+		</li>
+		<li style="display:none">
+			<input type="hidden" id="edit" name="edit" value="&#26152;&#22825;&#29992;&#20102;&#19968;&#19979;Commons-launcher&#65292;&#24863;&#35273;&#19981;&#38169;&#30340;&#20869;&#23481;~~&lt;br&gt;" />
+		</li>
+		
+<script src="images/DhtmlEdit.js"></script>
+<li class="ibutton"><span class="ibuttonc"><a id="oblog_TabView" onclick="oblog_View();" >&nbsp;<img src="BlogCupStyle/bup/i/ishow.gif" alt="发布预览" /> </a> <a onClick="if (oblog_bTextMode!=2) {oblog_setMode(2);}"> <img src="BlogCupStyle/bup/i/icode.gif" alt="切换为源代码编辑" /> </a> <a onClick="if (oblog_bTextMode!=1) {oblog_setMode(1);}"> <img src="BlogCupStyle/bup/i/ivie.gif" /> </a></span>
+
+<div id="ExtToolbar0"><a title="撤消" onclick="FormatText('undo');" href="javascript:v()"> 
+	<img alt="撤消" src="images/undo.gif" /> 
+	</a> <a title="恢复" onclick="FormatText('redo');" href="javascript:v()"> 
+	<img src="images/redo.gif" /> 
+	</a> <a title="取消格式" onclick="FormatText('RemoveFormat', '');" href="javascript:v()"> 
+	<img src="images/removeformat.gif" /> 
+	</a> <a title="加粗" onclick="FormatText('bold', '');" href="javascript:v()" > 
+	<img src="images/bold.gif" /> 
+	</a> <a title="斜体" onclick="FormatText('italic', '');" href="javascript:v()"> 
+	<img src="images/italic.gif" /> 
+	</a> <a title="下划线" onclick="FormatText('underline', '');" href="javascript:v()"> 
+	<img src="images/underline.gif" />  
+	</a> <a id="forecolor" name="forecolor" title="字体颜色" onclick="oblog_foreColor();" href="javascript:v()">
+
+	<img src="images/fgcolor.gif" /> 
+	</a> <span class="foie"><a id="backcolor" name="backcolor" title="字体背景颜色" onclick="oblog_backColor();" href="javascript:v()">
+	<img src="images/fbcolor.gif" /> 
+	</a></span> <a title="插入超级链接" onclick="oblog_forlink();"> 
+	<img src="images/wlink.gif"> 
+	</a> <a title="去掉超级链接" onclick="FormatText('Unlink');"> 
+	<img src="images/unlink.gif" /> 
+	</a> <a title="编号" onclick="FormatText('insertorderedlist', '');" href="javascript:v()"> 
+	<img src="images/numlist.gif" /> 
+	</a> <a title="项目符号" onclick="FormatText('insertunorderedlist', '');" href="javascript:v()"> 
+	<img src="images/bullist.gif" /> 
+	</a> <span class="foie"><a title="插入表情" onclick="oblog_foremot()" href="javascript:v()"> 
+	<img src="images/smiley.gif"> 
+	</a> </span><a title="插入图片" onclick="oblog_forimg();" href="javascript:v()"> 
+	<img src="images/img.gif" /> 
+	</a> <a title="插入引用" onclick="oblog_quote()" href="javascript:v()">
+
+	<img src="images/quote.gif" />
+	</a> <a title="上传文件" href="javascript:v()" onclick="hord(this,'supload')">
+	<img src="images/file.gif" /> 
+	</a> <a title="展开更多功能" href="javascript:v()" onclick="hord(this,'imoref')">
+	<img src="BlogCupStyle/bup/i/imoref.gif" /> 
+	</a></div>
+	</li>
+<span id="imoref" style="display:none">
+	<li id="ExtToolbar1" class="ibutton"><select id="FontName" onchange="FormatText ('fontname',this[this.selectedIndex].value);">
+
+		<option class="heading" selected="selected">字体</option> 
+		<option value="宋体">宋体</option> 
+		<option value="黑体">黑体</option> 
+		<option value="隶书">隶书</option> 
+		<option value="幼圆">幼圆</option> 
+		<option value="新宋体">新宋体</option> 
+		<option value="细明体">细明体</option> 
+		<option value="Arial">Arial</option> 
+		<option value="Arial Black">Arial Black</option> 
+		<option value="Arial Narrow">Arial Narrow </option>
+
+		<option value="Bradley Hand ITC">Bradley Hand ITC</option> 
+		<option value="Brush Script	MT">Brush Script MT</option> 
+		<option value="Century Gothic">Century Gothic</option> 
+		<option value="Comic Sans MS">Comic Sans MS</option> 
+		<option value="Courier">Courier</option> 
+		<option value="Courier New">Courier New</option> 
+		<option value="MS Sans Serif">MS Sans Serif </option>
+		<option value="Script">Script</option> 
+		<option value="System">System</option> 
+		<option value="Times New Roman">Times New Roman</option> 
+		<option value="Viner Hand ITC">Viner Hand ITC</option>
+
+		<option value="Verdana">Verdana</option> 
+		<option value="Wide Latin">Wide Latin</option> 
+		<option value="Wingdings">Wingdings</option>
+		</select>
+		<select =id="FontSize" onchange="FormatText('fontsize',this[this.selectedIndex].value);">
+		<option class="heading" selected="selected">字号</option> 
+		<option value="1">1</option> 
+		<option value="2">2</option> 
+		<option value="3">3</option> 
+		<option value="4">4</option> 
+		<option value="5">5</option> 
+		<option value="6">6</option> 
+		<option value="7">7</option>
+
+		</select>
+		<select id="oblog_formatSelect" onchange="oblog_doSelectClick('FormatBlock',this)">
+		<option>段落格式</option>
+		<option value="&lt;P&gt;">普通格式</option>
+		<option value="&lt;H1&gt;">标题 1</option> 
+		<option value="&lt;H2&gt;">标题 2</option> 
+		<option value="&lt;H3&gt;">标题 3</option> 
+		<option value="&lt;H4&gt;">标题 4</option> 
+		<option value="&lt;H5&gt;">标题 5</option> 
+		<option value="&lt;H6&gt;">标题 6</option> 
+		<option value="&lt;H7&gt;">标题 7</option> 
+		<option value="&lt;PRE&gt;">已编排格式</option> 
+		<option value="&lt;ADDRESS&gt;">地址</option> 
+		</select> 
+		<select id="Zoom" onchange="doZoom(this)" class="foie">
+
+		<option value="100">页面缩放</option>
+		<option value="50">50%</option>
+		<option value="75">75%</option> 
+		<option value="100">100%</option> 
+		<option value="125">125%</option> 
+		<option value="150">150%</option> 
+		<option value="175">175%</option> 
+		<option value="200">200%</option>
+
+		</select>  <a title="左对齐" onclick="FormatText('justifyleft', '');" href="javascript:v()"> 
+		<img src="images/aleft.gif" /> 
+		</a> <a title="居中" onclick="FormatText('justifycenter', '');" href="javascript:v()"> 
+		<img src="images/center.gif" /> 
+		</a> <a title="右对齐" onclick="FormatText('justifyright', '');" href="javascript:v()"> 
+		<img src="images/aright.gif" /> 
+		</a> <a title="减少缩进量" onclick="FormatText('outdent', '');" href="javascript:v()"> 
+		<img src="images/outdent.gif" /> 
+		</a> <a title="增加缩进量" onclick="FormatText('indent', '');" href="javascript:v()"> 
+		<img src="images/indent.gif" /> 
+		</a></li>
+
+	<li id="ExtToolbar2" class="ibutton"><span class="foie"><a title="插入Flash" onclick="oblog_forswf();" href="javascript:v()"> 
+		<img src="images/swf.gif" /> 
+		</a> <a title="插入Windows Media" onclick="oblog_forwmv();" href="javascript:v()"> 
+		<img src="images/wmv.gif" /> 
+		</a> <a title="插入Real Media" onclick="oblog_forrm();" href="javascript:v()"> 
+		<img src="images/rm.gif" /> 
+		</a></span> <a title="插入代码" onclick="oblog_code()" href="javascript:v()">
+		<img src="images/code.gif" />
+		</a> <a title="上标" onclick="FormatText('superscript', '');" href="javascript:v()"> 
+		<img src="images/superscript.gif" /> 
+		</a> <a title="下标" onclick="FormatText('subscript', '');" href="javascript:v()"> 
+		<img src="images/subscript.gif" /> 
+		</a> <a title="删除线" onclick="FormatText('strikethrough', '');" href="javascript:v()"> 
+		<img src="images/strikethrough.gif" /> 
+		</a> <a title="插入水平线" onclick="FormatText('InsertHorizontalRule', '');" href="javascript:v()"> 
+		<img src="images/hr.gif" /> 
+		</a> <span class="foie"><a title="插入特殊符号" onclick="insertSpecialChar();" href="javascript:v()"> 
+		<img src="images/specialchar.gif" width="16" height="16" /> 
+		</a> <a title="替换" onclick="oblog_replace();" href="javascript:v()"> 
+		<img src="images/replace.gif" /> 
+		</a> <a title="插入表格" onclick="oblog_fortable();" href="javascript:v()"> 
+		<img src="images/table.gif" /> 
+		</a> <a title="插入行" onclick="oblog_InsertRow();" href="javascript:v()"> 
+		<img src="images/insertrow.gif" /> 
+		</a> <a title="删除行" onclick="oblog_DeleteRow();" href="javascript:v()"> 
+		<img src="images/deleterow.gif" /> 
+		</a> <a title="插入列" onclick="oblog_InsertColumn();" href="javascript:v()"> 
+		<img src="images/insertcolumn.gif" /> 
+		</a> <a title="删除列" onclick="oblog_DeleteColumn();" href="javascript:v()"> 
+		<img src="images/deletecolumn.gif" /> 
+		</a></span> <a title="清理代码" onclick="oblog_CleanCode();" href="javascript:v()"> 
+		<img src="images/cleancode.gif" /> 
+		</a></li>
+
+</span>
+<li id="PostiFrame"><div class="iborder"><iframe id="oblog_Composition" class="oblog_Composition"></iframe></div></li>
+<li id="supload" style="display:none"><iframe id="d_file" frameborder="0" src="upload.asp?tMode=0&amp;re=" scrolling="No"></iframe></li>
+<script language="JavaScript" type="text/javascript">
+var oblog_bIsIE5=document.all;
+var canusehtml='1';
+var PostType=1;
+if (oblog_bIsIE5){
+	var IframeID=frames["oblog_Composition"];
+}
+else{
+	var IframeID=document.getElementById("oblog_Composition").contentWindow;
+	var oblog_bIsNC=true;
+}
+if (oblog_bLoad==false)
+{
+	oblog_InitDocument("Body","utf-8");
+}
+function submits(){
+	var html;
+	html =oblog_getText();
+	html=oblog_rCode(html,"<a>　</a>","");
+ 	document.oblogform.edit.value=html;
+}
+function initx(){
+IframeID.document.body.innerHTML=document.oblogform.edit.value;
+}
+function initt(){
+IframeID.document.body.innerHTML="<a>　</a>"+document.oblogform.edit.value;
+}
+if (0==1) {
+	initt();
+}
+else{
+	initx();
+}
+function part()
+{
+	oblog_InsertSymbol('#此前在首页部分显示#');
+}
+function pastestr()
+{
+	var tmpstr=window.clipboardData.getData("Text");
+	if (tmpstr!=null)
+	{
+		if (IframeID.document.body.innerHTML!="") {
+			if (confirm("您的编辑区有内容，是否覆盖？") == false)
+			return false;
+		}
+	IframeID.document.body.innerHTML=window.clipboardData.getData("Text");
+	}
+}
+</script>
+<script src="images/editor.js"></script>
+<li id="supload" style="display:none"><iframe id="d_file" allowtransparency="allowtransparency" frameborder="0" src="upload.asp?ubb=1"scrolling="No"></iframe></li>
+
+		<li><span style="float:right"> <span id="timemsg"></span><span id="msg2"></span><span id="msg"></span> 
+			<script type="text/javascript">
+var epoststr=""			
+var FileName="b4/blogmover/tmp_114a101a118a111a109a103a111a108a98.txt"
+			</script>
+
+			
+			<script src="ubbsave.js" type="text/javascript"></script>
+			<script type="text/javascript">function timer() { 
+ti=ti-1;
+document.getElementById("timemsg").innerHTML = ti+"秒后自动保存 ";
+if (ti>=0){window.setTimeout("timer()", 1000);}else{if (ti<=-1000){ti=AutoSaveTime;timer();}else{document.getElementById("timemsg").innerHTML = "正在保存...";autosave('57772','msg','cupAutoSaver.asp');ti=AutoSaveTime;timer();}} }</script></span><input name="logtags" id="itag" type="text" size="20" maxlength="255" Value="commons-launcher,感觉"/> 逗号','分隔,最多5个 <a href="user_help.asp#tag" target="_blank"><img src="BlogCupStyle/bup/i/i.gif" alt="什么是Tag?" /></a></li>
+		<li class="cop" ><div id="postbutton"><input type="hidden" name="isdraft" id="isdraft" value="0" /><input class="othbut" id="cop_submit" type="submit" value="&nbsp;发&nbsp;布&nbsp;POST" onClick="document.getElementById('postbutton').style.display='none';document.getElementById('submes').style.display='block'"  /> <input  class="othbut" type="submit" value="存为草稿" onClick="setdraft();document.getElementById('postbutton').style.display='none';document.getElementById('submes').style.display='block'" /> <input class="othbut" type="button" onClick="part();" value="摘要标记" /> <span style="display:none!important;display:inline"><input class="othbut" type="button" onClick="pastestr();" value="粘贴剪切板内容" /></span>
+			
+			</div>
+			<div id="submes" style="display:none;background-color:red;color:#fff;padding5px;margin:2px;clear:both;text-align:center;line-height:180%;">正在提交，请稍后。如果长时间未反应，请稍后复制内容重新刷新页面再提交</div>
+
+		</li>
+	</ul>
+	</div>
+	<br />
+	<h2><a href="javascript:v()" class="down" onClick="hord(this,'divAdvance')"><img src="BlogCupStyle/bup/i/ic.gif" alt="" align="left" />&nbsp;&nbsp;BLOG高级选项</a></h2>
+<ul id="divAdvance" class="pt" style="display:none">
+		<li class="coi">评论:<input name="isencomment" type="checkbox" value="1" checked />&nbsp;|&nbsp;隐藏:<input name="ishide" type="checkbox" value="1"  />&nbsp;|&nbsp;<span >置顶:<input name="istop" type="checkbox" value="1"  /></span>&nbsp;|&nbsp;时间:
+			<select name=selecty id=selecty><option value=2000>2000年</option><option value=2001>2001年</option><option value=2002>2002年</option><option value=2003>2003年</option><option value=2004>2004年</option><option value=2005>2005年</option><option value=2006>2006年</option><option value=2007 selected>2007年</option><option value=2008>2008年</option><option value=2009>2009年</option><option value=2010>2010年</option></select><select name=selectm id=selectm ><option value=1 selected>1月</option><option value=2>2月</option><option value=3>3月</option><option value=4>4月</option><option value=5>5月</option><option value=6>6月</option><option value=7>7月</option><option value=8>8月</option><option value=9>9月</option><option value=10>10月</option><option value=11>11月</option><option value=12>12月</option></select><select name=selectd id=selectd ><option value=1>1日</option><option value=2>2日</option><option value=3>3日</option><option value=4>4日</option><option value=5>5日</option><option value=6>6日</option><option value=7>7日</option><option value=8>8日</option><option value=9>9日</option><option value=10>10日</option><option value=11>11日</option><option value=12>12日</option><option value=13>13日</option><option value=14>14日</option><option value=15>15日</option><option value=16>16日</option><option value=17>17日</option><option value=18>18日</option><option value=19>19日</option><option value=20>20日</option><option value=21>21日</option><option value=22>22日</option><option value=23>23日</option><option value=24>24日</option><option value=25>25日</option><option value=26>26日</option><option value=27>27日</option><option value=28>28日</option><option value=29>29日</option><option value=30>30日</option><option value=31 selected>31日</option></select><select name=selecth id=selecth><option value=0>0时</option><option value=1>1时</option><option value=2>2时</option><option value=3>3时</option><option value=4>4时</option><option value=5>5时</option><option value=6>6时</option><option value=7>7时</option><option value=8>8时</option><option value=9>9时</option><option value=10 selected>10时</option><option value=11>11时</option><option value=12>12时</option><option value=13>13时</option><option value=14>14时</option><option value=15>15时</option><option value=16>16时</option><option value=17>17时</option><option value=18>18时</option><option value=19>19时</option><option value=20>20时</option><option value=21>21时</option><option value=22>22时</option><option value=23>23时</option></select><select name=selectmi id=selectmi><option value=0>0分</option><option value=1>1分</option><option value=2>2分</option><option value=3>3分</option><option value=4>4分</option><option value=5>5分</option><option value=6>6分</option><option value=7>7分</option><option value=8>8分</option><option value=9>9分</option><option value=10>10分</option><option value=11>11分</option><option value=12>12分</option><option value=13>13分</option><option value=14>14分</option><option value=15>15分</option><option value=16>16分</option><option value=17>17分</option><option value=18>18分</option><option value=19>19分</option><option value=20>20分</option><option value=21>21分</option><option value=22>22分</option><option value=23>23分</option><option value=24>24分</option><option value=25>25分</option><option value=26>26分</option><option value=27>27分</option><option value=28>28分</option><option value=29>29分</option><option value=30>30分</option><option value=31>31分</option><option value=32>32分</option><option value=33>33分</option><option value=34>34分</option><option value=35>35分</option><option value=36>36分</option><option value=37>37分</option><option value=38>38分</option><option value=39>39分</option><option value=40>40分</option><option value=41>41分</option><option value=42 selected>42分</option><option value=43>43分</option><option value=44>44分</option><option value=45>45分</option><option value=46>46分</option><option value=47>47分</option><option value=48>48分</option><option value=49>49分</option><option value=50>50分</option><option value=51>51分</option><option value=52>52分</option><option value=53>53分</option><option value=54>54分</option><option value=55>55分</option><option value=56>56分</option><option value=57>57分</option><option value=58>58分</option><option value=59>59分</option></select><select name=selects id=selects><option value=0 selected>0秒</option><option value=1>1秒</option><option value=2>2秒</option><option value=3>3秒</option><option value=4>4秒</option><option value=5>5秒</option><option value=6>6秒</option><option value=7>7秒</option><option value=8>8秒</option><option value=9>9秒</option><option value=10>10秒</option><option value=11>11秒</option><option value=12>12秒</option><option value=13>13秒</option><option value=14>14秒</option><option value=15>15秒</option><option value=16>16秒</option><option value=17>17秒</option><option value=18>18秒</option><option value=19>19秒</option><option value=20>20秒</option><option value=21>21秒</option><option value=22>22秒</option><option value=23>23秒</option><option value=24>24秒</option><option value=25>25秒</option><option value=26>26秒</option><option value=27>27秒</option><option value=28>28秒</option><option value=29>29秒</option><option value=30>30秒</option><option value=31>31秒</option><option value=32>32秒</option><option value=33>33秒</option><option value=34>34秒</option><option value=35>35秒</option><option value=36>36秒</option><option value=37>37秒</option><option value=38>38秒</option><option value=39>39秒</option><option value=40>40秒</option><option value=41>41秒</option><option value=42>42秒</option><option value=43>43秒</option><option value=44>44秒</option><option value=45>45秒</option><option value=46>46秒</option><option value=47>47秒</option><option value=48>48秒</option><option value=49>49秒</option><option value=50>50秒</option><option value=51>51秒</option><option value=52>52秒</option><option value=53>53秒</option><option value=54>54秒</option><option value=55>55秒</option><option value=56>56秒</option><option value=57>57秒</option><option value=58>58秒</option><option value=59>59秒</option></select>
+
+			<input name="logid"  type="hidden" id="logid" value=501609 />
+			<input name="oldisdraft"  type="hidden" id="oldisdraft" value=0 />
+		</li>
+		<li class="coi" >图标:
+			<input type="radio" name="face" value="0" checked />
+			无
+			<input name="face" type="radio" value="1"  />
+			<img src="images/face/1.gif" width="20" height="20">
+			<input type="radio" name="face" value="2"  />
+			<img src="images/face/2.gif" width="20" height="20">
+
+			<input type="radio" name="face" value="3"  />
+			<img src="images/face/3.gif" width="20" height="20">
+			<input type="radio" name="face" value="4"  />
+			<img src="images/face/4.gif" width="20" height="20">
+			<input type="radio" name="face" value="5"  />
+			<img src="images/face/5.gif" width="20" height="20">
+			<input type="radio" name="face" value="6"  />
+			<img src="images/face/6.gif" width="18" height="20">
+			<input type="radio" name="face" value="7"  />
+
+			<img src="images/face/7.gif" width="20" height="20">
+			<input type="radio" name="face" value="8"  />
+			<img src="images/face/8.gif" width="20" height="20">
+			<input type="radio" name="face" value="9"  />
+			<img src="images/face/9.gif" width="20" height="20"></li>
+		<li>
+			<input name="ispassword" type="password" id="ispassword" size="10" maxlength="15" value="" />
+			<input name="showword" type="hidden" id="showword" value="" size="6" maxlength="10" />
+			<input name="filename" type="text" id="filename" size="12" maxlength="30" value="自动编号" onClick="chkfilename();"  onBlur="chkfilename();" />
+
+			<span >
+			<select name="blogteam" id="s1" onChange="setSort(this,this.form.s2);">
+				<option value="57772" >选择发布站点[默认不选择]</option>
+				
+			</select>
+			<select name="blogteamsubject" id="s2">
+				<option value=0 selected>类目</option>
+			</select>
+			</span></li>
+
+		
+		<li>Track Back: 多个请回车换行区隔。<a href="user_help.asp#tb" target="_blank"><img src="BlogCupStyle/bup/i/i.gif" alt="什么是TrackBack?" /></a></li>
+		<li>
+			<textarea name="tb" id="tb" rows="3" cols="90"></textarea>
+		</li>
+		
+			<li class="cop"><span id="postbutton"><input onClick="this.style.display='none';document.getElementById('submes').style.display='block'" id="cop_submit" class="othbut" type="submit" value="发布BLOG" /> <input type="submit" onClick="setdraft();document.getElementById('postbutton').style.display='block';document.getElementById('submes').style.display='block'" value="存为草稿" class="othbut" /></span><div id="submes" style="display:none;background-color:red;color:#fff;padding5px;margin:2px;clear:both;text-align:center;line-height:180%;">正在提交，请稍后。如果长时间未反应，请稍后复制内容重新刷新页面再提交</div> 
+		</li>
+	</ul>
+
+	
+</form>
+	</div></div>
+	<!--/r3 -->
+	<br clear="all" />
+	</div></div>
+ 	<div class="r3b"><div class="t4"><div class="t3"><img src="BlogCupStyle/bup/i/space.png" alt="" /></div></div></div>
+	</div>
+</div>
+<div id="bottom">&copy;&nbsp;BlogCup.com 2004-2006. Mail:blogcup@gmail.com </div>
+
+</body>
+</html>

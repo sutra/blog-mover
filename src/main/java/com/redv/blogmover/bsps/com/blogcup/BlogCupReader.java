@@ -1,7 +1,7 @@
 /**
- * Created on 2007-1-27 上午03:46:59
+ * 
  */
-package com.redv.blogmover.bsps.com.blogchinese;
+package com.redv.blogmover.bsps.com.blogcup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,30 +11,40 @@ import org.w3c.dom.Document;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
+import com.redv.blogmover.bsps.com.blogchinese.ModifyWebLogHtmlPageParser;
+import com.redv.blogmover.bsps.com.blogcup.BlogCupLogin;
+import com.redv.blogmover.bsps.com.blogcup.ListWebLogHtmlParser;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
- * @author shutra
+ * @author shutrazh
  * 
  */
-public class BlogChineseReader extends AbstractBlogReader {
-	private static final String LIST_URL_FORMAT = "http://www.blogchinese.com/user_blogmanage.asp?t=0&page=%1$s";
+public class BlogCupReader extends AbstractBlogReader {
+	private static final String LIST_URL_FORMAT = "http://blogcup.com/user_blogmanage.asp?t=0&page=%1$s";
+
+	private static final String MODIFY_URL_FORMAT = "http://blogcup.com/user_post.asp?logid=%1$s&t=0";
+
+	private static final String WEB_LOG_URL_FORMAT = "http://blogccup.com/%1%s";
 
 	private HttpClient httpClient;
 
 	private HttpDocument httpDocument;
 
+	private List<WebLog> webLogs;
+
 	private String username;
 
 	private String password;
 
-	private List<WebLog> webLogs;
-
-	public BlogChineseReader() {
+	/**
+	 * 
+	 */
+	public BlogCupReader() {
 		super();
 		httpClient = new HttpClient();
-		httpDocument = new HttpDocument(httpClient, "GB2312");
+		httpDocument = new HttpDocument(httpClient, "UTF-8");
 	}
 
 	/**
@@ -62,9 +72,9 @@ public class BlogChineseReader extends AbstractBlogReader {
 	public List<WebLog> read() throws BlogMoverException {
 		this.webLogs = new ArrayList<WebLog>();
 
-		new BlogChineseLogin(httpDocument).login(username, password);
+		new BlogCupLogin(httpDocument).login(username, password);
 
-		ListWebLogHtmlPageParser listParser = new ListWebLogHtmlPageParser();
+		ListWebLogHtmlParser listParser = new ListWebLogHtmlParser();
 
 		int currentPageNumber = 1;
 		int lastPageNumber = 0;
@@ -72,14 +82,13 @@ public class BlogChineseReader extends AbstractBlogReader {
 		do {
 			String url = String.format(LIST_URL_FORMAT, currentPageNumber);
 			Document document = httpDocument.get(url);
-			listParser.setCurrentPageNumber(currentPageNumber);
 			listParser.setDocument(document);
 			listParser.parse();
 
 			this.status.setTotalCount(listParser.getTotalCount());
-			lastPageNumber = listParser.getLastPageNumber();
+			lastPageNumber = listParser.getTotalPage();
 
-			detail(listParser.getWebLogIds(), listParser.getUrls());
+			detail(listParser.getIds(), listParser.getLinks());
 
 		} while (++currentPageNumber <= lastPageNumber);
 
@@ -104,15 +113,12 @@ public class BlogChineseReader extends AbstractBlogReader {
 
 	private WebLog detail(String webLogId, String url) {
 		ModifyWebLogHtmlPageParser parser = new ModifyWebLogHtmlPageParser();
-		String modifyUrl = String.format(
-				"http://www.blogchinese.com/user_post.asp?logid=%1$s&t=0",
-				webLogId);
+		String modifyUrl = String.format(MODIFY_URL_FORMAT, webLogId);
 		Document document = httpDocument.get(modifyUrl);
 		parser.setDocument(document);
 		parser.parse();
 		WebLog webLog = parser.getWebLog();
-		webLog.setUrl("http://www.blogchinese.com/" + url);
+		webLog.setUrl(String.format(WEB_LOG_URL_FORMAT, url));
 		return webLog;
 	}
-
 }

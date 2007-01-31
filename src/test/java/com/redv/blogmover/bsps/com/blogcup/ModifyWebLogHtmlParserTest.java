@@ -1,13 +1,12 @@
 /**
  * 
  */
-package com.redv.blogmover.bsps.com.blogchinese;
+package com.redv.blogmover.bsps.com.blogcup;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -24,9 +23,8 @@ import com.redv.blogmover.util.HtmlFileToDocument;
  * @author shutrazh
  * 
  */
-public class ModifyWebLogHtmlPageParserTest {
-
-	private ModifyWebLogHtmlPageParser parser;
+public class ModifyWebLogHtmlParserTest {
+	private ModifyWebLogHtmlParser parser;
 
 	/**
 	 * @throws java.lang.Exception
@@ -47,7 +45,7 @@ public class ModifyWebLogHtmlPageParserTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		this.parser = new ModifyWebLogHtmlPageParser();
+		parser = new ModifyWebLogHtmlParser();
 	}
 
 	/**
@@ -59,7 +57,7 @@ public class ModifyWebLogHtmlPageParserTest {
 
 	/**
 	 * Test method for
-	 * {@link com.redv.blogmover.bsps.com.blogchinese.ModifyWebLogHtmlPageParser#parse(org.w3c.dom.Document)}.
+	 * {@link com.redv.blogmover.bsps.com.blogcup.ModifyWebLogHtmlParser#parse()}.
 	 * 
 	 * @throws SAXException
 	 * @throws IOException
@@ -67,17 +65,23 @@ public class ModifyWebLogHtmlPageParserTest {
 	@Test
 	public void testParse() throws IOException, SAXException {
 		Document document = new HtmlFileToDocument().getDocument(this
-				.getClass().getResource("user_post.asp_logid_939693.html"),
-				"gb2312");
+				.getClass().getResource("user_post.asp_logid_501609.html"),
+				"UTF-8");
 		parser.setDocument(document);
 		parser.parse();
 		WebLog webLog = parser.getWebLog();
-		assertEquals("测试", webLog.getTitle());
-		assertEquals("我测试测试blahblahblah", webLog.getBody());
-		Calendar cal = new GregorianCalendar(2007, 1 - 1, 27, 20, 18, 0);
+		assertEquals("昨天用了一下Commons-launcher，感觉不错", webLog.getTitle());
+		assertEquals("昨天用了一下Commons-launcher，感觉不错的内容~~<br>", webLog.getBody());
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 2007);
+		cal.set(Calendar.MONTH, 1 - 1);
+		cal.set(Calendar.DATE, 31);
+		cal.set(Calendar.HOUR, 10);
+		cal.set(Calendar.MINUTE, 42);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
 		assertEquals(cal.getTime(), webLog.getPublishedDate());
-		String[] tags = new String[] { "测试" };
-		assertEquals(tags, webLog.getTags());
+		assertEquals(new String[] { "commons-launcher", "感觉" }, webLog
+				.getTags());
 	}
-
 }

@@ -1,13 +1,11 @@
 /**
  * 
  */
-package com.redv.blogmover.bsps.com.blogchinese;
+package com.redv.blogmover.bsps.com.blogcup;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,16 +15,14 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import com.redv.blogmover.WebLog;
 import com.redv.blogmover.util.HtmlFileToDocument;
 
 /**
  * @author shutrazh
  * 
  */
-public class ModifyWebLogHtmlPageParserTest {
-
-	private ModifyWebLogHtmlPageParser parser;
+public class LoginResponseParserTest {
+	private LoginResponseParser parser;
 
 	/**
 	 * @throws java.lang.Exception
@@ -47,7 +43,7 @@ public class ModifyWebLogHtmlPageParserTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		this.parser = new ModifyWebLogHtmlPageParser();
+		parser = new LoginResponseParser();
 	}
 
 	/**
@@ -59,25 +55,35 @@ public class ModifyWebLogHtmlPageParserTest {
 
 	/**
 	 * Test method for
-	 * {@link com.redv.blogmover.bsps.com.blogchinese.ModifyWebLogHtmlPageParser#parse(org.w3c.dom.Document)}.
+	 * {@link com.redv.blogmover.bsps.com.blogcup.LoginResponseParser#parse()}.
 	 * 
 	 * @throws SAXException
 	 * @throws IOException
 	 */
 	@Test
-	public void testParse() throws IOException, SAXException {
-		Document document = new HtmlFileToDocument().getDocument(this
-				.getClass().getResource("user_post.asp_logid_939693.html"),
-				"gb2312");
+	public void testParseLoginSuccess() throws IOException, SAXException {
+		Document document = new HtmlFileToDocument()
+				.getDocument(this.getClass().getResource(
+						"login-success-response.html"), "UTF-8");
 		parser.setDocument(document);
 		parser.parse();
-		WebLog webLog = parser.getWebLog();
-		assertEquals("测试", webLog.getTitle());
-		assertEquals("我测试测试blahblahblah", webLog.getBody());
-		Calendar cal = new GregorianCalendar(2007, 1 - 1, 27, 20, 18, 0);
-		assertEquals(cal.getTime(), webLog.getPublishedDate());
-		String[] tags = new String[] { "测试" };
-		assertEquals(tags, webLog.getTags());
+		assertTrue(parser.isLoggedIn());
+	}
+
+	/**
+	 * Test method for
+	 * {@link com.redv.blogmover.bsps.com.blogcup.LoginResponseParser#parse()}.
+	 * 
+	 * @throws SAXException
+	 * @throws IOException
+	 */
+	@Test
+	public void testParseLoginFail() throws IOException, SAXException {
+		Document document = new HtmlFileToDocument().getDocument(this
+				.getClass().getResource("login-fail-response.html"), "UTF-8");
+		parser.setDocument(document);
+		parser.parse();
+		assertFalse(parser.isLoggedIn());
 	}
 
 }

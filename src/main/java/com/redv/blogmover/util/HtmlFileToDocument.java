@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.redv.blogmover.bsps.com.blogchinese;
+package com.redv.blogmover.util;
 
 import java.io.File;
 import java.io.FileInputStream;

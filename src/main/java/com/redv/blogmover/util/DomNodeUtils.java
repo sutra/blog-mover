@@ -155,13 +155,19 @@ public class DomNodeUtils {
 	 */
 	public static HtmlFormSelect getSelect(Element select) {
 		HtmlFormSelect hfs = new HtmlFormSelect();
-		try {
-			log.debug(getXmlAsString(select));
-		} catch (TransformerException e) {
-			log.warn(e);
+		if (log.isDebugEnabled()) {
+			try {
+				log.debug(getXmlAsString(select));
+			} catch (TransformerException e) {
+				log.warn(e);
+			}
 		}
 		hfs.setName(select.getAttribute("name"));
 		NodeList options = select.getElementsByTagName("option");
+		if (options.getLength() == 0) {// Hack it as html and xhtml are not
+										// same in capitalization-sensitivity.
+			options = select.getElementsByTagName("OPTION");
+		}
 		List<String> values = new ArrayList<String>();
 		for (int i = 0; i < options.getLength(); i++) {
 			Element option = (Element) options.item(i);

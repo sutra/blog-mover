@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>用户 blogmover 的BlogCup管理站台</title>
+<link href="/BlogCupStyle/bup/css/common.css" rel="stylesheet" type="text/css" />
+<script src="inc/function.js" type="text/javascript"></script>
+<script type="text/javascript">
+//Cssvar arrCSS=[["Forest","/BlogCupStyle/bup/css/forest.css"],["Ocean","/BlogCupStyle/bup/css/ocean.css"],""];
+var arrCSS=[["Forest","/BlogCupStyle/bup/css/forest.css"],""];
+writeCSS();
+setStyleSheet(readCookie("stylesheet"));
+</script>
+</head>
+<body>
+<div id="utop">
+	<div id="isitenews">[ <a href="list.asp" target="_blank">阅读日志</a> ]&nbsp;[ <a href="http://x.blogcup.com/feedback/2006-2-25/1.shtml" target="_blank">用户反馈</a> ]&nbsp;[ <a href="http://x.blogcup.com/howto/index.shtml" target="_blank">使用技巧</a> ]&nbsp[ <a href="http://blogcup.com/cup/box.htm" target="_blank"><strong>贴小格子获得增值</strong></a> ]</div>
+
+	<div id="logininfo"><div id="imysite"><img src="BlogCupStyle/bup/i/imysite.gif" alt="打开我的站点" align="left" /><a href="b4/blogmover" target="_blank">http://blogmover.blogcup.com</a></div> 
+		<div id="imes"><a href="user_pmmanage.asp"><img src="BlogCupStyle/bup/i/imes.gif" alt="短讯息" border="0" align="left" />0</a></div>
+	    &nbsp;<a href="user_index.asp?t=logout"><img src="BlogCupStyle/bup/i/ilogout.gif" alt="清除登陆信息，安全退出系统" border="0" /></a></div>
+</div>
+<div id="ulefttop"><a href="user_index.asp"><img src="BlogCupStyle/bup/i/i1.png" alt="BlogCup用户站台首页" width="42" height="160" border="0" /></a>
+    					<script type="text/javascript">writeCSSLinks();</script></div>
+<!--contain -->
+<div id="uright">
+	<div class="urightbg">
+	<div class="r3t"><div class="t2"><div class="t1"><img src="BlogCupStyle/bup/i/space.png" alt="" /></div></div></div>
+
+	<div class="r34"><div class="r32">
+	<!--r3 -->
+	<div class="mright"><ul id="menu">
+<!--userhelp -->
+<li class="tico"><a href="user_post.asp" title="撰写日志">[ 撰&nbsp;写 ] <span>开始撰写新日志!</span></a></li>
+<li class="tico"><a href="BBBAlbumConfig.asp" target="_blank" title="巴巴变相册" style="font-size:12px">[ BBB相册 <em style="font-size:9px">beta</em> ] <span>绑定巴巴变相册,上传照片显示到Blog上。巴巴变相册每个月分配给您50mb图片上传空间！</span></a></li>
+
+<li class="tico"><a href="user_blogmanage.asp?t=0" title="编辑日志">[ 编&nbsp;辑 ] <span>编辑管理现有日志</span></a></li>
+<li class="tico"><a href="user_comments.asp?t=0" title="察看评论">[ 评&nbsp;论 ] <span>察看答复管理评论</span></a></li>
+<li class="tico"><a href="user_messages.asp" title="察看留言">[ 留&nbsp;言 ] <span>察看和管理留言板</span></a></li>
+<li class="tico"><a href="user_files.asp" title="我的文件">[ 文&nbsp;件 ] <span>管理我的文件和照片</span></a></li>
+<li class="tico tico3"><a href="user_setting.asp" title="站点配置">[ 配&nbsp;置 ] <span>配置站点信息,发布公告管理链接</span></a></li>
+
+<li class="tico"><a href="user_template.asp" title="界面设定" >[ 界&nbsp;面 ] <span>选择修改站点界面 编辑CSS样式表</span></a></li>
+<li class="tico"><a href="user_music.asp" title="音乐播放器" >[ 播放器 ] <span>设定站点框架式音乐播放器</span></a></li>
+		<!--<li class="mt"><a href="javascript:v()" class="down" onclick="hord(this,'mm3')">使用帮助</a>
+          <ul id="mm3" style="display:none">
+            <li><a href="">&raquo;&nbsp;新手入门</a></li>
+          </ul>
+		</li>
+							
+		<li class="mt"><a href="javascript:v()" class="up" onclick="hord(this,'mm6')">Adver.</a><ul id="mm6"><li class="adsa"></li></ul></li> -->
+	</ul></div>
+	<div class="mleft">
+<!--//////////////////////////////////////top////////////////////////////////////////// --><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<div class="td_inner_a">
+	<div id="tabs">
+
+		<ul>
+		<li><a href="user_post.asp?t=0"><span>创建</span></a></li>
+		<li ><a href="user_blogmanage.asp?usersearch=5&t=0"><span>草稿</span></a></li>
+		<li id="tnow"><a href="user_blogmanage.asp?t=0"><span>编辑</span></a></li>
+		<li ><a href="user_comments.asp?t=0"><span>评论</span></a></li>
+		<li><a href="user_subject.asp?t=0"><span>类别</span></a></li>
+
+		<li ><a href="user_blogmanage.asp?action=downlog&t=0"><span>备份</span></a></li>
+  </ul>
+	</div>
+	<h2><a href="javascript:v()" class="up" onclick="hord(this,'prompt')"><img src="BlogCupStyle/bup/i/im.gif" alt="" align="left" />&nbsp;BLOG管理</a></h2>
+	<div id="prompt">
+
+	<h3>
+    <form name="form1" action="user_blogmanage.asp" method="get">
+
+    	<input type="hidden" name="t" value="0">
+        
+			<select name="usersearch" style="display:none" onChange="javascript:submit()">
+			<option value="10" selected>10</option>
+			</select>
+		
+		<select name="selectsub" id="selectsub" onChange="javascript:submit()">
+<option value="">  [ ---- 类别选择 ---- ] </option><option value="0">未归类</option>
+        </select>
+
+		<select name="Field" id="Field">
+            
+            <option value="id">BLOGID号</option>
+            <option value="topic" selected>BLOG标题</option>
+         </select> <input name="Keyword" class="oth" type="text" id="Keyword" size="20" maxlength="30">
+         <input type="submit" name="Submit2" class="oth othbut" value=" 搜索 ">
+  </form>
+    </h3>
+
+<h4>&nbsp;&raquo;&nbsp;所有BLOG (共有1篇BLOG)</h4>
+<div id="list"><!--by blogcup.com -->
+	<form name="myform" method="Post" action="user_blogmanage.asp?t=0" onSubmit="return confirm('确定要执行选定的操作吗？');">
+		
+		<ul class="list_content">
+    		<li>
+				<span style="float:right">
+					1 点击/ 0 评论&nbsp;<input name="id" type="checkbox" onClick="unselectall()" id="id" value="501609" />
+				</span>
+				<a href="user_post.asp?logid=501609&amp;t=0" class="abutton">&nbsp;修改&nbsp;</a>&nbsp;
+
+				<span class="atitle">
+					<a title="展开/收起内容" onclick="hord(this,'v501609');startLoad('501609','v501609')" href="javascript:v()" class="down">&raquo;&nbsp;昨天用了一下Commons-launcher，感觉不错</a>
+				</span>
+				<blockquote id="v501609" class="inner" style="display:none"></blockquote>
+			</li>
+    				<li class="list_info"><span style="float:right"><a href="user_blogmanage.asp?action=del&amp;id=501609&amp;t=0" title="删除"  onClick="return confirm('确定要删除此BLOG吗？');"><img src="BlogCupStyle/bup/i/c_delete.gif" alt="del" align="top"/></a>&nbsp;</span><a title="在新窗口打开" href="b4/blogmover/archives/2007/501609.shtml" target="_blank"><img src="BlogCupStyle/bup/i/in.gif" alt="在新窗口打开" />&nbsp;打开</a>&nbsp;blogmover &raquo; 2007-1-31 10:42:00</li>
+
+     
+						</ul>
+				
+    <ul class="list_bot"><li><input name="chkAll" type="checkbox" id="chkAll" onclick="CheckAll(this.form)" value="checkbox" />全选项目&nbsp;<input name="action" type="radio" value="del" checked="checked" onClick="document.myform.subject.disabled=true" />删除&nbsp;<input name="action" type="radio" value="Move" onClick="document.myform.subject.disabled=false" />移动到类别&nbsp;<select name="subject" id="subject" disabled="disabled">
+    
+    </select>&nbsp;
+    <input type="submit" name="Submit" value=" 执 行 " class="othbut"></li>
+    </ul>
+    </form></div>
+<div id="showpage">共1篇BLOG&nbsp;&nbsp;&nbsp;页次：1/1</strong>页 &nbsp;15篇BLOG/页&nbsp;转到：<select name='page' size='1' onchange="javascript:window.location='user_blogmanage.asp?t=0&page='+this.options[this.selectedIndex].value;"><option value='1' selected >1</option></select></div></div>
+
+		</div></div>
+	<!--/r3 -->
+	<br clear="all" />
+	</div></div>
+ 	<div class="r3b"><div class="t4"><div class="t3"><img src="BlogCupStyle/bup/i/space.png" alt="" /></div></div></div>
+	</div>
+</div>
+<div id="bottom">&copy;&nbsp;BlogCup.com 2004-2006. Mail:blogcup@gmail.com </div>
+</body>
+</html>
