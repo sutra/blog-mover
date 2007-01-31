@@ -45,6 +45,8 @@
 					value="com.redv.blogmover.bsps.com.blogchinese.BlogChineseReader" />
 				<entry key="blogcup.com"
 					value="com.redv.blogmover.bsps.com.blogcup.BlogCupReader" />
+				<entry key="blogcn.com"
+					value="com.redv.blogmover.bsps.com.blogcn.BlogCnReader" />
 			</map>
 		</property>
 	</bean>
@@ -75,7 +77,7 @@
 				<entry key="sohu"
 					value="com.redv.blogmover.bsps.sohu.SohuBlogWriter" />
 				<entry key="blogcn"
-					value="com.redv.blogmover.bsps.blogcn.BlogcnWriter" />
+					value="com.redv.blogmover.bsps.blogcn.BlogCNWriter" />
 			</map>
 		</property>
 	</bean>

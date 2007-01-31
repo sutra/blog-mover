@@ -16,7 +16,15 @@ import com.redv.blogmover.LoginFailedException;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
- * @author shutrazh
+ * Login from <a
+ * href="http://blogcup.com/login.asp">http://blogcup.com/login.asp</a>.
+ * <p>
+ * Test account:<br />
+ * username: blogmover<br />
+ * password: blogmover
+ * </p>
+ * 
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra</a>
  * 
  */
 public class BlogCupLogin {

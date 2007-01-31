@@ -14,8 +14,13 @@ import com.redv.blogmover.util.HttpDocument;
 
 /**
  * To login to http://www.blogchinse.com with http client.
+ * <p>
+ * Test account: <br />
+ * username: blogmover, <br />
+ * password: blogmover
+ * </p>
  * 
- * @author shutra
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra</a>
  * 
  */
 public class BlogChineseLogin {
