@@ -11,6 +11,8 @@ import org.w3c.dom.Document;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
+import com.redv.blogmover.blogengines.cn.oblog.ListWebLogHtmlPageParser;
+import com.redv.blogmover.blogengines.cn.oblog.ModifyWebLogHtmlPageParser;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.util.HttpDocument;
 
