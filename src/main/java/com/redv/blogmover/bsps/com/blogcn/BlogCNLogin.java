@@ -14,6 +14,13 @@ import com.redv.blogmover.LoginFailedException;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
+ * Login for <a href="http://www.blogcn.com/">http://www.blogcn.com</a>.
+ * <p>
+ * Test account:<br />
+ * Username: blogmoverdev<br />
+ * Password: blogmoverdev<br />
+ * </p>
+ * 
  * @author shutra
  * 
  */

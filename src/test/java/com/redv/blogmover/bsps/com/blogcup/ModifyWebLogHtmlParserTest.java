@@ -3,10 +3,10 @@
  */
 package com.redv.blogmover.bsps.com.blogcup;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -72,15 +72,8 @@ public class ModifyWebLogHtmlParserTest {
 		WebLog webLog = parser.getWebLog();
 		assertEquals("昨天用了一下Commons-launcher，感觉不错", webLog.getTitle());
 		assertEquals("昨天用了一下Commons-launcher，感觉不错的内容~~<br>", webLog.getBody());
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR, 2007);
-		cal.set(Calendar.MONTH, 1 - 1);
-		cal.set(Calendar.DATE, 31);
-		cal.set(Calendar.HOUR, 10);
-		cal.set(Calendar.MINUTE, 42);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND, 0);
-		assertEquals(cal.getTime(), webLog.getPublishedDate());
+		assertEquals(new GregorianCalendar(2007, 1 - 1, 31, 10, 42, 0)
+				.getTime(), webLog.getPublishedDate());
 		assertEquals(new String[] { "commons-launcher", "感觉" }, webLog
 				.getTags());
 	}
