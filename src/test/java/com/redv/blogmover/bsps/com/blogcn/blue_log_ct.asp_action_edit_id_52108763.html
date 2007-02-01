@@ -1,0 +1,705 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>添加日志 | 中国博客网</title><meta name="Keywords" content="日志，中国博客网，博客，Blog，博客网，Blog，Weblog，日志，博客中文站，强大的中文博客系统，Blogcn，Boke"> <meta name="Description" content="Blog，Blogger，Weblog，Blogcn，Boke，博客，中国博客网，博客网，日志，网络日志，博客中文站，强大的中文博客系统，第一家免费中文博客托管服务商（BSP），现有游戏博客、移动博客、音乐博客、rabo、情侣、图片博客等应用版块">
+<link href="images0604/style_blue.css" rel="stylesheet" type="text/css" />
+
+<script language="javascript">
+	function GenerateNewCode(objImgID)
+	{
+		//debugger;
+		var obj = document.getElementById(objImgID);
+		if (obj == null)return;
+		UpdateCode(obj);
+		//alert(objImgID.src);
+	}
+	function UpdateCode(objImg)
+	{
+		//debugger;
+		var src = objImg.src;	
+		var re = /MustCreate=\d/;
+		var arr = re.exec(src);
+		if(arr != null)
+		{
+			src = src.replace(src.substr(arr.index,12),"MustCreate=1");
+		}
+		
+		var oRandom = Math.ceil(Math.random() * 1000);
+		re = /RANDOM=\d{3}/;
+		arr = re.exec(src);
+		if(arr == null)
+			src += "&RANDOM=" + oRandom;
+		else
+			src = src.replace(src.substr(arr.index,10),"RANDOM=" + oRandom);
+		src = src.replace("Onload=0","Onload=1");		
+		objImg.src = src;
+	}
+</script>
+
+
+
+<script language=javascript src="ex_1.js"></script>
+<script language="JavaScript" src="img.js"></script>
+
+</head>
+
+<body>
+<table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="5"><img src="images0604/dot.gif" width="1" height="1" /></td>
+  </tr>
+</table>
+<table width="100%"  border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="2%" valign="top">&nbsp;</td>
+    <td valign="top"><table height="26"  border="0" align="left" cellpadding="0" cellspacing="0">
+
+        <tr align="center">
+          <td width="70" align="center" valign="bottom" background="images0604/menu2.gif" class="menu02"><a href="/blue_log_ct_html.asp?action=edit&id=52108763&UserID=32361141&uid=blogmoverdev&dbID=3&t=2007%2D2%2D1+12%3A54%3A12">可视化编辑</a></td>
+          <td width="70" align="center" valign="bottom" background="images0604/menu1.gif" class="menu01"><a href="/blue_log_ct.asp?action=edit&id=52108763&UserID=32361141&uid=blogmoverdev&dbID=3&t=2007%2D2%2D1+12%3A54%3A12">UBB编辑</a></td>
+        </tr>
+    </table></td>
+  </tr>
+</table>
+<form action="edit_new.asp?PageName=blue_log_ct.asp?action=edit&id=52108763&UserID=323" method="post"  name="PostTopic" onSubmit="return check_form();" ID="Form1" style="margin: 0px">
+<table width="100%"  border="0" cellpadding="0" cellspacing="0">
+
+  <tr> 
+    <td valign="top"> 
+      <table width="96%" border="0" align="center" cellpadding="4" cellspacing="0" class="main_box2">
+        <tr> 
+          <td width="14%" align="left" class="font-gray1">·日志标题</td>
+          <td align="left"> <input name="title" id="mytitle" value="测试" type="text" size="30" onMouseOver="javascript:if (this.value=='在这里输入日志标题')this.value='';"><font color="red">*</font> 
+            <select name="isorg" onChange="PostTopic.title.value+=this.options[this.selectedIndex].nam" ID="Select1">
+				<option value="">选择</option>
+				<option value="1"   nam=" [原]">原创</option>
+
+				<option value="0"   nam=" [转]">转载</option>
+			</select> &nbsp;隐藏此文 
+            <select name="ishd" onChange="javascript:if(this.options[this.selectedIndex].value==1)alert('选择 “是” 将隐藏此日志！\n\n隐藏日志不显示在主页上！ ');" ID="Select2">
+				<option value="1">是</option>
+				<option value="0" selected>否</option>
+			</select>
+        </tr>
+
+        <tr bgcolor="#FFFFFF"> 
+          <td align="left" class="font-gray1 blog_bg">·TAG</td>
+          <td align="left"  class="blog_bg"> 
+            <nobr><input name=keyword id="keyword" value="测试tag,第二个tag,第三个tag" size="40" maxLength=20> 
+            <span class="font-gray">TAG之间使用逗号分隔开</span> <a href="/foot/faq.asp?id=20&hid=134" class="blue" target=_blank><img src="images/log_ct_help.gif" border="0" alt=什么是TAG /></a>&nbsp;&nbsp;&nbsp;</nobr></td>
+        </tr>
+        <tr> 
+          <td align="left" class="font-gray1">·上传图片</td>
+          <td align="left" >
+
+		  <!--图片上船开始-->
+		  <iframe name=upload frameborder=0 framespacing=0 width=100% height=32 border=0 src=/upload/Upload.aspx scrolling=no marginheight=0 marginwidth=0></iframe>
+		  <!--图片上船结束-->
+		  </td>
+        </tr>
+		
+        <tr class="blog_bg"> 
+          <td colspan="2" align="left">
+		  <!-- Editor --> 
+		  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0 ID="Table9">
+
+		  <TBODY>
+			<TR> 
+			  <TD width="99%" height="33"> 
+				&nbsp;<img onClick=bold() height=26 alt=黑体 src="images/new/log_ct/b.gif" width=26 align=absMiddle border=0 ><img onClick=italicize() height=26 alt=斜体 src="images/new/log_ct/i.gif" width=26 align=absMiddle border=0><img onClick=underline() height=26 alt=下划线 src="images/new/log_ct/u.gif" width=26 align=absMiddle border=0><img onClick=calign() height=26 alt=文字居中 src="images/new/log_ct/center.gif" width=26 align=absMiddle><img onClick=hyperlink() height=26 alt=插入超级链接 src="images/new/log_ct/a.gif" width=26 align=absMiddle border=0><img onClick=email() alt=插入电子邮件 src="images/new/log_ct/email.gif" align=absMiddle border=0><img onClick=cimage() height=26 alt=插入图像 src="images/new/log_ct/image.gif" width=26 align=absMiddle border=0><img onClick=swf() height=26 alt=插入FLASH动画  src="images/new/log_ct/flash.gif" width=26 align=absMiddle><img onClick=cdir() height=26 alt=插入Shockwave动画 src="images/new/log_ct/sh.gif" width=26 align=absMiddle><img onClick=cmp() height=26 alt="插入Windows media电影" src="images/new/log_ct/mp.gif" width=26 align=absMiddle><img onClick=crm() height=26 alt=插入Real格式文件 src="images/new/log_ct/rm.gif" width=26 align=absMiddle><img onClick=cqt() height=26 alt="插入Quick time文件"  src="images/new/log_ct/qt.gif" width=26 align=absMiddle><img onClick=showcode() alt=插入代码 src="images/new/log_ct/code.gif" align=absMiddle border=0><img onClick=quote() height=26 alt=插入引用 src="images/new/log_ct/quote.gif" width=26  align=absMiddle border=0><img onClick=cmove() height=26 alt=插入移动文字 src="images/new/log_ct/move.gif" width=26 align=absMiddle><img onClick=cfly() height=26 alt=插入飞行文字 src="images/new/log_ct/fly.gif" width=26 align=absMiddle><img onClick=smilieopen() height=26 alt=插入CSS src="images/new/log_ct/css.gif" width=26 align=absMiddle border=0><img onClick=viewubb() height=26 alt=UBB代码说明 src="images/new/log_ct/ab.gif" width=26 align=absMiddle border=0><script language=javascript src="ubb.js"></script>
+				<select name=select2 class="inputt" onChange='showfont(this.options[this.selectedIndex].value)' ID="Select3">
+				  <option value="Andale Mono">Andale 
+				  Mono</option>
+				  <option value="Arial" selected>Arial</option>
+				  <option value="Arial Black">Arial 
+				  Black</option>
+
+				  <option value="Book Antiqua">Book 
+				  Antiqua</option>
+				  <option value="Century Gothic">Century 
+				  Gothic</option>
+				  <option value="Comic Sans MS">Comic 
+				  Sans MS</option>
+				  <option value="Courier New">Courier 
+				  New</option>
+				  <option value="Georgia">Georgia</option>
+				  <option value="Impact">Impact</option>
+
+				  <option value="Tahoma">Tahoma</option>
+				  <option value="Times New Roman">Times 
+				  New Roman</option>
+				  <option value="Trebuchet MS">Trebuchet 
+				  MS</option>
+				  <option value="Script MT Bold">Script 
+				  MT Bold</option>
+				  <option value="Stencil">Stencil</option>
+				  <option value="Verdana">Verdana</option>
+
+				  <option value="Lucida Console">Lucida 
+				  Console</option>
+				</select><select class=inputt onChange='showsize(this.options[this.selectedIndex].value)') name=select2 ID="Select4">
+				  <option value=1>1</option>
+				  <option value=2>2</option>
+				  <option value=3 selected>3</option>
+				  <option value=4>4</option>
+
+				  <option value=5>5</option>
+				  <option value=6>6</option>
+				</select><select class=inputt  onChange='showcolor(this.options[this.selectedIndex].value)') name=select2 ID="Select5">
+				  <option value=Black selected>黑色</option>
+				  <option value=Red>红色</option>
+				  <option value=Yellow>黄色</option>
+
+				  <option  value=Pink>粉色</option>
+				  <option value=Green>绿色</option>
+				  <option value=Orange>橙色</option>
+				  <option value=Purple>紫色</option>
+				  <option value=Blue>蓝色</option>
+				  <option value=Beige>米色</option>
+
+				  <option value=Brown>棕色</option>
+				  <option value=Teal>深绿色</option>
+				  <option value=Navy>深蓝色</option>
+				  <option value=Maroon>紫红色</option>
+				  <option value=LimeGreen>鲜绿色</option>
+				</select> </TD>
+
+			</TR>
+		  </TBODY>
+		</TABLE>
+		<!-- End Editor -->
+		  </td>
+        </tr>
+        <tr bgcolor="#FFFFFF"> 
+			<TD height=32> <DIV align=left><font color="#990000">·</font><FONT class="font-gray1"><strong>日志内容</strong></FONT></DIV></TD>
+
+			<TD height=32 valign="middle"><DIV align=left>&nbsp;<input type="checkbox" name="chkCopy" value="Y" checked>&nbsp;将内容复制到剪贴板<span class="font-gray">（将覆盖您本地计算机中剪贴板内容）</span><input type="hidden" name="hiddenCopy"><FONT color=#999999><A onclick=pasteC() href="#"><b>[还原日志内容]</b></A></FONT><a href="http://www.blogcn.com/foot/faq.asp?id=20&hid=395" target="_blank"><img src="images/log_ct_help.gif" border="0"></a></DIV></TD>
+		  </tr>
+		   		<!--自动保存开始-->
+											  
+				<script language="JavaScript">
+		 
+					function copyLogToClipboard(){
+		
+							if(document.PostTopic.chkCopy.checked){
+								var TempString = "";
+								TempString =document.PostTopic.Message.value;
+								document.PostTopic.hiddenCopy.value = TempString;
+								var textRange=document.PostTopic.hiddenCopy.createTextRange(); 
+								textRange.execCommand("Copy");
+							}
+			
+						}
+									
+					function pasteC(){
+									
+							if (document.PostTopic.chkCopy.checked){
+								document.PostTopic.Message.focus();
+								document.PostTopic.Message.createTextRange().execCommand("Paste");
+							}
+							else{
+								alert("对不起，无法还原。请先选择“将内容复制到剪贴板”选项！");
+							}
+						}
+
+				</script>
+											  
+				<!--自动保存结束-->
+		  
+		  
+		  
+		<tr>
+          <td colspan="2" align="left" valign="top"> 
+            <textarea  name="Message"  rows="14" id=mycontent cols="100%" style="width:100%;"  onSelect="storeCaret(this);" onClick="storeCaret(this);" onMouseOver="javascript:if (this.value=='在这里输入日志内容')this.value='';" onKeyUp="storeCaret(this);">测试日志内容。</textarea>
+
+</td>
+        </tr>
+        <tr bgcolor="#FFFFFF"> 
+          <td align="center" class="font-gray1">选择表情</td>
+          <td align="left"> 
+          	<!--自定义表情开始-->
+			<span id="_biaoqing">
+			<script language=JavaScript>
+			function writeface(nb)
+			{
+			var ct=0;
+			if(nb==1)
+			{ct=20}
+			else if(nb==5||nb==4)
+			{ct=22}
+			else
+			{ct=23};
+			mct='';
+			for(i=1;i<=ct;i++)
+			mct=mct+"<a href=\"javascript:face(':em"+nb.toString()+i.toString()+":')\"><img src='/images/em/"+nb.toString()+"/"+i.toString()+".gif' border=0></a>  ";
+			return mct;
+			}
+			var bianhao = 2;
+			function showdisplay(nb,direct){
+				ccdd=document.all.facetb;
+				if(direct=="next"){
+					//ccdd[nb-1].style.display='none';
+					if(bianhao==6){
+						bianhao=0;
+						nb=0;
+					}
+					//ccdd[nb].style.display='';
+					document.all("_biaoqing").innerHTML=writeface(nb+1);
+					bianhao++;
+				}
+				else{
+					//ccdd[nb-1].style.display='none';
+					if(bianhao==1){
+						bianhao=7;
+						nb=7;
+					}
+					//ccdd[nb-2].style.display='';
+					document.all("_biaoqing").innerHTML=writeface(nb-1);
+					bianhao--;
+				}
+			}
+
+			function _showdisplay(direct){
+
+				showdisplay(bianhao,direct);
+			}
+			//var writetb="";
+			//for(j=1;j<=6;j++){
+			//writetb=writetb+"<div id=facetb style='";
+			//if (j!=2){writetb=writetb+"display:none";};
+			//writetb=writetb+"'>"+writeface(j)+"</div>"}
+			document.all("_biaoqing").innerHTML=writeface(2);
+			</script> </span>
+			<!--自定义表情结束-->
+
+			<nobr><img src="images/new/log_ct/Previous.gif" width="14" height="14" style="cursor:hand;" onClick="_showdisplay('previous')"> 
+			<img src="images/new/log_ct/Next.gif" width="14" height="14" style="cursor:hand;" onClick="_showdisplay('next')"></nobr>
+		  </td>
+        </tr>
+        <tr> 
+          <td align="left" class="font-gray1 blog_bg">·文章归类</td>
+          <td align="left" class="blog_bg">
+		  <select name='tp' onChange='change()'>
+<option value=''>请选择类别</option>
+
+<option value='1'>原创文学</option>
+<option value='2'>驴族游记</option>
+<option value='3'>衣食风采</option>
+<option value='4'>情感密语</option>
+<option value='5'>我爱我家</option>
+<option value='6'>竞技体育</option>
+<option value='8'>职场日记</option>
+<option value='9'>动漫影音</option>
+<option value='10'>商业财经</option>
+
+<option value='11'>科技艺苑</option>
+<option value='12'>随想杂谈</option>
+</select>
+<select name='setp' sl='1' style='display:none' disabled>
+<option value='13'>网络原创</option>
+<option value='14'>诗词文赋</option>
+<option value='15'>连载作品</option>
+<option value='16'>外国文学</option>
+<option value='17'>古典文学</option>
+<option value='18'>读书时间</option>
+
+<option value='19'>笑林广记</option>
+</select><select name='setp' sl='2' style='display:none' disabled>
+<option value='20'>中华各地</option>
+<option value='21'>户外自然</option>
+<option value='22'>异国风貌</option>
+<option value='23'>民俗风情</option>
+<option value='24'>心情游记</option>
+<option value='25'>旅游杂记</option>
+</select><select name='setp' sl='3' style='display:none' disabled>
+<option value='26'>美食天地</option>
+
+<option value='27'>流行时尚</option>
+<option value='28'>化妆美容</option>
+<option value='29'>搜店购物</option>
+<option value='30'>休闲一族</option>
+<option value='31'>生活百科</option>
+</select><select name='setp' sl='4' style='display:none' disabled>
+<option value='32'>浪漫爱情</option>
+<option value='33'>亲情无限</option>
+<option value='34'>友情长存</option>
+
+<option value='35'>伤感之旅</option>
+<option value='36'>同性之间</option>
+<option value='37'>网络情缘</option>
+</select><select name='setp' sl='5' style='display:none' disabled>
+<option value='38'>家居导航</option>
+<option value='39'>左邻右舍</option>
+<option value='40'>车迷世界</option>
+<option value='41'>同居时代</option>
+<option value='42'>幸福生活</option>
+
+<option value='43'>房产楼记</option>
+<option value='44'>少儿乐园</option>
+</select><select name='setp' sl='6' style='display:none' disabled>
+<option value='45'>足球天地</option>
+<option value='46'>NBA     </option>
+<option value='47'>体坛明星</option>
+<option value='48'>奥运北京</option>
+<option value='49'>赛事观感</option>
+<option value='50'>球类世界</option>
+
+<option value='51'>各类竞技</option>
+</select><select name='setp' sl='8' style='display:none' disabled>
+<option value='59'>职场生涯</option>
+<option value='60'>同事之间</option>
+<option value='61'>校园时代</option>
+<option value='62'>教学天地</option>
+<option value='63'>语言学习</option>
+<option value='64'>进修培训</option>
+</select><select name='setp' sl='9' style='display:none' disabled>
+<option value='65'>流行音乐</option>
+
+<option value='66'>电玩游戏</option>
+<option value='67'>卡通漫画</option>
+<option value='68'>明星风采</option>
+<option value='69'>天下影视</option>
+<option value='70'>视听在线</option>
+<option value='71'>娱乐综合</option>
+</select><select name='setp' sl='10' style='display:none' disabled>
+<option value='72'>证券金融</option>
+<option value='73'>企业市场</option>
+
+<option value='74'>电子商务</option>
+<option value='75'>营销管理</option>
+<option value='76'>经济贸易</option>
+<option value='77'>工业农业</option>
+<option value='78'>商界名人</option>
+</select><select name='setp' sl='11' style='display:none' disabled>
+<option value='79'>电脑网络</option>
+<option value='80'>移动通讯</option>
+<option value='81'>电子科技</option>
+
+<option value='82'>各类科学</option>
+<option value='83'>艺术文化</option>
+<option value='84'>天下摄影</option>
+</select><select name='setp' sl='12' style='display:none' disabled>
+<option value='85'>随想杂谈</option>
+</select>		  
+<script language=JavaScript>
+function change()
+{
+	
+	mytp=document.getElementsByName("setp");
+	//alert(document.PostTopic.tp.options[document.PostTopic.tp.selectedIndex].value);
+	for(i=0;i<mytp.length;i++)
+	{ 
+		if(document.PostTopic.tp.options[document.PostTopic.tp.selectedIndex].value==mytp[i].sl)
+		{
+			mytp[i].style.display = "";
+			mytp[i].disabled = false;
+		}
+		else
+		{
+			mytp[i].style.display="none";
+			mytp[i].disabled=true;
+		}
+	}
+}
+
+</script>
+
+
+设置此项将<!--a href="http://www.blogcn.com/cool/files.asp" target="_blank"-->使您的文章更容易被找到<!--/a--> 
+
+
+<script language=javascript>
+with(document.PostTopic)
+{
+	for(i=0;i<tp.length;i++)
+	{
+		
+		if(tp.options[i].value == "")
+		
+		tp.selectedIndex=i
+	}
+	
+	mytp=document.getElementsByName("setp");
+	for(i=0;i<mytp.length;i++)
+	{
+		if(mytp[i].sl=="")
+		{
+			for(j=0;j<mytp[i].length;j++)
+			{
+				if(mytp[i].options[j].value=="")
+				{
+					mytp[i].selectedIndex=j;
+					mytp[i].style.display="";
+					mytp[i].disabled=false;
+				}
+			}
+		}
+	}
+	
+}
+</script>
+
+		  </td>
+        </tr>
+        <tr> 
+          <td align="left" bgcolor="#FDFDFD" class="font-gray1">·自设分类</td>
+          <td align="left" bgcolor="#FDFDFD"> 
+            <select name='st' size='1' id='st'><option value='0' sc='0'>无分类</option></select>
+		   <script language=JavaScript>
+			var aa="";
+			for(i=0;i<document.PostTopic.st.length;i++)
+			{if(aa==document.PostTopic.st.options[i].value)
+			document.PostTopic.st.selectedIndex=i;
+			}
+			</script> 
+		   <a href="/blue_mag_sort.asp?action=set" class="blue">［设置类别］</a></td>
+
+          </tr>
+        <tr>
+          <td align="left" bgcolor="#FDFDFD" class="font-gray1">&nbsp;</td>
+          <td align="left" bgcolor="#FDFDFD"><span class="font-gray1">显示头像</span>&nbsp;&nbsp; <span id=showhead>
+          <input  name=ishead type=radio class=rd value=1>是 <input class=rd type=radio value=0  name=ishead checked>否
+          </span> <span class="font-gray1">显示签名</span>&nbsp;&nbsp;
+          <input name=issign type=radio class=rd value=1>是 <input class=rd type=radio value=0  name=issign checked>否
+          <a href="/blue_mypr.asp#c" class="blue">［设置签名］</a></td>
+
+          </tr>
+        <tr> 
+          <td height="25" align="left" class="font-gray1 blog_bg">·高级选项</td>
+          <td align="left" class="blog_bg">
+		  <a href="#adv1" onClick="if(adv.style.display=='none'){adv.style.display='';}else{adv.style.display='none';}" class="darkcolor"><strong>显示高级编辑选项</strong>&nbsp;<font face="Webdings">6</font></a><a name="adv1"></a> &nbsp;<iframe src="http://gg.blogcn.com/cgi-bin/class/AD.DataProvider/ADData.aspx?act=Show&id=22350003001" frameborder="0" style="overflow: hidden;" scrolling="no" width="190px" height="16px"></iframe>
+          </td>
+        </tr>
+
+		<tr class="blog_bg"> 
+          <td  colspan="3">
+		  <!--adv start-->
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" id="adv" style="display:none">
+			  <TR bgcolor="#e0f0f7"> 
+				<TD width=84 height=32> <div align="left"><B><STRONG><B><FONT color=#348cc9>·</FONT></B></STRONG><FONT color=#666666>引用地址</FONT></B></div></TD>
+				<TD height=25 colspan="4"> 
+				<input class="memb" style="WIDTH: 73%" value="不填为空，地址必须以http://开头" onClick="javascrpit:if(this.value='不填为空，地址必须以http://开头')this.value=''"  name=tb ID="Text1"> </font> 
+				  <A href="/foot/faq.asp?id=22&hid=177" target=_blank><img src="images/log_ct_help.gif" border="0" alt="什么是引用地址?"/></A> </TD>
+
+			  </TR>
+			  <TR> 
+				<TD height=1 colspan="5" bgColor=#ffffff></TD>
+			  </TR>
+			  <TR> 
+				<TD height=32 bgcolor="#e0f0f7"> <div align="left"><strong><B><FONT color=#348cc9>·</FONT></B><font color="#666666">笑脸转换</font></strong> 
+				<script language="JavaScript">
+function bSubmit(){
+return "<input src='images/new/log_ct/fb.gif' width='87' height='22' type='image' name='Image2'>&nbsp;<img src='images/new/log_ct/cc.gif' width='87' height='22' style='ursor:hand;' onClick='PostTopic.reset()'>&nbsp;<img src='images/new/log_ct/yl.gif' width='87' height='22' style='cursor:hand' onClick='for(i=0;i<PostTopic.rs.length;i++){if(PostTopic.rs[i].checked){form1.r2.value=PostTopic.rs[i].value;}};form1.t.value=PostTopic.Message.value;form1.submit();'>";
+}
+function aSubmit(){
+return atijiao.innerHTML;
+}
+				var issub = false;
+				function check_form()
+				{
+				if (PostTopic.title.value=="" || PostTopic.title.value=="在这里输入日志标题")
+				{alert("请先填写日志标题");PostTopic.title.focus();return false}
+
+				if (PostTopic.title.value.length>50)
+				{alert("标题输入过长！");PostTopic.title.focus();return false}
+
+				if (PostTopic.Message.value.length==0)
+				{alert("内容不能为空！");PostTopic.Message.focus();return false}
+
+				if (PostTopic.passcode.value.length==0)
+				{alert("认证码不能为空！");PostTopic.passcode.focus();return false}
+				document.PostTopic.Message.focus();
+				document.PostTopic.Message.select();
+
+				therange=document.PostTopic.Message.createTextRange();
+				therange.execCommand("Copy");
+				tijiao.innerHTML = aSubmit();
+				
+				}
+
+				</script>
+					</div></TD>
+
+				<TD height=25 colspan="4"><TABLE width="100%" border=0 cellPadding=0 cellSpacing=0 ID="Table13">
+					<TBODY>
+					  <TR> 
+						<TD width="89" height=32 bgColor=#F8FCFE>
+						<input class=rd type=radio value=1 name=rs>是 <input class=rd type=radio  value=0 name=rs checked>否 
+						  </TD>
+						<TD width="68" bgColor=#e0f0f7> 
+						  <div align="center">头像位置</div></TD>
+						<TD width="97" bgColor=#F8FCFE>
+
+						<select name="dirhead" id="dirhead">
+							<option value="0">左</option>
+							<option value="1" >右</option>
+						</select>
+						  
+						  </TD>
+						<TD width="68" bgColor=#e0f0f7>
+						<div align="center">显示字数</div></TD>
+
+						<TD bgColor=#F8FCFE>
+						<input type="text" name="cword" class="memb" size="5" onKeyPress="return event.keyCode>=48&&event.keyCode<=57" onpaste="return !clipboardData.getData('text').match(/\D/)" style="ime-mode:Disabled" ondragenter="return false" value="" maxlength="4" ID="Text2">
+						  <span style="font-size:12px;color:#666666">全显为空</span></TD>
+					  </TR>
+					</TBODY>
+				  </TABLE></TD>
+			  </TR>
+			  <TR> 
+				<TD height=1 colspan="5" bgColor=#ffffff></TD>
+
+			  </TR>
+			  <TR> 
+				<TD height=32 bgcolor="#e0f0f7"> <div align="left"><strong><B><FONT color=#348cc9>·</FONT></B><font color="#666666">开启评论</font></strong></div></TD>
+				<TD height=25 colspan="4" bgColor=#ffffff><TABLE width="100%" border=0 cellPadding=0 cellSpacing=0 ID="Table14">
+					<TBODY>
+					  <TR> 
+						<TD width="89" height=32 bgcolor="#F8FCFE"> 
+						<input class=rd type=radio value=1  name=isgbook checked>是 <input class=rd type=radio value=0  name=isgbook>否   
+						  </TD>
+
+						<TD> <div align="center"></div></TD>
+					  </TR>
+					</TBODY>
+				  </TABLE></TD>
+			  </TR>
+			  <TR> 
+				<TD height=1 colspan="5" bgColor=#ffffff></TD>
+			  </TR>
+			  
+			  <TR bgcolor="#e0f0f7"> 
+				<TD height=32> <div align="left"><strong><B><FONT color=#348cc9>·</FONT></B><font color="#666666">发表时间</font></strong></div></TD>
+
+				<TD height=25 colspan="4"> 
+				  <input class=memb maxlength=4 size=3 name=yy value="2007" ID="Text3">年 
+				  <input class=memb name=mm maxlength=2 size=2 value="2" ID="Text4">月 
+				  <input class=memb maxlength=2 size=2 name=ddd value="1" ID="Text5">日 
+				  <input name=hh class=memb size=2 maxlength=2 value="10" ID="Text6">时 
+				  <input class=memb maxlength=2 size=2 name=mi value="3" ID="Text7">分 
+				  <input class=memb maxlength=2 size=2 name=ss value="31" ID="Text8">秒 　
+				  <span style="font-size:12px;color:#666666">按现在时间请<a onClick=clr() href="####">保持空白</span></a> 
+				<script language="JavaScript">
+				function clr()
+				{
+					with(document.PostTopic){
+						yy.value='';
+						mm.value='';
+						ddd.value='';
+						hh.value='';
+						mi.value='';
+						ss.value=''
+					}
+				}
+				</script> </TD>
+			  </TR>
+			</table>
+
+			<!--adv end-->
+          </td>
+        </tr>
+        <tr bgcolor="#FFFFFF"> 
+          <td align="left" class="font-gray1">·认证码</td>
+          <td align="left"> 
+            <input name="passcode" type="text" class="input_1" id="passcode" size="4" maxlength="4"> 
+			<!--认证码开始-->
+			
+<script>
+function GetRenZhengHtml(){
+var str,id;
+id = GetRandomChars();
+str = "<input type='hidden' name='renzid' id='renzid' value="+id+">";
+str += "<img onclick='ReIntiRenZheng(this)' src='/renzcode/img.asp?id="+id+"' onmousemove=this.style.cursor='hand'>";
+return str;
+}
+
+function ReIntiRenZheng(thisImg){
+	thisImg.src = "/renzcode/loading.bmp";
+	var renzid,id;
+	renzid = document.getElementById("renzid");
+	id = GetRandomChars();
+	renzid.value = id;
+	thisImg.src = "/renzcode/img.asp?id="+id;
+}
+
+function GetRandomChars(){
+	var id = Math.random().toString(16);
+	var id1 = Math.random().toString(16);
+	//alert(id + "   " + id1);
+	return id.substr(2,8)+id1.substr(2,8);
+}
+</script>
+
+			<script>document.write(GetRenZhengHtml())</script>
+			<!--认证码结束-->
+          &nbsp;&nbsp;<span class="font-redB">*</span><a href="#"  onClick="alert('点击认证码更新！')" class="blue">［认证码有问题］</a></td>
+        </tr>
+        <tr bgcolor="#FEFCFC"> 
+          <td height="24" colspan="2" align="left" class="font-yellow1">发表内容应当遵守国家有关法律、行政法规，不得从事危害国家安全、泄露国家秘密等违法犯罪活动，不得制作、查阅、复制和传播妨碍社会治安的信息和淫秽色情等信息。不得违反上级主管部门对网络经营有关的规定或传达的精神。情节严重者，将移交司法机关。</td>
+        </tr>
+
+        <tr align="center" bgcolor="#FFFFFF"> 
+          <td height="50" colspan="2" class="font-yellow1"> 
+			<input type="hidden" name="isubb" value="1" ID="Hidden1">
+			
+			<input type="hidden" name="id" value="52108763" ID="Hidden2">                   
+			<input type="hidden" name="auid" value="32361141" ID="Hidden3">
+			
+		  <span id="atijiao" style="display:none">
+		  <font color="#FF0000">您的日志已提交，请稍等！</font>
+		<div style="height:3px"></div>
+            <input type="submit" class="box-gray" id="button" value=" 提 交 " disabled > 
+            &nbsp;&nbsp; <input type="reset" class="box-gray" id="button" value=" 重 写 " disabled > 
+          &nbsp;&nbsp; <input type="button" class="box-gray" id="button" value=" 预 览 " disabled >
+
+		  </span>
+		<span id="tijiao">
+            <input type="submit" class="box-gray" id="button" value=" 提 交 "> 
+            &nbsp;&nbsp; <input type="reset" class="box-gray" id="button" value=" 重 写 "> 
+          &nbsp;&nbsp; <input type="button" onClick="for(i=0;i<PostTopic.rs.length;i++){if(PostTopic.rs[i].checked){form1.r2.value=PostTopic.rs[i].value;}};form1.t.value=PostTopic.Message.value;form1.submit();" class="box-gray" id="button" value=" 预 览 ">
+	     </span>
+	  </td>
+        </tr>
+      </table>  
+      
+    </td>
+
+  </tr>
+</table>  
+</FORM>
+<form name="form1" method="post" action="preview.asp"  target=_blank ID="Form2">
+<input type="hidden" name="t" ID="Hidden4">
+<input type="hidden" name="r2" ID="Hidden5">
+</form>
+<div id="mayid" style="position:absolute; width:164px; height:115px; z-index:1; right:0px;top: 10px; background-color: #FFFFFF; layer-background-color: #FFFFFF; border: 1px none #000000; visibility: hidden"> 
+          <table width="100%" border="0" ID="Table17">
+            <tr> 
+              <td bgcolor="#006699" valign="bottom"> 
+                <div align="right"><a href=#### onClick="mayid.style.visibility='hidden'"><font color="#FFFFFF">[关闭视窗]</font></a></div>
+              </td>
+
+            </tr>
+            <tr> 
+              <td><iframe name=magfiles frameborder=0 framespacing=0 width=100% height=500 border=0 src="about:blank" scrolling=yes marginheight=0 marginwidth=0></iframe></td>
+            </tr>
+          </table>
+        </div>
+
+<script language="JavaScript">
+magfiles.location.href="/upload/filelist.asp";				                     					
+</script>
+<script language="JavaScript" src="ppg.js"></script>
+
+<table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr> 
+    <td height="5"><img src="images0604/dot.gif" width="1" height="1" /></td>
+  </tr>
+</table>
+<table width="96%"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="30" align="right"><span class="blog_bg"><A class=blue href="http://www.blogcn.com" target=_blank>www.blogcn.com版权所有</A></span></td>
+  </tr>
+</table>
+</body>
+
+</html>

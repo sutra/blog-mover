@@ -20,6 +20,11 @@ import com.redv.blogmover.util.HttpDocument;
  * Username: blogmoverdev<br />
  * Password: blogmoverdev<br />
  * </p>
+ * <p>
+ * Test account:<br />
+ * Username: blogmover<br />
+ * Password: jdkcn.com<br />
+ * </p>
  * 
  * @author shutra
  * 
