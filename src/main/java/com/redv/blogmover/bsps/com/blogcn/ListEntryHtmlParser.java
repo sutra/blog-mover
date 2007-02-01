@@ -118,6 +118,7 @@ public class ListEntryHtmlParser {
 	}
 
 	public void parse() {
+		log(document);
 		this.publishedDates = new ArrayList<Date>();
 		this.titles = new ArrayList<String>();
 		this.permalinks = new ArrayList<String>();

@@ -55,6 +55,8 @@ public class BlogCNLogin {
 		} else if (parser.getResult() == LoginResponseParser.RESULT_PASSWORD_INCORRECT) {
 			throw new LoginFailedException("密码不正确，请重新输入");
 		}
+
+		document = httpDocument.get("http://login.blogcn.com/mc/newfm.aspx");
 	}
 
 	public static void main(String[] args) throws LoginFailedException {
