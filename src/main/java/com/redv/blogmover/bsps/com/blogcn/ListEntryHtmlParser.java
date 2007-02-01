@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 import javax.xml.transform.TransformerException;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -33,6 +34,8 @@ import com.redv.blogmover.util.DomNodeUtils;
  */
 public class ListEntryHtmlParser {
 	private static final Log log = LogFactory.getLog(ListEntryHtmlParser.class);
+
+	private static final String NO_ENTRY_PROMPT = "您好，您还未发表过日志";
 
 	private SimpleDateFormat sdf;
 
@@ -123,9 +126,29 @@ public class ListEntryHtmlParser {
 		this.titles = new ArrayList<String>();
 		this.permalinks = new ArrayList<String>();
 		this.modifyLinks = new ArrayList<String>();
-		parseFenye();
 
-		parseEntries();
+		if (hasEntries()) {
+			parseFenye();
+			parseEntries();
+		}
+	}
+
+	/**
+	 * Check if has entris in this blog.
+	 * 
+	 * @return
+	 */
+	private boolean hasEntries() {
+		String documentXmlString;
+		try {
+			documentXmlString = DomNodeUtils.getXmlAsString(document);
+		} catch (TransformerException e) {
+			throw new RuntimeException(e);
+		}
+		if (StringUtils.contains(documentXmlString, NO_ENTRY_PROMPT)) {
+			return false;
+		}
+		return true;
 	}
 
 	private void parseFenye() {

@@ -100,7 +100,8 @@ public class BlogCNReader extends AbstractBlogReader {
 
 		} while (++currentPageNumber <= lastPageNumber);
 
-		return null;
+		log.debug("webLogs.size(): " + webLogs.size());
+		return webLogs;
 	}
 
 	private void detail(List<String> modifyLinks, List<String> permalinks) {
@@ -136,6 +137,10 @@ public class BlogCNReader extends AbstractBlogReader {
 		BlogCNReader r = new BlogCNReader();
 		r.setUsername("blogmoverdev");
 		r.setPassword("blogmoverdev");
+		r.read();
+
+		r.setUsername("blogmover");
+		r.setPassword("jdkcn.com");
 		r.read();
 	}
 }
