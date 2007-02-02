@@ -32,7 +32,7 @@ import com.redv.blogmover.util.DomNodeUtils;
  * @author shutrazh
  * 
  */
-public class ListEntryHtmlParser {
+class ListEntryHtmlParser {
 	private static final Log log = LogFactory.getLog(ListEntryHtmlParser.class);
 
 	private static final String NO_ENTRY_PROMPT = "您好，您还未发表过日志";

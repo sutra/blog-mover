@@ -19,7 +19,7 @@ import com.redv.blogmover.impl.WebLogImpl;
  * @author shutrazh
  * 
  */
-public class ModifyEntryHtmlParser {
+class ModifyEntryHtmlParser {
 	@SuppressWarnings("unused")
 	private static final Log log = LogFactory
 			.getLog(ModifyEntryHtmlParser.class);

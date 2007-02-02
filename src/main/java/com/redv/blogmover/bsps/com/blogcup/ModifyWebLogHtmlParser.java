@@ -20,7 +20,7 @@ import com.redv.blogmover.util.HtmlFormSelect;
  * @author shutrazh
  * 
  */
-public class ModifyWebLogHtmlParser {
+class ModifyWebLogHtmlParser {
 	private static final Log log = LogFactory
 			.getLog(ModifyWebLogHtmlParser.class);
 

@@ -1,7 +1,7 @@
 /**
- * Created on 2007-1-27 下午12:26:56
+ * Created on 2007-2-3 上午12:02:43
  */
-package com.redv.blogmover.bsps.com.blogchinese;
+package com.redv.blogmover.bsps.cn.com.blog;
 
 import org.w3c.dom.Document;
 
@@ -9,20 +9,12 @@ import com.redv.blogmover.blogengines.cn.oblog.AbstractOBlogLogin;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
- * To login to http://www.blogchinse.com with http client.
- * <p>
- * Test account: <br />
- * username: blogmover, <br />
- * password: blogmover
- * </p>
- * 
- * @author <a href="mailto:zhoushuqun@gmail.com">Sutra</a>
+ * @author shutra
  * 
  */
-class BlogChineseLogin extends AbstractOBlogLogin {
-	private static final String loginActionUrl = "http://www.blogchinese.com/login.asp";
+class BlogLogin extends AbstractOBlogLogin {
 
-	public BlogChineseLogin(HttpDocument httpDocument) {
+	public BlogLogin(HttpDocument httpDocument) {
 		super(httpDocument);
 	}
 
@@ -33,7 +25,7 @@ class BlogChineseLogin extends AbstractOBlogLogin {
 	 */
 	@Override
 	protected String buildLoginActionUrl() {
-		return loginActionUrl;
+		return "http://www.blog.com.cn/login.asp?action=showindexlogin&chk=1";
 	}
 
 	/*

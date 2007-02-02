@@ -27,7 +27,7 @@ import com.redv.blogmover.util.HttpDocument;
  * @author <a href="mailto:zhoushuqun@gmail.com">Sutra</a>
  * 
  */
-public class BlogCupLogin {
+class BlogCupLogin {
 	private static final String loginActionUrl = "http://blogcup.com/login.asp";
 
 	private HttpDocument httpDocument;

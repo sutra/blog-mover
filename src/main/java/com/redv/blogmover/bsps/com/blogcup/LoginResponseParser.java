@@ -14,7 +14,7 @@ import com.redv.blogmover.util.DomNodeUtils;
  * @author shutrazh
  * 
  */
-public class LoginResponseParser {
+class LoginResponseParser {
 	private static final Log log = LogFactory.getLog(LoginResponseParser.class);
 
 	private Document document;

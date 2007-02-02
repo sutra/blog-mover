@@ -23,7 +23,7 @@ import com.redv.blogmover.util.DomNodeUtils;
  * @author shutrazh
  * 
  */
-public class ListWebLogHtmlParser {
+class ListWebLogHtmlParser {
 	private static final Log log = LogFactory
 			.getLog(ListWebLogHtmlParser.class);
 

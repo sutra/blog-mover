@@ -20,7 +20,7 @@ import com.redv.blogmover.util.DomNodeUtils;
  * @author shutra
  * 
  */
-public class LoginResponseParser {
+class LoginResponseParser {
 	private static final Log log = LogFactory.getLog(LoginResponseParser.class);
 
 	/**

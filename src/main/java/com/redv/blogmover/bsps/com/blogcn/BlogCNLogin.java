@@ -29,7 +29,7 @@ import com.redv.blogmover.util.HttpDocument;
  * @author shutra
  * 
  */
-public class BlogCNLogin {
+class BlogCNLogin {
 	private static final String LOGIN_ACTION_URL = "http://login.blogcn.com/cgi-bin/Login/Login.aspx";
 
 	private HttpDocument httpDocument;

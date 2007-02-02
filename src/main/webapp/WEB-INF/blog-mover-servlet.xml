@@ -47,6 +47,8 @@
 					value="com.redv.blogmover.bsps.com.blogcup.BlogCupReader" />
 				<entry key="blogcn.com"
 					value="com.redv.blogmover.bsps.com.blogcn.BlogCNReader" />
+				<entry key="blog.com.cn"
+					value="com.redv.blogmover.bsps.cn.com.blog.BlogReader" />
 			</map>
 		</property>
 	</bean>
