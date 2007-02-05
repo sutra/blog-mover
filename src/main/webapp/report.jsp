@@ -37,7 +37,7 @@
 			<hr />
 			<div>
 				<img
-					src="chart?jFreeChartBuilder=movedInMinusOutTimesReportChartBuilder"
+					src="chart?jFreeChartBuilder=movedInTimesReportChartBuilder"
 					alt="Moved in times" />
 			</div>
 			<hr />
