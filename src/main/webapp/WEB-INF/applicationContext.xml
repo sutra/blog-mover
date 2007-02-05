@@ -37,4 +37,19 @@
 		class="com.redv.blogmover.logging.ReportBuilder">
 		<property name="loggingService" ref="loggingService" />
 	</bean>
+	<bean id="movedInTimesReportChartBuilder"
+		class="com.redv.blogmover.logging.report.jfreechart.MovedInTimesReportChartBuilder"
+		scope="prototype">
+		<property name="reportBuilder" ref="reportBuilder" />
+	</bean>
+	<bean id="movedOutTimesReportChartBuilder"
+		class="com.redv.blogmover.logging.report.jfreechart.MovedOutTimesReportChartBuilder"
+		scope="prototype">
+		<property name="reportBuilder" ref="reportBuilder" />
+	</bean>
+	<bean id="movedInMinusOutTimesReportChartBuilder"
+		class="com.redv.blogmover.logging.report.jfreechart.MovedInMinusOutTimesReportChartBuilder"
+		scope="prototype">
+		<property name="reportBuilder" ref="reportBuilder" />
+	</bean>
 </beans>

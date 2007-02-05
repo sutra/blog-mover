@@ -21,10 +21,10 @@ import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.redv.blogmover.logging.ReportBuilder;
+import com.redv.blogmover.logging.report.jfreechart.JFreeChartBuilder;
 
 /**
- * @author shutrazh
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra</a>
  * 
  */
 public class ChartServlet extends HttpServlet {
@@ -47,8 +47,9 @@ public class ChartServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String movedDirection = StringUtils.defaultIfEmpty(request
-				.getParameter("movedDirection"), "in");
+		String chartBuilder = StringUtils.defaultIfEmpty(request
+				.getParameter("jFreeChartBuilder"),
+				"movedInMinusOutTimesReportChartBuilder");
 		String beginDateString = request.getParameter("beginDate");
 		String endDateString = request.getParameter("endDate");
 		Date beginDate = null, endDate = null;
@@ -83,22 +84,14 @@ public class ChartServlet extends HttpServlet {
 
 		log.debug("startDate: " + beginDate);
 		log.debug("endDate: " + endDate);
-		ReportBuilder reportBuilder = (ReportBuilder) WebApplicationContextUtils
+
+		JFreeChartBuilder jFreeChartBuilder = (JFreeChartBuilder) WebApplicationContextUtils
 				.getWebApplicationContext(this.getServletContext()).getBean(
-						"reportBuilder");
-		JFreeChart chart;
-		if (movedDirection.equals("in")) {
-			chart = reportBuilder.createChart(reportBuilder
-					.buildMovedInDataset(beginDate, endDate), "Moved in times",
-					"Date", "Times");
-		} else {
-			chart = reportBuilder.createChart(reportBuilder
-					.buildMovedOutDataset(beginDate, endDate),
-					"Moved out times", "Date", "Times");
-		}
+						chartBuilder);
+		JFreeChart chart = jFreeChartBuilder.build(beginDate, endDate);
+
 		response.setContentType("image/png");
 		ChartUtilities.writeChartAsPNG(response.getOutputStream(), chart, 800,
 				600);
 	}
-
 }

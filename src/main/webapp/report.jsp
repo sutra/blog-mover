@@ -36,11 +36,20 @@
 			<blog-mover:report />
 			<hr />
 			<div>
-				<img src="chart?movedDirection=in" alt="Moved in times" />
+				<img
+					src="chart?jFreeChartBuilder=movedInMinusOutTimesReportChartBuilder"
+					alt="Moved in times" />
 			</div>
 			<hr />
 			<div>
-				<img src="chart?movedDirection=out" alt="Moved out times" />
+				<img src="chart?jFreeChartBuilder=movedOutTimesReportChartBuilder"
+					alt="Moved out times" />
+			</div>
+			<hr />
+			<div>
+				<img
+					src="chart?jFreeChartBuilder=movedInMinusOutTimesReportChartBuilder"
+					alt="Moved in-out times" />
 			</div>
 		</div>
 	</body>
