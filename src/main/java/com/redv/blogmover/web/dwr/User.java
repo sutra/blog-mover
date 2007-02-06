@@ -51,13 +51,13 @@ public class User implements Serializable {
 		try {
 			this.userDelegate.setReader(className);
 		} catch (InstantiationException e) {
-			log.error(e);
+			log.error("An error occured in setReader.", e);
 		} catch (IllegalAccessException e) {
-			log.error(e);
+			log.error("An error occured in setReader.", e);
 		} catch (ClassNotFoundException e) {
-			log.error(e);
+			log.error("An error occured in setReader.", e);
 		} catch (RuntimeException e) {
-			log.error(e);
+			log.error("An error occured in setReader.", e);
 		}
 	}
 
@@ -65,13 +65,13 @@ public class User implements Serializable {
 		try {
 			this.userDelegate.setWriter(className);
 		} catch (InstantiationException e) {
-			log.error(e);
+			log.error("An error occured in setWriter.", e);
 		} catch (IllegalAccessException e) {
-			log.error(e);
+			log.error("An error occured in setWriter.", e);
 		} catch (ClassNotFoundException e) {
-			log.error(e);
+			log.error("An error occured in setWriter.", e);
 		} catch (RuntimeException e) {
-			log.error(e);
+			log.error("An error occured in setWriter.", e);
 		}
 	}
 
@@ -79,7 +79,7 @@ public class User implements Serializable {
 		try {
 			return this.userDelegate.getWebLogs(firstResult, maxResults);
 		} catch (RuntimeException e) {
-			log.error(e);
+			log.error("An error occured in getWebLogs.", e);
 			return null;
 		}
 	}
@@ -95,7 +95,7 @@ public class User implements Serializable {
 		try {
 			this.userDelegate.setReaderProperty(property, value);
 		} catch (RuntimeException e) {
-			log.error(e);
+			log.error("An error occured in setReaderProperty.", e);
 		}
 	}
 
@@ -104,7 +104,7 @@ public class User implements Serializable {
 		try {
 			this.userDelegate.setReaderProperties(properties, values);
 		} catch (RuntimeException e) {
-			log.error(e);
+			log.error("An error occured in setReaderProperties.", e);
 		}
 	}
 
@@ -119,7 +119,7 @@ public class User implements Serializable {
 		try {
 			this.userDelegate.setWriterProperty(property, value);
 		} catch (RuntimeException e) {
-			log.error(e);
+			log.error("An error occured in setWriterProperty.", e);
 		}
 	}
 
@@ -128,7 +128,7 @@ public class User implements Serializable {
 		try {
 			this.userDelegate.setWriterProperties(properties, values);
 		} catch (RuntimeException e) {
-			log.error(e);
+			log.error("An error occured in setWriterProperties.", e);
 		}
 	}
 
@@ -136,7 +136,7 @@ public class User implements Serializable {
 		try {
 			return this.userDelegate.getReaderStatus();
 		} catch (RuntimeException e) {
-			log.error(e);
+			log.error("An error occured in getReaderStatus.", e);
 			return null;
 		}
 	}
@@ -145,7 +145,7 @@ public class User implements Serializable {
 		try {
 			return this.userDelegate.getWriterStatus();
 		} catch (RuntimeException e) {
-			log.error(e);
+			log.error("An error occured in getWriterStatus.", e);
 			return null;
 		}
 	}
@@ -154,7 +154,7 @@ public class User implements Serializable {
 		try {
 			this.userDelegate.deleteWebLogs(indices);
 		} catch (RuntimeException e) {
-			log.error(e);
+			log.error("An error occured in deleteWebLogs.", e);
 		}
 	}
 
@@ -162,7 +162,7 @@ public class User implements Serializable {
 		try {
 			this.userDelegate.clearWebLogs();
 		} catch (RuntimeException e) {
-			log.error(e);
+			log.error("An error occured in clearWebLogs.", e);
 		}
 	}
 
@@ -172,7 +172,7 @@ public class User implements Serializable {
 		} catch (BlogMoverException ex) {
 			throw ex;
 		} catch (RuntimeException e) {
-			log.error(e);
+			log.error("An error occured in write.", e);
 			throw e;
 		}
 	}
@@ -183,7 +183,7 @@ public class User implements Serializable {
 		} catch (BlogMoverException ex) {
 			throw ex;
 		} catch (RuntimeException e) {
-			log.error(e);
+			log.error("An error occured in read.", e);
 			throw e;
 		}
 	}
