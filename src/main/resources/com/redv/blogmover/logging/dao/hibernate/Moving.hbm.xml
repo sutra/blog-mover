@@ -7,7 +7,7 @@
 			length="32">
 			<generator class="uuid" />
 		</id>
-		<property name="date" not-null="true" />
+		<property name="date" not-null="true" index="index_moving_date" />
 		<set name="movingLogs" lazy="false" inverse="true">
 			<key column="moving_id" />
 			<one-to-many class="MovingLog" />
