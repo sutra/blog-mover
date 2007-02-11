@@ -38,19 +38,19 @@ public class UserFacade implements Serializable {
 
 	private transient RecentWebLogsCache history = new RecentWebLogsCache();
 
-	private String token;
+	private transient String token;
 
-	private final ReadWriteLock readerLock = new ReentrantReadWriteLock();
+	private transient final ReadWriteLock readerLock = new ReentrantReadWriteLock();
 
-	private final ReadWriteLock writerLock = new ReentrantReadWriteLock();
+	private transient final ReadWriteLock writerLock = new ReentrantReadWriteLock();
 
 	private transient BlogReader reader;
 
 	private transient BlogWriter writer;
 
-	private List<WebLog> webLogs;
+	private transient List<WebLog> webLogs;
 
-	private LoggingService loggingService;
+	private transient LoggingService loggingService;
 
 	public UserFacade() {
 		webLogs = new Vector<WebLog>();
