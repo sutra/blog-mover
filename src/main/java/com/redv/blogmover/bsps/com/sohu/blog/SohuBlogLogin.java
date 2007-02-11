@@ -1,7 +1,7 @@
 /**
  *  Created on 2006-7-2 5:31:58
  */
-package com.redv.blogmover.bsps.sohu;
+package com.redv.blogmover.bsps.com.sohu.blog;
 
 import java.io.Serializable;
 import java.util.ArrayList;

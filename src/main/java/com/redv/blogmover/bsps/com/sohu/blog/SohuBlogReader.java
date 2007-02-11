@@ -1,7 +1,7 @@
 /**
  * Created on 2006-6-30 17:37:51
  */
-package com.redv.blogmover.bsps.sohu;
+package com.redv.blogmover.bsps.com.sohu.blog;
 
 import java.io.IOException;
 import java.text.ParseException;

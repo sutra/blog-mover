@@ -1,7 +1,7 @@
 /**
  *  Created on 2006-7-2 17:25:04
  */
-package com.redv.blogmover.bsps.sohu;
+package com.redv.blogmover.bsps.com.sohu.blog;
 
 /**
  * @author Joe

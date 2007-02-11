@@ -16,6 +16,8 @@ import org.junit.Test;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
+import com.redv.blogmover.bsps.com.sohu.blog.SohuBlogReader;
+import com.redv.blogmover.bsps.com.sohu.blog.SohuBlogWriter;
 import com.redv.blogmover.impl.WebLogImpl;
 
 /**

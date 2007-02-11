@@ -1,7 +1,7 @@
 /**
  * Created on 2006-8-11 上午03:14:32
  */
-package com.redv.blogmover.bsps.sohu;
+package com.redv.blogmover.bsps.com.sohu.blog;
 
 import java.util.ArrayList;
 import java.util.List;

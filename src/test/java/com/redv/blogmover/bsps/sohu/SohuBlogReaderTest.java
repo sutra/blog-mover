@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.LoginFailedException;
+import com.redv.blogmover.bsps.com.sohu.blog.SohuBlogReader;
 
 /**
  * @author shutra
@@ -50,7 +51,7 @@ public class SohuBlogReaderTest {
 
 	/**
 	 * Test method for
-	 * {@link com.redv.blogmover.bsps.sohu.SohuBlogReader#read()}.
+	 * {@link com.redv.blogmover.bsps.com.sohu.blog.SohuBlogReader#read()}.
 	 * 
 	 * @throws BlogMoverException
 	 */

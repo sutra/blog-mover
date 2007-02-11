@@ -40,7 +40,7 @@
 				<entry key="sina"
 					value="com.redv.blogmover.bsps.sina.SinaReader" />
 				<entry key="sohu"
-					value="com.redv.blogmover.bsps.sohu.SohuBlogReader" />
+					value="com.redv.blogmover.bsps.com.sohu.blog.SohuBlogReader" />
 				<entry key="blogchinese.com"
 					value="com.redv.blogmover.bsps.com.blogchinese.BlogChineseReader" />
 				<entry key="blogcup.com"
@@ -77,7 +77,7 @@
 				<entry key="sina"
 					value="com.redv.blogmover.bsps.sina.SinaWriter" />
 				<entry key="sohu"
-					value="com.redv.blogmover.bsps.sohu.SohuBlogWriter" />
+					value="com.redv.blogmover.bsps.com.sohu.blog.SohuBlogWriter" />
 				<entry key="blog.com.cn"
 					value="com.redv.blogmover.bsps.cn.com.blog.BlogWriter" />
 			</map>

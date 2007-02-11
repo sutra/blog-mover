@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.redv.blogmover.bsps.sohu;
+package com.redv.blogmover.bsps.com.sohu.blog;
 
 import com.redv.blogmover.impl.WebLogImpl;
 
