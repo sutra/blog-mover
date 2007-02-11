@@ -23,6 +23,7 @@ package com.redv.blogmover.bsps.blogcn;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 
+import com.redv.blogmover.bsps.cn.com.blog.BlogcnLogin;
 import com.redv.blogmover.util.HttpDocument;
 
 import junit.framework.TestCase;

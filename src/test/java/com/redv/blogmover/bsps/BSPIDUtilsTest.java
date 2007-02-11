@@ -16,10 +16,10 @@ import org.xml.sax.SAXException;
 
 import com.redv.blogmover.bsps.baidu.BaiduReader;
 import com.redv.blogmover.bsps.baidu.BaiduWriter;
-import com.redv.blogmover.bsps.blogcn.BlogcnWriter;
 import com.redv.blogmover.bsps.blogger.GDataWriter;
 import com.redv.blogmover.bsps.bokee.BokeeReader;
 import com.redv.blogmover.bsps.bokee.BokeeWriter;
+import com.redv.blogmover.bsps.cn.com.blog.BlogWriter;
 import com.redv.blogmover.bsps.csdn.CSDNBlogReader;
 import com.redv.blogmover.bsps.csdn.CSDNBlogWriter;
 import com.redv.blogmover.bsps.donews.DoNewsBlogReader;
@@ -72,7 +72,7 @@ public class BSPIDUtilsTest {
 
 	@Test
 	public void testBlogcn() {
-		assertEquals("blogcn", new BlogcnWriter().getBsp().getId());
+		assertEquals("blogcn", new BlogWriter().getBsp().getId());
 	}
 
 	@Test

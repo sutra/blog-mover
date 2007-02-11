@@ -18,7 +18,7 @@
  *
  * </pre>
  **/
-package com.redv.blogmover.bsps.blogcn;
+package com.redv.blogmover.bsps.cn.com.blog;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -28,6 +28,7 @@ import org.junit.Test;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
+import com.redv.blogmover.bsps.cn.com.blog.BlogWriter;
 import com.redv.blogmover.impl.WebLogImpl;
 
 /**
@@ -36,13 +37,13 @@ import com.redv.blogmover.impl.WebLogImpl;
  * @version $Id BlogcnWriterTest.java$
  */
 public class BlogcnWriterTest {
-	private BlogcnWriter blogcnWriter;
+	private BlogWriter blogcnWriter;
 	
 	/**
 	 * 
 	 */
 	public BlogcnWriterTest() {
-		blogcnWriter = new BlogcnWriter();
+		blogcnWriter = new BlogWriter();
 	}
 	
 	@Test

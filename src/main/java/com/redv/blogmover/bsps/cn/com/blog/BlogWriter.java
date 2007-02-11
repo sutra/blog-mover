@@ -18,7 +18,7 @@
  *
  * </pre>
  **/
-package com.redv.blogmover.bsps.blogcn;
+package com.redv.blogmover.bsps.cn.com.blog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,7 +49,7 @@ import com.redv.blogmover.util.HttpDocument;
  * @since 2006-9-27 上午08:42:39
  * @version $Id BlogcnWriter.java$
  */
-public class BlogcnWriter extends AbstractBlogWriter {
+public class BlogWriter extends AbstractBlogWriter {
 	private HttpDocument httpDocument;
 
 	private String username;
@@ -59,7 +59,7 @@ public class BlogcnWriter extends AbstractBlogWriter {
 	/**
 	 * 
 	 */
-	public BlogcnWriter() {
+	public BlogWriter() {
 		super();
 
 		HttpClient httpClient = new HttpClient();
