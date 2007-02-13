@@ -23,14 +23,14 @@
 	<name>Blog Mover</name>
 	<repositories>
 		<repository>
+			<id>redv.com</id>
+			<url>http://mirrors.redv.com/maven2</url>
+		</repository>
+		<repository>
 			<id>java.net</id>
 			<url>
 				https://maven2-repository.dev.java.net/nonav/repository
 			</url>
-		</repository>
-		<repository>
-			<id>mirrors.redv.com</id>
-			<url>http://mirrors.redv.com/maven2</url>
 		</repository>
 	</repositories>
 	<dependencies>
