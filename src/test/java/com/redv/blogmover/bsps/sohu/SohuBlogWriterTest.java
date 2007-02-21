@@ -3,7 +3,7 @@
  */
 package com.redv.blogmover.bsps.sohu;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
@@ -63,7 +62,7 @@ public class SohuBlogWriterTest {
 	 * 
 	 * @throws BlogMoverException
 	 */
-	@Test
+	// @Test
 	public void _testWrite() throws BlogMoverException {
 		this.sohuBlogWriter = new SohuBlogWriter();
 		this.sohuBlogReader = new SohuBlogReader();

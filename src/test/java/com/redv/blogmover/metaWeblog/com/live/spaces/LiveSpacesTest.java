@@ -24,7 +24,7 @@ import com.redv.blogmover.metaWeblog.MetaWeblogReader;
  */
 public class LiveSpacesTest {
 	// @Test
-	public void testGetUsersBlogs() throws MalformedURLException, Fault {
+	public void _testGetUsersBlogs() throws MalformedURLException, Fault {
 		Blogger blogger = new BloggerImpl(
 				"https://storage.msn.com/storageservice/MetaWeblog.rpc");
 		Blog[] blogs = blogger
@@ -37,7 +37,7 @@ public class LiveSpacesTest {
 	}
 
 	// @Test
-	public void testRead() throws MalformedURLException, BlogMoverException {
+	public void _testRead() throws MalformedURLException, BlogMoverException {
 		MetaWeblogReader metaWeblogReader = new MetaWeblogReader();
 		metaWeblogReader
 				.setServerURL("https://storage.msn.com/storageservice/MetaWeblog.rpc");

@@ -24,7 +24,7 @@ public class ReaderTest {
 	private static final Log log = LogFactory.getLog(ReaderTest.class);
 
 	// @Test
-	public void test() throws MalformedURLException, Fault {
+	public void _test() throws MalformedURLException, Fault {
 		Blogger blogger = new BloggerImpl("http://www.blogger.com/api");
 		User user = blogger.getUserInfo("", "shutra", "wangjing");
 		assertEquals("Shutra's", user.getNickname());

@@ -45,7 +45,7 @@ public class BlogcnWriterTest {
 	}
 
 	// @Test
-	public void testWrite() throws BlogMoverException {
+	public void _testWrite() throws BlogMoverException {
 		List<WebLog> webLogs = new ArrayList<WebLog>();
 		WebLog webLog = new WebLogImpl();
 		webLog.setTitle("今天心情不错");

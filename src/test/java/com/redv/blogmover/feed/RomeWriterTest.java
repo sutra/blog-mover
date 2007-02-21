@@ -10,7 +10,6 @@ import java.util.List;
 import org.apache.commons.lang.SystemUtils;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
@@ -47,7 +46,7 @@ public class RomeWriterTest {
 	 * @throws BlogMoverException
 	 * 
 	 */
-	@Test
+	// @Test
 	public void _testWrite() throws BlogMoverException {
 		outputFile = new File(SystemUtils.getJavaIoTmpDir(),
 				"RomeWriterTest.xml");

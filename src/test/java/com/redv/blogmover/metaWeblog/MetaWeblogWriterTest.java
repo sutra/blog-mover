@@ -40,7 +40,7 @@ public class MetaWeblogWriterTest {
 	 * @throws MalformedURLException
 	 */
 	// @Test
-	public void testWriteBokeland() throws BlogMoverException,
+	public void _testWriteBokeland() throws BlogMoverException,
 			MalformedURLException {
 		MetaWeblogWriter w = new MetaWeblogWriter();
 		w.setServerURL("http://www.bokeland.com/xmlrpc.php");
@@ -105,7 +105,7 @@ public class MetaWeblogWriterTest {
 	}
 
 	// @Test
-	public void testWriteIBlog() throws BlogMoverException,
+	public void _testWriteIBlog() throws BlogMoverException,
 			MalformedURLException {
 		MetaWeblogWriter w = new MetaWeblogWriter();
 		w.setServerURL("http://www.iblog.com/xmlrpc.php");

@@ -22,7 +22,7 @@ import com.redv.blogmover.metaWeblog.MetaWeblogReader;
  */
 public class BlogMeTest {
 	// @Test
-	public void testGetUsersBlogs() throws MalformedURLException, Fault {
+	public void _testGetUsersBlogs() throws MalformedURLException, Fault {
 		Blogger blogger = new BloggerImpl("http://www.blogme.cn/xmlrpc.php");
 		Blog[] blogs = blogger
 				.getUsersBlogs("dummy", "blogmover", "8474639898");
@@ -32,7 +32,7 @@ public class BlogMeTest {
 	}
 
 	// @Test
-	public void testRead() throws MalformedURLException, BlogMoverException {
+	public void _testRead() throws MalformedURLException, BlogMoverException {
 		MetaWeblogReader metaWeblogReader = new MetaWeblogReader();
 		metaWeblogReader.setServerURL("http://www.blogme.cn/xmlrpc.php");
 		metaWeblogReader.setUsername("blogmover");

@@ -90,20 +90,20 @@ public class BaiduWriterTest {
 	}
 
 	// @Test
-	public void testGetBsp() {
+	public void _testGetBsp() {
 		assertEquals("com.redv.blogmover.bsps.baidu.BaiduWriter",
 				this.baiduWriter.getBsp().getId());
 	}
 
 	// @Test
-	public void testWriteUsernameEqualsBlogHandle() throws BlogMoverException {
+	public void _testWriteUsernameEqualsBlogHandle() throws BlogMoverException {
 		String username = "blogremover";// blogHandle: blogremover
 		String password = "wangjing";
 		this.testWrite(username, password);
 	}
 
 	// @Test
-	public void testWriteUsernameEqualsBlogHandle1() throws BlogMoverException {
+	public void _testWriteUsernameEqualsBlogHandle1() throws BlogMoverException {
 		String username = "blogmover1";// blogHandle: blogmover1
 		String password = "blogmover1";
 		this.testWrite(username, password);
@@ -116,7 +116,7 @@ public class BaiduWriterTest {
 	 * @throws BlogMoverException
 	 */
 	// @Test
-	public void testWriteUsernameNotEqualsBlogHandle()
+	public void _testWriteUsernameNotEqualsBlogHandle()
 			throws BlogMoverException {
 		String username = "blogmover2";// blogHandler: blogmover3
 		String password = "blogmover2";
@@ -124,7 +124,7 @@ public class BaiduWriterTest {
 	}
 
 	// @Test
-	public void testWritePasswordError() throws BlogMoverException {
+	public void _testWritePasswordError() throws BlogMoverException {
 		this.baiduWriter = new BaiduWriter();
 		String username = "blogmover2";// blogHandler: blogmover3
 		String errorPassword = "anerrorpassword";

@@ -28,7 +28,7 @@ public class XpertTest {
 	private static final Log log = LogFactory.getLog(XpertTest.class);
 
 	// @Test
-	public void testGetUsersBlogs() throws MalformedURLException, Fault {
+	public void _testGetUsersBlogs() throws MalformedURLException, Fault {
 		// Version 2.3 is http://xpert.cn/xmlrpc.
 		Blogger blogger = new BloggerImpl(
 				"http://xpert.cn/roller-services/xmlrpc");
@@ -41,7 +41,7 @@ public class XpertTest {
 	}
 
 	// @Test
-	public void testWriteRead() throws BlogMoverException,
+	public void _testWriteRead() throws BlogMoverException,
 			MalformedURLException {
 		MetaWeblogReader metaWeblogReader = new MetaWeblogReader();
 		metaWeblogReader.setServerURL("http://xpert.cn/roller-services/xmlrpc");

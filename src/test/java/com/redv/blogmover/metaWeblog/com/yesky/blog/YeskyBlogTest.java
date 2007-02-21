@@ -22,7 +22,7 @@ public class YeskyBlogTest {
 	private static final Log log = LogFactory.getLog(CSDNBlogTest.class);
 
 	@Test
-	public void testGetUsersBlogs() throws MalformedURLException, Fault {
+	public void _testGetUsersBlogs() throws MalformedURLException, Fault {
 		// Blogger blogger = new BloggerImpl(
 		// "http://blog.yesky.com/Blog/blogmover/services/MetaBlogApi.aspx");
 		// Blog[] blogs = blogger.getUsersBlogs("dummy", "blogmover",

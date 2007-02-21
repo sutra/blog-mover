@@ -15,7 +15,7 @@ import com.redv.bloggerapi.client.Fault;
  */
 public class BokeeTest {
 	@Test
-	public void testGetUsersBlogs() throws MalformedURLException, Fault {
+	public void _testGetUsersBlogs() throws MalformedURLException, Fault {
 		// Blogger blogger = new BloggerImpl(
 		// "http://publishblog.bokee.com/xml-rpc");
 		// Blog[] blogs = blogger

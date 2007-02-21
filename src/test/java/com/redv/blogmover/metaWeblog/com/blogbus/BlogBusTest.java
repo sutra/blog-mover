@@ -26,7 +26,7 @@ public class BlogBusTest {
 	private static final Log log = LogFactory.getLog(XpertTest.class);
 
 	// @Test
-	public void testGetUsersBlogs() throws MalformedURLException, Fault {
+	public void _testGetUsersBlogs() throws MalformedURLException, Fault {
 		/*
 		 * Object[] params = new Object[] { "dummy33", "blogmover", "xpert.cn" };
 		 * Object o = this.execute("blogger.getUsersBlogs", params); Object[]
@@ -62,7 +62,7 @@ public class BlogBusTest {
 	}
 
 	// @Test
-	public void testWriteRead() throws BlogMoverException,
+	public void _testWriteRead() throws BlogMoverException,
 			MalformedURLException {
 		// XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
 		// config.setServerURL(new URL("http://rpc.blogbus.com/blogger"));
