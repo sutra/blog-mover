@@ -27,7 +27,7 @@ public class CSDNBlogTest {
 	private static final Log log = LogFactory.getLog(CSDNBlogTest.class);
 
 	// @Test
-	public void testGetUsersBlogs() throws MalformedURLException, Fault {
+	public void _testGetUsersBlogs() throws MalformedURLException, Fault {
 		Blogger blogger = new BloggerImpl(
 				"http://blog.csdn.net/blogremover/services/MetaBlogApi.aspx");
 		Blog[] blogs = blogger.getUsersBlogs("dummy", "blogremover",
@@ -38,7 +38,7 @@ public class CSDNBlogTest {
 	}
 
 	// @Test
-	public void testRead() throws MalformedURLException, BlogMoverException {
+	public void _testRead() throws MalformedURLException, BlogMoverException {
 		MetaWeblogReader metaWeblogReader = new MetaWeblogReader();
 		metaWeblogReader
 				.setServerURL("http://blog.csdn.net/blogremover/services/MetaBlogApi.aspx");
