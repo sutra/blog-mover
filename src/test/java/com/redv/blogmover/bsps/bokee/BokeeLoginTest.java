@@ -37,7 +37,7 @@ public class BokeeLoginTest extends TestCase {
 	 * Test method for
 	 * {@link com.redv.blogmover.bsps.bokee.BokeeLogin#login(java.lang.String, java.lang.String)}.
 	 */
-	public void testLoginStringString() {
+	public void _testLoginStringString() {
 		bokeeLogin.login("blogremover", "xpert.cn");
 		httpDocument
 				.get("http://blogremover.bokee.com/control/diary/postDiary.b");

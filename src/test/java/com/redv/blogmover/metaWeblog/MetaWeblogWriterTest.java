@@ -18,7 +18,6 @@ import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 import org.apache.xmlrpc.client.XmlRpcCommonsTransportFactory;
-import org.junit.Test;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
@@ -40,7 +39,7 @@ public class MetaWeblogWriterTest {
 	 * @throws BlogMoverException
 	 * @throws MalformedURLException
 	 */
-	@Test
+	// @Test
 	public void testWriteBokeland() throws BlogMoverException,
 			MalformedURLException {
 		MetaWeblogWriter w = new MetaWeblogWriter();
@@ -66,7 +65,7 @@ public class MetaWeblogWriterTest {
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	@Test
+	// @Test
 	public void getAllBlogsFromBokeland() throws MalformedURLException,
 			XmlRpcException {
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
@@ -86,7 +85,7 @@ public class MetaWeblogWriterTest {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Test
+	// @Test
 	public void getAllBlogsFromIBlog() throws MalformedURLException,
 			XmlRpcException {
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
@@ -105,7 +104,7 @@ public class MetaWeblogWriterTest {
 		assertEquals(m.get("blogName"), "Blog Mover");
 	}
 
-	@Test
+	// @Test
 	public void testWriteIBlog() throws BlogMoverException,
 			MalformedURLException {
 		MetaWeblogWriter w = new MetaWeblogWriter();

@@ -64,7 +64,7 @@ public class SohuBlogWriterTest {
 	 * @throws BlogMoverException
 	 */
 	@Test
-	public void testWrite() throws BlogMoverException {
+	public void _testWrite() throws BlogMoverException {
 		this.sohuBlogWriter = new SohuBlogWriter();
 		this.sohuBlogReader = new SohuBlogReader();
 

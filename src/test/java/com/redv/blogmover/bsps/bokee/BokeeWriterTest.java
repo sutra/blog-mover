@@ -33,7 +33,7 @@ public class BokeeWriterTest extends TestCase {
 	 * 
 	 * @throws BlogMoverException
 	 */
-	public void testWriteBlog() throws BlogMoverException {
+	public void _testWriteBlog() throws BlogMoverException {
 		List<WebLog> webLogs = new ArrayList<WebLog>();
 		WebLog webLog = new WebLogImpl();
 		webLog.setTitle("test");

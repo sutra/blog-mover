@@ -22,7 +22,7 @@ public class BaiduLoginTest extends TestCase {
 	 * Test method for 'com.redv.blogremover.bsps.baidu.BaiduLogin.login(String,
 	 * String)'
 	 */
-	public void testLogin() throws BlogMoverException {
+	public void _testLogin() throws BlogMoverException {
 		baiduLogin.login("blogremover", "wangjing");
 	}
 

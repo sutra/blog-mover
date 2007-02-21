@@ -56,7 +56,7 @@ public class SohuBlogReaderTest {
 	 * @throws BlogMoverException
 	 */
 	@Test
-	public void testRead() throws BlogMoverException {
+	public void _testRead() throws BlogMoverException {
 		this.sohuBlogReader = new SohuBlogReader();
 		this.sohuBlogReader.setUsername("blogmover");
 		this.sohuBlogReader.setPasswd("blogmover");
@@ -65,7 +65,7 @@ public class SohuBlogReaderTest {
 	}
 
 	@Test
-	public void testReadChinaren() throws BlogMoverException {
+	public void _testReadChinaren() throws BlogMoverException {
 		this.sohuBlogReader = new SohuBlogReader();
 		this.sohuBlogReader.setUsername("blogmover");
 		this.sohuBlogReader.setPasswd("blogmover");
@@ -74,7 +74,7 @@ public class SohuBlogReaderTest {
 	}
 
 	@Test
-	public void testReadSogou() throws BlogMoverException {
+	public void _testReadSogou() throws BlogMoverException {
 		this.sohuBlogReader = new SohuBlogReader();
 		this.sohuBlogReader.setUsername("blogmover");
 		this.sohuBlogReader.setPasswd("blogmover");
@@ -83,7 +83,7 @@ public class SohuBlogReaderTest {
 	}
 
 	@Test
-	public void testMailDomainNotCorrect() throws BlogMoverException {
+	public void _testMailDomainNotCorrect() throws BlogMoverException {
 		this.sohuBlogReader = new SohuBlogReader();
 		this.sohuBlogReader.setUsername("blogmover");
 		this.sohuBlogReader.setPasswd("blogmover");
@@ -97,7 +97,7 @@ public class SohuBlogReaderTest {
 	}
 
 	@Test
-	public void testPasswordNotCorrect() throws BlogMoverException {
+	public void _testPasswordNotCorrect() throws BlogMoverException {
 		this.sohuBlogReader = new SohuBlogReader();
 		this.sohuBlogReader.setUsername("blogmover");
 		this.sohuBlogReader.setPasswd("errorpassword");

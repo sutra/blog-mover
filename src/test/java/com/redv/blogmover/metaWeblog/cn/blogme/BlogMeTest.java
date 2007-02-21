@@ -8,8 +8,6 @@ import static org.junit.Assert.assertEquals;
 import java.net.MalformedURLException;
 import java.util.List;
 
-import org.junit.Test;
-
 import com.redv.bloggerapi.client.Blog;
 import com.redv.bloggerapi.client.Blogger;
 import com.redv.bloggerapi.client.BloggerImpl;
@@ -23,16 +21,17 @@ import com.redv.blogmover.metaWeblog.MetaWeblogReader;
  * 
  */
 public class BlogMeTest {
-	@Test
+	// @Test
 	public void testGetUsersBlogs() throws MalformedURLException, Fault {
 		Blogger blogger = new BloggerImpl("http://www.blogme.cn/xmlrpc.php");
-		Blog[] blogs = blogger.getUsersBlogs("dummy", "blogmover", "8474639898");
+		Blog[] blogs = blogger
+				.getUsersBlogs("dummy", "blogmover", "8474639898");
 		assertEquals(blogs.length, 1);
 		assertEquals(blogs[0].getBlogid(), "blog");
 		assertEquals(blogs[0].getBlogName(), "blogmover: blog");
 	}
 
-	@Test
+	// @Test
 	public void testRead() throws MalformedURLException, BlogMoverException {
 		MetaWeblogReader metaWeblogReader = new MetaWeblogReader();
 		metaWeblogReader.setServerURL("http://www.blogme.cn/xmlrpc.php");

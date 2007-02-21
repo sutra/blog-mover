@@ -29,7 +29,7 @@ public class MetaWeblogReaderTest {
 	}
 
 	@Test
-	public void testRead() throws BlogMoverException {
+	public void _testRead() throws BlogMoverException {
 		List<WebLog> webLogs = reader.read();
 		assertNotSame(0, webLogs.size());
 		// WebLog webLog = webLogs.get(0);

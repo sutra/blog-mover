@@ -3,7 +3,8 @@
  */
 package com.redv.blogmover.bsps.baidu;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.LoginFailedException;
@@ -89,20 +89,20 @@ public class BaiduWriterTest {
 		assertEquals(1, _new.size() - old.size());
 	}
 
-	@Test
+	// @Test
 	public void testGetBsp() {
 		assertEquals("com.redv.blogmover.bsps.baidu.BaiduWriter",
 				this.baiduWriter.getBsp().getId());
 	}
 
-	@Test
+	// @Test
 	public void testWriteUsernameEqualsBlogHandle() throws BlogMoverException {
 		String username = "blogremover";// blogHandle: blogremover
 		String password = "wangjing";
 		this.testWrite(username, password);
 	}
 
-	@Test
+	// @Test
 	public void testWriteUsernameEqualsBlogHandle1() throws BlogMoverException {
 		String username = "blogmover1";// blogHandle: blogmover1
 		String password = "blogmover1";
@@ -115,7 +115,7 @@ public class BaiduWriterTest {
 	 * 
 	 * @throws BlogMoverException
 	 */
-	@Test
+	// @Test
 	public void testWriteUsernameNotEqualsBlogHandle()
 			throws BlogMoverException {
 		String username = "blogmover2";// blogHandler: blogmover3
@@ -123,7 +123,7 @@ public class BaiduWriterTest {
 		this.testWrite(username, password);
 	}
 
-	@Test
+	// @Test
 	public void testWritePasswordError() throws BlogMoverException {
 		this.baiduWriter = new BaiduWriter();
 		String username = "blogmover2";// blogHandler: blogmover3

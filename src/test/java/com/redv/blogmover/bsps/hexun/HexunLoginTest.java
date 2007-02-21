@@ -26,7 +26,7 @@ public class HexunLoginTest extends TestCase {
 	 * Test method for 'com.redv.blogremover.bsps.hexun.HexunLogin.login(String,
 	 * String, String)'
 	 */
-	public void testLogin() throws BlogMoverException {
+	public void _testLogin() throws BlogMoverException {
 		hexunLogin.login("blogremover", "wangjing",
 				"http://blog.hexun.com/group/inc/login.aspx");
 	}

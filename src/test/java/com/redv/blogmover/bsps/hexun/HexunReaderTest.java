@@ -25,7 +25,7 @@ public class HexunReaderTest extends TestCase {
 	/*
 	 * Test method for 'com.redv.blogremover.bsps.hexun.HexunReader.read()'
 	 */
-	public void testRead() throws BlogMoverException {
+	public void _testRead() throws BlogMoverException {
 		hexunReader.setUsername("blogremover");
 		hexunReader.setPassword("wangjing");
 		List<WebLog> webLogs = hexunReader.read();
@@ -39,7 +39,7 @@ public class HexunReaderTest extends TestCase {
 
 	}
 
-	public void testLoginFailed() throws BlogMoverException {
+	public void _testLoginFailed() throws BlogMoverException {
 		hexunReader.setUsername("blogremover");
 		hexunReader.setPassword("anErrorPassword");
 		try {
@@ -54,11 +54,11 @@ public class HexunReaderTest extends TestCase {
 	 * Test method for
 	 * 'com.redv.blogremover.impl.AbstractBlogReader.getStatus()'
 	 */
-	public void testGetStatus() {
+	public void _testGetStatus() {
 
 	}
 
-	public void testParseTags() {
+	public void _testParseTags() {
 		String t = "a, b, c";
 		String[] tags = this.hexunReader.parseTags(t);
 		assertEquals(tags[0], "a");

@@ -52,7 +52,7 @@ public class BlogcnLoginTest extends TestCase {
 		blogcnLogin = new BlogcnLogin(httpDocument);
 	}
 	
-	public void testLogin() throws Exception{
+	public void _testLogin() throws Exception{
 		blogcnLogin.login("blog-mover", "jdkcn.com");
 	}
 }

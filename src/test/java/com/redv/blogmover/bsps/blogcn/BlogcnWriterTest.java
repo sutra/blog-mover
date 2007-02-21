@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.Test;
-
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.bsps.cn.com.blog.BlogWriter;
@@ -38,22 +36,22 @@ import com.redv.blogmover.impl.WebLogImpl;
  */
 public class BlogcnWriterTest {
 	private BlogWriter blogcnWriter;
-	
+
 	/**
 	 * 
 	 */
 	public BlogcnWriterTest() {
 		blogcnWriter = new BlogWriter();
 	}
-	
-	@Test
+
+	// @Test
 	public void testWrite() throws BlogMoverException {
 		List<WebLog> webLogs = new ArrayList<WebLog>();
 		WebLog webLog = new WebLogImpl();
 		webLog.setTitle("今天心情不错");
 		webLog.setBody("新Blog开通了。大家都来支持啊");
 		webLog.setPublishedDate(new Date());
-		webLog.setTags(new String[]{"First","Blog"});
+		webLog.setTags(new String[] { "First", "Blog" });
 		webLogs.add(webLog);
 		blogcnWriter.setUsername("blog-mover");
 		blogcnWriter.setPassword("jdkcn.com");

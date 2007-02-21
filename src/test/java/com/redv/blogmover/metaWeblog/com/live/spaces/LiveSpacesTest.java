@@ -8,8 +8,6 @@ import static org.junit.Assert.assertEquals;
 import java.net.MalformedURLException;
 import java.util.List;
 
-import org.junit.Test;
-
 import com.redv.bloggerapi.client.Blog;
 import com.redv.bloggerapi.client.Blogger;
 import com.redv.bloggerapi.client.BloggerImpl;
@@ -25,7 +23,7 @@ import com.redv.blogmover.metaWeblog.MetaWeblogReader;
  *      Live Spaces的MetaWeblog API的开启</a>
  */
 public class LiveSpacesTest {
-	@Test
+	// @Test
 	public void testGetUsersBlogs() throws MalformedURLException, Fault {
 		Blogger blogger = new BloggerImpl(
 				"https://storage.msn.com/storageservice/MetaWeblog.rpc");
@@ -38,7 +36,7 @@ public class LiveSpacesTest {
 				"http://spaces.msn.com/members/blogmover");
 	}
 
-	@Test
+	// @Test
 	public void testRead() throws MalformedURLException, BlogMoverException {
 		MetaWeblogReader metaWeblogReader = new MetaWeblogReader();
 		metaWeblogReader

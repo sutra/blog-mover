@@ -48,7 +48,7 @@ public class RomeWriterTest {
 	 * 
 	 */
 	@Test
-	public void testWrite() throws BlogMoverException {
+	public void _testWrite() throws BlogMoverException {
 		outputFile = new File(SystemUtils.getJavaIoTmpDir(),
 				"RomeWriterTest.xml");
 

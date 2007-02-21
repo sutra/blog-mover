@@ -12,7 +12,6 @@ import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 import org.apache.xmlrpc.client.XmlRpcCommonsTransportFactory;
-import org.junit.Test;
 
 import com.redv.bloggerapi.client.Fault;
 import com.redv.blogmover.BlogMoverException;
@@ -26,7 +25,7 @@ public class BlogBusTest {
 	@SuppressWarnings("unused")
 	private static final Log log = LogFactory.getLog(XpertTest.class);
 
-	@Test
+	// @Test
 	public void testGetUsersBlogs() throws MalformedURLException, Fault {
 		/*
 		 * Object[] params = new Object[] { "dummy33", "blogmover", "xpert.cn" };
@@ -62,7 +61,7 @@ public class BlogBusTest {
 
 	}
 
-	@Test
+	// @Test
 	public void testWriteRead() throws BlogMoverException,
 			MalformedURLException {
 		// XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();

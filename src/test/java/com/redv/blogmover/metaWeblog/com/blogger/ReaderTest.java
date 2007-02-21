@@ -3,13 +3,12 @@
  */
 package com.redv.blogmover.metaWeblog.com.blogger;
 
-import java.net.MalformedURLException;
-
 import static org.junit.Assert.assertEquals;
+
+import java.net.MalformedURLException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Test;
 
 import com.redv.bloggerapi.client.Blog;
 import com.redv.bloggerapi.client.Blogger;
@@ -24,7 +23,7 @@ import com.redv.bloggerapi.client.User;
 public class ReaderTest {
 	private static final Log log = LogFactory.getLog(ReaderTest.class);
 
-	@Test
+	// @Test
 	public void test() throws MalformedURLException, Fault {
 		Blogger blogger = new BloggerImpl("http://www.blogger.com/api");
 		User user = blogger.getUserInfo("", "shutra", "wangjing");

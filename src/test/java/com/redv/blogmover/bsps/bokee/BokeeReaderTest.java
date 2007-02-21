@@ -28,7 +28,7 @@ public class BokeeReaderTest extends TestCase {
 	/*
 	 * Test method for 'com.redv.blogremover.bsps.bokee.BokeeReader.read()'
 	 */
-	public void testRead() throws BlogMoverException {
+	public void _testRead() throws BlogMoverException {
 		reader.read();
 	}
 
@@ -36,7 +36,7 @@ public class BokeeReaderTest extends TestCase {
 	 * Test method for
 	 * 'com.redv.blogremover.impl.AbstractBlogReader.getStatus()'
 	 */
-	public void testGetStatus() {
+	public void _testGetStatus() {
 		Status status = reader.getStatus();
 		log.debug("totalCount: " + status.getTotalCount());
 	}

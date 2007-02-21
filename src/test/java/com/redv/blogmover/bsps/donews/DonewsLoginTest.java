@@ -25,7 +25,7 @@ public class DonewsLoginTest extends TestCase {
 	 * 'com.redv.blogremover.bsps.donews.DonewsLogin.login(String, String,
 	 * String)'
 	 */
-	public void testLogin() throws DOMException, BlogMoverException {
+	public void _testLogin() throws DOMException, BlogMoverException {
 		try {
 			donewsLogin.login("blogremover", "wangjing", "");
 		} catch (BlogMoverRuntimeException ex) {
@@ -39,7 +39,7 @@ public class DonewsLoginTest extends TestCase {
 	 * @throws DOMException
 	 * @throws BlogMoverExcetption
 	 */
-	public void testLoginByAnotherUsernamePasswordPair() throws DOMException,
+	public void _testLoginByAnotherUsernamePasswordPair() throws DOMException,
 			BlogMoverException {
 		try {
 			donewsLogin.login("blogremover", "wangjing", "");
