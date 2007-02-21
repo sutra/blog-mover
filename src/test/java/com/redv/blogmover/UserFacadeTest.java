@@ -74,7 +74,7 @@ public class UserFacadeTest extends TestCase {
 		userFacade.setReaderProperty("operationInterval", String.valueOf(1000));
 	}
 
-	public void test1() throws BlogMoverException {
+	public void _test1() throws BlogMoverException {
 		userFacade.setReader(new BaiduReader());
 		userFacade.setReaderProperty("username", "blogremover");
 		userFacade.setReaderProperty("password", "wangjing");
