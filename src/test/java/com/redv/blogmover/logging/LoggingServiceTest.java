@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.math.RandomUtils;
-import org.junit.Test;
 import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
 
 import com.redv.blogmover.WebLog;
@@ -41,7 +40,6 @@ public class LoggingServiceTest extends
 	 * Test method for
 	 * {@link com.redv.blogmover.logging.LoggingServiceImpl#log(java.util.List, com.redv.blogmover.logging.BSP)}.
 	 */
-	@Test
 	public void testLog() {
 		loggingService.log(this.buildWebLogs(this.buildBsp("fromBsp"), 1), this
 				.buildBsp("toBsp"));
@@ -57,12 +55,10 @@ public class LoggingServiceTest extends
 				"moving_entry", "bsp" });
 	}
 
-	@Test
 	public void testGetFromCountAndGetToCount1() {
 		testGetFromCountAndGetToCount(1);
 	}
 
-	@Test
 	public void testGetFromCountAndGetToCount2() {
 		testGetFromCountAndGetToCount(2);
 	}
