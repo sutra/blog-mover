@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import com.redv.blogmover.blogengines.cn.oblog.AbstractModifyWebLogHtmlPageParserTest;
@@ -29,7 +28,6 @@ public class ModifyWebLogHtmlPageParserTest extends
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	@Test
 	public void testParse() throws IOException, SAXException {
 		Calendar cal = new GregorianCalendar(2007, 1 - 1, 27, 20, 18, 0);
 		String[] tags = new String[] { "测试" };

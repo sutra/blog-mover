@@ -21,6 +21,10 @@ public class HexunReaderTest extends TestCase {
 		super.setUp();
 		hexunReader = new HexunReader();
 	}
+	
+	public void test() {
+		assertTrue(true);
+	}
 
 	/*
 	 * Test method for 'com.redv.blogremover.bsps.hexun.HexunReader.read()'

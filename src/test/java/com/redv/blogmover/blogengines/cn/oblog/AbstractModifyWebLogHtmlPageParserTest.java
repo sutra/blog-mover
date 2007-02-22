@@ -3,15 +3,12 @@
  */
 package com.redv.blogmover.blogengines.cn.oblog;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.IOException;
 import java.util.Date;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import junit.framework.TestCase;
+import junitx.framework.ArrayAssert;
+
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -22,28 +19,13 @@ import com.redv.blogmover.util.HtmlFileToDocument;
  * @author <a href="mail:zhoushuqun@gmail.com">Sutra</a>
  * 
  */
-public abstract class AbstractModifyWebLogHtmlPageParserTest {
+public abstract class AbstractModifyWebLogHtmlPageParserTest extends TestCase {
 
 	private ModifyWebLogHtmlPageParser parser;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
 	public void setUp() throws Exception {
 		this.parser = new ModifyWebLogHtmlPageParser();
 	}
@@ -51,7 +33,6 @@ public abstract class AbstractModifyWebLogHtmlPageParserTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@After
 	public void tearDown() throws Exception {
 	}
 
@@ -67,7 +48,7 @@ public abstract class AbstractModifyWebLogHtmlPageParserTest {
 		assertEquals(expectedTitle, webLog.getTitle());
 		assertEquals(expectedBody, webLog.getBody());
 		assertEquals(expectedPublishedDate, webLog.getPublishedDate());
-		assertEquals(expectedTags, webLog.getTags());
+		ArrayAssert.assertEquals(expectedTags, webLog.getTags());
 	}
 
 }

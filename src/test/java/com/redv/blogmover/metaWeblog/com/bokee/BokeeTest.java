@@ -5,7 +5,7 @@ package com.redv.blogmover.metaWeblog.com.bokee;
 
 import java.net.MalformedURLException;
 
-import org.junit.Test;
+import junit.framework.TestCase;
 
 import com.redv.bloggerapi.client.Fault;
 
@@ -13,8 +13,11 @@ import com.redv.bloggerapi.client.Fault;
  * @author Shutra
  * 
  */
-public class BokeeTest {
-	@Test
+public class BokeeTest extends TestCase {
+	public void test() {
+		assertTrue(true);
+	}
+
 	public void _testGetUsersBlogs() throws MalformedURLException, Fault {
 		// Blogger blogger = new BloggerImpl(
 		// "http://publishblog.bokee.com/xml-rpc");

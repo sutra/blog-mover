@@ -3,15 +3,10 @@
  */
 package com.redv.blogmover.bsps.sohu;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import junit.framework.TestCase;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
@@ -23,7 +18,7 @@ import com.redv.blogmover.impl.WebLogImpl;
  * @author shutra
  * 
  */
-public class SohuBlogWriterTest {
+public class SohuBlogWriterTest extends TestCase {
 	private SohuBlogWriter sohuBlogWriter;
 
 	private SohuBlogReader sohuBlogReader;
@@ -31,29 +26,17 @@ public class SohuBlogWriterTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
 	public void setUp() throws Exception {
 	}
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@After
 	public void tearDown() throws Exception {
+	}
+
+	public void test() {
+		assertTrue(true);
 	}
 
 	/**
@@ -62,7 +45,6 @@ public class SohuBlogWriterTest {
 	 * 
 	 * @throws BlogMoverException
 	 */
-	// @Test
 	public void _testWrite() throws BlogMoverException {
 		this.sohuBlogWriter = new SohuBlogWriter();
 		this.sohuBlogReader = new SohuBlogReader();

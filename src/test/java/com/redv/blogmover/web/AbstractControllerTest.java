@@ -14,7 +14,7 @@ import com.redv.blogmover.test.TestUtils;
  * @author shutra
  * 
  */
-public class AbstractControllerTest extends TestCase {
+public abstract class AbstractControllerTest extends TestCase {
 	protected XmlWebApplicationContext ctx;
 
 	/*

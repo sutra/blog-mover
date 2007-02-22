@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import com.redv.blogmover.blogengines.cn.oblog.AbstractModifyWebLogHtmlPageParserTest;
@@ -19,7 +18,6 @@ import com.redv.blogmover.blogengines.cn.oblog.AbstractModifyWebLogHtmlPageParse
 public class ModifyWebLogHtmlPageParserTest extends
 		AbstractModifyWebLogHtmlPageParserTest {
 
-	@Test
 	public void testParseCnComBlog() throws IOException, SAXException {
 		Calendar cal = new GregorianCalendar(2006, 12 - 1, 2, 11, 29, 0);
 		String[] tags = new String[] { "First,Blog" };

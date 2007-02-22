@@ -26,6 +26,10 @@ public class BokeeWriterTest extends TestCase {
 		super(name);
 		bokeeWriter = new BokeeWriter();
 	}
+	
+	public void test() {
+		assertTrue(true);
+	}
 
 	/**
 	 * Test method for

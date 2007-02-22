@@ -21,6 +21,10 @@ public class HexunLoginTest extends TestCase {
 				"GBK");
 		hexunLogin = new HexunLogin(httpDocument);
 	}
+	
+	public void test() {
+		assertTrue(true);
+	}
 
 	/*
 	 * Test method for 'com.redv.blogremover.bsps.hexun.HexunLogin.login(String,

@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import junit.framework.TestCase;
+
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.bsps.cn.com.blog.BlogWriter;
@@ -34,7 +36,7 @@ import com.redv.blogmover.impl.WebLogImpl;
  * @since 2006-9-27 上午11:06:22
  * @version $Id BlogcnWriterTest.java$
  */
-public class BlogcnWriterTest {
+public class BlogcnWriterTest extends TestCase {
 	private BlogWriter blogcnWriter;
 
 	/**
@@ -44,7 +46,10 @@ public class BlogcnWriterTest {
 		blogcnWriter = new BlogWriter();
 	}
 
-	// @Test
+	public void test() {
+		assertTrue(true);
+	}
+
 	public void _testWrite() throws BlogMoverException {
 		List<WebLog> webLogs = new ArrayList<WebLog>();
 		WebLog webLog = new WebLogImpl();

@@ -5,7 +5,6 @@ package com.redv.blogmover.bsps.com.blogchinese;
 
 import java.io.IOException;
 
-import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -26,7 +25,6 @@ public class ListWebLogHtmlPageParserTest extends
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	@Test
 	public void testParse() throws IOException, SAXException {
 		testParse("user_blogmanage.asp.html", "gb2312", 1, 2, 21, new String[] {
 				"939711", "939712", "939713", "939714", "939718", "939722",
@@ -55,7 +53,6 @@ public class ListWebLogHtmlPageParserTest extends
 				"06091/260430/archives/2007/2007127211931.shtml" });
 	}
 
-	@Test
 	public void testParsePage2() throws IOException, SAXException {
 		testParse(
 				"user_blogmanage.asp_page_2.html",
@@ -67,7 +64,6 @@ public class ListWebLogHtmlPageParserTest extends
 				new String[] { "06091/260430/archives/2007/2007127201826.shtml" });
 	}
 
-	@Test
 	public void test() throws IOException, SAXException {
 		Document document = new HtmlFileToDocument().getDocument(this
 				.getClass().getResource("user_blogmanage.asp.html"), "gb2312");

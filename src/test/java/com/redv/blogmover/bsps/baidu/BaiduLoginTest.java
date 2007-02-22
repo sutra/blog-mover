@@ -17,6 +17,10 @@ public class BaiduLoginTest extends TestCase {
 		HttpDocument httpDocument = new HttpDocument(httpClient, "GB2312");
 		baiduLogin = new BaiduLogin(httpDocument);
 	}
+	
+	public void test() {
+		assertTrue(true);
+	}
 
 	/*
 	 * Test method for 'com.redv.blogremover.bsps.baidu.BaiduLogin.login(String,

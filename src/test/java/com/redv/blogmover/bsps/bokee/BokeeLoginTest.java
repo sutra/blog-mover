@@ -33,6 +33,10 @@ public class BokeeLoginTest extends TestCase {
 		bokeeLogin = new BokeeLogin(httpClient, httpDocument);
 	}
 
+	public void test() {
+		assertTrue(true);
+	}
+
 	/**
 	 * Test method for
 	 * {@link com.redv.blogmover.bsps.bokee.BokeeLogin#login(java.lang.String, java.lang.String)}.

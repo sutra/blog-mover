@@ -3,15 +3,10 @@
  */
 package com.redv.blogmover.bsps.com.blogcn;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import junit.framework.TestCase;
+
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -21,27 +16,12 @@ import com.redv.blogmover.util.HtmlFileToDocument;
  * @author shutra
  * 
  */
-public class LoginResponseParserTest {
+public class LoginResponseParserTest extends TestCase {
 	private LoginResponseParser parser;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
 	public void setUp() throws Exception {
 		parser = new LoginResponseParser();
 	}
@@ -49,7 +29,6 @@ public class LoginResponseParserTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@After
 	public void tearDown() throws Exception {
 	}
 
@@ -60,19 +39,16 @@ public class LoginResponseParserTest {
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	@Test
 	public void testParse() throws IOException, SAXException {
 		testParse("login-success-response.html",
 				LoginResponseParser.RESULT_LOGGED_IN);
 	}
 
-	@Test
 	public void testParsePasswordIncorrect() throws IOException, SAXException {
 		testParse("login-fail-password-incorrect-response.html",
 				LoginResponseParser.RESULT_PASSWORD_INCORRECT);
 	}
 
-	@Test
 	public void testParseUsernameNotExists() throws IOException, SAXException {
 		testParse("login-fail-username-not-exists-response.html",
 				LoginResponseParser.RESULT_USERNAME_NOT_EXISTS);

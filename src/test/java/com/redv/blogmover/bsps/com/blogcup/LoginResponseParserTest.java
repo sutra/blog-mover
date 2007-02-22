@@ -3,15 +3,10 @@
  */
 package com.redv.blogmover.bsps.com.blogcup;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import junit.framework.TestCase;
+
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -21,27 +16,12 @@ import com.redv.blogmover.util.HtmlFileToDocument;
  * @author shutrazh
  * 
  */
-public class LoginResponseParserTest {
+public class LoginResponseParserTest extends TestCase {
 	private LoginResponseParser parser;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
 	public void setUp() throws Exception {
 		parser = new LoginResponseParser();
 	}
@@ -49,7 +29,6 @@ public class LoginResponseParserTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@After
 	public void tearDown() throws Exception {
 	}
 
@@ -60,7 +39,6 @@ public class LoginResponseParserTest {
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	@Test
 	public void testParseLoginSuccess() throws IOException, SAXException {
 		Document document = new HtmlFileToDocument()
 				.getDocument(this.getClass().getResource(
@@ -77,7 +55,6 @@ public class LoginResponseParserTest {
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	@Test
 	public void testParseLoginFail() throws IOException, SAXException {
 		Document document = new HtmlFileToDocument().getDocument(this
 				.getClass().getResource("login-fail-response.html"), "UTF-8");

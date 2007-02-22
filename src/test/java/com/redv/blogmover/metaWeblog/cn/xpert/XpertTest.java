@@ -3,10 +3,10 @@
  */
 package com.redv.blogmover.metaWeblog.cn.xpert;
 
-import static org.junit.Assert.assertEquals;
-
 import java.net.MalformedURLException;
 import java.util.List;
+
+import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,11 +23,14 @@ import com.redv.blogmover.metaWeblog.MetaWeblogReader;
  * @author Shutra
  * 
  */
-public class XpertTest {
+public class XpertTest extends TestCase {
 	@SuppressWarnings("unused")
 	private static final Log log = LogFactory.getLog(XpertTest.class);
+	
+	public void test() {
+		assertTrue(true);
+	}
 
-	// @Test
 	public void _testGetUsersBlogs() throws MalformedURLException, Fault {
 		// Version 2.3 is http://xpert.cn/xmlrpc.
 		Blogger blogger = new BloggerImpl(
@@ -40,7 +43,6 @@ public class XpertTest {
 		assertEquals(blogs[0].getBlogid(), "joe");
 	}
 
-	// @Test
 	public void _testWriteRead() throws BlogMoverException,
 			MalformedURLException {
 		MetaWeblogReader metaWeblogReader = new MetaWeblogReader();

@@ -21,6 +21,10 @@ public class BaiduReaderTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 	}
+	
+	public void test() {
+		assertTrue(true);
+	}
 
 	/**
 	 * Test method for {@link com.redv.blogmover.bsps.baidu.BaiduReader#read()}.

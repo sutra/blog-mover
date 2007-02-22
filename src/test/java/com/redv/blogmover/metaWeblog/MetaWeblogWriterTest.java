@@ -3,14 +3,14 @@
  */
 package com.redv.blogmover.metaWeblog;
 
-import static org.junit.Assert.assertEquals;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,10 +27,14 @@ import com.redv.blogmover.impl.WebLogImpl;
  * @author Shutra
  * 
  */
-public class MetaWeblogWriterTest {
+public class MetaWeblogWriterTest extends TestCase {
 	@SuppressWarnings("unused")
 	private static final Log log = LogFactory
 			.getLog(MetaWeblogWriterTest.class);
+
+	public void test() {
+		assertTrue(true);
+	}
 
 	/**
 	 * Test method for
@@ -39,7 +43,6 @@ public class MetaWeblogWriterTest {
 	 * @throws BlogMoverException
 	 * @throws MalformedURLException
 	 */
-	// @Test
 	public void _testWriteBokeland() throws BlogMoverException,
 			MalformedURLException {
 		MetaWeblogWriter w = new MetaWeblogWriter();
@@ -65,7 +68,6 @@ public class MetaWeblogWriterTest {
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	// @Test
 	public void getAllBlogsFromBokeland() throws MalformedURLException,
 			XmlRpcException {
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
@@ -85,7 +87,6 @@ public class MetaWeblogWriterTest {
 	}
 
 	@SuppressWarnings("unchecked")
-	// @Test
 	public void getAllBlogsFromIBlog() throws MalformedURLException,
 			XmlRpcException {
 		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
@@ -104,7 +105,6 @@ public class MetaWeblogWriterTest {
 		assertEquals(m.get("blogName"), "Blog Mover");
 	}
 
-	// @Test
 	public void _testWriteIBlog() throws BlogMoverException,
 			MalformedURLException {
 		MetaWeblogWriter w = new MetaWeblogWriter();

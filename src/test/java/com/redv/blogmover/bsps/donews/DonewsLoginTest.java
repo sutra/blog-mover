@@ -19,6 +19,10 @@ public class DonewsLoginTest extends TestCase {
 		HttpDocument httpDocument = new HttpDocument(httpClient);
 		donewsLogin = new DoNewsLogin(httpClient, httpDocument);
 	}
+	
+	public void test() {
+		assertTrue(true);
+	}
 
 	/*
 	 * Test method for

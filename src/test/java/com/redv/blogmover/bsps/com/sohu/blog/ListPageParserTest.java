@@ -3,8 +3,6 @@
  */
 package com.redv.blogmover.bsps.com.sohu.blog;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,11 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import junit.framework.TestCase;
+
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -26,27 +21,12 @@ import com.redv.blogmover.util.HtmlFileToDocument;
  * @author shutra
  * 
  */
-public class ListPageParserTest {
+public class ListPageParserTest extends TestCase {
 	private ListPageParser listPageParser;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
 	public void setUp() throws Exception {
 		this.listPageParser = new ListPageParser();
 	}
@@ -54,7 +34,6 @@ public class ListPageParserTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@After
 	public void tearDown() throws Exception {
 	}
 
@@ -84,7 +63,6 @@ public class ListPageParserTest {
 		assertEquals(expectedTitles, this.listPageParser.getTitles());
 	}
 
-	@Test
 	public void testPage1() throws IOException, SAXException, ParseException {
 		Document document = new HtmlFileToDocument().getDocument(
 				this.listPageParser.getClass().getResource(
@@ -136,7 +114,6 @@ public class ListPageParserTest {
 				expectedPermalinks, expectedTitles);
 	}
 
-	@Test
 	public void testPage2() throws IOException, SAXException, ParseException {
 		Document document = new HtmlFileToDocument().getDocument(
 				this.listPageParser.getClass()

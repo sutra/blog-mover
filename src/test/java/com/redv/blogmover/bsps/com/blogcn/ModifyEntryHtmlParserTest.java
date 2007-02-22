@@ -3,17 +3,13 @@
  */
 package com.redv.blogmover.bsps.com.blogcn;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import junit.framework.TestCase;
+import junitx.framework.ArrayAssert;
+
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -24,27 +20,12 @@ import com.redv.blogmover.util.HtmlFileToDocument;
  * @author shutrazh
  * 
  */
-public class ModifyEntryHtmlParserTest {
+public class ModifyEntryHtmlParserTest extends TestCase {
 	private ModifyEntryHtmlParser parser;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
 	public void setUp() throws Exception {
 		parser = new ModifyEntryHtmlParser();
 	}
@@ -52,7 +33,6 @@ public class ModifyEntryHtmlParserTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@After
 	public void tearDown() throws Exception {
 	}
 
@@ -66,7 +46,6 @@ public class ModifyEntryHtmlParserTest {
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	@Test
 	public void testParse() throws IOException, SAXException {
 		Date date = new GregorianCalendar(2007, 2 - 1, 1, 10, 3, 31).getTime();
 		String[] tags = new String[] { "测试tag", "第二个tag", "第三个tag" };
@@ -86,7 +65,7 @@ public class ModifyEntryHtmlParserTest {
 		assertEquals(expectedTitle, webLog.getTitle());
 		assertEquals(expectedBody, webLog.getBody());
 		assertEquals(expectedPublishedDate, webLog.getPublishedDate());
-		assertEquals(expectedTags, webLog.getTags());
+		ArrayAssert.assertEquals(expectedTags, webLog.getTags());
 	}
 
 }

@@ -3,19 +3,14 @@
  */
 package com.redv.blogmover.bsps.com.blogcn;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import junit.framework.TestCase;
+
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -25,27 +20,12 @@ import com.redv.blogmover.util.HtmlFileToDocument;
  * @author shutrazh
  * 
  */
-public class ListEntryHtmlParserTest {
+public class ListEntryHtmlParserTest extends TestCase {
 	private ListEntryHtmlParser parser;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
 	public void setUp() throws Exception {
 		parser = new ListEntryHtmlParser();
 	}
@@ -53,7 +33,6 @@ public class ListEntryHtmlParserTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@After
 	public void tearDown() throws Exception {
 	}
 
@@ -64,7 +43,6 @@ public class ListEntryHtmlParserTest {
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	@Test
 	public void testParse1Entry() throws IOException, SAXException {
 		List<String> titles = new ArrayList<String>();
 		titles.add("测试");

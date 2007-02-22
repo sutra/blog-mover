@@ -3,12 +3,7 @@
  */
 package com.redv.blogmover.bsps.sohu;
 
-import static org.junit.Assert.fail;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import junit.framework.TestCase;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.LoginFailedException;
@@ -18,35 +13,23 @@ import com.redv.blogmover.bsps.com.sohu.blog.SohuBlogReader;
  * @author shutra
  * 
  */
-public class SohuBlogReaderTest {
+public class SohuBlogReaderTest extends TestCase {
 	private SohuBlogReader sohuBlogReader;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
 	public void setUp() throws Exception {
 	}
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@After
 	public void tearDown() throws Exception {
+	}
+
+	public void test() {
+		assertTrue(true);
 	}
 
 	/**
@@ -55,7 +38,6 @@ public class SohuBlogReaderTest {
 	 * 
 	 * @throws BlogMoverException
 	 */
-	// @Test
 	public void _testRead() throws BlogMoverException {
 		this.sohuBlogReader = new SohuBlogReader();
 		this.sohuBlogReader.setUsername("blogmover");
@@ -64,7 +46,6 @@ public class SohuBlogReaderTest {
 		this.sohuBlogReader.read();
 	}
 
-	// @Test
 	public void _testReadChinaren() throws BlogMoverException {
 		this.sohuBlogReader = new SohuBlogReader();
 		this.sohuBlogReader.setUsername("blogmover");
@@ -73,7 +54,6 @@ public class SohuBlogReaderTest {
 		this.sohuBlogReader.read();
 	}
 
-	// @Test
 	public void _testReadSogou() throws BlogMoverException {
 		this.sohuBlogReader = new SohuBlogReader();
 		this.sohuBlogReader.setUsername("blogmover");
@@ -82,7 +62,6 @@ public class SohuBlogReaderTest {
 		this.sohuBlogReader.read();
 	}
 
-	// @Test
 	public void _testMailDomainNotCorrect() throws BlogMoverException {
 		this.sohuBlogReader = new SohuBlogReader();
 		this.sohuBlogReader.setUsername("blogmover");
@@ -96,7 +75,6 @@ public class SohuBlogReaderTest {
 		}
 	}
 
-	// @Test
 	public void _testPasswordNotCorrect() throws BlogMoverException {
 		this.sohuBlogReader = new SohuBlogReader();
 		this.sohuBlogReader.setUsername("blogmover");

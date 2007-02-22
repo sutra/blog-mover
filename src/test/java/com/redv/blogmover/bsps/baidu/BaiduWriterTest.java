@@ -3,18 +3,13 @@
  */
 package com.redv.blogmover.bsps.baidu;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.LoginFailedException;
@@ -25,7 +20,7 @@ import com.redv.blogmover.impl.WebLogImpl;
  * @author shutra
  * 
  */
-public class BaiduWriterTest {
+public class BaiduWriterTest extends TestCase {
 	private static final Log log = LogFactory.getLog(BaiduWriterTest.class);
 
 	private BaiduWriter baiduWriter;
@@ -35,21 +30,6 @@ public class BaiduWriterTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
 	public void setUp() throws Exception {
 		this.baiduWriter = new BaiduWriter();
 	}
@@ -57,8 +37,11 @@ public class BaiduWriterTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@After
 	public void tearDown() throws Exception {
+	}
+	
+	public void test() {
+		assertTrue(true);
 	}
 
 	private List<WebLog> generateWebLogs() {
@@ -89,20 +72,17 @@ public class BaiduWriterTest {
 		assertEquals(1, _new.size() - old.size());
 	}
 
-	// @Test
 	public void _testGetBsp() {
 		assertEquals("com.redv.blogmover.bsps.baidu.BaiduWriter",
 				this.baiduWriter.getBsp().getId());
 	}
 
-	// @Test
 	public void _testWriteUsernameEqualsBlogHandle() throws BlogMoverException {
 		String username = "blogremover";// blogHandle: blogremover
 		String password = "wangjing";
 		this.testWrite(username, password);
 	}
 
-	// @Test
 	public void _testWriteUsernameEqualsBlogHandle1() throws BlogMoverException {
 		String username = "blogmover1";// blogHandle: blogmover1
 		String password = "blogmover1";
@@ -115,7 +95,6 @@ public class BaiduWriterTest {
 	 * 
 	 * @throws BlogMoverException
 	 */
-	// @Test
 	public void _testWriteUsernameNotEqualsBlogHandle()
 			throws BlogMoverException {
 		String username = "blogmover2";// blogHandler: blogmover3
@@ -123,7 +102,6 @@ public class BaiduWriterTest {
 		this.testWrite(username, password);
 	}
 
-	// @Test
 	public void _testWritePasswordError() throws BlogMoverException {
 		this.baiduWriter = new BaiduWriter();
 		String username = "blogmover2";// blogHandler: blogmover3

@@ -3,10 +3,10 @@
  */
 package com.redv.blogmover.metaWeblog.cn.blogme;
 
-import static org.junit.Assert.assertEquals;
-
 import java.net.MalformedURLException;
 import java.util.List;
+
+import junit.framework.TestCase;
 
 import com.redv.bloggerapi.client.Blog;
 import com.redv.bloggerapi.client.Blogger;
@@ -20,8 +20,11 @@ import com.redv.blogmover.metaWeblog.MetaWeblogReader;
  * @author Shutra
  * 
  */
-public class BlogMeTest {
-	// @Test
+public class BlogMeTest extends TestCase {
+	public void test() {
+		assertTrue(true);
+	}
+
 	public void _testGetUsersBlogs() throws MalformedURLException, Fault {
 		Blogger blogger = new BloggerImpl("http://www.blogme.cn/xmlrpc.php");
 		Blog[] blogs = blogger
@@ -31,7 +34,6 @@ public class BlogMeTest {
 		assertEquals(blogs[0].getBlogName(), "blogmover: blog");
 	}
 
-	// @Test
 	public void _testRead() throws MalformedURLException, BlogMoverException {
 		MetaWeblogReader metaWeblogReader = new MetaWeblogReader();
 		metaWeblogReader.setServerURL("http://www.blogme.cn/xmlrpc.php");

@@ -3,10 +3,10 @@
  */
 package com.redv.blogmover.metaWeblog.cn.mblogger;
 
-import static org.junit.Assert.assertEquals;
-
 import java.net.MalformedURLException;
 import java.util.List;
+
+import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,10 +24,13 @@ import com.redv.blogmover.metaWeblog.net.csdn.blog.CSDNBlogTest;
  * @author Shutra
  * 
  */
-public class MbloggerTest {
+public class MbloggerTest extends TestCase {
 	private static final Log log = LogFactory.getLog(CSDNBlogTest.class);
 
-	// @Test
+	public void test() {
+		assertTrue(true);
+	}
+
 	public void _testGetUsersBlogs() throws MalformedURLException, Fault {
 		Blogger blogger = new BloggerImpl(
 				"http://java.mblogger.cn/blogmover/services/metablogapi.aspx");
@@ -37,7 +40,6 @@ public class MbloggerTest {
 		assertEquals(blogs[0].getBlogName(), "Blog Mover");
 	}
 
-	// @Test
 	public void _testRead() throws MalformedURLException, BlogMoverException {
 		MetaWeblogReader metaWeblogReader = new MetaWeblogReader();
 		metaWeblogReader

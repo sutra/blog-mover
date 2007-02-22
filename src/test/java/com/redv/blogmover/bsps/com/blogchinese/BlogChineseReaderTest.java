@@ -1,40 +1,17 @@
 package com.redv.blogmover.bsps.com.blogchinese;
 
-import static org.junit.Assert.*;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import com.redv.blogmover.bsps.com.blogchinese.BlogChineseReader;
+import junit.framework.TestCase;
 
 /**
  * @author shutrazh
  * 
  */
-public class BlogChineseReaderTest {
+public class BlogChineseReaderTest extends TestCase {
 	private BlogChineseReader reader;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
 	public void setUp() throws Exception {
 		reader = new BlogChineseReader();
 	}
@@ -42,7 +19,6 @@ public class BlogChineseReaderTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@After
 	public void tearDown() throws Exception {
 	}
 
@@ -50,7 +26,6 @@ public class BlogChineseReaderTest {
 	 * Test method for
 	 * {@link com.redv.blogmover.bsps.com.blogchinese.BlogChineseReader#BlogChineseReader()}.
 	 */
-	@Test
 	public void testBlogChineseReader() {
 		assertEquals("blogchinese.com", reader.getBsp().getId());
 	}

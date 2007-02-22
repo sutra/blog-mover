@@ -3,10 +3,10 @@
  */
 package com.redv.blogmover.metaWeblog.com.live.spaces;
 
-import static org.junit.Assert.assertEquals;
-
 import java.net.MalformedURLException;
 import java.util.List;
+
+import junit.framework.TestCase;
 
 import com.redv.bloggerapi.client.Blog;
 import com.redv.bloggerapi.client.Blogger;
@@ -22,8 +22,11 @@ import com.redv.blogmover.metaWeblog.MetaWeblogReader;
  *      href="http://wangxiaohu.com/index.php/2006/08/06/windows-live-spaces%E7%9A%84metaweblog-api%E7%9A%84%E5%BC%80%E5%90%AF/">Windows
  *      Live Spaces的MetaWeblog API的开启</a>
  */
-public class LiveSpacesTest {
-	// @Test
+public class LiveSpacesTest extends TestCase {
+	public void test() {
+		assertTrue(true);
+	}
+
 	public void _testGetUsersBlogs() throws MalformedURLException, Fault {
 		Blogger blogger = new BloggerImpl(
 				"https://storage.msn.com/storageservice/MetaWeblog.rpc");
@@ -36,7 +39,6 @@ public class LiveSpacesTest {
 				"http://spaces.msn.com/members/blogmover");
 	}
 
-	// @Test
 	public void _testRead() throws MalformedURLException, BlogMoverException {
 		MetaWeblogReader metaWeblogReader = new MetaWeblogReader();
 		metaWeblogReader

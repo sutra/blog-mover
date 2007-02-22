@@ -7,9 +7,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.lang.SystemUtils;
-import org.junit.After;
-import org.junit.Before;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
@@ -19,7 +19,7 @@ import com.redv.blogmover.impl.WebLogImpl;
  * @author Shutra
  * 
  */
-public class RomeWriterTest {
+public class RomeWriterTest extends TestCase {
 
 	private RomeWriter writer;
 
@@ -28,15 +28,17 @@ public class RomeWriterTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@Before
 	public void setUp() throws Exception {
 	}
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@After
 	public void tearDown() throws Exception {
+	}
+
+	public void test() {
+		assertTrue(true);
 	}
 
 	/**
@@ -46,7 +48,6 @@ public class RomeWriterTest {
 	 * @throws BlogMoverException
 	 * 
 	 */
-	// @Test
 	public void _testWrite() throws BlogMoverException {
 		outputFile = new File(SystemUtils.getJavaIoTmpDir(),
 				"RomeWriterTest.xml");

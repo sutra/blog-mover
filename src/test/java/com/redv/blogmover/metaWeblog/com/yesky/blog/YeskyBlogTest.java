@@ -5,9 +5,10 @@ package com.redv.blogmover.metaWeblog.com.yesky.blog;
 
 import java.net.MalformedURLException;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Test;
 
 import com.redv.bloggerapi.client.Fault;
 import com.redv.blogmover.BlogMoverException;
@@ -17,11 +18,10 @@ import com.redv.blogmover.metaWeblog.net.csdn.blog.CSDNBlogTest;
  * @author Shutra
  * 
  */
-public class YeskyBlogTest {
+public class YeskyBlogTest extends TestCase {
 	@SuppressWarnings("unused")
 	private static final Log log = LogFactory.getLog(CSDNBlogTest.class);
 
-	@Test
 	public void _testGetUsersBlogs() throws MalformedURLException, Fault {
 		// Blogger blogger = new BloggerImpl(
 		// "http://blog.yesky.com/Blog/blogmover/services/MetaBlogApi.aspx");
@@ -32,7 +32,6 @@ public class YeskyBlogTest {
 		// assertEquals(blogs[0].getBlogName(), "Blog Mover");
 	}
 
-	@Test
 	public void testRead() throws MalformedURLException, BlogMoverException {
 		// MetaWeblogReader metaWeblogReader = new MetaWeblogReader();
 		// metaWeblogReader

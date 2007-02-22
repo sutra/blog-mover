@@ -52,6 +52,10 @@ public class BlogcnLoginTest extends TestCase {
 		blogcnLogin = new BlogcnLogin(httpDocument);
 	}
 	
+	public void test() {
+		assertTrue(true);
+	}
+	
 	public void _testLogin() throws Exception{
 		blogcnLogin.login("blog-mover", "jdkcn.com");
 	}

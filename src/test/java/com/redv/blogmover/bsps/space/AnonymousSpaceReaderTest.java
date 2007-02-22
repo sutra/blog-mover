@@ -37,6 +37,10 @@ public class AnonymousSpaceReaderTest extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
+	
+	public void test() {
+		assertTrue(true);
+	}
 
 	/*
 	 * Test method for 'com.redv.blogremover.space.SpaceBSP.read()'

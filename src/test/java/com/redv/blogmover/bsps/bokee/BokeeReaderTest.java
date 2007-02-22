@@ -24,6 +24,10 @@ public class BokeeReaderTest extends TestCase {
 		super.setUp();
 		reader = new BokeeReader();
 	}
+	
+	public void test() {
+		assertTrue(true);
+	}
 
 	/*
 	 * Test method for 'com.redv.blogremover.bsps.bokee.BokeeReader.read()'

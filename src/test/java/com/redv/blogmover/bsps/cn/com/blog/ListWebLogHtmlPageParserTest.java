@@ -5,7 +5,6 @@ package com.redv.blogmover.bsps.cn.com.blog;
 
 import java.io.IOException;
 
-import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import com.redv.blogmover.blogengines.cn.oblog.AbstractListWebLogHtmlPageParserTest;
@@ -17,7 +16,6 @@ import com.redv.blogmover.blogengines.cn.oblog.AbstractListWebLogHtmlPageParserT
 public class ListWebLogHtmlPageParserTest extends
 		AbstractListWebLogHtmlPageParserTest {
 
-	@Test
 	public void testOblog() throws IOException, SAXException {
 		testParse(
 				"user_blogmanage.asp.html",

@@ -3,10 +3,10 @@
  */
 package com.redv.blogmover.metaWeblog;
 
-import static org.junit.Assert.assertNotSame;
-
 import java.net.MalformedURLException;
 import java.util.List;
+
+import junit.framework.TestCase;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
@@ -15,7 +15,7 @@ import com.redv.blogmover.WebLog;
  * @author Shutra
  * 
  */
-public class MetaWeblogReaderTest {
+public class MetaWeblogReaderTest extends TestCase {
 	private MetaWeblogReader reader;
 
 	public MetaWeblogReaderTest() throws MalformedURLException {
@@ -26,7 +26,10 @@ public class MetaWeblogReaderTest {
 		reader.setPassword("xpert.cn");
 	}
 
-	// @Test
+	public void test() {
+		assertTrue(true);
+	}
+
 	public void _testRead() throws BlogMoverException {
 		List<WebLog> webLogs = reader.read();
 		assertNotSame(0, webLogs.size());

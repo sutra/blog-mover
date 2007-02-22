@@ -3,8 +3,6 @@
  */
 package com.redv.blogmover.bsps.com.blogchinese;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.CharArrayReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,10 +10,11 @@ import java.io.Reader;
 
 import javax.xml.transform.TransformerException;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cyberneko.html.parsers.DOMParser;
-import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
@@ -27,11 +26,10 @@ import com.redv.blogmover.util.DomNodeUtils;
  * @author shutrazh
  * 
  */
-public class NekoHTMLTest {
+public class NekoHTMLTest extends TestCase {
 	private static final Log log = LogFactory.getLog(NekoHTMLTest.class);
 
-	@Test
-	public void test() throws SAXException, IOException {
+	public void test1() throws SAXException, IOException {
 		DOMParser parser = new DOMParser();
 
 		InputSource inputSource = new InputSource();
@@ -78,7 +76,6 @@ public class NekoHTMLTest {
 		}
 	}
 
-	@Test
 	public void test2() throws SAXException, IOException {
 		DOMParser parser = new DOMParser();
 
