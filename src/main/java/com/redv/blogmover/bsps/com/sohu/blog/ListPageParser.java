@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogMoverRuntimeException;
@@ -93,22 +94,36 @@ public class ListPageParser {
 		this.titles = new ArrayList<String>();
 		this.editUrls = new ArrayList<String>();
 
+		// <div id="entryList">
 		Element entryList = document.getElementById("entryList");
 		NodeList entryListChildNodes = entryList.getChildNodes();
 		logNodeList(entryListChildNodes);
 
+		// <div class="item">
 		Element itemDiv = (Element) entryListChildNodes.item(5);
+		logNode(itemDiv);
 		NodeList itemDivChildNodes = itemDiv.getChildNodes();
 		logNodeList(itemDivChildNodes);
 
+		// <div class="item-content">
 		Element itemContentDiv = (Element) itemDivChildNodes.item(3);
-		Element itemInfo = (Element) itemDivChildNodes.item(7);
-		parseItemInfo(itemInfo);
+		logNode(itemContentDiv);
 
-		NodeList itemContentDivChildNodes = itemContentDiv.getChildNodes();
-		logNodeList(itemContentDivChildNodes);
-		Element itemTable = (Element) itemContentDivChildNodes.item(3);
-		parseItemTable(itemTable);
+		// <div class="item-info">
+		Element itemInfo = (Element) itemDivChildNodes.item(7);
+
+		if (itemInfo != null) {
+			logNode(itemInfo);
+			parseItemInfo(itemInfo);
+
+			NodeList itemContentDivChildNodes = itemContentDiv.getChildNodes();
+			logNodeList(itemContentDivChildNodes);
+			Element itemTable = (Element) itemContentDivChildNodes.item(3);
+			parseItemTable(itemTable);
+
+		} else {// 没有日志。
+			log.debug("没有找到分页节点，没有日志。");
+		}
 	}
 
 	/**
@@ -164,17 +179,21 @@ public class ListPageParser {
 		this.editUrls.add(editUrl);
 	}
 
+	private void logNode(Node node) {
+		try {
+			log.debug(DomNodeUtils.getXmlAsString(node));
+		} catch (TransformerException e) {
+			log.debug("", e);
+		}
+	}
+
 	private void logNodeList(NodeList nodeList) {
 		if (log.isDebugEnabled()) {
 			log.debug("nodeList.getLength(): " + nodeList.getLength());
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				log.debug("i = " + i);
 				log.debug(nodeList.item(i).getClass());
-				try {
-					log.debug(DomNodeUtils.getXmlAsString(nodeList.item(i)));
-				} catch (TransformerException e) {
-					log.debug("", e);
-				}
+				logNode(nodeList.item(i));
 			}
 		}
 	}

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -143,6 +144,8 @@ public class ListPageParserTest extends TestCase {
 		Document document = new HtmlFileToDocument()
 				.getDocument(this.getClass().getResource(
 						"entry.do_m_list.no_entry.html"), "GBK");
-		this.testParse(document, 0, null, null, null, null);
+		List<Date> d = Collections.emptyList();
+		List<String> s = Collections.emptyList();
+		this.testParse(document, 0, d, s, s, s);
 	}
 }
