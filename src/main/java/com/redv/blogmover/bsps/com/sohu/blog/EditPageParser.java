@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.WebLogImpl;
@@ -43,15 +44,19 @@ public class EditPageParser {
 		webLog = new WebLogImpl();
 		webLog.setTitle(document.getElementById("entrytitle").getAttribute(
 				"value"));
-		webLog.setBody(document.getElementById("entrycontent").getFirstChild()
-				.getNodeValue());
+		Element entrycontent = document.getElementById("entrycontent");
+		if (entrycontent.hasChildNodes()) {
+			webLog.setBody(entrycontent.getFirstChild().getNodeValue());
+		}
 		String[] tags = document.getElementById("keywords").getAttribute(
 				"value").split(" ");
 		if (StringUtils.isEmpty(tags[tags.length - 1])) {
 			tags = (String[]) ArrayUtils.subarray(tags, 0, tags.length - 1);
 		}
 		webLog.setTags(tags);
-		webLog.setExcerpt(document.getElementById("excerpt").getFirstChild()
-				.getNodeValue());
+		Element excerptTextarea = document.getElementById("excerpt");
+		if (excerptTextarea.hasChildNodes()) {
+			webLog.setExcerpt(excerptTextarea.getFirstChild().getNodeValue());
+		}
 	}
 }

@@ -64,9 +64,8 @@ public class ListPageParserTest extends TestCase {
 	}
 
 	public void testPage1() throws IOException, SAXException, ParseException {
-		Document document = new HtmlFileToDocument().getDocument(
-				this.listPageParser.getClass().getResource(
-						"entry.do_m_list.html"), "GBK");
+		Document document = new HtmlFileToDocument().getDocument(this
+				.getClass().getResource("entry.do_m_list.html"), "GBK");
 
 		List<Date> expectedDates = new ArrayList<Date>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -115,9 +114,8 @@ public class ListPageParserTest extends TestCase {
 	}
 
 	public void testPage2() throws IOException, SAXException, ParseException {
-		Document document = new HtmlFileToDocument().getDocument(
-				this.listPageParser.getClass()
-						.getResource("entry.do_pg_2.html"), "GBK");
+		Document document = new HtmlFileToDocument().getDocument(this
+				.getClass().getResource("entry.do_pg_2.html"), "GBK");
 
 		List<Date> expectedDates = new ArrayList<Date>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -141,4 +139,10 @@ public class ListPageParserTest extends TestCase {
 				expectedPermalinks, expectedTitles);
 	}
 
+	public void testNoEntry() throws IOException, SAXException, ParseException {
+		Document document = new HtmlFileToDocument()
+				.getDocument(this.getClass().getResource(
+						"entry.do_m_list.no_entry.html"), "GBK");
+		this.testParse(document, 0, null, null, null, null);
+	}
 }

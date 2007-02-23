@@ -38,9 +38,15 @@ import com.redv.blogmover.util.HttpDocument;
  * e.g. http://blog-remover.blog.sohu.com <br />
  * Username: zhoushuqun2000@chianren.com
  * </p>
+ * <p>
+ * another test user:<br />
+ * http://blogmover1.blog.sohu.com <br />
+ * Username: blogmover@sohu.com
+ * </p>
  * 
- * @author Joe
+ * @author <a href="mailto:zhoushuqun@gmail.com">Sutra</a>
  * @version 1.0
+ * @version 2.0
  */
 public class SohuBlogReader extends AbstractBlogReader {
 
@@ -52,13 +58,21 @@ public class SohuBlogReader extends AbstractBlogReader {
 	private static final SimpleDateFormat sdfWithTime = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm");
 
+	private static final String LIST_URL = "http://blog.sohu.com/manage/entry.do?m=list";
+
+	private static final String LIST_URL_FORMAT = "http://blog.sohu.com/manage/entry.do?pg=%1$s";
+
+	private static final String EDIT_URL_FORMAT = "http://blog.sohu.com%1$s";
+
+	private ListPageParser listPageParser;
+
+	private EditPageParser editPageParser;
+
 	private HttpClient httpClient;
 
 	private HttpDocument httpDocument;
 
 	private HeaderGroup requestHeaderGroup;
-
-	private boolean loggedIn = false;
 
 	private String maildomain;
 
@@ -74,6 +88,13 @@ public class SohuBlogReader extends AbstractBlogReader {
 	public SohuBlogReader() {
 		super();
 
+		init();
+
+		this.listPageParser = new ListPageParser();
+		this.editPageParser = new EditPageParser();
+	}
+
+	private void init() {
 		httpClient = new HttpClient();
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
@@ -135,10 +156,9 @@ public class SohuBlogReader extends AbstractBlogReader {
 	 * @throws BlogMoverException
 	 */
 	private void checkLogin() throws BlogMoverException {
-		if (!loggedIn) {
-			new SohuBlogLogin(this.httpClient).login(username, maildomain,
-					passwd);
-		}
+		init();
+		SohuBlogLogin sohuBlogLogin = new SohuBlogLogin(this.httpClient);
+		sohuBlogLogin.login(username, maildomain, passwd);
 	}
 
 	/*
@@ -154,25 +174,42 @@ public class SohuBlogReader extends AbstractBlogReader {
 		log.debug("passwd: " + this.getPasswd());
 		log.debug("maildomain: " + this.getMaildomain());
 		checkLogin();
-		Setting setting = null;
-		try {
-			setting = this.parseSetting();
-			if (log.isDebugEnabled()) {
-				log.debug("name: " + setting.getName());
-				log.debug("desc: " + setting.getDesc());
-				log.debug("entryShowMode: " + setting.getEntryShowMode());
-				log.debug("entryPerPage: " + setting.getEntryPerPage());
-				log.debug("defaultAllowComment: "
-						+ setting.getDefaultAllowComment());
-			}
-			this.parseWebLogManagementListPage(webLogs, setting);
-		} catch (IOException e) {
-			throw new BlogMoverException(e);
-		} catch (SAXException e) {
-			throw new BlogMoverException(e);
-		} catch (BlogMoverException e) {
-			throw e;
+		// Setting setting = null;
+		// try {
+		// setting = this.parseSetting();
+		// if (log.isDebugEnabled()) {
+		// log.debug("name: " + setting.getName());
+		// log.debug("desc: " + setting.getDesc());
+		// log.debug("entryShowMode: " + setting.getEntryShowMode());
+		// log.debug("entryPerPage: " + setting.getEntryPerPage());
+		// log.debug("defaultAllowComment: "
+		// + setting.getDefaultAllowComment());
+		// }
+		// this.parseWebLogManagementListPage(webLogs, setting);
+		// } catch (IOException e) {
+		// throw new BlogMoverException(e);
+		// } catch (SAXException e) {
+		// throw new BlogMoverException(e);
+		// } catch (BlogMoverException e) {
+		// throw e;
+		// }
+
+		Document document = this.httpDocument.get(LIST_URL);
+		this.listPageParser.setDocument(document);
+		this.listPageParser.parse();
+		this.parse(webLogs, this.listPageParser.getEditUrls(),
+				this.listPageParser.getPermalinks(), this.listPageParser
+						.getTitles(), this.listPageParser.getDates());
+		int totalPage = this.listPageParser.getTotalPage();
+		for (int i = 2; i <= totalPage; i++) {
+			String url = String.format(LIST_URL_FORMAT, i);
+			this.listPageParser.setDocument(this.httpDocument.get(url));
+			this.listPageParser.parse();
+			this.parse(webLogs, this.listPageParser.getEditUrls(),
+					this.listPageParser.getPermalinks(), this.listPageParser
+							.getTitles(), this.listPageParser.getDates());
 		}
+
 		return webLogs;
 	}
 
@@ -184,6 +221,7 @@ public class SohuBlogReader extends AbstractBlogReader {
 	 * @throws SAXException
 	 * @throws BlogMoverException
 	 */
+	@SuppressWarnings("unused")
 	private Setting parseSetting() throws IOException, SAXException,
 			BlogMoverException {
 		if (log.isDebugEnabled()) {
@@ -272,6 +310,7 @@ public class SohuBlogReader extends AbstractBlogReader {
 	 * @throws SAXException
 	 * @throws BlogMoverException
 	 */
+	@SuppressWarnings("unused")
 	private void parseWebLogManagementListPage(final List<WebLog> webLogs,
 			final Setting setting) throws IOException, SAXException,
 			BlogMoverException {
@@ -448,4 +487,18 @@ public class SohuBlogReader extends AbstractBlogReader {
 		webLog.setExcerpt(excerpt);
 	}
 
+	private void parse(List<WebLog> webLogs, List<String> editUrls,
+			List<String> permalinks, List<String> titles, List<Date> dates) {
+		int i = 0;
+		for (String editUrl : editUrls) {
+			this.editPageParser.setDocument(this.httpDocument.get(String
+					.format(EDIT_URL_FORMAT, editUrl)));
+			this.editPageParser.parse();
+			WebLog webLog = this.editPageParser.getWebLog();
+			webLog.setUrl(permalinks.get(i));
+			webLog.setPublishedDate(dates.get(i));
+			webLogs.add(webLog);
+			i++;
+		}
+	}
 }
