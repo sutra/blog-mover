@@ -33,19 +33,33 @@
 	</head>
 	<body>
 		<div>
+			<h2>
+				搬迁统计
+			</h2>
 			<blog-mover:report />
 			<hr />
+			<h2>
+				搬入趋势图
+			</h2>
 			<div>
-				<img
-					src="chart?jFreeChartBuilder=movedInTimesReportChartBuilder"
+				<img src="chart?jFreeChartBuilder=movedInTimesReportChartBuilder"
 					alt="Moved in times" />
 			</div>
 			<hr />
+			<h2>
+				搬出趋势图
+			</h2>
 			<div>
 				<img src="chart?jFreeChartBuilder=movedOutTimesReportChartBuilder"
 					alt="Moved out times" />
 			</div>
 			<hr />
+			<h2>
+				搬入搬出趋势图
+			</h2>
+			<div>
+				搬入次数减去搬出次数得出的结果画出的趋势图
+			</div>
 			<div>
 				<img
 					src="chart?jFreeChartBuilder=movedInMinusOutTimesReportChartBuilder"
