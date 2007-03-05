@@ -4,6 +4,7 @@
 package com.redv.blogmover.bsps.com.blogcn;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -60,16 +61,18 @@ public class ListEntryHtmlParserTest extends TestCase {
 		modifyLinks
 				.add("/blue_log_ct.asp?action=edit&id=52108763&UserID=32361141&uid=blogmoverdev&dbID=3&t=2007%2D2%2D1+10%3A03%3A42");
 
-		testParse(1, 1, 1, titles, publishedDates, permalinks, modifyLinks);
+		String filename = "blue_modfile.asp_1_entry.html";
+		URL url = this.getClass().getResource(filename);
+		assertNotNull(url);
+		testParse(url, 1, 1, 1, titles, publishedDates, permalinks, modifyLinks);
 	}
 
-	private void testParse(int expectedCurrentPage, int expectedTotalEntries,
-			int expectedTotalPages, List<String> expectedTitles,
-			List<Date> expectedPublishedDates, List<String> expectedPermalinks,
-			List<String> expectedModifyLinks) throws IOException, SAXException {
-		Document document = new HtmlFileToDocument().getDocument(this
-				.getClass().getResource("blue_modfile.asp_1_entry.html"),
-				"UTF-8");
+	private void testParse(URL url, int expectedCurrentPage,
+			int expectedTotalEntries, int expectedTotalPages,
+			List<String> expectedTitles, List<Date> expectedPublishedDates,
+			List<String> expectedPermalinks, List<String> expectedModifyLinks)
+			throws IOException, SAXException {
+		Document document = new HtmlFileToDocument().getDocument(url, "UTF-8");
 		parser.setDocument(document);
 		parser.parse();
 		assertEquals(expectedCurrentPage, parser.getCurrentPage());

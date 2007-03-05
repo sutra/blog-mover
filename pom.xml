@@ -363,6 +363,7 @@
 			<version>2.4.0</version>
 			<type>jar</type>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>net.csdn.passport</groupId>
 			<artifactId>csdn-passport</artifactId>
@@ -373,6 +374,7 @@
 				${basedir}/target/csdn-passport/csdn-passport-1.0.jar
 			</systemPath>
 		</dependency>
+		-->
 		<!--
 			http://code.google.com/p/blogger-api-client/
 		-->
