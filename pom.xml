@@ -37,6 +37,7 @@
 		</repository>
 	</repositories>
 	<build>
+		<finalName>blogmover</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
