@@ -26,6 +26,7 @@ import org.w3c.dom.html.HTMLTableCellElement;
 import org.w3c.dom.html.HTMLTableElement;
 import org.w3c.dom.html.HTMLTableRowElement;
 
+import com.redv.blogmover.BlogMoverRuntimeException;
 import com.redv.blogmover.util.DomNodeUtils;
 
 /**
@@ -121,14 +122,14 @@ class ListEntryHtmlParser {
 	}
 
 	public void parse() {
-		log(document);
+		// log(document);
 		this.publishedDates = new ArrayList<Date>();
 		this.titles = new ArrayList<String>();
 		this.permalinks = new ArrayList<String>();
 		this.modifyLinks = new ArrayList<String>();
 
 		if (hasEntries()) {
-			parseFenye();
+			parsePage();
 			parseEntries();
 		}
 	}
@@ -151,7 +152,7 @@ class ListEntryHtmlParser {
 		return true;
 	}
 
-	private void parseFenye() {
+	private void parsePage() {
 		Element formFenye = document.getElementById("Form2");
 		NodeList children = formFenye.getChildNodes();
 		Node table = children.item(1);
@@ -160,17 +161,38 @@ class ListEntryHtmlParser {
 		if (tr instanceof HTMLTableRowElement) {
 			Element trElement = (Element) tr;
 			NodeList tds = trElement.getElementsByTagName("TD");
+			/*
+			 * <xmp> <td height="30" align="right">
+			 * 
+			 * <a href=?order=&action=&page=1&s=>首页</a> <a
+			 * href=?order=&action=&page=1&s=>上页</a>
+			 * 
+			 * 下页 尾页</font> <font face="Verdana, Arial, Helvetica, sans-serif"
+			 * class="bgbg" color="#000000"> // 共12条记录 第2/2 页 // 转到 <input
+			 * type='text' name='page' size=3 class=f value="2" ID="Text1">
+			 * 
+			 * 页</font> <input type='submit' id="Submit1" class="box-gray"
+			 * value="GO！" name='cndok'> </td> </xmp>
+			 */
 			Element td = (Element) tds.item(0);
-			children = td.getChildNodes();
-			Node node = children.item(3);
-			String str = node.getFirstChild().getNodeValue();
-			Pattern p = Pattern.compile("共([0-9]+)条记录 第([0-9]+)/([0-9]+) 页");
-			Matcher m = p.matcher(str);
-			if (m.find()) {
-				this.totalEntries = Integer.parseInt(m.group(1));
-				this.currentPage = Integer.parseInt(m.group(2));
-				this.totalPages = Integer.parseInt(m.group(3));
-			}
+			parsePageTd(td);
+		}
+	}
+
+	private void parsePageTd(Element td) {
+		String str;
+		try {
+			str = DomNodeUtils.getXmlAsString(td);
+		} catch (TransformerException e) {
+			throw new BlogMoverRuntimeException(e);
+		}
+		log.debug("str: " + str);
+		Pattern p = Pattern.compile("共([0-9]+)条记录 第([0-9]+)/([0-9]+) 页");
+		Matcher m = p.matcher(str);
+		if (m.find()) {
+			this.totalEntries = Integer.parseInt(m.group(1));
+			this.currentPage = Integer.parseInt(m.group(2));
+			this.totalPages = Integer.parseInt(m.group(3));
 		}
 	}
 

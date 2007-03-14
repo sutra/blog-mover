@@ -1,0 +1,433 @@
+﻿<html>
+<title>文章管理 | 中国博客网</title><meta name="Keywords" content="文章管理，中国博客网，博客，Blog，博客网，中华博客，Blog，Weblog，日志，博客中文站，强大的中文博客系统，Blogcn，Boke"> <meta name="Description" content="Blog，Blogger，Weblog，Blogcn，Boke，博客，中国博客网，博客网，日志，网络日志，博客中文站，强大的中文博客系统，第一家免费中文博客托管服务商（BSP），现有游戏博客、移动博客、音乐博客、rabo、情侣、图片博客等应用版块">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="images0604/style_blue.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="main_bg">
+<table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="166" height="5"><img src="images0604/dot.gif" width="1" height="1" /></td>
+  </tr>
+
+</table>
+<table width="100%"  border="0" cellpadding="0" cellspacing="0">
+  <tr> 
+    <td width="2%" valign="top">&nbsp; </td>
+    <td valign="top"><table height="26"  border="0" align="left" cellpadding="0" cellspacing="0">
+        <tr align="center"> 
+          <td width="70" align="center" valign="bottom" class="menu01"><a href="blue_modfile.asp?wenxin=1">我的日志</a></td>
+          <td width="70" align="center" valign="bottom" background="images0604/menu02.jpg" class="menu02"><a href="?action=viewmessages">评论管理</a></td>
+          <td width="70" align="center" valign="bottom" background="images0604/menu02.jpg" class="menu02"><a href="blue_mag_sort.asp">类别管理</a></td>
+
+          <td width="70" align="center" valign="bottom" background="images0604/menu02.jpg" class="menu02"><a href="blue_mag_sort.asp?action=apply">应用类别</a></td>
+<td width="70" align="center" valign="bottom" class="menu02"><A href="/createfiles/archivesNew.asp">档案管理</A></td>
+        </tr>
+      </table>
+	  <script language=javascript>
+function comfirm_del()
+{var ac=confirm('您确定要删除该篇日志吗？');if (ac==false) return false;}
+function comfirm_hd()
+{var ac=confirm('此操作将隐藏所有文章，\n并且让其不被搜索引擎搜索到\n\n是否继续？');if (ac==false) return false;}
+function comfirm_pb()
+{var ac=confirm('此操作将公开所有文章，\n并且让其能被搜索引擎搜索到\n\n是否继续？');if (ac==false) return false;}
+</script>
+<script language="javascript">
+function DeleteItems()
+{
+	var i,sign;
+	sign =false;
+	for(i=0;i<frmcontent.elements.length;i++)
+	{
+		if( frmcontent.elements[i].checked)
+		{
+			sign=true;
+			break; 
+		}
+	}
+	if( sign)
+	{
+		if(confirm("您确定要删除评论吗？"))
+		{
+			document.frmcontent.submit();			
+			return true;
+		}
+	}
+	else
+	{
+		alert("你未选中任何评论，请返回选择后再进行相关操作。");		
+	}
+}
+
+function Chk_SelAll()
+{
+      
+	var chkdel = document.all.chk_del;
+      
+	var i;
+	if(chkdel!=undefined)
+	{
+		if(chkdel.length!=undefined)
+			for(i=0;i<chkdel.length;i++)
+				chkdel[i].checked = true;
+	}
+}
+function Chk_UnSelAll()
+{
+      
+	var chkdel = document.all.chk_del;
+      
+	var i;
+	if(chkdel!=undefined)
+	{
+		if(chkdel.length!=undefined)
+			for(i=0;i<chkdel.length;i++)
+			{
+				if (chkdel[i].checked == true)
+					chkdel[i].checked = false
+				else
+					chkdel[i].checked = true
+			}
+	}
+}
+</script>
+    </td>
+  </tr>
+
+</table>
+<table width="100%"  border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td valign="top">
+ 
+	<table width="96%" border="0" align="center" cellpadding="2" cellspacing="1" class="maintb_bg">
+	<tr>
+	  <td colspan=5 bgcolor="#FFFFFF" style="font-size:12px">
+	  您共发表了<a class=blue href=?order=&action=&page=1&s=>12篇日志</a> <a class=blue href=?order=&action=&page=1&s=4>公开日志</a>（12） <a class=blue href=?order=&action=&page=1&s=2>隐藏日志</a>（0）
+	  </td> 
+	</tr>
+
+	<form name="batchAction" action="" method="post">
+	<input type="hidden" name="ids" value="">
+	</form>
+<script language="javascript">
+function getIds( isHide )
+{
+	var chkdel = document.all.chk_del;
+	var i,ids;
+	ids = "";
+	if(chkdel!=undefined)
+	{
+		if(chkdel.length==undefined)
+		{
+			var arr = new Array(1);
+			arr[0] = chkdel;
+			chkdel = arr;
+		}
+		for(i=0;i<chkdel.length;i++)
+			if( chkdel[i].checked )
+			{
+				var v = chkdel[i].value;
+				var j = v.indexOf( "," );
+				var h = v.substring(0,j);
+				if( isHide == undefined || (isHide && (h == "True" || h == "1")) || (!isHide && (h!= "True" && h != "1")) )
+					if( ids == "" )
+						ids = v.substr(j+1);
+					else
+						ids += "|" + v.substr(j+1);
+			}
+	}
+
+	return ids;
+}
+function batchHide()
+{
+	var ids = getIds( false );
+	if( ids == "" )
+	{
+		alert("请先选择要隐藏的日志！")
+		return;
+	}
+	document.batchAction.ids.value = ids;
+	document.batchAction.action = "markhd_new.asp?action=bper&ish=y&rurl=" + escape(location.href);
+	document.batchAction.submit();
+}
+function batchPub()
+{
+	var ids = getIds( true );
+	if( ids == "" )
+	{
+		alert("请先选择要公开的日志！")
+		return;
+	}
+	document.batchAction.ids.value = ids;
+	document.batchAction.action = "markhd_new.asp?action=bper&ish=n&rurl=" + escape(location.href);
+	document.batchAction.submit();
+}
+function batchUp()
+{
+	var ids = getIds();
+	if( ids == "" )
+	{
+		alert("请先选择要操作的日志！")
+		return;
+	}
+	document.batchAction.ids.value = ids;
+	document.batchAction.action = "restore_newB.asp?uid=blogmoverdev&UserID=32361141&rurl=" + escape(location.href);
+	document.batchAction.submit();
+}
+</script>
+        <tr>
+          <td width="6%" align="center" class="B font-gray2 title_line font-14px">选 项</td>
+          <td width="20%" align="center" class="B font-gray2 title_line font-14px">日 期</td>
+          <td width="50%" align="center" class="B font-gray2 title_line font-14px">日志标题</td>
+
+          <td width="14%" align="center" class="B font-gray2 title_line font-14px">操 作</td>
+          <td width="10%" align="center" class="B font-gray2 title_line font-14px">评 论</td>
+        </tr>
+		
+        <tr>
+          <td align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chk_del" value="False,54544359,3"></td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">2007-03-11 12:04:39</td>
+          <td bgcolor="#FFFFFF" class="font-14px">
+
+		   ·
+		  
+						<a target="_blank" href=http://www.blogcn.com//u3/95/81/blogmoverdev/blog/54544359.html>测试</a>  
+				
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">
+		   <div align="center"><a class="blue" href="/blue_log_ct.asp?action=edit&id=54544359&UserID=32361141&uid=blogmoverdev&dbID=3&t=2007%2D3%2D11+12%3A27%3A15"> 
+			修改</a> <a class="blue" href="/del_new.asp?id=54544359&UserID=32361141&uid=blogmoverdev&dbID=3" onClick="return comfirm_del()">删除</a> </div>
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px"><div align="center"><a class="blue" href="/gbook.asp?userid=32361141&gid=54544359&p=1">0 条</a></div></td>
+
+        </tr>
+		
+        <tr>
+          <td align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chk_del" value="False,54544330,3"></td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">2007-03-11 12:04:01</td>
+          <td bgcolor="#FFFFFF" class="font-14px">
+		   ·
+		  
+						<a target="_blank" href=http://www.blogcn.com//u3/95/81/blogmoverdev/blog/54544330.html>测试</a>  
+				
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">
+
+		   <div align="center"><a class="blue" href="/blue_log_ct.asp?action=edit&id=54544330&UserID=32361141&uid=blogmoverdev&dbID=3&t=2007%2D3%2D11+12%3A27%3A15"> 
+			修改</a> <a class="blue" href="/del_new.asp?id=54544330&UserID=32361141&uid=blogmoverdev&dbID=3" onClick="return comfirm_del()">删除</a> </div>
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px"><div align="center"><a class="blue" href="/gbook.asp?userid=32361141&gid=54544330&p=1">0 条</a></div></td>
+        </tr>
+		
+        <tr>
+          <td align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chk_del" value="False,54544313,3"></td>
+
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">2007-03-11 12:03:21</td>
+          <td bgcolor="#FFFFFF" class="font-14px">
+		   ·
+		  
+						<a target="_blank" href=http://www.blogcn.com//u3/95/81/blogmoverdev/blog/54544313.html>测试</a>  
+				
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">
+		   <div align="center"><a class="blue" href="/blue_log_ct.asp?action=edit&id=54544313&UserID=32361141&uid=blogmoverdev&dbID=3&t=2007%2D3%2D11+12%3A27%3A15"> 
+			修改</a> <a class="blue" href="/del_new.asp?id=54544313&UserID=32361141&uid=blogmoverdev&dbID=3" onClick="return comfirm_del()">删除</a> </div>
+
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px"><div align="center"><a class="blue" href="/gbook.asp?userid=32361141&gid=54544313&p=1">0 条</a></div></td>
+        </tr>
+		
+        <tr>
+          <td align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chk_del" value="False,54544301,3"></td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">2007-03-11 12:02:58</td>
+          <td bgcolor="#FFFFFF" class="font-14px">
+		   ·
+		  
+						<a target="_blank" href=http://www.blogcn.com//u3/95/81/blogmoverdev/blog/54544301.html>测试</a>  
+				
+		  </td>
+
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">
+		   <div align="center"><a class="blue" href="/blue_log_ct.asp?action=edit&id=54544301&UserID=32361141&uid=blogmoverdev&dbID=3&t=2007%2D3%2D11+12%3A27%3A15"> 
+			修改</a> <a class="blue" href="/del_new.asp?id=54544301&UserID=32361141&uid=blogmoverdev&dbID=3" onClick="return comfirm_del()">删除</a> </div>
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px"><div align="center"><a class="blue" href="/gbook.asp?userid=32361141&gid=54544301&p=1">0 条</a></div></td>
+        </tr>
+		
+        <tr>
+
+          <td align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chk_del" value="False,54544260,3"></td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">2007-03-11 12:01:47</td>
+          <td bgcolor="#FFFFFF" class="font-14px">
+		   ·
+		  
+						<a target="_blank" href=http://www.blogcn.com//u3/95/81/blogmoverdev/blog/54544260.html>测试</a>  
+				
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">
+		   <div align="center"><a class="blue" href="/blue_log_ct.asp?action=edit&id=54544260&UserID=32361141&uid=blogmoverdev&dbID=3&t=2007%2D3%2D11+12%3A27%3A15"> 
+			修改</a> <a class="blue" href="/del_new.asp?id=54544260&UserID=32361141&uid=blogmoverdev&dbID=3" onClick="return comfirm_del()">删除</a> </div>
+
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px"><div align="center"><a class="blue" href="/gbook.asp?userid=32361141&gid=54544260&p=1">0 条</a></div></td>
+        </tr>
+		
+        <tr>
+          <td align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chk_del" value="False,54544250,3"></td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">2007-03-11 12:01:29</td>
+          <td bgcolor="#FFFFFF" class="font-14px">
+		   ·
+		  
+						<a target="_blank" href=http://www.blogcn.com//u3/95/81/blogmoverdev/blog/54544250.html>测试</a>  
+				
+		  </td>
+
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">
+		   <div align="center"><a class="blue" href="/blue_log_ct.asp?action=edit&id=54544250&UserID=32361141&uid=blogmoverdev&dbID=3&t=2007%2D3%2D11+12%3A27%3A15"> 
+			修改</a> <a class="blue" href="/del_new.asp?id=54544250&UserID=32361141&uid=blogmoverdev&dbID=3" onClick="return comfirm_del()">删除</a> </div>
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px"><div align="center"><a class="blue" href="/gbook.asp?userid=32361141&gid=54544250&p=1">0 条</a></div></td>
+        </tr>
+		
+        <tr>
+
+          <td align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chk_del" value="False,54544222,3"></td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">2007-03-11 12:01:13</td>
+          <td bgcolor="#FFFFFF" class="font-14px">
+		   ·
+		  
+						<a target="_blank" href=http://www.blogcn.com//u3/95/81/blogmoverdev/blog/54544222.html>测试</a>  
+				
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">
+		   <div align="center"><a class="blue" href="/blue_log_ct.asp?action=edit&id=54544222&UserID=32361141&uid=blogmoverdev&dbID=3&t=2007%2D3%2D11+12%3A27%3A15"> 
+			修改</a> <a class="blue" href="/del_new.asp?id=54544222&UserID=32361141&uid=blogmoverdev&dbID=3" onClick="return comfirm_del()">删除</a> </div>
+
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px"><div align="center"><a class="blue" href="/gbook.asp?userid=32361141&gid=54544222&p=1">0 条</a></div></td>
+        </tr>
+		
+        <tr>
+          <td align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chk_del" value="False,54544201,3"></td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">2007-03-11 12:00:31</td>
+          <td bgcolor="#FFFFFF" class="font-14px">
+		   ·
+		  
+						<a target="_blank" href=http://www.blogcn.com//u3/95/81/blogmoverdev/blog/54544201.html>测试</a>  
+				
+		  </td>
+
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">
+		   <div align="center"><a class="blue" href="/blue_log_ct.asp?action=edit&id=54544201&UserID=32361141&uid=blogmoverdev&dbID=3&t=2007%2D3%2D11+12%3A27%3A15"> 
+			修改</a> <a class="blue" href="/del_new.asp?id=54544201&UserID=32361141&uid=blogmoverdev&dbID=3" onClick="return comfirm_del()">删除</a> </div>
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px"><div align="center"><a class="blue" href="/gbook.asp?userid=32361141&gid=54544201&p=1">0 条</a></div></td>
+        </tr>
+		
+        <tr>
+
+          <td align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chk_del" value="False,54544158,3"></td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">2007-03-11 11:59:16</td>
+          <td bgcolor="#FFFFFF" class="font-14px">
+		   ·
+		  
+						<a target="_blank" href=http://www.blogcn.com//u3/95/81/blogmoverdev/blog/54544158.html>测试</a>  
+				
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">
+		   <div align="center"><a class="blue" href="/blue_log_ct.asp?action=edit&id=54544158&UserID=32361141&uid=blogmoverdev&dbID=3&t=2007%2D3%2D11+12%3A27%3A15"> 
+			修改</a> <a class="blue" href="/del_new.asp?id=54544158&UserID=32361141&uid=blogmoverdev&dbID=3" onClick="return comfirm_del()">删除</a> </div>
+
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px"><div align="center"><a class="blue" href="/gbook.asp?userid=32361141&gid=54544158&p=1">0 条</a></div></td>
+        </tr>
+		
+        <tr>
+          <td align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chk_del" value="False,54544149,3"></td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">2007-03-11 11:58:58</td>
+          <td bgcolor="#FFFFFF" class="font-14px">
+		   ·
+		  
+						<a target="_blank" href=http://www.blogcn.com//u3/95/81/blogmoverdev/blog/54544149.html>测试</a>  
+				
+		  </td>
+
+          <td align="center" bgcolor="#FFFFFF" class="font-14px">
+		   <div align="center"><a class="blue" href="/blue_log_ct.asp?action=edit&id=54544149&UserID=32361141&uid=blogmoverdev&dbID=3&t=2007%2D3%2D11+12%3A27%3A15"> 
+			修改</a> <a class="blue" href="/del_new.asp?id=54544149&UserID=32361141&uid=blogmoverdev&dbID=3" onClick="return comfirm_del()">删除</a> </div>
+		  </td>
+          <td align="center" bgcolor="#FFFFFF" class="font-14px"><div align="center"><a class="blue" href="/gbook.asp?userid=32361141&gid=54544149&p=1">0 条</a></div></td>
+        </tr>
+		
+	<tr>
+
+	  <td colspan=5 bgcolor="#FFFFFF" align=left>
+			<a class="blue" style="font-size:12px" href="#nogo" onClick="Chk_SelAll()">全选</a>   <a href="#nogo" class="blue" style="font-size:12px" onClick="Chk_UnSelAll()">反选</a>
+			&nbsp;&nbsp;<input type=button value=隐藏 onclick=batchHide()> <input type=button value=公开 onclick=batchPub()> <input type=button value=更新 onclick=batchUp()>
+	  </td>
+	</tr>
+      </table>
+
+      <table width="96%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr> 
+	
+			<form name="fenye" method=get action='?action=&order=&s=' style="margin: 0px;" ID="Form2">
+			  <table width="96%" height="30"  border="0" align="center" cellpadding="2" cellspacing="0" ID="Table3">
+			    <tr>
+			    	<input type=hidden name=action value=''>
+			    	<!--input type=hidden name=order value=''-->
+			    	<input type=hidden name=s value=''>
+			      <td height="30" align="right">
+
+					  
+			          首页 上页</font></font> <font face="Verdana, Arial, Helvetica, sans-serif" class="bgbg" color="#000000"> 
+			          
+			          <a href=?order=&action=&page=2&s=>下页</a> 
+			          <a href=?order=&action=&page=2&s=>尾页</a> 
+			          
+			          // 共12条记录 第1/2 页 // 
+			          转到 
+			          <input type='text' name='page' size=3 class=f value="1" ID="Text1">
+			          页</font> 
+			          <input type='submit' id="Submit1" class="box-gray" value="GO！" name='cndok'>
+				  </td>
+		       </tr>
+
+		     </table>
+			 </form>
+			 </td>
+        </tr>  
+        <tr><td height="6">&nbsp; </td></tr>      
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0">
+
+  <tr> 
+    <td height="5"><img src="images0604/dot.gif" width="1" height="1" /></td>
+  </tr>
+</table>
+
+<table width="96%" border="0" align="center" cellpadding="3" cellspacing="1" class="main-box" ID="Table1">
+  <tr class="title_bg">
+    <td height="25"><span class="font-blue">温馨提示：</span></td>
+  </tr>
+  <tr>
+
+    <td class="font-gray">    <b>更新</b>是指将新的模板效果应用到旧日志页面，也可修复显示有错误的日志。</td>
+  </tr>
+  <tr>
+    <td class="font-gray">    <b>隐藏</b>的日志标题显示为灰色。</td>
+  </tr>
+</table>
+
+<table width="96%"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="30" align="right"><span class="title_bg"><A class=blue href="http://www.blogcn.com" target=_blank>www.blogcn.com版权所有</A></span></td>
+  </tr>
+</table>
+</body>
+</html>
