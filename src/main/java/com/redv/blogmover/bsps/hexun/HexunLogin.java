@@ -14,7 +14,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import com.redv.blogmover.BlogMoverRuntimeException;
 import com.redv.blogmover.LoginFailedException;
 import com.redv.blogmover.util.HttpDocument;
 
@@ -42,7 +41,7 @@ class HexunLogin {
 		Document document = httpDocument.get(url);
 		NodeList forms = document.getElementsByTagName("form");
 		if (forms.getLength() == 0) {
-			throw new BlogMoverRuntimeException("登录表单获取失败，和讯 Blog 登录服务器故障。");
+			throw new LoginFailedException("登录表单获取失败，和讯 Blog 登录服务器故障。");
 		}
 		Element form = (Element) forms.item(0);
 		String action = form.getAttribute("action");
