@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -34,6 +35,9 @@ class HexunLogin {
 
 	void login(String username, String password, String gourl)
 			throws LoginFailedException {
+		if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+			throw new LoginFailedException("用户名密码不能为空。");
+		}
 		String url = "http://blog.hexun.com/group/inc/login.aspx";
 		Document document = httpDocument.get(url);
 		NodeList forms = document.getElementsByTagName("form");
