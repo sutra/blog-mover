@@ -6,14 +6,14 @@ function setReader(className) {
 	$("readButton").disabled = true;
 	setStatus("设置读取器……");
 	debug("设置读取器：" + className);
-	DWREngine.setReverseAjax(true);
+	// DWREngine.setReverseAjax(true);
 	User.setReader(
 		className, 
 		{
 			callback:setReaderReply, 
 			errorHandler:function(errorString, exception)
 			{
-				DWREngine.setReverseAjax(false);
+				// DWREngine.setReverseAjax(false);
 				setStatus("设置读取器失败：" + errorString);
 				alert("设置读取器失败：\n\n" + errorString);
 				$("readButton").disabled = false;
@@ -22,7 +22,7 @@ function setReader(className) {
 		);
 }
 function setReaderReply(data) {
-	DWREngine.setReverseAjax(false);
+	// DWREngine.setReverseAjax(false);
 	var readerId = g_readerId;
 	var url = 'readers/' + readerId + '.jsp?now=' + new Date().getTime();
 	var myAjax = new Ajax.Updater(
