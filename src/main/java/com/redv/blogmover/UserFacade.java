@@ -140,7 +140,7 @@ public class UserFacade implements Serializable {
 		this.readerLock.writeLock().lock();
 		try {
 			if (this.reader == null) {
-				throw new NullPointerException("读取器为空。请设置读取器。");
+				throw new BlogMoverException("读取器为空。请设置读取器。");
 			}
 			new PropertySetter(this.reader).setProperty(property, value);
 		} finally {
@@ -163,7 +163,7 @@ public class UserFacade implements Serializable {
 		this.writerLock.writeLock().lock();
 		try {
 			if (this.writer == null) {
-				throw new NullPointerException("写入器为空。请设置写入器。");
+				throw new BlogMoverException("写入器为空。请设置写入器。");
 			}
 			new PropertySetter(this.writer).setProperty(property, value);
 		} finally {
