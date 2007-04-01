@@ -13,7 +13,7 @@
 <script type="text/javascript" src="scripts/blogger.js"></script>
 <script type="text/javascript">
 <!--
-DWREngine.setReverseAjax(false);
+// DWREngine.setReverseAjax(false);
 
 //if (window.addEventListener) {
 //	window.addEventListener("beforeunload", doClose, false);
