@@ -17,7 +17,6 @@ import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 
 import com.redv.blogmover.BlogMoverException;
-import com.redv.blogmover.BlogMoverRuntimeException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.impl.WebLogImpl;
@@ -103,7 +102,7 @@ public class MetaWeblogReader extends AbstractBlogReader {
 		try {
 			o = client.execute("metaWeblog.getRecentPosts", params);
 		} catch (XmlRpcException e) {
-			throw new BlogMoverRuntimeException(e);
+			throw new BlogMoverException(e);
 		}
 		List<WebLog> webLogs = null;
 		log.debug(o);
