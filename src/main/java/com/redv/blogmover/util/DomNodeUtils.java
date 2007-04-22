@@ -7,6 +7,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -112,10 +113,9 @@ public class DomNodeUtils {
 	private static Transformer getTransformer() throws TransformerException {
 		TransformerFactory factory = TransformerFactory.newInstance();
 		Transformer transformer = factory.newTransformer();
-		transformer.setOutputProperty(javax.xml.transform.OutputKeys.INDENT,
-				"yes");
-		transformer.setOutputProperty(
-				javax.xml.transform.OutputKeys.STANDALONE, "yes");
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
+		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 		return transformer;
 	}
 
@@ -165,7 +165,7 @@ public class DomNodeUtils {
 		hfs.setName(select.getAttribute("name"));
 		NodeList options = select.getElementsByTagName("option");
 		if (options.getLength() == 0) {// Hack it as html and xhtml are not
-										// same in capitalization-sensitivity.
+			// same in capitalization-sensitivity.
 			options = select.getElementsByTagName("OPTION");
 		}
 		List<String> values = new ArrayList<String>();

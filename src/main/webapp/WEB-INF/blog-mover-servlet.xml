@@ -23,6 +23,8 @@
 					<entry key="anonymousSpace"
 					value="com.redv.blogmover.bsps.space.AnonymousSpaceReader" />
 				-->
+				<entry key="spaces.live.com"
+					value="com.redv.blogmover.bsps.com.live.spaces.SpaceReader" />
 				<entry key="baidu"
 					value="com.redv.blogmover.bsps.baidu.BaiduReader" />
 				<!--
