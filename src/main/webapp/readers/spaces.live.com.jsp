@@ -1,6 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <div>
-	<img src="images/bsps/blog.com.cn.gif" alt="Blog.com.cn(博客天下)" />
+	Windows Live™ Spaces
 </div>
 <div>
 	请填写必要信息，用于 Blog Mover 从 Windows Live™ Spaces 读取日志：

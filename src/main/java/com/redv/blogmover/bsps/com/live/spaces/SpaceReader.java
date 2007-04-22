@@ -86,11 +86,13 @@ public class SpaceReader extends AbstractBlogReader {
 			lp.parse();
 			List<WebLog> listWebLogs = detail(lp.getPermalinks());
 			webLogs.addAll(listWebLogs);
+			this.status.setCurrentCount(webLogs.size());
 			this.readedPageUrls.add(firstPage);
 		}
 
 		// 加入第二页的日志。
 		webLogs.addAll(secondListPageWebLogs);
+		this.status.setCurrentCount(webLogs.size());
 
 		// 从第三页开始，然后第四页，直到最后一页。
 		String nextPage = thirdPage;
@@ -102,6 +104,7 @@ public class SpaceReader extends AbstractBlogReader {
 
 				List<WebLog> listWebLogs = detail(lp.getPermalinks());
 				webLogs.addAll(listWebLogs);
+				this.status.setCurrentCount(webLogs.size());
 				this.readedPageUrls.add(nextPage);
 
 				// Next page.
@@ -122,7 +125,9 @@ public class SpaceReader extends AbstractBlogReader {
 			ep.setId(EntryParser.parseId(permalink));
 			ep.parse();
 
-			webLogs.add(ep.getWebLog());
+			WebLog webLog = ep.getWebLog();
+			webLogs.add(webLog);
+			this.status.setCurrentWebLog(webLog);
 		}
 		return webLogs;
 	}
