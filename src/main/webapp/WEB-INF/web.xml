@@ -147,15 +147,15 @@
 	-->
 	<servlet-mapping>
 		<servlet-name>blog-mover</servlet-name>
-		<url-pattern>/blog-mover-readers.jsp</url-pattern>
+		<url-pattern>/readers.html</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>blog-mover</servlet-name>
-		<url-pattern>/blog-mover-writers.jsp</url-pattern>
+		<url-pattern>/writers.html</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>blog-mover</servlet-name>
-		<url-pattern>/blog-mover-logout.jsp</url-pattern>
+		<url-pattern>/logout.html</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>dwr-invoker</servlet-name>
@@ -215,10 +215,12 @@
 		<location>/errors.jsp</location>
 	</error-page>
 
+	<!--
 	<error-page>
 		<error-code>404</error-code>
 		<location>/</location>
 	</error-page>
+	-->
 
 	<jsp-config>
 		<taglib>

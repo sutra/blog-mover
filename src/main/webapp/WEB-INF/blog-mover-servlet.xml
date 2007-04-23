@@ -95,27 +95,15 @@
 		</property>
 		<property name="urlMap">
 			<map>
-				<!--
-				<entry key="/logout.jhtml">
+				<entry key="/logout.*">
 					<ref local="logoutController" />
 				</entry>
-				<entry key="/readers.jhtml">
+				<entry key="/readers.*">
 					<ref local="readersController" />
 				</entry>
-				<entry key="/writers.jhtml">
+				<entry key="/writers.*">
 					<ref local="writersController" />
 				</entry>
-				-->
-				<!-- Some host(or container) does not support the .jhtml. -->
-				<entry key="/blog-mover-logout.jsp">
-					<ref local="logoutController" />
-				</entry>
-				<entry key="/blog-mover-readers.jsp">
-					<ref local="readersController" />
-				</entry>
-				<entry key="/blog-mover-writers.jsp">
-					<ref local="writersController" />
-				</entry>				
 			</map>
 		</property>
 	</bean>
