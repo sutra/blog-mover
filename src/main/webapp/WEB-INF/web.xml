@@ -3,10 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
 	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-	<display-name>Blog Mover</display-name>
 	<description>
 		Our goal is allowing your blog moving freely between each BSP.
 	</description>
+	<display-name>Blog Mover</display-name>
 
 	<context-param>
 		<description>
@@ -27,19 +27,25 @@
 	</context-param>
 
 	<listener>
-		<description>Context loader for spring.</description>
+		<!--
+			<description>Context loader for spring.</description>
+		-->
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
 	<listener>
-		<description>Context listener for blog mover.</description>
+		<!--
+			<description>Context listener for blog mover.</description>
+		-->
 		<listener-class>
 			com.redv.blogmover.web.BlogMoverServletContextListener
 		</listener-class>
 	</listener>
 	<listener>
-		<description>Session listener for blog mover.</description>
+		<!--
+			<description>Session listener for blog mover.</description>
+		-->
 		<listener-class>
 			com.redv.blogmover.web.BlogMoverHttpSessionListener
 		</listener-class>
