@@ -45,10 +45,10 @@ function reportError(request) {
 	alert('Sorry. There was an error.');
 }
 function loadReaders() {
-	update("readers.jhtml", "", "readers");
+	update("blog-mover-readers.jsp", "", "readers");
 }
 function loadWriters() {
-	update("writers.jhtml", "", "writers");
+	update("blog-mover-writers.jsp", "", "writers");
 }
 
 // Status.

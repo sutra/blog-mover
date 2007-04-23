@@ -139,9 +139,23 @@
 		</init-param>
 	</filter>
 
+	<!--
 	<servlet-mapping>
 		<servlet-name>blog-mover</servlet-name>
 		<url-pattern>*.jhtml</url-pattern>
+	</servlet-mapping>
+	-->
+	<servlet-mapping>
+		<servlet-name>blog-mover</servlet-name>
+		<url-pattern>/blog-mover-readers.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>blog-mover</servlet-name>
+		<url-pattern>/blog-mover-writers.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>blog-mover</servlet-name>
+		<url-pattern>/blog-mover-logout.jsp</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>dwr-invoker</servlet-name>
