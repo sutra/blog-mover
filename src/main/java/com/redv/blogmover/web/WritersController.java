@@ -45,6 +45,8 @@ public class WritersController implements Controller {
 	 */
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		log.debug("WritersController.handleRequest called, writers.length: "
+				+ this.writers.length);
 		return new ModelAndView("writers", "writers", this.writers);
 	}
 

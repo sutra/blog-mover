@@ -44,6 +44,8 @@ public class ReadersController implements Controller {
 	 */
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		log.debug("ReadersController.handleRequest called, readers.length: "
+				+ this.readers.length);
 		return new ModelAndView("readers", "readers", this.readers);
 	}
 
