@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.logging.Log;
@@ -30,6 +31,9 @@ import com.redv.blogmover.util.HttpDocument;
  */
 public class SpaceReader extends AbstractBlogReader {
 	private final Log log = LogFactory.getLog(SpaceReader.class);
+
+	private static final Pattern homepageUrlPattern = Pattern
+			.compile("http://(.*).spaces.live.com([/]{0,1})");
 
 	private final Set<String> readedPageUrls = new HashSet<String>();
 
@@ -58,8 +62,13 @@ public class SpaceReader extends AbstractBlogReader {
 	 */
 	@Override
 	public List<WebLog> read() throws BlogMoverException {
+		if (!homepageUrlPattern.matcher(homepageUrl).matches()) {
+			throw new BlogMoverException("你输入的首页地址不正确。");
+		}
+
 		List<WebLog> webLogs = new ArrayList<WebLog>();
-		Document document = httpDocument.get(this.homepageUrl);
+		Document document;
+		document = httpDocument.get(this.homepageUrl);
 		HomepageParser hp = new HomepageParser();
 		hp.setDocument(document);
 		hp.parse();
