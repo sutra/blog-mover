@@ -90,6 +90,7 @@ function getWebLogsReply(data) {
 	$("index").checked = false;
 	DWRUtil.removeAllRows('webLogsTbody');
 	count = fromIndex;
+	DWRUtil.setEscapeHtml(false);
 	DWRUtil.addRows("webLogsTbody", data[2], cellFuncs);
 	
 	currentFromIndex = fromIndex;
