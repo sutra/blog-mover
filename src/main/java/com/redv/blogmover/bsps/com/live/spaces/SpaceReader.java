@@ -33,7 +33,7 @@ public class SpaceReader extends AbstractBlogReader {
 	private final Log log = LogFactory.getLog(SpaceReader.class);
 
 	private static final Pattern homepageUrlPattern = Pattern
-			.compile("http://(.*).spaces.live.com([/]{0,1})");
+			.compile("http://.*.spaces.live.com[/]{0,1}");
 
 	private final Set<String> readedPageUrls = new HashSet<String>();
 
