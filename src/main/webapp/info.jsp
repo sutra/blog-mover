@@ -8,6 +8,21 @@
 	<body>
 		<%@ page import="java.util.*"%>
 		<table border="1">
+			<%
+				Map env = System.getenv();
+				Set envKeySet = env.keySet();
+				for (Iterator iter = envKeySet.iterator(); iter.hasNext();) {
+					String key = iter.next().toString();
+					out.print("<tr><td align='right'>");
+					out.print(key);
+					out.print("</td><td>");
+					out.print(env.get(key));
+					out.println("</td></tr>");
+				}
+			%>
+			<tr>
+				<td colspan="2"><hr /></td>
+			</tr>
 			<tr>
 				<td align="right">
 					new java.io.File("./").getAbsolutePath():
