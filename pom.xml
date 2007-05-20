@@ -405,9 +405,9 @@
 			http://code.google.com/p/blogger-api-client/
 		-->
 		<dependency>
-			<groupId>com.redv.bloggerapi.client</groupId>
+			<groupId>com.redv.bloggerapi</groupId>
 			<artifactId>blogger-api-client</artifactId>
-			<version>1.0</version>
+			<version>1.1</version>
 			<type>jar</type>
 		</dependency>
 		<!--

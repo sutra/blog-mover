@@ -79,6 +79,11 @@ public class EntryParser {
 			// 去除外层的 div 标签的包围。
 			int start = s.indexOf('>');
 			int end = s.lastIndexOf('<');
+			if (end < start + 1) {
+				String format = "在去除外层的 div 标签的包围时遇到意外： s: %1$s, start+1: %2$s, end: %3$s";
+				throw new BlogMoverRuntimeException(String.format(format, s,
+						start + 1, end));
+			}
 			s = s.substring(start + 1, end);
 
 			webLog.setBody(s);
