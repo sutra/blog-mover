@@ -34,6 +34,7 @@
 			Project Home:
 			<a href="http://code.google.com/p/blog-mover/">http://code.google.com/p/blog-mover/</a>
 		</div>
+		<%--
 		<div id="author">
 			联系 Blog Mover： ♨Shutra Zhou
 			<ul>
@@ -51,6 +52,7 @@
 				</li>
 			</ul>
 		</div>
+		--%>
 		<div id="googleGroup">
 			<form action="http://groups.google.com/group/blog-mover/boxsubscribe">
 				<table style="border:1px solid #aa0033; font-size:small">
