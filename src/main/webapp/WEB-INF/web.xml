@@ -154,6 +154,12 @@
 			<param-value>application</param-value>
 		</init-param>
 	</filter>
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>
+			com.opensymphony.module.sitemesh.filter.PageFilter
+		</filter-class>
+	</filter>
 
 	<!--
 	<servlet-mapping>
@@ -200,6 +206,13 @@
 	<filter-mapping>
 		<filter-name>ApplicationOneMonthCacheFilter</filter-name>
 		<servlet-name>chart</servlet-name>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 
 	<security-constraint>
