@@ -199,7 +199,7 @@
 	<!-- Cache the report.jsp a day in the application scope. -->
 	<filter-mapping>
 		<filter-name>ApplicationOneDayCacheFilter</filter-name>
-		<url-pattern>/report.jsp</url-pattern>
+		<url-pattern>/reports/*</url-pattern>
 	</filter-mapping>
 
 	<!-- Cache the monthly report chart a month in the application scope. -->

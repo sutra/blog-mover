@@ -32,7 +32,7 @@
 		--%>
 	</ul>
 	<div id="blogMoverTopRight">
-		<a href="report.jsp">搬迁报告</a>
+		<a href="reports/moving-stat.jsp">搬迁报告</a>
 		<a href="http://blogmover.redv.com/help/"
 			class="blogMoverTopRightLast">帮助</a>
 	</div>
