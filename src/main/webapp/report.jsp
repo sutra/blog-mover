@@ -5,7 +5,7 @@
 <%@ taglib prefix="blog-mover" uri="http://blogmover.redv.com/"%>
 <html>
 	<head>
-		<title>搬迁报告 - Blog Mover</title>
+		<title><fmt:message key="blogmover.report" /> - Blog Mover</title>
 		<style>
 	.movedIn {
 	background-color:green;
@@ -34,12 +34,12 @@
 	<body>
 		<div>
 			<h2>
-				搬迁统计
+				<fmt:message key="blogmover.movingStat" />
 			</h2>
 			<blog-mover:report />
 			<hr />
 			<h2>
-				搬入趋势图
+				<fmt:message key="blogmover.moveInTrendChart" />
 			</h2>
 			<div>
 				<img src="chart?jFreeChartBuilder=movedInTimesReportChartBuilder"
@@ -47,7 +47,7 @@
 			</div>
 			<hr />
 			<h2>
-				搬出趋势图
+				<fmt:message key="blogmover.moveOutTrendChart" />
 			</h2>
 			<div>
 				<img src="chart?jFreeChartBuilder=movedOutTimesReportChartBuilder"
@@ -55,10 +55,10 @@
 			</div>
 			<hr />
 			<h2>
-				搬入搬出趋势图
+				<fmt:message key="blogmover.moveInOutTrendChart" />
 			</h2>
 			<div>
-				搬入次数减去搬出次数得出的结果画出的趋势图
+				<fmt:message key="blogmover.moveInOutTrendChart.description" />
 			</div>
 			<div>
 				<img
