@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -43,6 +44,16 @@ public class SpaceReader extends AbstractBlogReader {
 
 	public SpaceReader() {
 		final HttpClient httpClient = new HttpClient();
+
+		// 如果没有设定cookie模式将会有警告：WARN
+		// [org.apache.commons.httpclient.HttpMethodBase] - Cookie rejected:
+		// "$Version=0;
+		// wlru=http%3a%2f%2feyeth.spaces.live.com%2fblog%2fcns!DDA97AA9E929B1C4!325.entry;
+		// $Path=/; $Domain=spaces.live.com". Domain attribute "spaces.live.com"
+		// violates RFC 2109: domain must start with a dot
+		httpClient.getParams().setCookiePolicy(
+				CookiePolicy.BROWSER_COMPATIBILITY);
+
 		httpDocument = new HttpDocument(httpClient, HttpClientUtils
 				.buildInternetExplorerHeader("zh-cn", false));
 	}
