@@ -1,0 +1,1 @@
+<%response.sendRedirect("http://groups.google.com/group/blog-mover/web/user-guide");%>
