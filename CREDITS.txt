@@ -1,4 +1,8 @@
-zhoushuqun
-Rory.CN
+* Developers
+  zhoushuqun
+  Rory.CN
+ 
+* Contributors
 
-xsharp
+* Hardware & Network support
+  xsharp - In 2006, he provider the demo server's hardware and bandwidth.

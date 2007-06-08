@@ -13,6 +13,7 @@ __zh__
 我们的目标是让你的 Blog 可以在各个 BSP 之间自由地搬家。
 
 
+本项目开始于 2006 年 5～8 月。
 
 http://blogmover.redv.com
 
