@@ -23,6 +23,14 @@ import com.redv.blogmover.LoginFailedException;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
+ * Account for testing:
+ * 
+ * <pre>
+ * username: blogmover1
+ * password: blogmover
+ * url: http://blog.sina.com.cn/blogmover
+ * </pre>
+ * 
  * @author Joe
  * @version 1.0
  * 
