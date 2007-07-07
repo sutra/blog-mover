@@ -3,6 +3,7 @@
  */
 package com.redv.blogmover.bsps.com.blogcn;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,6 +11,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.html.HTMLCollection;
+import org.w3c.dom.html.HTMLFormElement;
 import org.w3c.dom.html.HTMLTextAreaElement;
 
 import com.redv.blogmover.WebLog;
@@ -45,10 +49,42 @@ class ModifyEntryHtmlParser {
 
 	public void parse() {
 		webLog = new WebLogImpl();
-		webLog.setTitle(document.getElementById("mytitle")
-				.getAttribute("value"));
-		webLog.setTags(document.getElementById("keyword").getAttribute("value")
-				.split(","));
+
+		// Look for title.
+		Element title = document.getElementById("mytitle");
+		if (title == null) {
+			title = document.getElementById("title");
+		}
+		if (title == null) {
+			HTMLFormElement form = null;
+			NodeList forms = document.getElementsByTagName("form");
+			for (int i = 0; i < forms.getLength(); i++) {
+				form = (HTMLFormElement) forms.item(i);
+				if ("hEditor".equals(form.getAttribute("name"))) {
+					break;
+				}
+			}
+			HTMLCollection htmlc = form.getElements();
+			for (int i = 0; i < htmlc.getLength(); i++) {
+				Element e = (Element) htmlc.item(i);
+				if ("title".equals(e.getAttribute("name"))) {
+					title = e;
+					break;
+				}
+			}
+		}
+		webLog.setTitle(title.getAttribute("value"));
+		String[] tags = document.getElementById("keyword")
+				.getAttribute("value").split(",");
+		ArrayList<String> arrayListTags = new ArrayList<String>(tags.length);
+		for (int i = 0; i < tags.length; i++) {
+			if (!tags[i].equals("")) {
+				arrayListTags.add(tags[i]);
+			}
+		}
+		String[] t = new String[arrayListTags.size()];
+		arrayListTags.toArray(t);
+		webLog.setTags(t);
 		HTMLTextAreaElement textarea = (HTMLTextAreaElement) document
 				.getElementById("mycontent");
 		webLog.setBody(textarea.getFirstChild().getNodeValue());
