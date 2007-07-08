@@ -6,6 +6,8 @@ package com.redv.blogmover.metaWeblog.com.blogbus;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xmlrpc.XmlRpcException;
@@ -21,7 +23,7 @@ import com.redv.blogmover.metaWeblog.cn.xpert.XpertTest;
  * @author Shutra
  * 
  */
-public class BlogBusTest {
+public class BlogBusTest extends TestCase {
 	@SuppressWarnings("unused")
 	private static final Log log = LogFactory.getLog(XpertTest.class);
 
