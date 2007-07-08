@@ -190,6 +190,9 @@ public class RomeWriter extends AbstractBlogWriter {
 		OutputStream outputStream = null;
 		Writer writer = null;
 		try {
+			// mkdirs of its parent.
+			this.outputFile.getParentFile().mkdirs();
+
 			outputStream = new FileOutputStream(this.outputFile);
 			writer = new OutputStreamWriter(outputStream, this.encoding);
 			output.output(feed, writer);
