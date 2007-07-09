@@ -5,7 +5,6 @@ package com.redv.blogmover.bsps.baidu;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -38,8 +37,6 @@ public class BaiduReader extends AbstractBlogReader {
 	private BaiduLogin baiduLogin;
 
 	private boolean loggedIn = false;
-
-	private List<WebLog> webLogs;
 
 	@SuppressWarnings("unused")
 	private int dispNum;
@@ -81,7 +78,6 @@ public class BaiduReader extends AbstractBlogReader {
 	 */
 	@Override
 	public List<WebLog> read() throws BlogMoverException {
-		webLogs = new ArrayList<WebLog>();
 		checkLogin();
 		blogHandle = BaiduUtils.findBlogHandle(this.httpDocument);
 		parseSetting(blogHandle);
@@ -90,13 +86,12 @@ public class BaiduReader extends AbstractBlogReader {
 			String u = url + i;
 			log.debug("u: " + u);
 			Document document = httpDocument.get(u);
-			parse(document);
 			// Page.
-			if (!hasNextPage(document)) {
+			if (!parse(document) || !hasNextPage(document)) {
 				break;
 			}
 		}
-		return webLogs;
+		return getWebLogs();
 	}
 
 	private void checkLogin() throws BlogMoverException {
@@ -196,7 +191,7 @@ public class BaiduReader extends AbstractBlogReader {
 		}
 	}
 
-	private void parse(Document document) {
+	private boolean parse(Document document) {
 		NodeList divs = document.getElementsByTagName("div");
 		for (int i = 0; i < divs.getLength(); i++) {
 			Element div = (Element) divs.item(i);
@@ -215,12 +210,13 @@ public class BaiduReader extends AbstractBlogReader {
 					log.debug("webLog.publishedDate: "
 							+ webLog.getPublishedDate());
 					log.debug("webLog.body: " + webLog.getBody());
-					this.webLogs.add(webLog);
-					this.status.setCurrentWebLog(webLog);
-					this.status.setCurrentCount(webLogs.size());
+					
+					if (!processNewBlog(webLog))
+						return false;
 				}
 			}
 		}
+		return true;
 	}
 
 	private WebLog detail(String id) {

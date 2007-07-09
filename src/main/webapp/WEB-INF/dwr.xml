@@ -5,6 +5,9 @@
 		<create javascript="User" creator="spring">
 			<param name="beanName" value="user" />
 		</create>
+		<create javascript="SyncUser" creator="spring">
+			<param name="beanName" value="syncuser" />
+		</create>
 		<create javascript="BloggerClient" creator="spring">
 			<param name="beanName" value="bloggerClient" />
 		</create>

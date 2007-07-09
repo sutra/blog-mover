@@ -86,8 +86,8 @@
 					value="com.redv.blogmover.bsps.com.sohu.blog.SohuBlogWriter" />
 				<entry key="blog.com.cn"
 					value="com.redv.blogmover.bsps.cn.com.blog.BlogWriter" />
-				<entry key="spaces.live.com"
-					value="com.redv.blogmover.bsps.com.live.spaces.SpaceWriter" />
+        <entry key="spaces.live.com"
+          value="com.redv.blogmover.bsps.com.live.spaces.SpaceWriter" />
 			</map>
 		</property>
 	</bean>

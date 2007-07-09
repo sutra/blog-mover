@@ -28,4 +28,5 @@ public interface BlogReader extends Statusable {
 	 */
 	BSP getBsp();
 
+	void setBlogFilter(BlogFilter filter);
 }

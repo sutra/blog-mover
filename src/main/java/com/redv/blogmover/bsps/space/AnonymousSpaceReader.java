@@ -14,6 +14,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.redv.blogmover.BlogFilter;
 import com.redv.blogmover.BlogReader;
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Status;
@@ -166,5 +167,15 @@ public class AnonymousSpaceReader implements BlogReader {
 			}
 		}
 		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.BlogReader#setBlogFilter(com.redv.blogmover.BlogFilter)
+	 */
+	public void setBlogFilter(BlogFilter filter) {
+		// TODO Auto-generated method stub
+
 	}
 }

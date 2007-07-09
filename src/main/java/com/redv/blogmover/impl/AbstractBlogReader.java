@@ -3,13 +3,17 @@
  */
 package com.redv.blogmover.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.redv.blogmover.BlogReader;
+import com.redv.blogmover.BlogFilter;
 import com.redv.blogmover.BlogMoverException;
+import com.redv.blogmover.BlogReader;
+import com.redv.blogmover.ReadFilterResult;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.bsps.BSPIDUtils;
@@ -28,6 +32,10 @@ public abstract class AbstractBlogReader implements BlogReader {
 	protected Status status;
 
 	protected long operationInterval;
+
+	protected BlogFilter m_filter = BlogFilter.NONE;
+
+	private List<WebLog> m_webLogs = new ArrayList<WebLog>();
 
 	/**
 	 * 
@@ -72,4 +80,46 @@ public abstract class AbstractBlogReader implements BlogReader {
 		return status;
 	}
 
+	public void setBlogFilterId(String filterIdAndArg) {
+		String[] args = filterIdAndArg.split(":");
+		if ("BlogFilterNone".equals(args[0])) {
+			setBlogFilter(BlogFilter.NONE);
+		} else if ("BlogFilterByCount".equals(args[0])) {
+			setBlogFilter(new BlogFilterByCount(Integer.parseInt(args[1])));
+		} else if ("BlogFilterByPubDate".equals(args[0])) {
+			Date now = new Date();
+			final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000;
+			Date fromPubDate = new Date(now.getTime()
+					- Integer.parseInt(args[1]) * MILLSECS_PER_DAY);
+			setBlogFilter(new BlogFilterByPubDate(fromPubDate));
+		}
+	}
+
+	public void setBlogFilter(BlogFilter filter) {
+		m_filter = filter;
+	}
+
+	protected BlogFilter getBlogFilter() {
+		return m_filter;
+	}
+
+	/**
+	 * @param webLog
+	 * @return true, if more to read; false, otherwise
+	 */
+	protected boolean processNewBlog(WebLog webLog) {
+		ReadFilterResult res = getBlogFilter().run(webLog);
+
+		if (res.accepted()) {
+			m_webLogs.add(webLog);
+			status.setCurrentWebLog(webLog);
+			status.setCurrentCount(m_webLogs.size());
+		}
+
+		return res.readMore();
+	}
+
+	protected List<WebLog> getWebLogs() {
+		return m_webLogs;
+	}
 }
