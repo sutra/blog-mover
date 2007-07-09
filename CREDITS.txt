@@ -3,6 +3,7 @@
   Rory.CN
  
 * Contributors
+  Ziru Zhou
 
 * Hardware & Network support
   xsharp - In 2006, he provider the demo server's hardware and bandwidth.
