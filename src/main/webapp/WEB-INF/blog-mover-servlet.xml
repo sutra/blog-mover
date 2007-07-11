@@ -23,8 +23,14 @@
 					<entry key="anonymousSpace"
 					value="com.redv.blogmover.bsps.space.AnonymousSpaceReader" />
 				-->
+
+				<!-- The reader that parsing weblog entries from homepage -->
 				<entry key="spaces.live.com"
 					value="com.redv.blogmover.bsps.com.live.spaces.SpaceReader" />
+
+				<!-- The reader that parsing weblog entries permlink from homepage, get details by metaWeblog API -->
+				<entry key="spaces.live.com-metaWeblog"
+					value="com.redv.blogmover.bsps.com.live.spaces.SpaceReaderByMetaWeblog" />
 				<entry key="baidu"
 					value="com.redv.blogmover.bsps.baidu.BaiduReader" />
 				<!--
