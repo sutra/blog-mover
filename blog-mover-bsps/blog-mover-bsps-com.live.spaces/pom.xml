@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+						http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.redv.blogmover</groupId>
+		<artifactId>blog-mover-bsps</artifactId>
+		<version>3.0</version>
+	</parent>
+	<groupId>com.redv.blogmover</groupId>
+	<artifactId>blog-mover-bsps-com.live.spaces</artifactId>
+	<version>3.0</version>
+	<packaging>jar</packaging>
+	<name>Blog Mover bsps com.live.spaces</name>
+	<dependencies>
+		<dependency>
+			<groupId>com.redv.blogmover</groupId>
+			<artifactId>blog-mover-core</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>axis</groupId>
+			<artifactId>axis-schema</artifactId>
+			<version>1.3</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.redv.blogmover</groupId>
+			<artifactId>blog-mover-metaWeblog</artifactId>
+			<version>3.0</version>
+		</dependency>
+	</dependencies>
+</project>
