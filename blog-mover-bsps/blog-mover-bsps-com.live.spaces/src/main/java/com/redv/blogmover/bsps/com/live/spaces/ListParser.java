@@ -59,12 +59,12 @@ public class ListParser {
 
 	public void parse() {
 		Element previousPageAnchor = document
-				.getElementById("BlogViewPaging_Prev");
+				.getElementById("aToolbarPrev");
 		if (!previousPageAnchor.getAttribute("style").equals("display:none")) {
 			this.previousPageUrl = previousPageAnchor.getAttribute("href");
 		}
 
-		Element nextPageAnchor = document.getElementById("BlogViewPaging_Next");
+		Element nextPageAnchor = document.getElementById("actionToolbarNext");
 		if (!nextPageAnchor.getAttribute("style").equals("display:none")) {
 			this.nextPageUrl = nextPageAnchor.getAttribute("href");
 		}
