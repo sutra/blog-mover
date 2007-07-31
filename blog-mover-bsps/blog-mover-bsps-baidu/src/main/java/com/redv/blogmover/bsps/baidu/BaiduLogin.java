@@ -20,6 +20,14 @@ import com.redv.blogmover.util.DomNodeUtils;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
+ * Account for testing:
+ * 
+ * <pre>
+ * username: blogmover1
+ * password: blogmover1
+ * url: http://hi.baidu.com/blogmover1
+ * </pre>
+ * 
  * @author Joe
  * @version 1.0
  * 
