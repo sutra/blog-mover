@@ -51,14 +51,13 @@ public class ListParserTest extends TestCase {
 						"listpage_zhoushuqun.spaces.live.com.html"), "UTF-8");
 		lp.setDocument(document);
 		lp.parse();
-		String expectedPreviousPage = "http://zhoushuqun.spaces.live.com/?_c11_BlogPart_p=1&_c11_BlogPart_handle=cns!2B070A76FD6627CE!923&_c11_BlogPart_FullView=1&_c11_BlogPart_BlogPart=blogview&_c=BlogPart";
-		String expectedNextPage = "http://zhoushuqun.spaces.live.com/?_c11_BlogPart_n=1&_c11_BlogPart_handle=cns!2B070A76FD6627CE!786&_c11_BlogPart_FullView=1&_c11_BlogPart_BlogPart=blogview&_c=BlogPart";
+		String expectedPreviousPage = "http://zhoushuqun.spaces.live.com/?_c11_BlogPart_pagedir=Previous&_c11_BlogPart_handle=cns!2B070A76FD6627CE!922&_c11_BlogPart_BlogPart=blogview&_c=BlogPart";
+		String expectedNextPage = "http://zhoushuqun.spaces.live.com/?_c11_BlogPart_pagedir=Next&_c11_BlogPart_handle=cns!2B070A76FD6627CE!782&_c11_BlogPart_BlogPart=blogview&_c=BlogPart";
 		assertEquals("Previous page link string not equals.",
 				expectedPreviousPage, lp.getPreviousPageUrl());
 		assertEquals("Next page link string not equals.", expectedNextPage, lp
 				.getNextPageUrl());
 		String[] urls = new String[] {
-				"http://zhoushuqun.spaces.live.com/blog/cns!2B070A76FD6627CE!923.entry",
 				"http://zhoushuqun.spaces.live.com/blog/cns!2B070A76FD6627CE!922.entry",
 				"http://zhoushuqun.spaces.live.com/blog/cns!2B070A76FD6627CE!921.entry",
 				"http://zhoushuqun.spaces.live.com/blog/cns!2B070A76FD6627CE!920.entry",
@@ -77,7 +76,8 @@ public class ListParserTest extends TestCase {
 				"http://zhoushuqun.spaces.live.com/blog/cns!2B070A76FD6627CE!840.entry",
 				"http://zhoushuqun.spaces.live.com/blog/cns!2B070A76FD6627CE!793.entry",
 				"http://zhoushuqun.spaces.live.com/blog/cns!2B070A76FD6627CE!791.entry",
-				"http://zhoushuqun.spaces.live.com/blog/cns!2B070A76FD6627CE!786.entry" };
+				"http://zhoushuqun.spaces.live.com/blog/cns!2B070A76FD6627CE!786.entry",
+				"http://zhoushuqun.spaces.live.com/blog/cns!2B070A76FD6627CE!782.entry" };
 		String[] actualPermalinks = new String[lp.getPermalinks().size()];
 		lp.getPermalinks().toArray(actualPermalinks);
 		ArrayAssert.assertEquals("Permalinks not equals.", urls,
