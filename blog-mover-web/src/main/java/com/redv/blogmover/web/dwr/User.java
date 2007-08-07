@@ -237,6 +237,7 @@ public class User implements RemoteUser, Serializable {
 		*/
 		
 		private UserFacade getUserFacade() {
+			// Get UserFacade instance from springframework's session scope.
 			WebContext webContext = WebContextFactory.get();
 			HttpSession session = webContext.getSession(true);
 
