@@ -18,10 +18,13 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.BlogReader;
 import com.redv.blogmover.BlogWriter;
+import com.redv.blogmover.RemoteUser;
+import com.redv.blogmover.ReaderNotSettedException;
 import com.redv.blogmover.Status;
 import com.redv.blogmover.UserFacade;
 import com.redv.blogmover.WebLog;
-import com.redv.blogmover.logging.LoggingService;
+import com.redv.blogmover.WriterNotSettedException;
+//import com.redv.blogmover.logging.LoggingService;
 
 /**
  * DWR 用户接口。
@@ -31,7 +34,7 @@ import com.redv.blogmover.logging.LoggingService;
  * @version 2.0
  * 
  */
-public class User implements Serializable {
+public class User implements RemoteUser, Serializable {
 	/**
 	 * 
 	 */
@@ -85,13 +88,12 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @deprecated
 	 * @param property
 	 * @param value
 	 * @throws BlogMoverException
 	 */
 	public void setReaderProperty(String property, String value)
-			throws BlogMoverException {
+			throws ReaderNotSettedException {
 		try {
 			this.userDelegate.setReaderProperty(property, value);
 		} catch (RuntimeException e) {
@@ -100,7 +102,7 @@ public class User implements Serializable {
 	}
 
 	public void setReaderProperties(String[] properties, String[] values)
-			throws BlogMoverException {
+			throws ReaderNotSettedException {
 		try {
 			this.userDelegate.setReaderProperties(properties, values);
 		} catch (RuntimeException e) {
@@ -109,13 +111,12 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @deprecated
 	 * @param property
 	 * @param value
 	 * @throws BlogMoverException
 	 */
 	public void setWriterProperty(String property, String value)
-			throws BlogMoverException {
+			throws WriterNotSettedException {
 		try {
 			this.userDelegate.setWriterProperty(property, value);
 		} catch (RuntimeException e) {
@@ -124,7 +125,7 @@ public class User implements Serializable {
 	}
 
 	public void setWriterProperties(String[] properties, String[] values)
-			throws BlogMoverException {
+			throws WriterNotSettedException {
 		try {
 			this.userDelegate.setWriterProperties(properties, values);
 		} catch (RuntimeException e) {
@@ -211,6 +212,7 @@ public class User implements Serializable {
 		 * 
 		 * @return 用户门面。
 		 */
+		/*
 		private UserFacade getUserFacade() {
 			WebContext webContext = WebContextFactory.get();
 			HttpSession session = webContext.getSession(true);
@@ -231,6 +233,20 @@ public class User implements Serializable {
 				ret.setLoggingService(loggingService);
 			}
 			return ret;
+		}
+		*/
+		
+		private UserFacade getUserFacade() {
+			WebContext webContext = WebContextFactory.get();
+			HttpSession session = webContext.getSession(true);
+
+			UserFacade userFacade = (UserFacade) WebApplicationContextUtils
+					.getWebApplicationContext(
+							WebContextFactory.get().getServletContext())
+					.getBean("userFacade");
+			userFacade.setToken(session.getId());
+
+			return userFacade;
 		}
 
 		/**
@@ -334,13 +350,13 @@ public class User implements Serializable {
 		 * @throws BlogMoverException
 		 */
 		public void setReaderProperty(String property, String value)
-				throws BlogMoverException {
+				throws ReaderNotSettedException {
 			UserFacade facade = this.getUserFacade();
 			facade.setReaderProperty(property, value);
 		}
 
 		public void setReaderProperties(String[] properties, String[] values)
-				throws BlogMoverException {
+				throws ReaderNotSettedException {
 			UserFacade facade = this.getUserFacade();
 			for (int i = 0; i < properties.length; i++) {
 				log.debug("Setting reader property: " + properties[i]
@@ -359,13 +375,13 @@ public class User implements Serializable {
 		 * @throws BlogMoverException
 		 */
 		public void setWriterProperty(String property, String value)
-				throws BlogMoverException {
+				throws WriterNotSettedException {
 			UserFacade facade = this.getUserFacade();
 			facade.setWriterProperty(property, value);
 		}
 
 		public void setWriterProperties(String[] properties, String[] values)
-				throws BlogMoverException {
+				throws WriterNotSettedException {
 			UserFacade facade = this.getUserFacade();
 			for (int i = 0; i < properties.length; i++) {
 				log.debug("Setting writer property: " + properties[i]

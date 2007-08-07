@@ -131,16 +131,16 @@ public class UserFacade implements Serializable {
 	 *            The property to set.
 	 * @param value
 	 *            The value to set.
-	 * @throws BlogMoverException
+	 * @throws ReaderNotSettedException
 	 */
 	public void setReaderProperty(String property, String value)
-			throws BlogMoverException {
+			throws ReaderNotSettedException {
 		log.debug("setReaderProperty called. property=" + property + ", value="
 				+ value);
 		this.readerLock.writeLock().lock();
 		try {
 			if (this.reader == null) {
-				throw new BlogMoverException("读取器为空。请设置读取器。");
+				throw new ReaderNotSettedException("读取器为空。请设置读取器。");
 			}
 			new PropertySetter(this.reader).setProperty(property, value);
 		} finally {
@@ -157,13 +157,13 @@ public class UserFacade implements Serializable {
 	 * @throws BlogMoverException
 	 */
 	public void setWriterProperty(String property, String value)
-			throws BlogMoverException {
+			throws WriterNotSettedException {
 		log.debug("setReaderProperty called. property=" + property + ", value="
 				+ value);
 		this.writerLock.writeLock().lock();
 		try {
 			if (this.writer == null) {
-				throw new BlogMoverException("写入器为空。请设置写入器。");
+				throw new WriterNotSettedException("写入器为空。请设置写入器。");
 			}
 			new PropertySetter(this.writer).setProperty(property, value);
 		} finally {

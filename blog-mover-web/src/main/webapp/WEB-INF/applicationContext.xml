@@ -15,6 +15,11 @@
 	<bean id="syncuser" class="com.redv.blogsynchronizer.web.dwr.User" />
 	<bean id="bloggerClient"
 		class="com.redv.blogmover.web.dwr.BloggerClient" />
+
+	<bean id="userFacade" class="com.redv.blogmover.UserFacade" scope="session">
+		<property name="loggingService" ref="loggingService" />
+	</bean>
+
 	<bean id="baseTransactionProxy"
 		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
 		abstract="true">

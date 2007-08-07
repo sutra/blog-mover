@@ -7,7 +7,7 @@
 		Our goal is allowing your blog moving freely between each BSP.
 	</description>
 	<display-name>Blog Mover</display-name>
-	
+
 	<!-- Define the basename for a resource bundle for I18N -->
 	<context-param>
 		<param-name>
@@ -23,7 +23,7 @@
 		</param-name>
 		<param-value>zh</param-value>
 	</context-param>
-	
+
 	<context-param>
 		<description>
 			该 web application 的根目录的绝对文件路径作为属性保存在 System 的属性列表中。该属性的名字，由
@@ -48,6 +48,12 @@
 		-->
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+	<!-- To enable scope="session" -->
+	<listener>
+		<listener-class>
+			org.springframework.web.context.request.RequestContextListener
 		</listener-class>
 	</listener>
 	<listener>
@@ -162,10 +168,10 @@
 	</filter>
 
 	<!--
-	<servlet-mapping>
+		<servlet-mapping>
 		<servlet-name>blog-mover</servlet-name>
 		<url-pattern>*.jhtml</url-pattern>
-	</servlet-mapping>
+		</servlet-mapping>
 	-->
 	<servlet-mapping>
 		<servlet-name>blog-mover</servlet-name>
@@ -207,7 +213,7 @@
 		<filter-name>ApplicationOneMonthCacheFilter</filter-name>
 		<servlet-name>chart</servlet-name>
 	</filter-mapping>
-	
+
 	<filter-mapping>
 		<filter-name>sitemesh</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -245,10 +251,10 @@
 	</error-page>
 
 	<!--
-	<error-page>
+		<error-page>
 		<error-code>404</error-code>
 		<location>/</location>
-	</error-page>
+		</error-page>
 	-->
 
 	<jsp-config>
