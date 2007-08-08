@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.util.WebUtils;
 
 import com.redv.blogmover.UserFacade;
+import com.redv.blogmover.UserFacadeImpl;
 import com.redv.blogmover.web.dwr.User;
 
 /**
@@ -43,7 +44,7 @@ public class IdentifyingCodeImageServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		UserFacade userFacade = (UserFacade) WebUtils
 				.getOrCreateSessionAttribute(session,
-						User.SESSION_NAME_USER_FACADE, UserFacade.class);
+						User.SESSION_NAME_USER_FACADE, UserFacadeImpl.class);
 
 		Object readerOrWriter = null;
 		if (type.equals("reader")) {
