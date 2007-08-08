@@ -27,14 +27,14 @@ import com.redv.blogmover.util.PropertySetter;
  * @version 1.0
  * 
  */
-public class UserFacade implements Serializable {
+public class UserFacadeImpl implements Serializable, UserFacade {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4355547205744489604L;
 
 	private static final transient Log log = LogFactory
-			.getLog(UserFacade.class);
+			.getLog(UserFacadeImpl.class);
 
 	private transient RecentWebLogsCache history = new RecentWebLogsCache();
 
@@ -52,10 +52,13 @@ public class UserFacade implements Serializable {
 
 	private transient LoggingService loggingService;
 
-	public UserFacade() {
+	public UserFacadeImpl() {
 		webLogs = new Vector<WebLog>();
 	}
 
+	/* （非 Javadoc）
+	 * @see com.redv.blogmover.UserFacade#setToken(java.lang.String)
+	 */
 	public void setToken(String token) {
 		this.token = token;
 	}
@@ -68,8 +71,8 @@ public class UserFacade implements Serializable {
 		this.loggingService = loggingService;
 	}
 
-	/**
-	 * @return Returns the reader.
+	/* （非 Javadoc）
+	 * @see com.redv.blogmover.UserFacade#getReader()
 	 */
 	public BlogReader getReader() {
 		this.readerLock.readLock().lock();
@@ -80,8 +83,8 @@ public class UserFacade implements Serializable {
 		}
 	}
 
-	/**
-	 * @return Returns the writer.
+	/* （非 Javadoc）
+	 * @see com.redv.blogmover.UserFacade#getWriter()
 	 */
 	public BlogWriter getWriter() {
 		this.writerLock.readLock().lock();
@@ -92,9 +95,8 @@ public class UserFacade implements Serializable {
 		}
 	}
 
-	/**
-	 * @param reader
-	 *            The reader to set.
+	/* （非 Javadoc）
+	 * @see com.redv.blogmover.UserFacade#setReader(com.redv.blogmover.BlogReader)
 	 */
 	public void setReader(BlogReader reader) {
 		this.readerLock.writeLock().lock();
@@ -105,9 +107,8 @@ public class UserFacade implements Serializable {
 		}
 	}
 
-	/**
-	 * @param writer
-	 *            The writer to set.
+	/* （非 Javadoc）
+	 * @see com.redv.blogmover.UserFacade#setWriter(com.redv.blogmover.BlogWriter)
 	 */
 	public void setWriter(BlogWriter writer) {
 		this.writerLock.writeLock().lock();
@@ -118,20 +119,15 @@ public class UserFacade implements Serializable {
 		}
 	}
 
-	/**
-	 * @return Returns the webLogs.
+	/* （非 Javadoc）
+	 * @see com.redv.blogmover.UserFacade#getWebLogs()
 	 */
 	public List<WebLog> getWebLogs() {
 		return webLogs;
 	}
 
-	/**
-	 * 
-	 * @param property
-	 *            The property to set.
-	 * @param value
-	 *            The value to set.
-	 * @throws ReaderNotSettedException
+	/* （非 Javadoc）
+	 * @see com.redv.blogmover.UserFacade#setReaderProperty(java.lang.String, java.lang.String)
 	 */
 	public void setReaderProperty(String property, String value)
 			throws ReaderNotSettedException {
@@ -148,13 +144,8 @@ public class UserFacade implements Serializable {
 		}
 	}
 
-	/**
-	 * 
-	 * @param property
-	 *            The property to set.
-	 * @param value
-	 *            The value to set.
-	 * @throws BlogMoverException
+	/* （非 Javadoc）
+	 * @see com.redv.blogmover.UserFacade#setWriterProperty(java.lang.String, java.lang.String)
 	 */
 	public void setWriterProperty(String property, String value)
 			throws WriterNotSettedException {
@@ -171,6 +162,9 @@ public class UserFacade implements Serializable {
 		}
 	}
 
+	/* （非 Javadoc）
+	 * @see com.redv.blogmover.UserFacade#read()
+	 */
 	public void read() throws BlogMoverException {
 		if (reader == null) {
 			throw new BlogMoverException("尚未设置读取器。");
@@ -191,6 +185,9 @@ public class UserFacade implements Serializable {
 		}
 	}
 
+	/* （非 Javadoc）
+	 * @see com.redv.blogmover.UserFacade#write()
+	 */
 	public void write() throws BlogMoverException {
 		if (writer == null) {
 			throw new BlogMoverException("写入器尚未设置。");
