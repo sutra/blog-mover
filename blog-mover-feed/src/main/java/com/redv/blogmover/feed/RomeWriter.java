@@ -304,13 +304,13 @@ public class RomeWriter extends AbstractBlogWriter {
 			entry.setTitle("title");
 			entry.setLink("http://xpert.cn/" + i);
 
-			List contents = new ArrayList();
+			List<?> contents = new ArrayList<Object>();
 			entry.setContents(contents);
 			entries.add(entry);
 		}
 
 		SyndFeedOutput output = new SyndFeedOutput();
-		List l = feed.getSupportedFeedTypes();
+		List<?> l = feed.getSupportedFeedTypes();
 		for (Object s : l) {
 			feed.setFeedType(s.toString());
 			try {
