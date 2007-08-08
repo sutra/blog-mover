@@ -71,7 +71,7 @@ public class SpaceReader extends AbstractBlogReader {
 	@Override
 	public List<WebLog> read() throws BlogMoverException {
 		if (!homepageUrlPattern.matcher(this.homepageUrl).matches()) {
-			throw new BlogMoverException("homepage url not corrent.");
+			throw new BlogMoverException("输入的首页地址不正确。");
 		}
 		if (this.homepageUrl.endsWith("/")) {
 			this.blogHomepageUrl = this.homepageUrl + "blog/";
