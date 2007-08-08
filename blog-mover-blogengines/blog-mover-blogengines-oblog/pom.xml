@@ -13,7 +13,7 @@
 	<artifactId>blog-mover-blogengines-oblog</artifactId>
 	<version>3.0</version>
 	<packaging>jar</packaging>
-	<name>Blog Mover Blogengies Oblog</name>
+	<name>Blog Mover Blogengines Oblog</name>
 	<dependencies>
 		<dependency>
 			<groupId>com.redv.blogmover</groupId>
