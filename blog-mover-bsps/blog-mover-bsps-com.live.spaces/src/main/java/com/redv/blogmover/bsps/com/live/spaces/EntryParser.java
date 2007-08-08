@@ -95,7 +95,17 @@ public class EntryParser {
 		for (int i = 0; i < divs.getLength(); i++) {
 			Element div = (Element) divs.item(i);
 			if ("footerLinks".equals(div.getAttribute("class"))) {
+				if (log.isDebugEnabled()) {
+					try {
+						log.debug(DomNodeUtils.getXmlAsString(div));
+					} catch (TransformerException e) {
+						log.error("", e);
+					}
+				}
 				String s = div.getFirstChild().getNodeValue();
+				if (s == null) {
+					s = div.getFirstChild().getFirstChild().getNodeValue();
+				}
 				log.debug("date string: " + s);
 				try {
 					webLog.setPublishedDate(publishedDateFormat.parse(s));

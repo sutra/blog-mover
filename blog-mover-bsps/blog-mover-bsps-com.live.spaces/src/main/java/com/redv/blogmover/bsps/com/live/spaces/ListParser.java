@@ -6,9 +6,15 @@ package com.redv.blogmover.bsps.com.live.spaces;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.transform.TransformerException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import com.redv.blogmover.util.DomNodeUtils;
 
 /**
  * Windows live space's list page parser.
@@ -20,6 +26,8 @@ import org.w3c.dom.NodeList;
  * 
  */
 public class ListParser {
+	private static final Log log = LogFactory.getLog(ListParser.class);
+
 	private Document document;
 
 	private String previousPageUrl;
@@ -58,8 +66,15 @@ public class ListParser {
 	}
 
 	public void parse() {
-		Element previousPageAnchor = document
-				.getElementById("aToolbarPrev");
+		Element previousPageAnchor = document.getElementById("aToolbarPrev");
+		if (log.isDebugEnabled()) {
+			try {
+				log.debug(DomNodeUtils.getXmlAsString(document));
+			} catch (TransformerException e) {
+				log.error("", e);
+			}
+			log.debug("previousPageAnchor: " + previousPageAnchor);
+		}
 		if (!previousPageAnchor.getAttribute("style").equals("display:none")) {
 			this.previousPageUrl = previousPageAnchor.getAttribute("href");
 		}

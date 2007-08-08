@@ -11,8 +11,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.ws.commons.util.NamespaceContextImpl;
 import org.apache.xmlrpc.XmlRpcException;
@@ -25,15 +23,11 @@ import org.apache.xmlrpc.parser.DateParser;
 import org.apache.xmlrpc.parser.TypeParser;
 import org.apache.xmlrpc.serializer.DateSerializer;
 import org.apache.xmlrpc.serializer.TypeSerializer;
-import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
-import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.impl.WebLogImpl;
-import com.redv.blogmover.util.HttpClientUtils;
-import com.redv.blogmover.util.HttpDocument;
 
 /**
  * Blog Mover Reader for http:///spaces.live.com by metaWeblog.
@@ -70,38 +64,11 @@ import com.redv.blogmover.util.HttpDocument;
  * @author Sutra Zhou
  * 
  */
-public class SpaceReaderByMetaWeblog extends AbstractBlogReader {
-	private HttpDocument httpDocument;
-
-	private String homepageUrl;
+public class SpaceReaderByMetaWeblog extends SpaceReader {
 
 	private String username;
 
 	private String password;
-
-	public SpaceReaderByMetaWeblog() {
-		final HttpClient httpClient = new HttpClient();
-
-		// 如果没有设定cookie模式将会有警告：WARN
-		// [org.apache.commons.httpclient.HttpMethodBase] - Cookie rejected:
-		// "$Version=0;
-		// wlru=http%3a%2f%2feyeth.spaces.live.com%2fblog%2fcns!DDA97AA9E929B1C4!325.entry;
-		// $Path=/; $Domain=spaces.live.com". Domain attribute "spaces.live.com"
-		// violates RFC 2109: domain must start with a dot
-		httpClient.getParams().setCookiePolicy(
-				CookiePolicy.BROWSER_COMPATIBILITY);
-
-		httpDocument = new HttpDocument(httpClient, HttpClientUtils
-				.buildInternetExplorerHeader("zh-cn", false));
-	}
-
-	/**
-	 * @param homepageUrl
-	 *            the homepageUrl to set
-	 */
-	public void setHomepageUrl(String homepageUrl) {
-		this.homepageUrl = homepageUrl;
-	}
 
 	/**
 	 * @param password
@@ -118,44 +85,7 @@ public class SpaceReaderByMetaWeblog extends AbstractBlogReader {
 	public void setUsername(String username) {
 		this.username = username;
 
-		setHomepageUrl("http://" + username + ".spaces.live.com/blog/");
-	}
-
-	/*
-	 * /* (non-Javadoc)
-	 * 
-	 * @see com.redv.blogmover.impl.AbstractBlogReader#read()
-	 */
-	@Override
-	public List<WebLog> read() throws BlogMoverException {
-		Document document = httpDocument.get(this.homepageUrl);
-
-		while (true) {
-			ListParser lp = new ListParser();
-			lp.setDocument(document);
-			lp.parse();
-
-			if (!detail(lp.getPermalinks()))
-				break;
-
-			String nextPageUrl = lp.getNextPageUrl();
-			if (nextPageUrl == null)
-				break;
-
-			document = httpDocument.get(nextPageUrl);
-		}
-
-		return getWebLogs();
-	}
-
-	private boolean detail(List<String> permalinks) throws BlogMoverException {
-		for (String permalink : permalinks) {
-			WebLog webLog = readOnePost(parsePostId(permalink));
-			if (!processNewBlog(webLog))
-				return false;
-		}
-
-		return true;
+		super.setHomepageUrl("http://" + username + ".spaces.live.com/");
 	}
 
 	private static class MyTypeFactory extends TypeFactoryImpl {
@@ -184,6 +114,12 @@ public class SpaceReaderByMetaWeblog extends AbstractBlogReader {
 				return super.getSerializer(pConfig, pObject);
 			}
 		}
+	}
+
+	@Override
+	protected WebLog readPostByPermalink(String permalink)
+			throws BlogMoverException {
+		return readOnePost(parsePostId(permalink));
 	}
 
 	private String parsePostId(String permaLink) throws BlogMoverException {
@@ -238,8 +174,7 @@ public class SpaceReaderByMetaWeblog extends AbstractBlogReader {
 	 * @throws BlogMoverException
 	 * @throws MalformedURLException
 	 */
-	public static void main(String[] args) throws BlogMoverException,
-			MalformedURLException {
+	public static void main(String[] args) throws BlogMoverException {
 		SpaceReaderByMetaWeblog reader = new SpaceReaderByMetaWeblog();
 		reader.setUsername("username");
 		reader.setPassword("xxxxxxxx");
