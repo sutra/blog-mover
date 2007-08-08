@@ -110,7 +110,7 @@ public class MetaWeblogReader extends AbstractBlogReader {
 			Object[] objects = (Object[]) o;
 			webLogs = new ArrayList<WebLog>(objects.length);
 			for (Object obj : objects) {
-				Map m = (Map) obj;
+				Map<?, ?> m = (Map<?, ?>) obj;
 				WebLog webLog = new WebLogImpl();
 				webLog.setUrl(ObjectUtils.toString(m.get("permaLink"), null));
 				// userid
