@@ -215,10 +215,7 @@ public class WebLogImpl implements WebLog {
 		this.bsp = bsp;
 	}
 
-	public int compareTo(Object o) {
-		if (!(o instanceof WebLog))
-			return 0;
-		WebLog another = (WebLog) o;
+	public int compareTo(WebLog another) {
 		Date publishedDate2 = another.getPublishedDate();
 
 		if (this.publishedDate == null && publishedDate2 == null) {

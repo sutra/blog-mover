@@ -205,8 +205,8 @@ public class MovingLogHibernateDaoTest extends
 
 		assertTrue(moving.getMovingLogs() == moving.getMovingLogs());
 
-		Set set1 = moving.getMovingLogs();
-		Set set2 = moving.getMovingLogs();
+		Set<MovingLog> set1 = moving.getMovingLogs();
+		Set<MovingLog> set2 = moving.getMovingLogs();
 
 		assertEquals(1, set1.size());
 		assertEquals(1, set2.size());

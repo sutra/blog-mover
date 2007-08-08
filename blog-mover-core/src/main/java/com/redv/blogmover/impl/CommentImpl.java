@@ -117,10 +117,8 @@ public class CommentImpl implements Comment {
 		this.url = url;
 	}
 
-	public int compareTo(Object o) {
-		if (!(o instanceof Comment))
-			return 0;
-		Date publishedDate2 = ((Comment) o).getPublishedDate();
+	public int compareTo(Comment o) {
+		Date publishedDate2 = o.getPublishedDate();
 		return this.publishedDate.compareTo(publishedDate2);
 	}
 

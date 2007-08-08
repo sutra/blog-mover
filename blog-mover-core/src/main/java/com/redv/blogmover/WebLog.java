@@ -17,7 +17,7 @@ import com.redv.blogmover.logging.BSP;
  * @version 2.0
  * 
  */
-public interface WebLog extends Serializable, Comparable {
+public interface WebLog extends Serializable, Comparable<WebLog> {
 
 	/**
 	 * 获取固定链接。

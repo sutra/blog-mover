@@ -17,7 +17,7 @@ import org.apache.commons.lang.StringUtils;
 public class PropertySetter {
 	private Object object;
 
-	private Class clazz;
+	private Class<?> clazz;
 
 	public PropertySetter(Object object) {
 		this.object = object;

@@ -9,7 +9,7 @@ import java.util.Date;
  * @author shutra
  * 
  */
-public interface Comment extends Serializable, Comparable {
+public interface Comment extends Serializable, Comparable<Comment> {
 
 	/**
 	 * @return Returns the publishedDate.
