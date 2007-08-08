@@ -118,6 +118,7 @@ public class SpaceReader extends AbstractBlogReader {
 		ep.parse();
 
 		WebLog webLog = ep.getWebLog();
+		webLog.setUrl(permalink);
 		return webLog;
 	}
 
