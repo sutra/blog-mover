@@ -113,6 +113,7 @@ public abstract class AbstractBlogReader implements BlogReader {
 			m_webLogs.add(webLog);
 			status.setCurrentWebLog(webLog);
 			status.setCurrentCount(m_webLogs.size());
+			log.debug("status: " + status.toString());
 		}
 
 		return res.readMore();

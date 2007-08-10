@@ -3,6 +3,7 @@
  */
 package com.redv.blogmover.impl;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -94,6 +95,16 @@ public class StatusImpl implements Status {
 	 */
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
+	}
+
+	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }
