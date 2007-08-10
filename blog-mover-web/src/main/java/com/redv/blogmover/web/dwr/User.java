@@ -196,7 +196,7 @@ public class User implements RemoteUser, Serializable {
 		 */
 		private static final long serialVersionUID = -3343291565699533910L;
 
-		private final Log log = LogFactory.getLog(User.class);
+		private final Log log = LogFactory.getLog(UserDelegate.class);
 
 		public static final String SESSION_NAME_USER_FACADE = "com.redv.blogremover.web.dwr.User.userFacade";
 
