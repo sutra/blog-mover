@@ -56,7 +56,9 @@ public class UserFacadeImpl implements Serializable, UserFacade {
 		webLogs = new Vector<WebLog>();
 	}
 
-	/* （非 Javadoc）
+	/*
+	 * （非 Javadoc）
+	 * 
 	 * @see com.redv.blogmover.UserFacade#setToken(java.lang.String)
 	 */
 	public void setToken(String token) {
@@ -71,7 +73,9 @@ public class UserFacadeImpl implements Serializable, UserFacade {
 		this.loggingService = loggingService;
 	}
 
-	/* （非 Javadoc）
+	/*
+	 * （非 Javadoc）
+	 * 
 	 * @see com.redv.blogmover.UserFacade#getReader()
 	 */
 	public BlogReader getReader() {
@@ -83,7 +87,9 @@ public class UserFacadeImpl implements Serializable, UserFacade {
 		}
 	}
 
-	/* （非 Javadoc）
+	/*
+	 * （非 Javadoc）
+	 * 
 	 * @see com.redv.blogmover.UserFacade#getWriter()
 	 */
 	public BlogWriter getWriter() {
@@ -95,7 +101,9 @@ public class UserFacadeImpl implements Serializable, UserFacade {
 		}
 	}
 
-	/* （非 Javadoc）
+	/*
+	 * （非 Javadoc）
+	 * 
 	 * @see com.redv.blogmover.UserFacade#setReader(com.redv.blogmover.BlogReader)
 	 */
 	public void setReader(BlogReader reader) {
@@ -107,7 +115,9 @@ public class UserFacadeImpl implements Serializable, UserFacade {
 		}
 	}
 
-	/* （非 Javadoc）
+	/*
+	 * （非 Javadoc）
+	 * 
 	 * @see com.redv.blogmover.UserFacade#setWriter(com.redv.blogmover.BlogWriter)
 	 */
 	public void setWriter(BlogWriter writer) {
@@ -119,15 +129,20 @@ public class UserFacadeImpl implements Serializable, UserFacade {
 		}
 	}
 
-	/* （非 Javadoc）
+	/*
+	 * （非 Javadoc）
+	 * 
 	 * @see com.redv.blogmover.UserFacade#getWebLogs()
 	 */
 	public List<WebLog> getWebLogs() {
 		return webLogs;
 	}
 
-	/* （非 Javadoc）
-	 * @see com.redv.blogmover.UserFacade#setReaderProperty(java.lang.String, java.lang.String)
+	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see com.redv.blogmover.UserFacade#setReaderProperty(java.lang.String,
+	 *      java.lang.String)
 	 */
 	public void setReaderProperty(String property, String value)
 			throws ReaderNotSettedException {
@@ -144,8 +159,11 @@ public class UserFacadeImpl implements Serializable, UserFacade {
 		}
 	}
 
-	/* （非 Javadoc）
-	 * @see com.redv.blogmover.UserFacade#setWriterProperty(java.lang.String, java.lang.String)
+	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see com.redv.blogmover.UserFacade#setWriterProperty(java.lang.String,
+	 *      java.lang.String)
 	 */
 	public void setWriterProperty(String property, String value)
 			throws WriterNotSettedException {
@@ -162,13 +180,16 @@ public class UserFacadeImpl implements Serializable, UserFacade {
 		}
 	}
 
-	/* （非 Javadoc）
+	/*
+	 * （非 Javadoc）
+	 * 
 	 * @see com.redv.blogmover.UserFacade#read()
 	 */
 	public void read() throws BlogMoverException {
 		if (reader == null) {
 			throw new BlogMoverException("尚未设置读取器。");
 		}
+		log.debug("read() called." + reader.getClass() + " will be called.");
 		this.readerLock.readLock().lock();
 		try {
 			List<WebLog> webLogs = reader.read();
@@ -185,7 +206,9 @@ public class UserFacadeImpl implements Serializable, UserFacade {
 		}
 	}
 
-	/* （非 Javadoc）
+	/*
+	 * （非 Javadoc）
+	 * 
 	 * @see com.redv.blogmover.UserFacade#write()
 	 */
 	public void write() throws BlogMoverException {
