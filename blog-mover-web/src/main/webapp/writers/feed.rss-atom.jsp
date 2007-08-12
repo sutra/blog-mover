@@ -118,7 +118,7 @@
 						}
 						out.println(availableLocalesOptionsString);
 				%>
-			
+			</select>
 		</td>
 	</tr>
 	<tr>
