@@ -86,9 +86,9 @@
 			<select name="language" tabindex="104">
 				<%
 						String availableLocalesOptionsString;
-						availableLocalesOptionsString = (String) application.getAttribute("availableLocalesOptionsString");
+						//availableLocalesOptionsString = (String) application.getAttribute("availableLocalesOptionsString");
 						
-						if (availableLocalesOptionsString == null) {
+						//if (availableLocalesOptionsString == null) {
 							Locale[] availableLocales = Locale.getAvailableLocales();
 							// Sorting.
 							List<Locale> locales = new ArrayList<Locale>();
@@ -110,12 +110,12 @@
 								sb.append("'>");
 								sb.append(StringUtils.replace(StringUtils.rightPad(value, 5, " "), " ", "&nbsp;"));
 								sb.append(" ");
-								sb.append(locale.getDisplayName());
+								sb.append(StringEscapeUtils.escapeHtml(locale.getDisplayName()));
 								sb.append("</option>");
 							}
 							availableLocalesOptionsString = sb.toString();
 							application.setAttribute("availableLocalesOptionsString", availableLocalesOptionsString);
-						}
+						//}
 						out.println(availableLocalesOptionsString);
 				%>
 			</select>
