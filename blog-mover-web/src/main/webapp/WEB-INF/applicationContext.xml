@@ -16,7 +16,7 @@
 	<bean id="bloggerClient"
 		class="com.redv.blogmover.web.dwr.BloggerClient" />
 
-	<bean id="userFacade" class="com.redv.blogmover.UserFacade" scope="session">
+	<bean id="userFacade" class="com.redv.blogmover.UserFacadeImpl" scope="session">
 		<property name="loggingService" ref="loggingService" />
 	</bean>
 
