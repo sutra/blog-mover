@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<fmt:bundle basename="com.redv.blogmover.bsps.messages-writers">
 <img src="images/bsps/sina.gif" />
 <table>
 	<tr>
