@@ -24,7 +24,8 @@ import com.redv.blogmover.Status;
 import com.redv.blogmover.UserFacade;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.WriterNotSettedException;
-//import com.redv.blogmover.logging.LoggingService;
+
+// import com.redv.blogmover.logging.LoggingService;
 
 /**
  * DWR 用户接口。
@@ -45,6 +46,21 @@ public class User implements RemoteUser, Serializable {
 	public static final String SESSION_NAME_USER_FACADE = UserDelegate.SESSION_NAME_USER_FACADE;
 
 	private UserDelegate userDelegate;
+
+	/**
+	 * Get UserFacade instance from springframework's session scope.
+	 * 
+	 * @return userFacade
+	 */
+	public static UserFacade getUserFacade(HttpSession session) {
+		UserFacade userFacade = (UserFacade) WebApplicationContextUtils
+				.getWebApplicationContext(
+						WebContextFactory.get().getServletContext()).getBean(
+						"userFacade");
+		userFacade.setToken(session.getId());
+
+		return userFacade;
+	}
 
 	public User() {
 		this.userDelegate = new UserDelegate();
@@ -213,41 +229,28 @@ public class User implements RemoteUser, Serializable {
 		 * @return 用户门面。
 		 */
 		/*
+		 * private UserFacade getUserFacade() { WebContext webContext =
+		 * WebContextFactory.get(); HttpSession session =
+		 * webContext.getSession(true); // return (UserFacade)
+		 * WebUtils.getOrCreateSessionAttribute(session, //
+		 * SESSION_NAME_USER_FACADE, UserFacade.class); UserFacade ret =
+		 * (UserFacade) session .getAttribute(SESSION_NAME_USER_FACADE); if (ret ==
+		 * null) { ret = new UserFacade(); ret.setToken(session.getId());
+		 * session.setAttribute(SESSION_NAME_USER_FACADE, ret);
+		 * 
+		 * LoggingService loggingService = (LoggingService)
+		 * WebApplicationContextUtils .getWebApplicationContext(
+		 * WebContextFactory.get().getServletContext())
+		 * .getBean("loggingService");
+		 * 
+		 * ret.setLoggingService(loggingService); } return ret; }
+		 */
+
 		private UserFacade getUserFacade() {
 			WebContext webContext = WebContextFactory.get();
 			HttpSession session = webContext.getSession(true);
-			// return (UserFacade) WebUtils.getOrCreateSessionAttribute(session,
-			// SESSION_NAME_USER_FACADE, UserFacade.class);
-			UserFacade ret = (UserFacade) session
-					.getAttribute(SESSION_NAME_USER_FACADE);
-			if (ret == null) {
-				ret = new UserFacade();
-				ret.setToken(session.getId());
-				session.setAttribute(SESSION_NAME_USER_FACADE, ret);
 
-				LoggingService loggingService = (LoggingService) WebApplicationContextUtils
-						.getWebApplicationContext(
-								WebContextFactory.get().getServletContext())
-						.getBean("loggingService");
-
-				ret.setLoggingService(loggingService);
-			}
-			return ret;
-		}
-		*/
-		
-		private UserFacade getUserFacade() {
-			// Get UserFacade instance from springframework's session scope.
-			WebContext webContext = WebContextFactory.get();
-			HttpSession session = webContext.getSession(true);
-
-			UserFacade userFacade = (UserFacade) WebApplicationContextUtils
-					.getWebApplicationContext(
-							WebContextFactory.get().getServletContext())
-					.getBean("userFacade");
-			userFacade.setToken(session.getId());
-
-			return userFacade;
+			return User.getUserFacade(session);
 		}
 
 		/**
