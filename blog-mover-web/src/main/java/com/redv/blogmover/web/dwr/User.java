@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
@@ -52,11 +53,10 @@ public class User implements RemoteUser, Serializable {
 	 * 
 	 * @return userFacade
 	 */
-	public static UserFacade getUserFacade(HttpSession session) {
+	public static UserFacade getUserFacade(ServletContext sc,
+			HttpSession session) {
 		UserFacade userFacade = (UserFacade) WebApplicationContextUtils
-				.getWebApplicationContext(
-						WebContextFactory.get().getServletContext()).getBean(
-						"userFacade");
+				.getWebApplicationContext(sc).getBean("userFacade");
 		userFacade.setToken(session.getId());
 
 		return userFacade;
@@ -250,7 +250,8 @@ public class User implements RemoteUser, Serializable {
 			WebContext webContext = WebContextFactory.get();
 			HttpSession session = webContext.getSession(true);
 
-			return User.getUserFacade(session);
+			return User.getUserFacade(WebContextFactory.get()
+					.getServletContext(), session);
 		}
 
 		/**
