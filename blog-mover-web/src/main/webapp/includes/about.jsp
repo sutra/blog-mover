@@ -53,6 +53,7 @@
 			</ul>
 		</div>
 		--%>
+		<div style="position: relative;">
 		<div id="googleGroup">
 			<form action="http://groups.google.com/group/blog-mover/boxsubscribe">
 				<table style="border:1px solid #aa0033; font-size:small">
@@ -91,6 +92,10 @@
 					</tr>
 				</table>
 			</form>
+		</div>
+		<div style="position: absolute;right:0px;top:0px;">
+			<jsp:include flush="true" page="/ads/about.jsp" />
+		</div>
 		</div>
 		<%--
 		<div id="developProgress">
