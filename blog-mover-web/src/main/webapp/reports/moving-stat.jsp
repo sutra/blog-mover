@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="blog-mover" uri="http://blogmover.redv.com/"%>
+<fmt:bundle basename="com.redv.blogmover.messages">
 <html>
 	<head>
 		<title><fmt:message key="blogmover.movingStat" /></title>
@@ -13,3 +14,4 @@
 		</div>
 	</body>
 </html>
+</fmt:bundle>

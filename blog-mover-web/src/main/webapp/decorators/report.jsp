@@ -14,6 +14,7 @@
 	<c:set var="menu" value="1" />
 </c:if>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
+<fmt:bundle basename="com.redv.blogmover.messages">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN">
 	<head>
 		<title><decorator:title default="Report" /> 
@@ -114,3 +115,4 @@
 		</div>
 	</body>
 </html>
+</fmt:bundle>
