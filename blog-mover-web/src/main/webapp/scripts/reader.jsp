@@ -114,7 +114,7 @@ function initReaderReply() {
 }
 function initReaderErrorHandler(errorString, exception) {
 	setStatus("初始化读取器失败：" + errorString);
-	alert("初始化读取器失败：\r\n" + errorString);
+	alert("初始化读取器失败：\n\n" + errorString);
 	readerBusy = false;
 	$("readButton").disabled = false;
 }
