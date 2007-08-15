@@ -174,7 +174,8 @@ public class SinaReader extends AbstractBlogReader {
 	 * @param str
 	 */
 	private void parseOne(String str) {
-		String pattern = "http://blog.sina.com.cn/u/([0-9a-z]+)";
+		log.debug("str: " + str);
+		String pattern = "/writing/scriber/article_edit\\.php\\?blog_id\\=([0-9a-z]+)";
 		Pattern p = Pattern.compile(pattern);
 		Matcher m = p.matcher(str);
 		boolean rs = m.find();

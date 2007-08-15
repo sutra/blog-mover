@@ -72,7 +72,7 @@ public class SinaLogin {
 				if (node != null) {
 					String s = node.getNodeValue();
 					log.debug("s: " + s);
-					if (" top.window.location.href = \"http://blog.sina.com.cn/control/\"; "
+					if (" top.window.location.href = \"http://my.blog.sina.com.cn/control/\"; "
 							.equals(s)) {
 						ok = true;
 						break;
