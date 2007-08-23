@@ -48,11 +48,10 @@ public class BlogMoverUtils {
 	 * @return
 	 */
 	public static String[] parseTags(String tags, String splitter) {
-		String[] tagArray = StringUtils.split(splitter);
+		String[] tagArray = StringUtils.split(tags, splitter);
 		List<String> ret = new ArrayList<String>(tagArray.length);
 		for (int i = 0; i < tagArray.length; i++) {
-			if (!StringUtils.isEmpty(tagArray[i])
-					&& !StringUtils.isBlank(tagArray[i])) {
+			if (tagArray[i] != null && tagArray[i].trim().length() > 0) {
 				ret.add(tagArray[i].trim());
 			}
 		}

@@ -54,6 +54,9 @@ public class WebLogImpl implements WebLog {
 		super();
 		this.publishedDate = new Date();
 		this.comments = new ArrayList<Comment>(1);
+		this.attachments = new ArrayList<Attachment>(1);
+		this.tags = new String[] {};
+		this.categories = new CategoryImpl[] {};
 	}
 
 	/*
