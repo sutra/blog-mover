@@ -179,6 +179,14 @@ public class DomNodeUtils {
 				labels.add(option.getFirstChild().getNodeValue());
 			}
 		}
+
+		// 如果没有任何被 selected，那么默认是选择的第一个。
+		if (values.size() == 0 && options.getLength() != 0) {
+			Element option = (Element) options.item(0);
+			values.add(option.getAttribute("value"));
+			labels.add(option.getFirstChild().getNodeValue());
+		}
+
 		String[] valueStrings = new String[values.size()];
 		values.toArray(valueStrings);
 		hfs.setValues(valueStrings);
