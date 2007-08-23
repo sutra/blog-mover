@@ -4,7 +4,10 @@
 package com.redv.blogmover.util;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -34,5 +37,27 @@ public class BlogMoverUtils {
 
 		// The directory is now empty so delete it
 		return dir.delete();
+	}
+
+	/**
+	 * e.g. Parse this "test1, test2,test3" to String array{"test1", "test2",
+	 * "test3"}.
+	 * 
+	 * @param tags
+	 * @param splitter
+	 * @return
+	 */
+	public static String[] parseTags(String tags, String splitter) {
+		String[] tagArray = StringUtils.split(splitter);
+		List<String> ret = new ArrayList<String>(tagArray.length);
+		for (int i = 0; i < tagArray.length; i++) {
+			if (!StringUtils.isEmpty(tagArray[i])
+					&& !StringUtils.isBlank(tagArray[i])) {
+				ret.add(tagArray[i].trim());
+			}
+		}
+		String retArray[] = new String[ret.size()];
+		ret.toArray(retArray);
+		return retArray;
 	}
 }

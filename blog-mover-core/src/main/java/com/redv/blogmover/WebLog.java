@@ -147,4 +147,16 @@ public interface WebLog extends Serializable, Comparable<WebLog> {
 	 * @since 2.0
 	 */
 	void setBsp(BSP bsp);
+
+	/**
+	 * 
+	 * @return
+	 */
+	Category[] getCategories();
+
+	/**
+	 * 
+	 * @param categories
+	 */
+	void setCategories(Category[] categories);
 }

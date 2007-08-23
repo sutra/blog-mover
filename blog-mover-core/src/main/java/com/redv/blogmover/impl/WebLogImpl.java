@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.redv.blogmover.Attachment;
+import com.redv.blogmover.Category;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.logging.BSP;
@@ -37,6 +38,8 @@ public class WebLogImpl implements WebLog {
 	private String body;
 
 	private String[] tags;
+
+	private Category[] categories;
 
 	private List<Comment> comments;
 
@@ -284,6 +287,24 @@ public class WebLogImpl implements WebLog {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#getCategories()
+	 */
+	public Category[] getCategories() {
+		return categories;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.redv.blogmover.WebLog#setCategories(com.redv.blogmover.Category[])
+	 */
+	public void setCategories(Category[] categories) {
+		this.categories = categories;
 	}
 
 }

@@ -169,17 +169,22 @@ public class DomNodeUtils {
 			options = select.getElementsByTagName("OPTION");
 		}
 		List<String> values = new ArrayList<String>();
+		List<String> labels = new ArrayList<String>();
 		for (int i = 0; i < options.getLength(); i++) {
 			Element option = (Element) options.item(i);
 			Node selectedNode = option.getAttributes().getNamedItem("selected");
 			log.debug("is selectedNode null: " + (selectedNode == null));
 			if (selectedNode != null) {
 				values.add(option.getAttribute("value"));
+				labels.add(option.getFirstChild().getNodeValue());
 			}
 		}
 		String[] valueStrings = new String[values.size()];
 		values.toArray(valueStrings);
 		hfs.setValues(valueStrings);
+		String[] labelStrings = new String[labels.size()];
+		labels.toArray(labelStrings);
+		hfs.setLabels(labelStrings);
 		return hfs;
 	}
 

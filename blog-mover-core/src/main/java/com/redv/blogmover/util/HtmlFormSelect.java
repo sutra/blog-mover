@@ -12,6 +12,8 @@ public class HtmlFormSelect {
 
 	private String[] values;
 
+	private String[] labels;
+
 	/**
 	 * @return the name
 	 */
@@ -40,6 +42,21 @@ public class HtmlFormSelect {
 	 */
 	public void setValues(String[] values) {
 		this.values = values;
+	}
+
+	/**
+	 * @return the labels
+	 */
+	public String[] getLabels() {
+		return labels;
+	}
+
+	/**
+	 * @param labels
+	 *            the labels to set
+	 */
+	public void setLabels(String[] labels) {
+		this.labels = labels;
 	}
 
 }
