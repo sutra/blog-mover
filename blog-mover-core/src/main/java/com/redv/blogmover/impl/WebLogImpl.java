@@ -251,9 +251,13 @@ public class WebLogImpl implements WebLog {
 				} else {
 					return false;
 				}
+			} else if (this.getTitle() == null) {
+				return false;
+			} else {
+				return this.getTitle().equals(obj.getTitle())
+						&& this.getPublishedDate().equals(
+								obj.getPublishedDate());
 			}
-			return this.getTitle().equals(obj.getTitle())
-					&& this.getPublishedDate().equals(obj.getPublishedDate());
 		}
 		return false;
 	}
@@ -274,7 +278,8 @@ public class WebLogImpl implements WebLog {
 				if (!_hashCodeCalc) {
 					_hashCode = (this.getPublishedDate() == null ? new Date()
 							: this.getPublishedDate()).hashCode()
-							^ this.getTitle().hashCode();
+							^ (this.getTitle() == null ? "".hashCode() : this
+									.getTitle().hashCode());
 					_hashCodeCalc = true;
 				}
 			}
