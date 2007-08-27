@@ -292,6 +292,13 @@ public class HttpDocument implements Serializable {
 	 */
 	private Document getDocumentInternal(HttpMethod method)
 			throws SAXException, IOException {
+		if (log.isDebugEnabled()) {
+			Header[] headers = method.getRequestHeaders();
+			log.debug("---- request header ----");
+			for (Header header : headers) {
+				log.debug(header.getName() + ":" + header.getValue());
+			}
+		}
 		Document document;
 		// 检查是否重定向
 		int statuscode = method.getStatusCode();
