@@ -41,7 +41,7 @@ function doClose() {
 // 发出退出指令。
 function doLogout() {
 	var myAjax = new Ajax.Request(
-		'logout.html',
+		'logout.html.jsp',
 		{method: 'get', parameters: ''}
 		);
 }

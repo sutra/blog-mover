@@ -107,13 +107,13 @@
 		</property>
 		<property name="urlMap">
 			<map>
-				<entry key="/logout.*">
+				<entry key="/logout.html.jsp">
 					<ref local="logoutController" />
 				</entry>
-				<entry key="/readers.*">
+				<entry key="/readers.html.jsp">
 					<ref local="readersController" />
 				</entry>
-				<entry key="/writers.*">
+				<entry key="/writers.html.jsp">
 					<ref local="writersController" />
 				</entry>
 			</map>

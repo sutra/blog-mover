@@ -175,15 +175,15 @@
 	-->
 	<servlet-mapping>
 		<servlet-name>blog-mover</servlet-name>
-		<url-pattern>/readers.html</url-pattern>
+		<url-pattern>/readers.html.jsp</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>blog-mover</servlet-name>
-		<url-pattern>/writers.html</url-pattern>
+		<url-pattern>/writers.html.jsp</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>blog-mover</servlet-name>
-		<url-pattern>/logout.html</url-pattern>
+		<url-pattern>/logout.html.jsp</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>dwr-invoker</servlet-name>
