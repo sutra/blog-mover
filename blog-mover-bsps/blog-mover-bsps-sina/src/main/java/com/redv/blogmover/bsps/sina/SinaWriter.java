@@ -3,6 +3,7 @@
  */
 package com.redv.blogmover.bsps.sina;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,6 +17,8 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.SystemUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -25,6 +28,7 @@ import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogWriter;
+import com.redv.blogmover.impl.WebLogImpl;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
@@ -120,11 +124,11 @@ public class SinaWriter extends AbstractBlogWriter {
 	@Override
 	protected void writeBlog(WebLog webLog, Map<Attachment, String> attachments)
 			throws BlogMoverException {
-		String action = "http://blog.sina.com.cn/control/writing/scriber/article_post.php";
+		String action = "http://my.blog.sina.com.cn/writing/scriber/article_post.php";
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 
 		Document document = httpDocument
-				.get("http://blog.sina.com.cn/control/writing/scriber/article_add.php?quick1");
+				.get("http://my.blog.sina.com.cn/writing/scriber/article_add.php?quick1");
 		NodeList inputs = document.getElementsByTagName("input");
 		NodeList selects = document.getElementsByTagName("select");
 		NodeList textareas = document.getElementsByTagName("textarea");
@@ -229,4 +233,33 @@ public class SinaWriter extends AbstractBlogWriter {
 		return SinaLogin.getIdentifyingCodeImage(httpClient);
 	}
 
+	public static void main(String[] args) throws HttpException, IOException,
+			BlogMoverException {
+		SinaWriter sw = new SinaWriter();
+		sw.setUsername("blogmover1");
+		sw.setPassword("blogmover");
+		byte[] image = sw.getIdentifyingCodeImage();
+		File file = new File(SystemUtils.JAVA_IO_TMPDIR, SinaWriter.class
+				.getName()
+				+ ".png");
+		FileUtils.writeByteArrayToFile(file, image);
+		System.out.print(String.format(
+				"Please enter the code on the image(%1$s): ", file.getPath()));
+		StringBuffer identifyingCode = new StringBuffer();
+		int b;
+		while ((b = System.in.read()) != '\n') {
+			identifyingCode.append((char) b);
+		}
+		System.out.println("Your enter code is: " + identifyingCode);
+		if (!file.delete()) {
+			file.deleteOnExit();
+		}
+		sw.setIdentifyingCode(identifyingCode.toString().trim());
+		List<WebLog> webLogs = new ArrayList<WebLog>();
+		WebLog webLog = new WebLogImpl();
+		webLog.setTitle("test");
+		webLog.setBody("<font style='color:red'>test</font>");
+		webLogs.add(webLog);
+		sw.write(webLogs);
+	}
 }
