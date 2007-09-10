@@ -196,4 +196,14 @@ public class DomNodeUtils {
 		return hfs;
 	}
 
+	public static void debug(Log log, Node node) {
+		if (log.isDebugEnabled()) {
+			try {
+				log.debug(getXmlAsString(node));
+			} catch (TransformerException e) {
+				log.debug("Error while get xml as string from a node.", e);
+			}
+		}
+	}
+
 }
