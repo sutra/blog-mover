@@ -3,6 +3,7 @@
  */
 package com.redv.blogmover.bsps.sina;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,7 +18,9 @@ import java.util.regex.Pattern;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -347,4 +350,31 @@ public class SinaReader extends AbstractBlogReader {
 		return SinaLogin.getIdentifyingCodeImage(httpClient);
 	}
 
+	public static void main(String[] args) throws HttpException, IOException,
+			BlogMoverException {
+		SinaReader sr = new SinaReader();
+		sr.setUsername("blogmover1");
+		sr.setPassword("blogmover");
+		byte[] image = sr.getIdentifyingCodeImage();
+		File file = new File(SystemUtils.JAVA_IO_TMPDIR, SinaReader.class
+				.getName()
+				+ ".png");
+		FileUtils.writeByteArrayToFile(file, image);
+		System.out.print(String.format(
+				"Please enter the code on the image(%1$s): ", file.getPath()));
+		StringBuffer identifyingCode = new StringBuffer();
+		int b;
+		while ((b = System.in.read()) != '\n') {
+			identifyingCode.append((char) b);
+		}
+		System.out.println("Your enter code is: " + identifyingCode);
+		if (!file.delete()) {
+			file.deleteOnExit();
+		}
+		sr.setIdentifyingCode(identifyingCode.toString().trim());
+		List<WebLog> entries = sr.read();
+		for (WebLog entry : entries) {
+			System.out.println(entry.getTitle());
+		}
+	}
 }
