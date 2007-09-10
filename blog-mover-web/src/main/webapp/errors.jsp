@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" isErrorPage="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:if test="${param['hl'] != null}">
 	<fmt:setLocale value="${param['hl']}" scope="session" />
 </c:if>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
+<%@page import="java.io.PrintWriter"%>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN">
 	<head>
 		<title>Blog Mover （博客“搬家公司”、博客搬家通用工具、博客搬家服务、博客备份通用工具）</title>
@@ -32,6 +33,10 @@
 				A general exception occurred while trying to access Blog Mover.
 				Please notify your system administrator.
 			</p>
+			
+			<div>
+				<xmp><%exception.printStackTrace(new PrintWriter(out));%></xmp>
+			</div>
 		</div>
 	</body>
 </html>

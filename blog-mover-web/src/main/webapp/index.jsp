@@ -1,1 +1,4 @@
-<jsp:forward page="blog-mover.jsp"></jsp:forward>
+<%@page contentType="text/html; charset=UTF-8"%>
+<%
+response.sendRedirect("blog-mover.jsp");
+%>
