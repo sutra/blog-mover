@@ -207,6 +207,8 @@ public class SinaReader extends AbstractBlogReader {
 		webLog.setUrl(url);
 
 		Document document = httpDocument.get(editUrl);
+		log.debug("---- document ----");
+		DomNodeUtils.debug(this.log, document);
 		Element element = document.getElementById("blog_title");
 		if (element == null) {
 			throw new BlogMoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
@@ -322,25 +324,29 @@ public class SinaReader extends AbstractBlogReader {
 	private String findBody(Document document) {
 		String body = null;
 		NodeList nodeList = document.getElementsByTagName("script");
-		Node node = nodeList.item(14);
-		String str = node.getFirstChild().getNodeValue();
-		log.debug("node value: " + str);
+		boolean notFound = true;
+		int index = 0;
+		while (index < nodeList.getLength() && notFound) {
+			Node node = nodeList.item(index);
+			index++;
+			if (node.getFirstChild() == null) {
+				continue;
+			}
+			String str = node.getFirstChild().getNodeValue();
+			log.debug("node value: " + str);
 
-		// et = new word("blog_body",
-		// "<DIV>\n找到了一个比现在离公司更近，生活更方便的地方。明天搬进去。<\/DIV>\n<HR><\/HR>\n<TABLE
-		// BORDER=\"0\" CELLSPACING=\"0\"><\/TABLE>\n");
-		String pattern = "et = new word\\(\"blog_body\", \"([^\n\r]*)";
-		Pattern p = Pattern.compile(pattern);
-		Matcher m = p.matcher(str);
-		boolean rs = m.find();
-		if (rs) {
-			for (int i = 1; i <= m.groupCount(); i++) {
-				body = m.group(i);
-				if (body.endsWith("\");")) {
+			String pattern = "if\\(sState == \"iframe\"\\)\\{\\s*SinaEditor\\.initialize\\(\"SinaEditor\", \"blog_body\", true, \"(.*)\"\\);";
+			Pattern p = Pattern.compile(pattern);
+			Matcher m = p.matcher(str);
+			boolean rs = m.find();
+			if (rs) {
+				notFound = false;
+				for (int i = 1; i <= m.groupCount(); i++) {
+					body = m.group(i);
 					body = body.substring(0, body.length() - 3);
+					body = StringEscapeUtils.unescapeJavaScript(body);
+					log.debug("body: " + body);
 				}
-				body = StringEscapeUtils.unescapeJavaScript(body);
-				log.debug("body: " + body);
 			}
 		}
 		return body;
@@ -375,6 +381,7 @@ public class SinaReader extends AbstractBlogReader {
 		List<WebLog> entries = sr.read();
 		for (WebLog entry : entries) {
 			System.out.println(entry.getTitle());
+			System.out.println(entry.getBody());
 		}
 	}
 }
