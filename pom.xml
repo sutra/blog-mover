@@ -43,6 +43,7 @@
 		<module>blog-mover-blogengines</module>
 		<module>blog-mover-bsps</module>
 		<module>blog-mover-web</module>
+		<module>blog-mover-webapp</module>
 		<module>blog-mover-sandbox</module>
 	</modules>
 	<build>
@@ -116,7 +117,7 @@
 			<url>
 				http://www.opensource.org/licenses/bsd-license.php
 			</url>
-			<distribution>http://blog-mover.redv.com</distribution>
+			<distribution>http://blogmover.redv.com</distribution>
 		</license>
 	</licenses>
 	<organization>
