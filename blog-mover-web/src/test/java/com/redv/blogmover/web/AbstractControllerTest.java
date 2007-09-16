@@ -21,7 +21,7 @@ public abstract class AbstractControllerTest extends TestCase {
 
 	public static String[] getConfigLocations() {
 		File userDir = new File(SystemUtils.getUserDir(),
-				"src/main/webapp/WEB-INF/");
+				"src/test/resources/");
 
 		String[] paths;
 		try {

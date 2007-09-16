@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+	default-lazy-init="false">
+	<bean id="logoutController"
+		class="com.redv.blogmover.web.LogoutController">
+	</bean>
+	<bean id="readersController"
+		class="com.redv.blogmover.web.ReadersController">
+		<property name="readers">
+			<map>
+				<entry key="metaWeblog"
+					value="com.redv.blogmover.metaWeblog.MetaWeblogReader" />
+				<!--
+					<entry key="anonymousSpace"
+					value="com.redv.blogmover.bsps.space.AnonymousSpaceReader" />
+				-->
+
+				<!-- The reader that parsing weblog entries from homepage -->
+				<entry key="spaces.live.com"
+					value="com.redv.blogmover.bsps.com.live.spaces.SpaceReader" />
+
+				<!-- The reader that parsing weblog entries permlink from homepage, get details by metaWeblog API -->
+				<entry key="spaces.live.com-metaWeblog"
+					value="com.redv.blogmover.bsps.com.live.spaces.SpaceReaderByMetaWeblog" />
+				<entry key="baidu"
+					value="com.redv.blogmover.bsps.baidu.BaiduReader" />
+				<!--
+					<entry key="bokee"
+					value="com.redv.blogmover.bsps.bokee.BokeeReader" />
+				-->
+				<!--
+					<entry key="csdn"
+					value="com.redv.blogmover.bsps.csdn.CSDNBlogReader" />
+				-->
+				<entry key="donews"
+					value="com.redv.blogmover.bsps.donews.DoNewsBlogReader" />
+				<entry key="hexun"
+					value="com.redv.blogmover.bsps.hexun.HexunReader" />
+				<entry key="sina"
+					value="com.redv.blogmover.bsps.sina.SinaReader" />
+				<entry key="sohu"
+					value="com.redv.blogmover.bsps.com.sohu.blog.SohuBlogReader" />
+				<entry key="blogchinese.com"
+					value="com.redv.blogmover.bsps.com.blogchinese.BlogChineseReader" />
+				<entry key="blogcup.com"
+					value="com.redv.blogmover.bsps.com.blogcup.BlogCupReader" />
+				<entry key="blogcn.com"
+					value="com.redv.blogmover.bsps.com.blogcn.BlogCNReader" />
+				<entry key="blog.com.cn"
+					value="com.redv.blogmover.bsps.cn.com.blog.BlogReader" />
+
+				<!-- The reader for http://www.blogger.com/ -->
+				<entry key="blogger"
+					value="com.redv.blogmover.bsps.blogger.GDataReader" />
+			</map>
+		</property>
+	</bean>
+	<bean id="writersController"
+		class="com.redv.blogmover.web.WritersController">
+		<property name="writers">
+			<map>
+				<entry key="feed.rss-atom"
+					value="com.redv.blogmover.feed.RomeWriter" />
+				<entry key="metaWeblog"
+					value="com.redv.blogmover.metaWeblog.MetaWeblogWriter" />
+
+				<!-- The writer for http://www.blogger.com/ -->
+				<entry key="blogger"
+					value="com.redv.blogmover.bsps.blogger.GDataWriter" />
+
+				<!-- The writer for http://hi.baidu.com/ -->
+				<entry key="baidu"
+					value="com.redv.blogmover.bsps.baidu.BaiduWriter" />
+				<!-- 
+					<entry key="csdn"
+					value="com.redv.blogmover.bsps.csdn.CSDNBlogWriter" />
+				-->
+				<entry key="donews"
+					value="com.redv.blogmover.bsps.donews.DoNewsBlogWriter" />
+				<entry key="sina"
+					value="com.redv.blogmover.bsps.sina.SinaWriter" />
+				<entry key="sohu"
+					value="com.redv.blogmover.bsps.com.sohu.blog.SohuBlogWriter" />
+				<entry key="blog.com.cn"
+					value="com.redv.blogmover.bsps.cn.com.blog.BlogWriter" />
+				<entry key="spaces.live.com"
+					value="com.redv.blogmover.bsps.com.live.spaces.SpaceWriter" />
+			</map>
+		</property>
+	</bean>
+	<!-- URL Mapping -->
+	<bean id="secureHandlerMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref local="localChangeInterceptor" />
+			</list>
+		</property>
+		<property name="urlMap">
+			<map>
+				<entry key="/logout-html.jsp">
+					<ref local="logoutController" />
+				</entry>
+				<entry key="/readers-html.jsp">
+					<ref local="readersController" />
+				</entry>
+				<entry key="/writers-html.jsp">
+					<ref local="writersController" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>com.redv.blogmover.messages</value>
+				<value>com.redv.blogmover.bsps.messages-readers</value>
+				<value>com.redv.blogmover.bsps.messages-writers</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="localChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="hl" />
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+</beans>
