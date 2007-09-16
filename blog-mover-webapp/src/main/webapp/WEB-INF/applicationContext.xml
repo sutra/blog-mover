@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd"
+	default-lazy-init="false">
+	<bean id="user" class="com.redv.blogmover.web.dwr.User" />
+	<bean id="syncuser" class="com.redv.blogsynchronizer.web.dwr.User" />
+	<bean id="bloggerClient"
+		class="com.redv.blogmover.web.dwr.BloggerClient" />
+
+	<bean id="userFacade" class="com.redv.blogmover.UserFacadeImpl" scope="session">
+		<property name="loggingService" ref="loggingService" />
+	</bean>
+
+	<bean id="baseTransactionProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		abstract="true">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="log">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="loggingService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean
+				class="com.redv.blogmover.logging.LoggingServiceImpl">
+				<property name="movingLogDao" ref="movingLogDao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="reportBuilder"
+		class="com.redv.blogmover.logging.ReportBuilder">
+		<property name="loggingService" ref="loggingService" />
+	</bean>
+	<bean id="movedInTimesReportChartBuilder"
+		class="com.redv.blogmover.logging.report.jfreechart.MovedInTimesReportChartBuilder"
+		scope="prototype">
+		<property name="reportBuilder" ref="reportBuilder" />
+	</bean>
+	<bean id="movedOutTimesReportChartBuilder"
+		class="com.redv.blogmover.logging.report.jfreechart.MovedOutTimesReportChartBuilder"
+		scope="prototype">
+		<property name="reportBuilder" ref="reportBuilder" />
+	</bean>
+	<bean id="movedInMinusOutTimesReportChartBuilder"
+		class="com.redv.blogmover.logging.report.jfreechart.MovedInMinusOutTimesReportChartBuilder"
+		scope="prototype">
+		<property name="reportBuilder" ref="reportBuilder" />
+	</bean>
+</beans>

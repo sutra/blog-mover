@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<description>
+		Our goal is allowing your blog moving freely between each BSP.
+	</description>
+	<display-name>Blog Mover</display-name>
+
+	<!-- Define the basename for a resource bundle for I18N -->
+	<context-param>
+		<param-name>
+			javax.servlet.jsp.jstl.fmt.localizationContext
+		</param-name>
+		<param-value>com.redv.blogmover.messages</param-value>
+	</context-param>
+	<!-- Fallback locale if no bundles found for browser's preferred locale -->
+	<!-- Force a single locale using param-name 'javax.servlet.jsp.jstl.fmt.locale' -->
+	<context-param>
+		<param-name>
+			javax.servlet.jsp.jstl.fmt.fallbackLocale
+		</param-name>
+		<param-value>zh</param-value>
+	</context-param>
+
+	<context-param>
+		<description>
+			该 web application 的根目录的绝对文件路径作为属性保存在 System 的属性列表中。该属性的名字，由
+			web.xml 文件中的名为 "webAppRootKey" 的参数值指出。如果不在 web.xml 中定义
+			webAppRootKey 参数，那么属性名就是缺省的 "webapp.root".
+		</description>
+		<param-name>webAppRootKey</param-name>
+		<param-value>com.redv.blogmover.root</param-value>
+	</context-param>
+	<context-param>
+		<description>Configuration for spring.</description>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/applicationContext.xml
+			/WEB-INF/dataAccessContext-hibernate.xml
+		</param-value>
+	</context-param>
+
+	<listener>
+		<!--
+			<description>Context loader for spring.</description>
+		-->
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+	<!-- To enable scope="session" -->
+	<listener>
+		<listener-class>
+			org.springframework.web.context.request.RequestContextListener
+		</listener-class>
+	</listener>
+	<listener>
+		<!--
+			<description>Context listener for blog mover.</description>
+		-->
+		<listener-class>
+			com.redv.blogmover.web.BlogMoverServletContextListener
+		</listener-class>
+	</listener>
+	<listener>
+		<!--
+			<description>Session listener for blog mover.</description>
+		-->
+		<listener-class>
+			com.redv.blogmover.web.BlogMoverHttpSessionListener
+		</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>blog-mover</servlet-name>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<load-on-startup>10</load-on-startup>
+	</servlet>
+	<servlet>
+		<description>Direct Web Remoter Servlet</description>
+		<display-name>DWR Servlet</display-name>
+		<servlet-name>dwr-invoker</servlet-name>
+		<servlet-class>
+			org.directwebremoting.servlet.DwrServlet
+		</servlet-class>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>classes</param-name>
+			<param-value>java.lang.Object</param-value>
+		</init-param>
+		<load-on-startup>20</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>identifying-code-image</servlet-name>
+		<servlet-class>
+			com.redv.blogmover.web.IdentifyingCodeImageServlet
+		</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>download-file</servlet-name>
+		<servlet-class>
+			com.redv.blogmover.web.DownloadFileServlet
+		</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>chart</servlet-name>
+		<servlet-class>
+			com.redv.blogmover.web.ChartServlet
+		</servlet-class>
+	</servlet>
+
+	<filter>
+		<filter-name>ApplicationOneDayCacheFilter</filter-name>
+		<filter-class>
+			com.opensymphony.oscache.web.filter.CacheFilter
+		</filter-class>
+		<init-param>
+			<description>
+				1 day = (24 hours/day * 60 minutes/hour * 60
+				seconds/minute) seconds
+			</description>
+			<param-name>time</param-name>
+			<param-value>86400</param-value>
+		</init-param>
+		<init-param>
+			<param-name>expires</param-name>
+			<param-value>time</param-value>
+		</init-param>
+		<init-param>
+			<param-name>scope</param-name>
+			<param-value>application</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>ApplicationOneMonthCacheFilter</filter-name>
+		<filter-class>
+			com.opensymphony.oscache.web.filter.CacheFilter
+		</filter-class>
+		<init-param>
+			<description>
+				1 month = (30 days/month * 24 hours/day * 60
+				minutes/hour * 60 seconds/minute) seconds
+			</description>
+			<param-name>time</param-name>
+			<param-value>2592000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>expires</param-name>
+			<param-value>time</param-value>
+		</init-param>
+		<init-param>
+			<param-name>scope</param-name>
+			<param-value>application</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>
+			com.opensymphony.module.sitemesh.filter.PageFilter
+		</filter-class>
+	</filter>
+
+	<!--
+		<servlet-mapping>
+		<servlet-name>blog-mover</servlet-name>
+		<url-pattern>*.jhtml</url-pattern>
+		</servlet-mapping>
+	-->
+	<servlet-mapping>
+		<servlet-name>blog-mover</servlet-name>
+		<url-pattern>/readers-html.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>blog-mover</servlet-name>
+		<url-pattern>/writers-html.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>blog-mover</servlet-name>
+		<url-pattern>/logout-html.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>identifying-code-image</servlet-name>
+		<url-pattern>/identifying-code-image</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>download-file</servlet-name>
+		<url-pattern>/download-file</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>chart</servlet-name>
+		<url-pattern>/chart</url-pattern>
+	</servlet-mapping>
+
+	<!-- Cache the report.jsp a day in the application scope. -->
+	<filter-mapping>
+		<filter-name>ApplicationOneDayCacheFilter</filter-name>
+		<url-pattern>/reports/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Cache the monthly report chart a month in the application scope. -->
+	<filter-mapping>
+		<filter-name>ApplicationOneMonthCacheFilter</filter-name>
+		<servlet-name>chart</servlet-name>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>deny</web-resource-name>
+			<description>Include files</description>
+			<url-pattern>/includes/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+
+		</web-resource-collection>
+		<auth-constraint />
+	</security-constraint>
+
+	<error-page>
+		<exception-type>
+			org.springframework.context.ApplicationContextException
+		</exception-type>
+		<location>/brokenContext.jsp</location>
+	</error-page>
+
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/errors.jsp</location>
+	</error-page>
+
+	<!--
+		<error-page>
+		<error-code>404</error-code>
+		<location>/</location>
+		</error-page>
+	-->
+
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://blogmover.redv.com/</taglib-uri>
+			<taglib-location>
+				/WEB-INF/tlds/blog-mover.tld
+			</taglib-location>
+		</taglib>
+	</jsp-config>
+</web-app>

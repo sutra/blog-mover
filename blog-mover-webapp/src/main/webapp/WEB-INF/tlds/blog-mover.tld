@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>blog-mover</short-name>
+	<uri>http://blogmover.redv.com/</uri>
+	<tag>
+		<name>report</name>
+		<tag-class>com.redv.blogmover.web.tags.ReportTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+</taglib>
