@@ -27,8 +27,8 @@
 	<groupId>com.redv.blogmover</groupId>
 	<artifactId>blog-mover-web</artifactId>
 	<version>3.0</version>
-	<packaging>war</packaging>
-	<name>Blog Mover Web</name>
+	<packaging>jar</packaging>
+	<name>Blog Mover Web Library</name>
 	<repositories>
 		<repository>
 			<id>redv.com</id>
