@@ -23,6 +23,21 @@ public interface Comment extends Serializable, Comparable<Comment> {
 	public void setPublishedDate(Date publishedDate);
 
 	/**
+	 * Get the title.
+	 * 
+	 * @return Returns the title.
+	 */
+	String getTitle();
+
+	/**
+	 * Set the title.
+	 * 
+	 * @param title
+	 *            The title to set.
+	 */
+	void setTitle(String title);
+
+	/**
 	 * @return Returns the comment.
 	 */
 	public abstract String getComment();

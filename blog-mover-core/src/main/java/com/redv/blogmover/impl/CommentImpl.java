@@ -25,6 +25,8 @@ public class CommentImpl implements Comment {
 
 	private String url;
 
+	private String title;
+
 	private String comment;
 
 	/*
@@ -43,6 +45,24 @@ public class CommentImpl implements Comment {
 	 */
 	public void setPublishedDate(Date publishedDate) {
 		this.publishedDate = publishedDate;
+	}
+
+	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see com.redv.blogmover.Comment#getTitle()
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see com.redv.blogmover.Comment#setTitle(java.lang.String)
+	 */
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	/*
@@ -146,15 +166,15 @@ public class CommentImpl implements Comment {
 		if (!_hashCodeCalc) {
 			synchronized (this) {
 				if (!_hashCodeCalc) {
-					_hashCode = this.getPublishedDate().hashCode()
-							^ this.getName().hashCode()
-							^ this.getUrl().hashCode()
-							^ this.getComment().hashCode();
+					_hashCode = (publishedDate == null ? 0 : publishedDate
+							.hashCode())
+							^ (name == null ? 0 : name.hashCode())
+							^ (url == null ? 0 : url.hashCode())
+							^ (comment == null ? 0 : comment.hashCode());
 					_hashCodeCalc = true;
 				}
 			}
 		}
 		return _hashCode;
 	}
-
 }
