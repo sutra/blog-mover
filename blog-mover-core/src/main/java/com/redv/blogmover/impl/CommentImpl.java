@@ -27,7 +27,7 @@ public class CommentImpl implements Comment {
 
 	private String title;
 
-	private String comment;
+	private String content;
 
 	/*
 	 * (non-Javadoc)
@@ -68,19 +68,19 @@ public class CommentImpl implements Comment {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.redv.blogremover.Comment#getComment()
+	 * @see com.redv.blogremover.Comment#getContent()
 	 */
-	public String getComment() {
-		return comment;
+	public String getContent() {
+		return content;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.redv.blogremover.Comment#setComment(java.lang.String)
+	 * @see com.redv.blogremover.Comment#setContent(java.lang.String)
 	 */
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	/*
@@ -170,7 +170,7 @@ public class CommentImpl implements Comment {
 							.hashCode())
 							^ (name == null ? 0 : name.hashCode())
 							^ (url == null ? 0 : url.hashCode())
-							^ (comment == null ? 0 : comment.hashCode());
+							^ (content == null ? 0 : content.hashCode());
 					_hashCodeCalc = true;
 				}
 			}

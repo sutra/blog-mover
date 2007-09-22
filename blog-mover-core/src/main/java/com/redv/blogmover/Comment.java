@@ -38,15 +38,15 @@ public interface Comment extends Serializable, Comparable<Comment> {
 	void setTitle(String title);
 
 	/**
-	 * @return Returns the comment.
+	 * @return Returns the comment content.
 	 */
-	public abstract String getComment();
+	public abstract String getContent();
 
 	/**
 	 * @param comment
-	 *            The comment to set.
+	 *            The comment content to set.
 	 */
-	public abstract void setComment(String comment);
+	public abstract void setContent(String content);
 
 	/**
 	 * @return Returns the email.

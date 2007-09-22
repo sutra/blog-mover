@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="expires" content="0">
+	<title>新浪博客</title>
+
+	<script type="text/javascript">
+		var $BASE = "http://blogjs.sinajs.cn/";
+	</script>
+	<script type="text/javascript" src="http://blogjs.sinajs.cn/js/BootStrap.js"></script>
+
+	<script>loadCss();</script>
+	<script type="text/javascript">
+			
+	</script> 
+</head>
+
+<body onload="main_sub(); init_comment(); init_comment_post();" class="subContent">
+
+<div id="outBound" class="outBound">
+
+<div id="innerBound" class="innerBound">
+	<div id="commentPageBar" class="toggleLink"
+			toggle="commentContainer pageArea commentPostIframe">
+			<span class="fixie"></span>	文章评论
+		<label style="font-size: 12px; padding-left: 20px; font-weight: normal;"><a href="http://my2008.sina.com.cn/index1.shtml" target="_blank" style=" color:#ff0000; text-decoration:underline;font-family:Arial,'宋体';">欢迎参加“我的2008”活动，赢取每周活动大奖！</a></label>
+
+	</div>
+	<div id="commentContentTitle">以下网友留言只代表其个人观点，不代表新浪网的观点或立场</div>								
+	<ul id="commentContainer">
+		
+	</ul>
+	<div id="pageArea">
+	</div>
+	<!-- 新评论发表 -->
+<fieldset id="postComment">
+<form id="commentForm" action="http://my.blog.sina.com.cn/myblog/comment/newcommentpost.php" method="post" enctype="application/x-www-form-urlencoded" target="dataHolder" style="padding:0px 28px" >
+<label><strong>发表评论</strong></label><br/>
+
+<a href="http://my.my2008.sina.com.cn" target="_blank">登录后发评论，争当"<b>我的2008--每周奉献评论最多博主</b>"，赢现金大奖！</a><br/>
+<script type="text/javascript">
+function clearStr(ins){
+	if(ins.value=="新浪网友")
+		ins.value="";
+}
+var sCookie = document.cookie.toString().toLowerCase();
+// 解析Cookie类
+// FlashSoft
+function GetCookieString(str) {
+	var rs = new RegExp("(^|)" + str + "=([^\;]*)(\;|$)", "gi").exec(String(document.cookie)), tmp;
+	if(tmp = rs)return tmp[2];
+	return null;
+}
+function openWindow_2008(url,width,height){
+			window.open(url, null, "Width="+width+",Height="+height);
+		}
+if(sCookie.indexOf("blog_nickname_ria") != -1) {
+	var nkName = unescape(GetCookieString("blog_nickname_ria"));
+	//var nkName = unescape(GetCookieString("blog_nickname_ria").replace(/%25/gi, '%'));
+	//var nkName =  GetCookieString("nick").split("(")[0];
+	//var nkName =  (GetCookieString("blog_nickname"));
+	
+	var blogUID = (GetCookieString("nick") || "()").split("(")[1].split(")")[0];
+	var LoginInfo = {n: nkName, h: "http://blog.sina.com.cn/u/"+blogUID};
+	document.write('<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr><td width="46%" align="left"><label for="loginname">昵&nbsp;&nbsp;称：</label><input name="loginname" id="loginname" class="w350" type="hidden" value="' + LoginInfo.n + '"/>' + LoginInfo.n + '</td><td align="right"><span id="cms_2008"><a href="javascript:void(0);" onclick=openWindow_2008("http://my.blog.sina.com.cn/my2008/userinfo.php",450,430)>填写个人真实信息，便于获奖后联系！</a></span></td></tr></table>');
+	document.write('<label for="homepage">主&nbsp;&nbsp;页：</label><input type="hidden" name="homepage" id="homepage" class="w400" value="' + LoginInfo.h + '"/>' + LoginInfo.h + '<br/>');
+}
+else {
+	document.write('<label for="loginname">昵&nbsp;&nbsp;称：</label><input type="text" onclick="clearStr(this)" name="loginname" id="loginname" class="w350" value="新浪网友"/><br/>');
+}
+function load_chk_img(s) {
+  var stamp = new Date().getTime();
+	document.getElementById(s).src = 'http://my.blog.sina.com.cn/myblog/checkwd_image.php?' + stamp;
+	}
+</script>
+<label for="checkwd">验证码：</label><input type="text" name="checkwd" id="checkwd" class="w70" size=10 />&nbsp;图案：<a href="javascript:load_chk_img('chk_img');">
+<script type="text/javascript">
+document.write('<img border="0" align="absmiddle" onload="this.onload=\'\';load_chk_img(\'chk_img\');" alt="看不清楚数字吗？点击这里再试试。" src="http://my.blog.sina.com.cn/myblog/checkwd_image.php?'+Math.random()+'" id="chk_img"/>');
+</script>
+</a>&nbsp;<a href="javascript:callFlash();">收听验证码</a>&nbsp;<img id="play_img" name="play_img" src="http://image2.sina.com.cn/blog/tmpl/v3/images/blank.gif" align="absmiddle" style="margin-right:2px;" height="15"><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="1" height="1" id="mp3_player" align="middle">
+<param name="allowScriptAccess" value="sameDomain" />
+<param name="movie" value="/images/audio/mp3.swf" />
+<param name="quality" value="high" />
+<param name="bgcolor" value="#ffffff" /> 
+
+<param name="FlashVars" value="mp3URL=http://my.blog.sina.com.cn/myblog/audio/login_audio.php" />
+<embed src="/images/audio/mp3.swf" FlashVars="mp3URL=http://my.blog.sina.com.cn/myblog/audio/login_audio.php" quality="high" bgcolor="#ffffff" width="1" height="1" name="mp3_player" id="mp3_player" swLiveConnect="true" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"/>
+</object>
+<br/>
+
+<label for="content">内&nbsp;&nbsp;容：</label><textarea name="content" id="content" class="w350 h200"></textarea><br/>
+<input id="cms_id46f37fb501000b53" type="hidden" name="cms_id" value="46f37fb501000b53" />
+<input id="src_title46f37fb501000b53" type="hidden" name="src_title" value="简爱8则"/>
+<input id="src_uname46f37fb501000b53" type="hidden" name="src_uname" value="徐静蕾"/>
+<input type="hidden" name="curr_page"   id="curr_page" value="9" />
+<input type="submit" id="comment_submit" value="发表评论" /><a href="http://my.my2008.sina.com.cn/pd/app/login1.php" target="_blank">查询您的发评论成绩 ></a>
+</form>
+</fieldset>
+
+<iframe id="dataHolder" name="dataHolder" style="display:none;" class="invisible"></iframe>
+<!--新评论发表-->
+	<iframe id="requestProxy" name="requestProxy" style="display:none;" class="invisible"></iframe>
+</div><!--innerBound-->
+</div><!--outBound-->
+	<script>loadResource();</script>
+</body>
+<img src="http://secure-cn.imrworldwide.com/cgi-bin/m?ci=cn-sina2006&cg=0" alt=""/>
+</html>

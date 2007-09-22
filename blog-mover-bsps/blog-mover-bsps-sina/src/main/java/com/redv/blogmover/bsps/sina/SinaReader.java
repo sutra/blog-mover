@@ -29,6 +29,7 @@ import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.BlogMoverRuntimeException;
+import com.redv.blogmover.Comment;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.impl.WebLogImpl;
@@ -222,6 +223,8 @@ public class SinaReader extends AbstractBlogReader {
 		// body
 		webLog.setBody(this.findBody(document));
 
+		readComments(webLog);
+
 		this.status.setCurrentWebLog(webLog);
 		webLogs.add(webLog);
 		this.status.setCurrentCount(webLogs.size());
@@ -352,6 +355,34 @@ public class SinaReader extends AbstractBlogReader {
 		return body;
 	}
 
+	/**
+	 * @param webLog
+	 */
+	private void readComments(WebLog webLog) {
+		String url = webLog.getUrl();
+		String commentsPageUrl = new ViewBlogPageParser(this.httpDocument
+				.get(url)).getCommentsFirstPageUrl();
+		if (commentsPageUrl == null) {
+			return;
+		}
+
+		String commentsPageUrlPattern = commentsPageUrl.substring(0,
+				commentsPageUrl.length() - 6)
+				+ "%1$s.html";
+		log.debug("commentsPageUrlPattern: " + commentsPageUrlPattern);
+		CommentPageParser commentPageParser;
+		List<Comment> comments = null;
+		int i = 1;
+		do {
+			commentsPageUrl = String.format(commentsPageUrlPattern, i);
+			commentPageParser = new CommentPageParser(this.httpDocument
+					.get(commentsPageUrl));
+			comments = commentPageParser.getComments();
+			webLog.getComments().addAll(comments);
+			i++;
+		} while (comments.size() != 0);
+	}
+
 	public byte[] getIdentifyingCodeImage() throws HttpException, IOException {
 		return SinaLogin.getIdentifyingCodeImage(httpClient);
 	}
@@ -373,7 +404,7 @@ public class SinaReader extends AbstractBlogReader {
 		while ((b = System.in.read()) != '\n') {
 			identifyingCode.append((char) b);
 		}
-		System.out.println("Your enter code is: " + identifyingCode);
+		System.out.println("Your entered code is: " + identifyingCode);
 		if (!file.delete()) {
 			file.deleteOnExit();
 		}
@@ -381,7 +412,7 @@ public class SinaReader extends AbstractBlogReader {
 		List<WebLog> entries = sr.read();
 		for (WebLog entry : entries) {
 			System.out.println(entry.getTitle());
-			System.out.println(entry.getBody());
+			System.out.println(entry.getUrl());
 		}
 	}
 }

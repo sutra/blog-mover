@@ -179,7 +179,7 @@ public class LBS2Writer extends AbstractBlogWriter {
 			}
 			rs.close();
 			this.commentPstmt.setInt(1, id);
-			this.commentPstmt.setString(2, comment.getComment());
+			this.commentPstmt.setString(2, comment.getContent());
 			this.commentPstmt.setString(3, comment.getName());
 			this.commentPstmt.setTimestamp(4, new java.sql.Timestamp(comment
 					.getPublishedDate().getTime()));
