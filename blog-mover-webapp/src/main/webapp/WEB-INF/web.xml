@@ -203,10 +203,13 @@
 	</servlet-mapping>
 
 	<!-- Cache the report.jsp a day in the application scope. -->
+	<!-- Comment this as resin looks like not support this. -->
+	<!--
 	<filter-mapping>
 		<filter-name>ApplicationOneDayCacheFilter</filter-name>
 		<url-pattern>/reports/*</url-pattern>
 	</filter-mapping>
+	-->
 
 	<!-- Cache the monthly report chart a month in the application scope. -->
 	<filter-mapping>
