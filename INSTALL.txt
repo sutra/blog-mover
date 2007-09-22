@@ -1,0 +1,9 @@
+
+FAQ：
+Q：当我把blog mover部署在类unix系统上时，在显示搬迁统计的报表图片时出现如下错误：
+java.lang.InternalError: Can't connect to X11 window server using ':0.0' as the value of the DISPLAY variable
+
+A：jasper安装在windows环境运行正常，但是在linux环境中出现错误:java.lang.InternalError: Can't connect to X11 window server using ':0.0' as the value of the DISPLAY variable.
+解决方式:
+在JVM中加入-Djava.awt.headless=true
+对于tomcat ,可以修改catalina.sh,加入:CATALINA_OPTS="$CATALINA_OPTS -Djava.awt.headless=true "
