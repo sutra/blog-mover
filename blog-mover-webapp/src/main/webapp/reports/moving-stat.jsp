@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		<div>
-			<cache:cache cron="0 0 1 * *">
+			<cache:cache key="reports.moving-stat.jsp.report" cron="0 0 1 * *">
 				<blog-mover:report />
 			</cache:cache>
 		</div>
