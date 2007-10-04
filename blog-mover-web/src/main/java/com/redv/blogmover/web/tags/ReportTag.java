@@ -50,6 +50,7 @@ public class ReportTag extends TagSupport {
 	}
 
 	private void render() throws IOException {
+		long start = System.currentTimeMillis();
 		JspWriter out = this.pageContext.getOut();
 		out.println("<table cellpadding='0' cellspacing='0' class='report'>");
 		out.print("<thead>");
@@ -72,8 +73,9 @@ public class ReportTag extends TagSupport {
 		out.print("搬出次数");
 		out.print("</div></td>");
 		out.print("<td style='text-align: right;'>");
-		out.print(String
-				.format("报表生成时间：%1$s</td></tr>", sdf.format(new Date())));
+		long end = System.currentTimeMillis();
+		out.print(String.format("报表生成时间：%1$s，耗时：%2$sms</td></tr>", sdf
+				.format(new Date()), end - start));
 		out.println("</tfoot>");
 		out.println("</table>");
 	}
