@@ -5,6 +5,7 @@
 <c:if test="${param['hl'] != null}">
 	<fmt:setLocale value="${param['hl']}" scope="session" />
 </c:if>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN">
 	<head>

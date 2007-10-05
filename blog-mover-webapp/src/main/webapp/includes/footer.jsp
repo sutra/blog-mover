@@ -4,5 +4,5 @@
 		Copyright &copy; 2006,
 		<a href="http://redv.com">Redv Soft</a>. All rights reserved.
 	</div>
-	<img src="images/index_copyright.gif" alt="Powered by" />
+	<img src="${ctx}/images/index_copyright.gif" alt="Powered by" />
 </div>
