@@ -249,11 +249,6 @@
 		<url-pattern>/download-file</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
-	<filter-mapping>
-		<filter-name>GzipFilter</filter-name>
-		<url-pattern>/dwr/*</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-	</filter-mapping>
 
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
