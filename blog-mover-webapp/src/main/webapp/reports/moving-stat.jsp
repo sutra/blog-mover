@@ -11,7 +11,8 @@
 	</head>
 	<body>
 		<div>
-			<cache:cache key="reports.moving-stat.jsp.report" cron="0 0 1 * *">
+			<%-- 2592000 = 30天 * 24小时 * 60分 * 60秒 --%>
+			<cache:cache key="reports.moving-stat.jsp.report" time="2592000">
 				<blog-mover:report />
 			</cache:cache>
 		</div>
