@@ -28,7 +28,7 @@
 	<artifactId>blog-mover-webapp</artifactId>
 	<version>3.0</version>
 	<packaging>war</packaging>
-	<name>Blog Mover Web</name>
+	<name>Blog Mover Web Application</name>
 	<repositories>
 		<repository>
 			<id>redv.com</id>
@@ -144,7 +144,7 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	<url>http://blog-mover.redv.com</url>
+	<url>http://blogmover.redv.com</url>
 	<inceptionYear>2006</inceptionYear>
 	<licenses>
 		<license>
@@ -152,7 +152,7 @@
 			<url>
 				http://www.opensource.org/licenses/bsd-license.php
 			</url>
-			<distribution>http://blog-mover.redv.com</distribution>
+			<distribution>http://blogmover.redv.com</distribution>
 		</license>
 	</licenses>
 	<organization>
@@ -198,6 +198,10 @@
 			<artifactId>blog-mover-web</artifactId>
 			<version>3.0</version>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>1.4.0-beta</version>
+		</dependency>
 	</dependencies>
 </project>
-
