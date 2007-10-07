@@ -8,190 +8,12 @@
 		<artifactId>blog-mover</artifactId>
 		<version>3.0</version>
 	</parent>
-	<description>
-		Blog Moving Tool(博客搬家通用工具): Our goal is allowing your blog
-		moving freely between each BSP.(我们的目标是让你的 Blog 可以在各个 BSP
-		之间自由地搬家。)
-	</description>
-	<mailingLists>
-		<mailingList>
-			<name>Blog Mover（博客搬家工具）</name>
-			<subscribe>blog-mover@googlegroups.com</subscribe>
-			<unsubscribe>
-				blog-mover-unsubscribe@googlegroups.com
-			</unsubscribe>
-			<archive>http://groups.google.com/group/blog-mover</archive>
-		</mailingList>
-	</mailingLists>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.redv.blogmover</groupId>
 	<artifactId>blog-mover-web</artifactId>
 	<version>3.0</version>
 	<packaging>jar</packaging>
 	<name>Blog Mover Web Library</name>
-	<repositories>
-		<repository>
-			<id>redv.com</id>
-			<url>http://mirrors.redv.com/maven2</url>
-		</repository>
-		<repository>
-			<id>java.net</id>
-			<url>
-				https://maven2-repository.dev.java.net/nonav/repository
-			</url>
-		</repository>
-	</repositories>
-	<build>
-		<finalName>blogmover</finalName>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<encoding>UTF-8</encoding>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<!-- 
-					<configuration>
-					<excludes>
-					<exclude>**/Abstract*.java</exclude>
-					</excludes>
-					</configuration>
-				-->
-			</plugin>
-			<!-- 
-				<plugin>
-				<groupId>net.unto.maven.plugins</groupId>
-				<artifactId>maven-junit4-plugin</artifactId>
-				<version>1.0-SNAPSHOT</version>
-				<executions>
-				<execution>
-				<phase>test</phase>
-				<goals>
-				<goal>test</goal>
-				</goals>
-				</execution>
-				</executions>
-				</plugin>
-			-->
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<configuration>
-					<scanIntervalSeconds>3</scanIntervalSeconds>
-					<scanTargets>
-						<scanTarget>
-							src/main/webapp/WEB-INF/applicationContext.xml
-						</scanTarget>
-						<scanTarget>
-							src/main/webapp/WEB-INF/blog-mover-servlet.xml
-						</scanTarget>
-						<scanTarget>
-							src/main/webapp/WEB-INF/dataAccessContext-hibernate.xml
-						</scanTarget>
-						<scanTarget>
-							src/main/webapp/WEB-INF/dwr.xml
-						</scanTarget>
-						<scanTarget>
-							src/main/webapp/WEB-INF/scheduling.xml
-						</scanTarget>
-						<scanTarget>
-							src/main/webapp/WEB-INF/web.xml
-						</scanTarget>
-					</scanTargets>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>unto.net</id>
-			<url>http://repository.unto.net/maven/</url>
-			<releases>
-				<updatePolicy>daily</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<updatePolicy>daily</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-	<reporting>
-		<plugins>
-			<plugin>
-				<artifactId>maven-site-plugin</artifactId>
-				<configuration>
-					<inputEncoding>UTF-8</inputEncoding>
-					<outputEncoding>UTF-8</outputEncoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<encoding>UTF-8</encoding>
-					<docencoding>UTF-8</docencoding>
-					<charset>UTF-8</charset>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</reporting>
-	<url>http://blog-mover.redv.com</url>
-	<inceptionYear>2006</inceptionYear>
-	<licenses>
-		<license>
-			<name>New BSD License</name>
-			<url>
-				http://www.opensource.org/licenses/bsd-license.php
-			</url>
-			<distribution>http://blog-mover.redv.com</distribution>
-		</license>
-	</licenses>
-	<organization>
-		<name>Redv Soft</name>
-		<url>http://www.redv.com/</url>
-	</organization>
-	<developers>
-		<developer>
-			<id>zhoushuqun</id>
-			<name>Shutra, Zhou</name>
-			<email>zhoushuqun@gmail.com</email>
-			<organization>Redv Soft</organization>
-			<organizationUrl>http://www.redv.com</organizationUrl>
-			<roles>
-				<role>Administrator</role>
-				<role>Developer</role>
-			</roles>
-			<timezone>+8</timezone>
-		</developer>
-		<developer>
-			<id>somebody</id>
-			<name>Rory,Ye</name>
-			<email>rory.cn@gmail.com</email>
-			<organizationUrl>http://jdkcn.com</organizationUrl>
-			<roles>
-				<role>Developer</role>
-			</roles>
-			<timezone>+8</timezone>
-		</developer>
-	</developers>
-	<scm>
-		<connection>
-			scm:svn:http://blog-mover.googlecode.com/svn/trunk/
-		</connection>
-		<developerConnection>
-			scm:svn:https://blog-mover.googlecode.com/svn/trunk/
-		</developerConnection>
-		<url>http://blog-mover.googlecode.com/svn/</url>
-	</scm>
 	<dependencies>
 		<dependency>
 			<groupId>com.redv.blogmover</groupId>
@@ -200,222 +22,48 @@
 		</dependency>
 		<dependency>
 			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-feed</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-metaWeblog</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-bsps-baidu</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-bsps-blogger</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-bsps-bokee</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-bsps-cn.com.blog</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-bsps-com.blogchinese</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-bsps-com.blogcn</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-bsps-com.live.spaces</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-bsps-com.sohu.blog</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-bsps-csdn</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-bsps-donews</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-bsps-hexun</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-bsps-lbs2</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-bsps-sina</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
-			<artifactId>blog-mover-bsps-space</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.redv.blogmover</groupId>
 			<artifactId>blog-mover-sandbox</artifactId>
 			<version>3.0</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.activation</groupId>
-			<artifactId>activation</artifactId>
-			<version>1.0.2</version>
-			<type>jar</type>
+			<groupId>com.redv.bloggerapi</groupId>
+			<artifactId>blogger-api-client</artifactId>
+			<version>1.1</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.3.2</version>
-			<type>jar</type>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>2.0.7</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.4</version>
-			<type>jar</type>
-			<scope>provided</scope>
+			<groupId>org.directwebremoting</groupId>
+			<artifactId>dwr</artifactId>
+			<version>2.0.1</version>
 		</dependency>
+
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.1.2</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.2</version>
-			<type>jar</type>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-mock</artifactId>
+			<version>2.0.7</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>junit-addons</groupId>
-			<artifactId>junit-addons</artifactId>
-			<version>1.4</version>
-			<type>jar</type>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>2.0.7</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-dao</artifactId>
+			<version>2.0.7</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
-			<version>1.2.1</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.13</version>
-			<type>jar</type>
-		</dependency>
-
-		<dependency>
-			<groupId>opensymphony</groupId>
-			<artifactId>oscache</artifactId>
-			<version>2.4</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring</artifactId>
-			<version>2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-mock</artifactId>
-			<version>2.0</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate</artifactId>
-			<version>3.2.2.ga</version>
-		</dependency>
-		<dependency>
-			<groupId>struts</groupId>
-			<artifactId>struts</artifactId>
-			<version>1.2.9</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>standard</artifactId>
-			<version>1.1.2</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>opensymphony</groupId>
-			<artifactId>sitemesh</artifactId>
-			<version>2.3</version>
-		</dependency>
-		<!--
-			http://getahead.ltd.uk/dwr
-		-->
-		<dependency>
-			<groupId>org.directwebremoting</groupId>
-			<artifactId>dwr</artifactId>
-			<version>2.0.rc2</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>xerces</groupId>
-			<artifactId>xercesImpl</artifactId>
-			<version>2.4.0</version>
-			<type>jar</type>
-		</dependency>
-		<!--
-			http://code.google.com/p/blogger-api-client/
-		-->
-		<dependency>
-			<groupId>com.redv.bloggerapi</groupId>
-			<artifactId>blogger-api-client</artifactId>
-			<version>1.1</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>opensymphony</groupId>
-			<artifactId>oscache</artifactId>
-			<version>2.3</version>
-		</dependency>
-		<!-- JDBC Drivers -->
-		<dependency>
-			<groupId>hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>1.8.0.7</version>
-			<type>jar</type>
+			<version>1.2.2</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
-
