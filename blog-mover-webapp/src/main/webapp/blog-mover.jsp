@@ -63,8 +63,8 @@
 			<jsp:directive.include file="includes/status-bar.jsp" />
 			<jsp:directive.include file="includes/debug.jsp" />
 			<jsp:directive.include file="includes/analytics.jsp" />
-			<jsp:directive.include file="includes/footer.jsp" />
 			<jsp:directive.include file="includes/ads.jsp" />
+			<jsp:directive.include file="includes/footer.jsp" />
 		</div>
 	</body>
 </html>
