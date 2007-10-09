@@ -16,6 +16,7 @@ import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.logging.Log;
@@ -403,9 +404,19 @@ public class HttpDocument implements Serializable {
 		try {
 			httpClient.executeMethod(method);
 		} catch (HttpException e) {
-			throw new BlogMoverRuntimeException(e);
+			String url = null;
+			try {
+				url = method.getURI().toString();
+			} catch (URIException e1) {
+			}
+			throw new BlogMoverRuntimeException("HttpException: url=" + url, e);
 		} catch (IOException e) {
-			throw new BlogMoverRuntimeException(e);
+			String url = null;
+			try {
+				url = method.getURI().toString();
+			} catch (URIException e1) {
+			}
+			throw new BlogMoverRuntimeException("HttpException: url=" + url, e);
 		}
 	}
 
