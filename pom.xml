@@ -157,19 +157,193 @@
 		</developerConnection>
 		<url>http://blog-mover.googlecode.com/svn/</url>
 	</scm>
+	<dependencyManagement>
+		<dependencies>
+			<!--
+				com.google.gdata:gdata-client:jar:1.0
+				Try downloading the file manually from the project website:
+				http://code.google.com/apis/gdata/authsub.html.
+				Then, install it using the command: 
+				mvn install:install-file -DgroupId=com.google.gdata -DartifactId=gdata-client \
+				-Dversion=1.0 -Dpackaging=jar -Dfile=/path/to/file
+			-->
+			<dependency>
+				<groupId>com.google.gdata</groupId>
+				<artifactId>gdata-client</artifactId>
+				<scope>system</scope>
+				<version>1.0</version>
+				<systemPath>
+					${basedir}/lib/gdata-client-1.0.jar
+				</systemPath>
+			</dependency>
+			<!--
+				com.google.gdata:gdata-calendar:jar:1.0
+				Try downloading the file manually from the project website:
+				http://code.google.com/apis/gdata/authsub.html.
+				Then, install it using the command:
+				mvn install:install-file -DgroupId=com.google.gdata -DartifactId=gdata-calendar \
+				-Dversion=1.0 -Dpackaging=jar -Dfile=/path/to/file
+			-->
+			<dependency>
+				<groupId>com.google.gdata</groupId>
+				<artifactId>gdata-calendar</artifactId>
+				<scope>system</scope>
+				<version>1.0</version>
+				<systemPath>
+					${basedir}/lib/gdata-calendar-1.0.jar
+				</systemPath>
+			</dependency>
+			<!--
+				http://code.google.com/p/blogger-api-client/
+			-->
+			<dependency>
+				<groupId>com.redv.bloggerapi</groupId>
+				<artifactId>blogger-api-client</artifactId>
+				<version>1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-httpclient</groupId>
+				<artifactId>commons-httpclient</artifactId>
+				<version>3.1</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.3</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging-api</artifactId>
+				<version>1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>jfree</groupId>
+				<artifactId>jfreechart</artifactId>
+				<version>1.0.5</version>
+			</dependency>
+			<dependency>
+				<groupId>nekohtml</groupId>
+				<artifactId>nekohtml</artifactId>
+				<version>0.9.5</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.ehcache</groupId>
+				<artifactId>ehcache</artifactId>
+				<version>1.4.0-beta</version>
+			</dependency>
+			<dependency>
+				<groupId>opensymphony</groupId>
+				<artifactId>sitemesh</artifactId>
+				<version>2.3</version>
+			</dependency>
+			<dependency>
+				<groupId>opensymphony</groupId>
+				<artifactId>oscache</artifactId>
+				<version>2.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>1.3.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.xmlrpc</groupId>
+				<artifactId>xmlrpc-client</artifactId>
+				<version>3.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.directwebremoting</groupId>
+				<artifactId>dwr</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate</artifactId>
+				<version>3.2.5.ga</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>2.0.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>2.0.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-dao</artifactId>
+				<version>2.0.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-hibernate3</artifactId>
+				<version>2.0.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>2.0.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>2.0.7</version>
+			</dependency>
+			<dependency>
+				<groupId>rome</groupId>
+				<artifactId>rome</artifactId>
+				<version>0.8</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>1.2.2</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>hsqldb</groupId>
+				<artifactId>hsqldb</artifactId>
+				<version>1.8.0.7</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.4</version>
+			</dependency>
+			<dependency>
+				<groupId>junit-addons</groupId>
+				<artifactId>junit-addons</artifactId>
+				<version>1.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-mock</artifactId>
+				<version>2.0.7</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring</artifactId>
+				<version>2.0.7</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.2</version>
-			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit-addons</groupId>
 			<artifactId>junit-addons</artifactId>
 			<version>1.4</version>
-			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -9,16 +9,14 @@
 		<artifactId>blog-mover-blogengines</artifactId>
 		<version>3.0</version>
 	</parent>
-	<groupId>com.redv.blogmover</groupId>
 	<artifactId>blog-mover-blogengines-oblog</artifactId>
-	<version>3.0</version>
 	<packaging>jar</packaging>
 	<name>Blog Mover Blogengines Oblog</name>
 	<dependencies>
 		<dependency>
-			<groupId>com.redv.blogmover</groupId>
+			<groupId>${groupId}</groupId>
 			<artifactId>blog-mover-core</artifactId>
-			<version>3.0</version>
+			<version>${version}</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -9,32 +9,26 @@
 		<artifactId>blog-mover</artifactId>
 		<version>3.0</version>
 	</parent>
-	<groupId>com.redv.blogmover</groupId>
 	<artifactId>blog-mover-sandbox</artifactId>
-	<version>3.0</version>
 	<packaging>jar</packaging>
-	<name>Blog Mover Core</name>
+	<name>Blog Mover Sandbox</name>
 	<dependencies>
 		<dependency>
-			<groupId>com.redv.blogmover</groupId>
+			<groupId>${groupId}</groupId>
 			<artifactId>blog-mover-core</artifactId>
-			<version>3.0</version>
-			<type>jar</type>
+			<version>${version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.directwebremoting</groupId>
 			<artifactId>dwr</artifactId>
-			<version>2.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.xmlrpc</groupId>
 			<artifactId>xmlrpc-client</artifactId>
-			<version>3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>2.0.7</version>
 		</dependency>
 	</dependencies>
 </project>

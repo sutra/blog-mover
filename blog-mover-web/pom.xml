@@ -9,60 +9,51 @@
 		<version>3.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.redv.blogmover</groupId>
 	<artifactId>blog-mover-web</artifactId>
-	<version>3.0</version>
 	<packaging>jar</packaging>
 	<name>Blog Mover Web Library</name>
 	<dependencies>
 		<dependency>
-			<groupId>com.redv.blogmover</groupId>
+			<groupId>${groupId}</groupId>
 			<artifactId>blog-mover-core</artifactId>
-			<version>3.0</version>
+			<version>${version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.redv.blogmover</groupId>
+			<groupId>${groupId}</groupId>
 			<artifactId>blog-mover-sandbox</artifactId>
-			<version>3.0</version>
+			<version>${version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.redv.bloggerapi</groupId>
 			<artifactId>blogger-api-client</artifactId>
-			<version>1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>2.0.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.directwebremoting</groupId>
 			<artifactId>dwr</artifactId>
-			<version>2.0.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-mock</artifactId>
-			<version>2.0.7</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>2.0.7</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-dao</artifactId>
-			<version>2.0.7</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
-			<version>1.2.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

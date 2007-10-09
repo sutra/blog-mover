@@ -9,26 +9,24 @@
 		<artifactId>blog-mover-bsps</artifactId>
 		<version>3.0</version>
 	</parent>
-	<groupId>com.redv.blogmover</groupId>
 	<artifactId>blog-mover-bsps-com.blogchinese</artifactId>
-	<version>3.0</version>
 	<packaging>jar</packaging>
 	<name>Blog Mover bsps com.blogchinese</name>
 	<dependencies>
 		<dependency>
-			<groupId>com.redv.blogmover</groupId>
+			<groupId>${groupId}</groupId>
 			<artifactId>blog-mover-core</artifactId>
-			<version>3.0</version>
+			<version>${version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.redv.blogmover</groupId>
+			<groupId>${groupId}</groupId>
 			<artifactId>blog-mover-blogengines-oblog</artifactId>
-			<version>3.0</version>
+			<version>${version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.redv.blogmover</groupId>
+			<groupId>${groupId}</groupId>
 			<artifactId>blog-mover-blogengines-oblog-test</artifactId>
-			<version>3.0</version>
+			<version>${version}</version>
 		</dependency>
 	</dependencies>
 </project>

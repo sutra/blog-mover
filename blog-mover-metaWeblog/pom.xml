@@ -9,21 +9,18 @@
 		<artifactId>blog-mover</artifactId>
 		<version>3.0</version>
 	</parent>
-	<groupId>com.redv.blogmover</groupId>
 	<artifactId>blog-mover-metaWeblog</artifactId>
-	<version>3.0</version>
 	<packaging>jar</packaging>
 	<name>Blog Mover MetaWeblog</name>
 	<dependencies>
 		<dependency>
-			<groupId>com.redv.blogmover</groupId>
+			<groupId>${groupId}</groupId>
 			<artifactId>blog-mover-core</artifactId>
-			<version>3.0</version>
+			<version>${version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.redv.bloggerapi</groupId>
 			<artifactId>blogger-api-client</artifactId>
-			<version>1.1</version>
 		</dependency>
 	</dependencies>
 </project>
