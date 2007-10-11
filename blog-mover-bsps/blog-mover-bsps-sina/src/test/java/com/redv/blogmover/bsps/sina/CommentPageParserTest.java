@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.apache.commons.lang.SystemUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,7 +64,8 @@ public class CommentPageParserTest {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		comment.setName("[匿名] 新浪网友");
 		comment.setPublishedDate(sdf.parse("2007-09-22 11:33:04"));
-		comment.setContent("sf哈哈<BR/>\nENJOY SUNSHINE");
+		comment.setContent("sf哈哈<BR/>" + SystemUtils.LINE_SEPARATOR
+				+ "ENJOY SUNSHINE");
 		assertEquals(comment.getContent(), comments.get(0).getContent());
 		assertEquals(comment, comments.get(0));
 	}
