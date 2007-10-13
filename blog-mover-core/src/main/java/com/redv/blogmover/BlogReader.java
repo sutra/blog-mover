@@ -13,8 +13,9 @@ import com.redv.blogmover.logging.BSP;
  * @author Joe
  * @version 1.0
  * @version 2.0
+ * @version 3.0
  */
-public interface BlogReader extends Statusable {
+public interface BlogReader extends Statusable, UserInputCheckable {
 	/**
 	 * 从BSP读取某个用户的所有日志。
 	 * 

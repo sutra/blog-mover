@@ -13,8 +13,9 @@ import com.redv.blogmover.logging.BSP;
  * @author Joe
  * @version 1.0
  * @version 2.0
+ * @version 3.0
  */
-public interface BlogWriter extends Statusable {
+public interface BlogWriter extends Statusable, UserInputCheckable {
 	/**
 	 * 写入日志。
 	 * 

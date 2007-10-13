@@ -22,6 +22,7 @@ import com.redv.blogmover.logging.BSP;
  * @author Joe
  * @version 1.0
  * @version 2.0
+ * @version 3.0
  */
 public abstract class AbstractBlogReader implements BlogReader {
 	protected Log log = LogFactory.getLog(this.getClass());
@@ -77,6 +78,15 @@ public abstract class AbstractBlogReader implements BlogReader {
 	 */
 	public Status getStatus() {
 		return status;
+	}
+
+	/*
+	 * （non-Javadoc）
+	 * 
+	 * @see com.redv.blogmover.UserInputCheckable#check()
+	 */
+	public void check() throws BlogMoverException {
+
 	}
 
 	public void setBlogFilterId(String filterIdAndArg) {

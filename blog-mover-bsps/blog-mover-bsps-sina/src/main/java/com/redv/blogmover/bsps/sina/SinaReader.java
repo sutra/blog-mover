@@ -91,6 +91,15 @@ public class SinaReader extends AbstractBlogReader {
 		this.username = username;
 	}
 
+	@Override
+	public void check() throws BlogMoverException {
+		if (!loggedIn) {
+			new SinaLogin(httpDocument).login(username, password,
+					identifyingCode);
+			loggedIn = true;
+		}
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

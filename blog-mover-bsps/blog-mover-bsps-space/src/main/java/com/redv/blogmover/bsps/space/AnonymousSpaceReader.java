@@ -76,6 +76,15 @@ public class AnonymousSpaceReader implements BlogReader {
 		return bsp;
 	}
 
+	/*
+	 * (non-Javadoc）
+	 * 
+	 * @see com.redv.blogmover.UserInputCheckable#check()
+	 */
+	public void check() {
+
+	}
+
 	/**
 	 * 设置空间名。
 	 * 

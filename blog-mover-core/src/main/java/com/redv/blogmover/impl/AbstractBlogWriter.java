@@ -24,7 +24,7 @@ import com.redv.blogmover.logging.BSP;
  * @author Joe
  * @version 1.0
  * @version 2.0
- * 
+ * @version 3.0
  */
 public abstract class AbstractBlogWriter implements BlogWriter {
 	protected Log log = LogFactory.getLog(this.getClass());
@@ -47,6 +47,15 @@ public abstract class AbstractBlogWriter implements BlogWriter {
 
 	public BSP getBsp() {
 		return bsp;
+	}
+
+	/*
+	 * （non-Javadoc）
+	 * 
+	 * @see com.redv.blogmover.UserInputCheckable#check()
+	 */
+	public void check() throws BlogMoverException {
+
 	}
 
 	/**

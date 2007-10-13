@@ -164,6 +164,15 @@ public class CSDNBlogWriter implements BlogWriter {
 		return status;
 	}
 
+	/*
+	 * (non-Javadoc）
+	 * 
+	 * @see com.redv.blogmover.UserInputCheckable#check()
+	 */
+	public void check() {
+
+	}
+
 	public byte[] getIdentifyingCodeImage() throws BlogMoverException {
 		String showExPwdUrl = "http://passport.csdn.net/"
 				+ this.writerUtil.getShowExPwdUrl(loginPageDocument);
