@@ -211,6 +211,11 @@
 				<version>1.1</version>
 			</dependency>
 			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>1.2.2</version>
+			</dependency>
+			<dependency>
 				<groupId>commons-httpclient</groupId>
 				<artifactId>commons-httpclient</artifactId>
 				<version>3.1</version>
@@ -231,9 +236,24 @@
 				<version>1.1</version>
 			</dependency>
 			<dependency>
+				<groupId>hsqldb</groupId>
+				<artifactId>hsqldb</artifactId>
+				<version>1.8.0.7</version>
+			</dependency>
+			<dependency>
 				<groupId>jfree</groupId>
 				<artifactId>jfreechart</artifactId>
 				<version>1.0.5</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.4</version>
+			</dependency>
+			<dependency>
+				<groupId>junit-addons</groupId>
+				<artifactId>junit-addons</artifactId>
+				<version>1.4</version>
 			</dependency>
 			<dependency>
 				<groupId>nekohtml</groupId>
@@ -283,6 +303,11 @@
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
+				<artifactId>spring</artifactId>
+				<version>2.0.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
 				<artifactId>spring-aop</artifactId>
 				<version>2.0.7</version>
 			</dependency>
@@ -303,6 +328,11 @@
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
+				<artifactId>spring-mock</artifactId>
+				<version>2.0.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
 				<artifactId>spring-web</artifactId>
 				<version>2.0.7</version>
 			</dependency>
@@ -315,41 +345,6 @@
 				<groupId>rome</groupId>
 				<artifactId>rome</artifactId>
 				<version>0.8</version>
-			</dependency>
-
-			<dependency>
-				<groupId>commons-dbcp</groupId>
-				<artifactId>commons-dbcp</artifactId>
-				<version>1.2.2</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>hsqldb</groupId>
-				<artifactId>hsqldb</artifactId>
-				<version>1.8.0.7</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.4</version>
-			</dependency>
-			<dependency>
-				<groupId>junit-addons</groupId>
-				<artifactId>junit-addons</artifactId>
-				<version>1.4</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-mock</artifactId>
-				<version>2.0.7</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring</artifactId>
-				<version>2.0.7</version>
-				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
