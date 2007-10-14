@@ -306,6 +306,11 @@
 		<location>/errors.jsp</location>
 	</error-page>
 
+	<error-page>
+		<exception-type>java.lang.Error</exception-type>
+		<location>/errors.jsp</location>
+	</error-page>
+
 	<!--
 		<error-page>
 		<error-code>404</error-code>

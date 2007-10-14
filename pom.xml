@@ -172,6 +172,7 @@
 				mvn install:install-file -DgroupId=com.google.gdata -DartifactId=gdata-client \
 				-Dversion=1.0 -Dpackaging=jar -Dfile=/path/to/file
 			-->
+			<!--
 			<dependency>
 				<groupId>com.google.gdata</groupId>
 				<artifactId>gdata-client</artifactId>
@@ -181,6 +182,7 @@
 					${basedir}/lib/gdata-client-1.0.jar
 				</systemPath>
 			</dependency>
+			-->
 			<!--
 				com.google.gdata:gdata-calendar:jar:1.0
 				Try downloading the file manually from the project website:
@@ -189,6 +191,7 @@
 				mvn install:install-file -DgroupId=com.google.gdata -DartifactId=gdata-calendar \
 				-Dversion=1.0 -Dpackaging=jar -Dfile=/path/to/file
 			-->
+			<!--
 			<dependency>
 				<groupId>com.google.gdata</groupId>
 				<artifactId>gdata-calendar</artifactId>
@@ -198,6 +201,7 @@
 					${basedir}/lib/gdata-calendar-1.0.jar
 				</systemPath>
 			</dependency>
+			-->
 			<!--
 				http://code.google.com/p/blogger-api-client/
 			-->
