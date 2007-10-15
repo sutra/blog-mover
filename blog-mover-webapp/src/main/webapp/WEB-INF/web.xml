@@ -42,6 +42,15 @@
 		</param-value>
 	</context-param>
 
+	<!-- Reference:
+		http://www.blogjava.net/liuwentao253/archive/2006/08/20/64602.html
+		http://bbs.w3china.org/blog/more.asp?name=greenboy&id=21477
+	-->
+	<listener>
+		<listener-class>
+			org.springframework.web.util.IntrospectorCleanupListener
+		</listener-class>
+	</listener>
 	<listener>
 		<!--
 			<description>Context loader for spring.</description>
@@ -258,10 +267,10 @@
 	<!-- Cache the report.jsp a day in the application scope. -->
 	<!-- Comment this as resin looks like not support this. -->
 	<!--
-	<filter-mapping>
+		<filter-mapping>
 		<filter-name>ApplicationOneDayCacheFilter</filter-name>
 		<url-pattern>/reports/*</url-pattern>
-	</filter-mapping>
+		</filter-mapping>
 	-->
 
 	<!-- Cache the monthly report chart a month in the application scope. -->
