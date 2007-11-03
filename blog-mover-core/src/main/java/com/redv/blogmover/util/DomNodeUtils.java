@@ -168,15 +168,25 @@ public class DomNodeUtils {
 			// same in capitalization-sensitivity.
 			options = select.getElementsByTagName("OPTION");
 		}
-		List<String> values = new ArrayList<String>();
-		List<String> labels = new ArrayList<String>();
+		List<String> candidateValues = new ArrayList<String>(options
+				.getLength());
+		List<String> candidateLabels = new ArrayList<String>(options
+				.getLength());
+		List<String> values = new ArrayList<String>(options.getLength());
+		List<String> labels = new ArrayList<String>(options.getLength());
+		String value, label;
 		for (int i = 0; i < options.getLength(); i++) {
 			Element option = (Element) options.item(i);
+			value = option.getAttribute("value");
+			label = option.getFirstChild().getNodeValue();
+			candidateValues.add(value);
+			candidateLabels.add(label);
+
 			Node selectedNode = option.getAttributes().getNamedItem("selected");
 			log.debug("is selectedNode null: " + (selectedNode == null));
 			if (selectedNode != null) {
-				values.add(option.getAttribute("value"));
-				labels.add(option.getFirstChild().getNodeValue());
+				values.add(value);
+				labels.add(label);
 			}
 		}
 
@@ -186,6 +196,13 @@ public class DomNodeUtils {
 			values.add(option.getAttribute("value"));
 			labels.add(option.getFirstChild().getNodeValue());
 		}
+
+		String[] candidateValueStrings = new String[candidateValues.size()];
+		candidateValues.toArray(candidateValueStrings);
+		hfs.setCandidateValues(candidateValueStrings);
+		String[] candidateLabelStrings = new String[candidateLabels.size()];
+		candidateLabels.toArray(candidateLabelStrings);
+		hfs.setCandidateLabels(candidateLabelStrings);
 
 		String[] valueStrings = new String[values.size()];
 		values.toArray(valueStrings);

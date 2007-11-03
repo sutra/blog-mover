@@ -10,6 +10,10 @@ package com.redv.blogmover.util;
 public class HtmlFormSelect {
 	private String name;
 
+	private String[] candidateValues;
+
+	private String[] candidateLabels;
+
 	private String[] values;
 
 	private String[] labels;
@@ -27,6 +31,36 @@ public class HtmlFormSelect {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the candidateValues
+	 */
+	public String[] getCandidateValues() {
+		return candidateValues;
+	}
+
+	/**
+	 * @param candidateValues
+	 *            the candidateValues to set
+	 */
+	public void setCandidateValues(String[] candidateValues) {
+		this.candidateValues = candidateValues;
+	}
+
+	/**
+	 * @return the candidateLabels
+	 */
+	public String[] getCandidateLabels() {
+		return candidateLabels;
+	}
+
+	/**
+	 * @param candidateLabels
+	 *            the candidateLabels to set
+	 */
+	public void setCandidateLabels(String[] candidateLabels) {
+		this.candidateLabels = candidateLabels;
 	}
 
 	/**
