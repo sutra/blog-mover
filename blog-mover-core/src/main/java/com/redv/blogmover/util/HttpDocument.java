@@ -54,6 +54,8 @@ public class HttpDocument implements Serializable {
 
 	private String encoding;
 
+	private String requestCharSet;
+
 	/**
 	 * 
 	 */
@@ -188,6 +190,22 @@ public class HttpDocument implements Serializable {
 	}
 
 	/**
+	 * @return requestCharSet
+	 */
+	public String getRequestCharSet() {
+		return requestCharSet;
+	}
+
+	/**
+	 * @param requestCharSet
+	 *            要设置的 requestCharSet
+	 * @see CharSetPostMethod
+	 */
+	public void setRequestCharSet(String requestCharSet) {
+		this.requestCharSet = requestCharSet;
+	}
+
+	/**
 	 * Execute `get' method.
 	 * 
 	 * @param url
@@ -225,7 +243,12 @@ public class HttpDocument implements Serializable {
 	 */
 	public Document post(String action, NameValuePair[] parameters,
 			HeaderGroup requestHeaderGroup) {
-		PostMethod postMethod = new PostMethod(action);
+		PostMethod postMethod;
+		if (this.requestCharSet == null) {
+			postMethod = new PostMethod(action);
+		} else {
+			postMethod = new CharSetPostMethod(action, this.requestCharSet);
+		}
 		addRequestHeaderGroup(postMethod, this.requestHeaderGroup);
 		addRequestHeaderGroup(postMethod, requestHeaderGroup);
 		if (manualCookie) {
