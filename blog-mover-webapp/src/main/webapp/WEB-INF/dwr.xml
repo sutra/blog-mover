@@ -15,10 +15,19 @@
 		<convert converter="bean" match="com.redv.blogmover.WebLog" />
 		<convert converter="bean" match="com.redv.blogmover.Category" />
 		<convert converter="bean" match="com.redv.blogmover.Comment" />
-		<convert converter="bean" match="com.redv.blogmover.logging.BSP" />
+		<convert converter="bean"
+			match="com.redv.blogmover.logging.BSP" />
 		<convert converter="bean" match="com.redv.blogmover.BlogReader" />
 		<convert converter="bean" match="com.redv.blogmover.BlogWriter" />
 		<convert converter="bean"
 			match="com.redv.bloggerapi.client.Blog" />
+
+		<convert converter="bean" match="java.lang.StackTraceElement" />
+		<convert converter="exception"
+			match="com.redv.blogmover.BlogMoverException" />
+		<convert converter="exception"
+			match="com.redv.blogmover.BlogMoverRuntimeException" />
+		<convert converter="exception"
+			match="com.redv.blogmover.LoginFailedException" />
 	</allow>
 </dwr>
