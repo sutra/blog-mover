@@ -5,6 +5,8 @@ package com.redv.blogmover.bsps.sina;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -65,6 +67,7 @@ public class SinaReader extends AbstractBlogReader {
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
 		httpDocument = new HttpDocument(httpClient, true, "GB2312");
+		httpDocument.setRequestCharSet("GB2312");
 	}
 
 	/**
@@ -399,8 +402,12 @@ public class SinaReader extends AbstractBlogReader {
 	public static void main(String[] args) throws HttpException, IOException,
 			BlogMoverException {
 		SinaReader sr = new SinaReader();
-		sr.setUsername("blogmover1");
-		sr.setPassword("blogmover");
+		LineNumberReader lnr = new LineNumberReader(new InputStreamReader(
+				System.in));
+		System.out.print("Please enter your username: ");
+		sr.setUsername(lnr.readLine());
+		System.out.print("Please enter your password: ");
+		sr.setPassword(lnr.readLine());
 		byte[] image = sr.getIdentifyingCodeImage();
 		File file = new File(SystemUtils.JAVA_IO_TMPDIR, SinaReader.class
 				.getName()
@@ -408,11 +415,7 @@ public class SinaReader extends AbstractBlogReader {
 		FileUtils.writeByteArrayToFile(file, image);
 		System.out.print(String.format(
 				"Please enter the code on the image(%1$s): ", file.getPath()));
-		StringBuffer identifyingCode = new StringBuffer();
-		int b;
-		while ((b = System.in.read()) != '\n') {
-			identifyingCode.append((char) b);
-		}
+		String identifyingCode = lnr.readLine();
 		System.out.println("Your entered code is: " + identifyingCode);
 		if (!file.delete()) {
 			file.deleteOnExit();

@@ -3,14 +3,21 @@
  */
 package com.redv.blogmover.bsps.sina;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -29,6 +36,11 @@ import com.redv.blogmover.util.HttpDocument;
  * username: blogmover1
  * password: blogmover
  * url: http://blog.sina.com.cn/blogmover
+ * </pre>
+ * <pre>
+ * username: 博客搬家
+ * password: blogmover
+ * url: http://blog.sina.com.cn/blogmover1
  * </pre>
  * 
  * @author Joe
@@ -93,4 +105,40 @@ public class SinaLogin {
 		return method.getResponseBody();
 	}
 
+	public static void main(String[] args) throws HttpException, IOException,
+			BlogMoverException {
+		HttpClient httpClient = new HttpClient();
+		httpClient.getParams().setCookiePolicy(
+				CookiePolicy.BROWSER_COMPATIBILITY);
+		HttpDocument httpDocument = new HttpDocument(httpClient);
+		httpDocument.setRequestCharSet("GB2312");
+		SinaLogin login = new SinaLogin(httpDocument);
+		Reader r = new InputStreamReader(System.in);
+		LineNumberReader lnr = new LineNumberReader(r);
+		System.out.print("Please enter your username: ");
+		String username = lnr.readLine();
+		System.out.println("Your entered username is: " + username.toString());
+		System.out.print("Please enter your password: ");
+		String password = lnr.readLine();
+		System.out.println("Your entered password is: " + password.toString());
+		byte[] image = getIdentifyingCodeImage(httpClient);
+		File file = new File(SystemUtils.JAVA_IO_TMPDIR, SinaReader.class
+				.getName()
+				+ ".png");
+		FileUtils.writeByteArrayToFile(file, image);
+		System.out.print(String.format(
+				"Please enter the code on the image(%1$s): ", file.getPath()));
+		String identifyingCode = lnr.readLine();
+		System.out.println("Your entered code is: " + identifyingCode);
+		if (!file.delete()) {
+			file.deleteOnExit();
+		}
+		try {
+			login.login(username.toString(), password.toString(),
+					identifyingCode.toString());
+			System.out.println("Login OK.");
+		} catch (LoginFailedException ex) {
+			System.out.println("Login failed.");
+		}
+	}
 }

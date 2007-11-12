@@ -65,6 +65,7 @@ public class SinaWriter extends AbstractBlogWriter {
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
 		httpDocument = new HttpDocument(httpClient, true, "GB2312");
+		httpDocument.setRequestCharSet("GB2312");
 	}
 
 	/**
