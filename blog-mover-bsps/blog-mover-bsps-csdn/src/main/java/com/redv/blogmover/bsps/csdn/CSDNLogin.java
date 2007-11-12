@@ -67,7 +67,7 @@ public class CSDNLogin {
 		hg.addHeader(new Header("Keep-Alive", "300"));
 		hg.addHeader(new Header("Connection", "Keep-Alive"));
 
-		this.httpDocument = new HttpDocument(httpClient, hg, true, "GB2312");
+		this.httpDocument = new HttpDocument(httpClient, hg, true, "UTF-8");
 	}
 
 	private Document getLoginPage() {
@@ -103,9 +103,11 @@ public class CSDNLogin {
 		String from = loginPageDocument.getElementById("from").getAttribute(
 				"value");
 		log.debug("from=" + from);
+		/*
 		String __EVENTVALIDATION = loginPageDocument.getElementById(
 				"__EVENTVALIDATION").getAttribute("value");
 		log.debug("__EVENTVALIDATION: " + __EVENTVALIDATION);
+		*/
 
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 		parameters.add(new NameValuePair("__EVENTTARGET", ""));
@@ -123,8 +125,10 @@ public class CSDNLogin {
 						"http://writeblog.csdn.net/Login.aspx?ReturnUrl=%2fDefault.aspx"));
 		parameters.add(new NameValuePair("CSDNUserLogin$Image_Login.x", "24"));
 		parameters.add(new NameValuePair("CSDNUserLogin$Image_Login.y", "0"));
+		/*
 		parameters
 				.add(new NameValuePair("__EVENTVALIDATION", __EVENTVALIDATION));
+		*/
 		if (log.isDebugEnabled()) {
 			log.debug("parameters......");
 			for (NameValuePair nvp : parameters) {
@@ -140,6 +144,8 @@ public class CSDNLogin {
 				"application/x-www-form-urlencoded; charset=gb2312"));
 		Document document = httpDocument.post(action, parameters,
 				requestHeaderGroup);
+		log.debug("---------------------- login response -----------------");
+		DomNodeUtils.debug(log, document);
 
 		// httpDocument.get("http://www.csdn.net/LoginPageSideColumns.aspx");
 
@@ -178,9 +184,12 @@ public class CSDNLogin {
 	}
 
 	public byte[] getIdentifyingCodeImage() throws BlogMoverException {
+		String showExPwdUrl = "http://passport.csdn.net/ShowExPwd.aspx?temp=f8x70ory";
+		/*
 		String showExPwdUrl = "http://passport.csdn.net/"
 				+ getShowExPwdUrl(this.getLoginPage());
 		showExPwdUrl = showExPwdUrl.replace(" ", "%20");
+		*/
 		log.debug("showExPwdUrl: " + showExPwdUrl);
 		try {
 			return this.showExPwd(showExPwdUrl);
@@ -209,6 +218,7 @@ public class CSDNLogin {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private String getShowExPwdUrl(Document loginPageDocument) {
 		// check code
 		NodeList scripts = loginPageDocument.getElementsByTagName("script");

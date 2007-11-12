@@ -3,6 +3,10 @@
  */
 package com.redv.blogmover.bsps.csdn;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -12,6 +16,8 @@ import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HeaderGroup;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -205,4 +211,31 @@ public class CSDNBlogReader extends AbstractBlogReader {
 		return csdnLogin.getIdentifyingCodeImage();
 	}
 
+	public static void main(String[] args) throws IOException,
+			BlogMoverException {
+		CSDNBlogReader csdnBlogReader = new CSDNBlogReader();
+		LineNumberReader lnr = new LineNumberReader(new InputStreamReader(
+				System.in));
+		System.out.print("Please enter your username: ");
+		csdnBlogReader.setUsername(lnr.readLine());
+		System.out.print("Please enter your password: ");
+		csdnBlogReader.setPassword(lnr.readLine());
+		byte[] image = csdnBlogReader.getIdentifyingCodeImage();
+		File file = new File(SystemUtils.JAVA_IO_TMPDIR, CSDNBlogReader.class
+				.getName());
+		FileUtils.writeByteArrayToFile(file, image);
+		System.out.print(String.format(
+				"Please enter the code on the image(%1$s): ", file.getPath()));
+		String identifyingCode = lnr.readLine();
+		System.out.println("Your entered code is: " + identifyingCode);
+		if (!file.delete()) {
+			file.deleteOnExit();
+		}
+		csdnBlogReader.setIdentifyingCode(identifyingCode.toString().trim());
+		List<WebLog> entries = csdnBlogReader.read();
+		for (WebLog entry : entries) {
+			System.out.println(entry.getTitle());
+			System.out.println(entry.getUrl());
+		}
+	}
 }
