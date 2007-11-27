@@ -266,9 +266,14 @@ public class User implements RemoteUser, Serializable {
 		private BlogReader newReader(String className)
 				throws InstantiationException, IllegalAccessException,
 				ClassNotFoundException {
-			BlogReader reader = (BlogReader) Class.forName(className)
-					.newInstance();
-			return reader;
+			try {
+				BlogReader reader = (BlogReader) Class.forName(className)
+						.newInstance();
+				return reader;
+			} catch (NoClassDefFoundError error) {
+				log.error("java.lang.NoClassDefFoundError occured.", error);
+				throw error;
+			}
 		}
 
 		/**
@@ -331,6 +336,7 @@ public class User implements RemoteUser, Serializable {
 				IllegalAccessException, ClassNotFoundException {
 			log.debug("setReader called. className=" + className);
 			this.getUserFacade().setReader(newReader(className));
+			log.debug("setReader end. className=" + className);
 		}
 
 		/**
