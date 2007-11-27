@@ -29,12 +29,14 @@
 			<id>redv.com</id>
 			<url>http://mirrors.redv.com/maven2</url>
 		</repository>
-		<repository>
+		<!--
+			<repository>
 			<id>java.net</id>
 			<url>
-				https://maven2-repository.dev.java.net/nonav/repository
+			https://maven2-repository.dev.java.net/nonav/repository
 			</url>
-		</repository>
+			</repository>
+		-->
 	</repositories>
 	<modules>
 		<module>blog-mover-core</module>
@@ -173,15 +175,15 @@
 				-Dversion=1.0 -Dpackaging=jar -Dfile=/path/to/file
 			-->
 			<!--
-			<dependency>
+				<dependency>
 				<groupId>com.google.gdata</groupId>
 				<artifactId>gdata-client</artifactId>
 				<scope>system</scope>
 				<version>1.0</version>
 				<systemPath>
-					${basedir}/lib/gdata-client-1.0.jar
+				${basedir}/lib/gdata-client-1.0.jar
 				</systemPath>
-			</dependency>
+				</dependency>
 			-->
 			<!--
 				com.google.gdata:gdata-calendar:jar:1.0
@@ -192,15 +194,15 @@
 				-Dversion=1.0 -Dpackaging=jar -Dfile=/path/to/file
 			-->
 			<!--
-			<dependency>
+				<dependency>
 				<groupId>com.google.gdata</groupId>
 				<artifactId>gdata-calendar</artifactId>
 				<scope>system</scope>
 				<version>1.0</version>
 				<systemPath>
-					${basedir}/lib/gdata-calendar-1.0.jar
+				${basedir}/lib/gdata-calendar-1.0.jar
 				</systemPath>
-			</dependency>
+				</dependency>
 			-->
 			<!--
 				http://code.google.com/p/blogger-api-client/
@@ -229,6 +231,16 @@
 				<groupId>commons-logging</groupId>
 				<artifactId>commons-logging-api</artifactId>
 				<version>1.1</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.servlet</groupId>
+						<artifactId>servlet-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>commons-logging</groupId>
@@ -241,6 +253,23 @@
 				<version>1.8.0.7</version>
 			</dependency>
 			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>jsp-api</artifactId>
+				<version>2.1</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
 				<groupId>jfree</groupId>
 				<artifactId>jfreechart</artifactId>
 				<version>1.0.5</version>
@@ -248,11 +277,13 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
+				<scope>test</scope>
 				<version>4.4</version>
 			</dependency>
 			<dependency>
 				<groupId>junit-addons</groupId>
 				<artifactId>junit-addons</artifactId>
+				<scope>test</scope>
 				<version>1.4</version>
 			</dependency>
 			<dependency>
@@ -278,6 +309,10 @@
 					<exclusion>
 						<groupId>javax.jms</groupId>
 						<artifactId>jms</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.servlet</groupId>
+						<artifactId>servlet-api</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>
@@ -350,16 +385,22 @@
 	</dependencyManagement>
 	<dependencies>
 		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>servlet-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.2</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit-addons</groupId>
 			<artifactId>junit-addons</artifactId>
-			<version>1.4</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
