@@ -1,6 +1,7 @@
 package com.redv.blogmover.bsps.blogger;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,10 @@ import com.google.gdata.data.HtmlTextConstruct;
 import com.google.gdata.data.TextContent;
 import com.google.gdata.util.AuthenticationException;
 import com.google.gdata.util.ServiceException;
+import com.redv.bloggerapi.client.Blog;
+import com.redv.bloggerapi.client.BloggerClient;
+import com.redv.bloggerapi.client.BloggerImpl;
+import com.redv.bloggerapi.client.Fault;
 import com.redv.blogmover.BlogFilter;
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.WebLog;
@@ -101,5 +106,22 @@ public class GDataReader extends AbstractBlogReader {
 		webLog.setPublishedDate(new Date(entry.getPublished().getValue()));
 
 		return processNewBlog(webLog);
+	}
+
+	public static void main(String[] args) throws MalformedURLException, Fault,
+			BlogMoverException {
+		String username = args[0], password = args[1];
+		GDataReader gdr = new GDataReader();
+		BloggerImpl bi = new BloggerImpl("http://www.blogger.com/api");
+		BloggerClient bc = new BloggerClient(bi, username, password);
+		Blog[] blogs = bc.getUsersBlogs();
+		System.out.println(blogs[0].getBlogid());
+		gdr.setBlogid(blogs[0].getBlogid());
+		gdr.setUsername(username);
+		gdr.setPassword(password);
+		List<WebLog> webLogs = gdr.read();
+		for (WebLog webLog : webLogs) {
+			System.out.println(webLog.getTitle());
+		}
 	}
 }
