@@ -21,84 +21,85 @@ import com.redv.blogmover.impl.BlogFilterByCount;
 import com.redv.blogmover.impl.WebLogImpl;
 
 public class GDataReader extends AbstractBlogReader {
-  private String blogid;
+	private String blogid;
 
-  private String username;
+	private String username;
 
-  private String password;
-  
-  public static final int MAX_READ_RESULTS = 1000;
+	private String password;
 
-  /**
-   * @param blogid
-   *            the blogid to set
-   */
-  public void setBlogid(String blogid) {
-    this.blogid = blogid;
-  }
+	public static final int MAX_READ_RESULTS = 1000;
 
-  /**
-   * @param password
-   *            the password to set
-   */
-  public void setPassword(String password) {
-    this.password = password;
-  }
+	/**
+	 * @param blogid
+	 *            the blogid to set
+	 */
+	public void setBlogid(String blogid) {
+		this.blogid = blogid;
+	}
 
-  /**
-   * @param username
-   *            the username to set
-   */
-  public void setUsername(String username) {
-    this.username = username;
-  }
+	/**
+	 * @param password
+	 *            the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-  @Override
-  public List<WebLog> read() throws BlogMoverException {
-    
-    GoogleService gs = new GoogleService("blogger", "blog-mover");
-    try {
-      gs.setUserCredentials(username, password);
+	/**
+	 * @param username
+	 *            the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-      URL feedUrl = new URL("http://www.blogger.com/feeds/" + blogid + "/posts/default");
-      Query myQuery = new Query(feedUrl);
-      myQuery.setMaxResults(getMaxReadResults());
-      Feed resultFeed = gs.query(myQuery, Feed.class);
+	@Override
+	public List<WebLog> read() throws BlogMoverException {
 
-      for (int i = 0; i < resultFeed.getEntries().size(); i++) {
-        Entry entry = resultFeed.getEntries().get(i);
+		GoogleService gs = new GoogleService("blogger", "blog-mover");
+		try {
+			gs.setUserCredentials(username, password);
 
-        if (!parse(entry))
-          break;
-      }
-    } catch (AuthenticationException e) {
-      throw new BlogMoverException(e);
-    } catch (IOException e) {
-      throw new BlogMoverException(e);
-    } catch (ServiceException e) {
-      throw new BlogMoverException(e);
-    }
-    return getWebLogs();
-  }
+			URL feedUrl = new URL("http://www.blogger.com/feeds/" + blogid
+					+ "/posts/default");
+			Query myQuery = new Query(feedUrl);
+			myQuery.setMaxResults(getMaxReadResults());
+			Feed resultFeed = gs.query(myQuery, Feed.class);
 
-  private int getMaxReadResults() {
-    BlogFilter filter = getBlogFilter();
-    if (filter instanceof BlogFilterByCount) {
-      return ((BlogFilterByCount)filter).getLimit();
-    }
-    return MAX_READ_RESULTS;
-  }
+			for (int i = 0; i < resultFeed.getEntries().size(); i++) {
+				Entry entry = resultFeed.getEntries().get(i);
 
-  private boolean parse(Entry entry) {
-    // create a webLog object from the entry
-    WebLog webLog = new WebLogImpl();
-    
-    webLog.setTitle(entry.getTitle().getPlainText());
-    TextContent tc = (TextContent)entry.getContent();
-    HtmlTextConstruct htc = (HtmlTextConstruct)tc.getContent(); 
-    webLog.setBody(htc.getHtml());
-    webLog.setPublishedDate(new Date(entry.getPublished().getValue()));
+				if (!parse(entry))
+					break;
+			}
+		} catch (AuthenticationException e) {
+			throw new BlogMoverException(e);
+		} catch (IOException e) {
+			throw new BlogMoverException(e);
+		} catch (ServiceException e) {
+			throw new BlogMoverException(e);
+		}
+		return getWebLogs();
+	}
 
-    return processNewBlog(webLog);
-  }  
+	private int getMaxReadResults() {
+		BlogFilter filter = getBlogFilter();
+		if (filter instanceof BlogFilterByCount) {
+			return ((BlogFilterByCount) filter).getLimit();
+		}
+		return MAX_READ_RESULTS;
+	}
+
+	private boolean parse(Entry entry) {
+		// create a webLog object from the entry
+		WebLog webLog = new WebLogImpl();
+
+		webLog.setTitle(entry.getTitle().getPlainText());
+		TextContent tc = (TextContent) entry.getContent();
+		HtmlTextConstruct htc = (HtmlTextConstruct) tc.getContent();
+		webLog.setBody(htc.getHtml());
+		webLog.setPublishedDate(new Date(entry.getPublished().getValue()));
+
+		return processNewBlog(webLog);
+	}
 }
