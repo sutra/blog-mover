@@ -150,7 +150,7 @@ function readStatusReply(data) {
 		var s = "正在读取…… 当前读取数目/总数： " + data.currentCount + "/" 
 			+ (data.totalCount == -1 ? "未知" : data.totalCount) + "，当前正在处理的日志：" 
 			+ (data.currentWebLog.title === null ? "" : data.currentWebLog.title) 
-			+ "(" + data.currentWebLog.publishedDate + ")。";
+			+ "(" + (data.currentWebLog.publishedDate == null ? "" : data.currentWebLog.publishedDate.toLocaleString()) + ")。";
 		setStatus(s);
 		debug(s);
 		// 继续查询读取状态。

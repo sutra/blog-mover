@@ -19,7 +19,7 @@ var cellFuncs = [
 	function(data) {
 		return "<a href='" + data.url + "'>" + data.title + "</a>";
 	},
-	function(data) {return data.publishedDate;}
+	function(data) {return (data.publishedDate == null ? "" : data.publishedDate.toLocaleString());}
 ];
 /**
  * 日志总数。
