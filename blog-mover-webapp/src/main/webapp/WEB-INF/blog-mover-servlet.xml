@@ -29,8 +29,10 @@
 					value="com.redv.blogmover.bsps.com.live.spaces.SpaceReader" />
 
 				<!-- The reader that parsing weblog entries permlink from homepage, get details by metaWeblog API -->
+				<!--
 				<entry key="spaces.live.com-metaWeblog"
 					value="com.redv.blogmover.bsps.com.live.spaces.SpaceReaderByMetaWeblog" />
+				-->
 				<entry key="baidu"
 					value="com.redv.blogmover.bsps.baidu.BaiduReader" />
 				<!--
@@ -41,8 +43,10 @@
 					<entry key="csdn"
 					value="com.redv.blogmover.bsps.csdn.CSDNBlogReader" />
 				-->
+				<!--
 				<entry key="donews"
 					value="com.redv.blogmover.bsps.donews.DoNewsBlogReader" />
+				-->
 				<entry key="hexun"
 					value="com.redv.blogmover.bsps.hexun.HexunReader" />
 				<entry key="sina"
