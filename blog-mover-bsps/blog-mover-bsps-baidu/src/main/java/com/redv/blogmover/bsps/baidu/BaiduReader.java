@@ -3,6 +3,10 @@
  */
 package com.redv.blogmover.bsps.baidu;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.io.PrintStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -210,7 +214,7 @@ public class BaiduReader extends AbstractBlogReader {
 					log.debug("webLog.publishedDate: "
 							+ webLog.getPublishedDate());
 					log.debug("webLog.body: " + webLog.getBody());
-					
+
 					if (!processNewBlog(webLog))
 						return false;
 				}
@@ -310,4 +314,19 @@ public class BaiduReader extends AbstractBlogReader {
 		return cal.getTime();
 	}
 
+	public static void main(String[] args) throws IOException,
+			BlogMoverException {
+		LineNumberReader lnr = new LineNumberReader(new InputStreamReader(
+				System.in));
+		PrintStream out = System.out;
+		out.print("Please enter your username:");
+		String username = lnr.readLine();
+		out.print("Please entry your password:");
+		String password = lnr.readLine();
+		BaiduReader br = new BaiduReader();
+		br.setUsername(username);
+		br.setPassword(password);
+		List<WebLog> entries = br.read();
+		out.println("entries: " + entries.size());
+	}
 }
