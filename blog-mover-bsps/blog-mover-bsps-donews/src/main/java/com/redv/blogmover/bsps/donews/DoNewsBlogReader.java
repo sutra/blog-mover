@@ -3,7 +3,13 @@
  */
 package com.redv.blogmover.bsps.donews;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,17 +115,19 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 		}
 		if (last == null) {
 			/**
-			 * bug fix @author <a href="mailto:rory.cn@gmail.com">Rory</a>
-			 * 修改如果用户日志不超过9页的时候不会出现最后文字。
+			 * bug fix
+			 * 
+			 * @author <a href="mailto:rory.cn@gmail.com">Rory</a>
+			 *         修改如果用户日志不超过9页的时候不会出现最后文字。
 			 */
-			for (int i=0; i<children.getLength(); i++) {
+			for (int i = 0; i < children.getLength(); i++) {
 				Node node = children.item(i);
 				if (node.getFirstChild() == null) {
 					continue;
 				}
 				last = node;
 			}
-//			throw new BlogMoverException("没有找到最后一页标识，无法继续。");
+			// throw new BlogMoverException("没有找到最后一页标识，无法继续。");
 		}
 		String href = last.getAttributes().getNamedItem("href").getNodeValue();
 		String pageString = href.substring("EditPosts.aspx?pg=".length(), href
@@ -204,4 +212,32 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 		return doNewsLogin.getIdentifyingCodeImage();
 	}
 
+	public static void main(String[] args) throws HttpException, IOException,
+			BlogMoverException {
+		LineNumberReader in = new LineNumberReader(new InputStreamReader(
+				System.in));
+		PrintStream out = System.out;
+		DoNewsBlogReader dnbr = new DoNewsBlogReader();
+		byte[] image = dnbr.getIdentifyingCodeImage();
+		File tmpImageFile = new File(System.getProperty("java.io.tmpdir"),
+				DoNewsBlogReader.class.getName());
+		tmpImageFile.deleteOnExit();
+		OutputStream os = new FileOutputStream(tmpImageFile);
+		try {
+			os.write(image);
+		} finally {
+			os.close();
+		}
+		out.print("Please enter the code(" + tmpImageFile.getPath() + "): ");
+		String code = in.readLine();
+		out.print("Please enter your username: ");
+		String username = in.readLine();
+		out.print("Please enter your password: ");
+		String password = in.readLine();
+		dnbr.setUsername(username);
+		dnbr.setPassword(password);
+		dnbr.setIdentifyingCode(code);
+		List<WebLog> entries = dnbr.read();
+		out.println("entries: " + entries.size());
+	}
 }
