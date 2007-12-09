@@ -123,7 +123,7 @@ public class SpaceReaderByMetaWeblog extends SpaceReader {
 	}
 
 	private String parsePostId(String permaLink) throws BlogMoverException {
-		String prefix = homepageUrl + "cns!";
+		String prefix = homepageUrl + "blog/cns!";
 		String suffix = ".entry";
 		if (permaLink.startsWith(prefix) && permaLink.endsWith(suffix)) {
 			return permaLink.substring(prefix.length(), permaLink.length()
@@ -176,8 +176,8 @@ public class SpaceReaderByMetaWeblog extends SpaceReader {
 	 */
 	public static void main(String[] args) throws BlogMoverException {
 		SpaceReaderByMetaWeblog reader = new SpaceReaderByMetaWeblog();
-		reader.setUsername("username");
-		reader.setPassword("xxxxxxxx");
+		reader.setUsername(args[0]);
+		reader.setPassword(args[1]);
 		// reader.readOnePost("67972F30B4F9D8FB!173");
 		List<WebLog> list = reader.read();
 		System.out.println("# of blogs : " + list.size());
