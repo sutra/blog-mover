@@ -18,6 +18,12 @@ import com.redv.blogmover.LoginFailedException;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
+ * <p>
+ * Test account:<br />
+ * Username: blogremover<br />
+ * Password: blogremover<br />
+ * </p>
+ * 
  * @author Joe
  * @version 1.0
  * 

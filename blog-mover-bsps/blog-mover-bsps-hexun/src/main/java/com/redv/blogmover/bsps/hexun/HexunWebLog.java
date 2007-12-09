@@ -17,9 +17,26 @@ public class HexunWebLog extends WebLogImpl {
 	 */
 	private static final long serialVersionUID = -6062821237644115558L;
 
+	private String articleId;
+
 	private String editUrl;
 
 	private String deleteUrl;
+
+	/**
+	 * @return articleId
+	 */
+	public String getArticleId() {
+		return articleId;
+	}
+
+	/**
+	 * @param articleId
+	 *            要设置的 articleId
+	 */
+	public void setArticleId(String articleId) {
+		this.articleId = articleId;
+	}
 
 	/**
 	 * @return Returns the deleteUrl.
