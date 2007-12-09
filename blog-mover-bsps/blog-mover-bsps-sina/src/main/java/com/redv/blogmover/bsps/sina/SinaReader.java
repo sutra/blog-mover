@@ -410,8 +410,7 @@ public class SinaReader extends AbstractBlogReader {
 		sr.setPassword(lnr.readLine());
 		byte[] image = sr.getIdentifyingCodeImage();
 		File file = new File(SystemUtils.JAVA_IO_TMPDIR, SinaReader.class
-				.getName()
-				+ ".png");
+				.getName());
 		FileUtils.writeByteArrayToFile(file, image);
 		System.out.print(String.format(
 				"Please enter the code on the image(%1$s): ", file.getPath()));

@@ -27,6 +27,7 @@ import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.LoginFailedException;
+import com.redv.blogmover.util.DomNodeUtils;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
@@ -61,7 +62,9 @@ public class SinaLogin {
 
 	public void login(String loginname, String passwd, String checkwd)
 			throws BlogMoverException {
-		String action = "http://blog.sina.com.cn/login.php?url=%2Fcontrol%2F";
+		// String action =
+		// "http://blog.sina.com.cn/login.php?url=%2Fcontrol%2F";
+		String action = "http://my.blog.sina.com.cn/login.php?url=%2F";
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 
 		NameValuePair parameter = new NameValuePair("loginname", loginname);
@@ -74,9 +77,9 @@ public class SinaLogin {
 		parameters.add(parameter);
 
 		Document document = httpDocument.post(action, parameters);
+		DomNodeUtils.debug(log, document);
 
 		NodeList scripts = document.getElementsByTagName("script");
-		boolean ok = false;
 		for (int i = 0; i < scripts.getLength(); i++) {
 			Element input = (Element) scripts.item(i);
 			if (input != null) {
@@ -84,22 +87,24 @@ public class SinaLogin {
 				if (node != null) {
 					String s = node.getNodeValue();
 					log.debug("s: " + s);
-					if (" top.window.location.href = \"http://my.blog.sina.com.cn/control/\"; "
-							.equals(s)) {
-						ok = true;
+					if (s.indexOf("很抱歉，您输入的登录名不存在，请输入正确的登录名：") != -1) {
+						throw new LoginFailedException(
+								"很抱歉，您输入的登录名不存在，请输入正确的登录名。");
+					} else if (s.indexOf("很抱歉，您输入的登录密码错误，请重新输入：") != -1) {
+						throw new LoginFailedException("很抱歉，您输入的登录密码错误，请重新输入。");
+					} else {
 						break;
 					}
 				}
 			}
 		}
-		if (!ok) {
-			throw new LoginFailedException("用户名密码或者验证码有误，请重新输入，或者重新获取验证码。");
-		}
 	}
 
 	public static byte[] getIdentifyingCodeImage(HttpClient httpClient)
 			throws HttpException, IOException {
-		String url = "http://blog.sina.com.cn/myblog/checkwd_image.php";
+		// String url = "http://blog.sina.com.cn/myblog/checkwd_image.php";
+		String url = "http://my.blog.sina.com.cn/myblog/checkwd_image.php?"
+				+ System.currentTimeMillis();
 		GetMethod method = new GetMethod(url);
 		httpClient.executeMethod(method);
 		return method.getResponseBody();
