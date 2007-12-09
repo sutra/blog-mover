@@ -45,6 +45,8 @@ public class HexunReader extends AbstractBlogReader {
 
 	private String password;
 
+	private boolean checked;
+
 	/**
 	 * 
 	 */
@@ -98,24 +100,31 @@ public class HexunReader extends AbstractBlogReader {
 	}
 
 	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see com.redv.blogmover.impl.AbstractBlogReader#check()
+	 */
+	@Override
+	public void check() throws BlogMoverException {
+		new HexunLogin(httpDocument).login(username, password,
+				"http://blog.hexun.com/group/inc/login.aspx");
+		checked = true;
+	}
+
+	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see com.redv.blogremover.impl.AbstractBlogReader#read()
 	 */
 	@Override
 	public List<WebLog> read() throws BlogMoverException {
-		new HexunLogin(httpDocument).login(username, password,
-				"http://blog.hexun.com/group/inc/login.aspx");
-		// String url = "http://hexun.com/admin_index.aspx";
-		// String url = "http://blog.hexun.com/myblogadmin.aspx";
-		// BlogRemoverUtils.getDocument(httpClient, null, url, true);
-		// String url = "http://blogremover.blog.hexun.com/adminarticle.aspx";
+		if (!checked) {
+			check();
+		}
+
 		int page = 0;
 		List<WebLog> webLogs = new ArrayList<WebLog>();
 		while (true) {
-			// String url =
-			// "http://blogremover.blog.hexun.com/adminarticle.aspx?articlecategoryid=0&page="
-			// + (++page);
 			String url = "http://post.blog.hexun.com/inc/adminarticle.aspx?blogname="
 					+ username + "&categoryid=0&page=" + (++page);
 			Document document = httpDocument.get(url);
