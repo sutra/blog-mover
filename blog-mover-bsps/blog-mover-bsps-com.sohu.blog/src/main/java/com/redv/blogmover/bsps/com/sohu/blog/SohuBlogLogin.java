@@ -13,15 +13,16 @@ import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HeaderGroup;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogMoverRuntimeException;
 import com.redv.blogmover.LoginFailedException;
+import com.redv.blogmover.util.DomNodeUtils;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
@@ -75,8 +76,12 @@ class SohuBlogLogin implements Serializable {
 				throw new BlogMoverRuntimeException(
 						"No redirecting form found.");
 			}
-			Element form = (Element) forms.item(0);
-			String action = StringUtils.trimToNull(form.getAttribute("action"));
+			// The ssl chain of sohu passport is not correct, so we use the http
+			// instead of https to access the passport.
+			// Element form = (Element) forms.item(0);
+			// String action =
+			// StringUtils.trimToNull(form.getAttribute("action"));
+			String action = "http://passport.sohu.com/sso/login_js.jsp";
 			NodeList inputs = document.getElementsByTagName("input");
 			parameters = new ArrayList<NameValuePair>(inputs.getLength());
 			for (int i = 0; i < inputs.getLength(); i++) {
@@ -86,12 +91,26 @@ class SohuBlogLogin implements Serializable {
 				parameters.add(new NameValuePair(name, value));
 			}
 			document = this.httpDocument.post(action, parameters);
-			Element blogUrlElement = document.getElementById("blogUrl");
-			if (blogUrlElement == null) {
+			DomNodeUtils.debug(log, document);
+			Element blogUrlElementDiv = document.getElementById("blogUrl");
+			if (blogUrlElementDiv == null) {
 				throw new LoginFailedException("登录失败，用户名或者密码输入有误。");
 			}
-			String blogUrl = blogUrlElement.getFirstChild().getAttributes()
-					.getNamedItem("href").getNodeValue();
+			DomNodeUtils.debug(log, blogUrlElementDiv);
+			log.debug("blogUrlElement className: "
+					+ blogUrlElementDiv.getClass().getName());
+			NodeList childNodes = blogUrlElementDiv.getChildNodes();
+			Node blogUrlElementA = null;
+			for (int i = 0; i < childNodes.getLength(); i++) {
+				Node node = childNodes.item(i);
+				log.debug("node className: " + node.getClass().getName());
+				if ("a".equalsIgnoreCase(node.getNodeName())) {
+					blogUrlElementA = node;
+					break;
+				}
+			}
+			String blogUrl = blogUrlElementA.getAttributes().getNamedItem(
+					"href").getNodeValue();
 			log.debug("blogUrl: " + blogUrl);
 			Pattern p = Pattern.compile("http://([^.]+).blog.sohu.com/");
 			Matcher m = p.matcher(blogUrl);

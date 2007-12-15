@@ -16,7 +16,6 @@ import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HeaderGroup;
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.w3c.dom.Document;
@@ -96,8 +95,9 @@ public class SohuBlogReader extends AbstractBlogReader {
 
 	private void init() {
 		httpClient = new HttpClient();
-		httpClient.getParams().setCookiePolicy(
-				CookiePolicy.BROWSER_COMPATIBILITY);
+		// Remove the following as this cause login failed.
+		// httpClient.getParams().setCookiePolicy(
+		// CookiePolicy.BROWSER_COMPATIBILITY);
 		this.requestHeaderGroup = new HeaderGroup();
 		this.requestHeaderGroup.addHeader(new Header("User-Agent",
 				ManageUrlConstants.USER_AGENT));
@@ -500,5 +500,16 @@ public class SohuBlogReader extends AbstractBlogReader {
 			webLogs.add(webLog);
 			i++;
 		}
+	}
+
+	public static void main(String[] args) throws BlogMoverException {
+		String username = args[0];
+		String maildomain = args[1];
+		String passwd = args[2];
+		SohuBlogReader sbr = new SohuBlogReader();
+		sbr.setUsername(username);
+		sbr.setMaildomain(maildomain);
+		sbr.setPasswd(passwd);
+		sbr.read();
 	}
 }
