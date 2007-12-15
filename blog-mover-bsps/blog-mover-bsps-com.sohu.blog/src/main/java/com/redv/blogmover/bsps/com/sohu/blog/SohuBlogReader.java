@@ -201,6 +201,8 @@ public class SohuBlogReader extends AbstractBlogReader {
 				this.listPageParser.getPermalinks(), this.listPageParser
 						.getTitles(), this.listPageParser.getDates());
 		int totalPage = this.listPageParser.getTotalPage();
+		this.getStatus().setTotalCount(
+				this.listPageParser.getTitles().size() * totalPage);
 		for (int i = 2; i <= totalPage; i++) {
 			String url = String.format(LIST_URL_FORMAT, i);
 			this.listPageParser.setDocument(this.httpDocument.get(url));
@@ -498,6 +500,10 @@ public class SohuBlogReader extends AbstractBlogReader {
 			webLog.setUrl(permalinks.get(i));
 			webLog.setPublishedDate(dates.get(i));
 			webLogs.add(webLog);
+
+			this.getStatus().setCurrentWebLog(webLog);
+			this.getStatus().setCurrentCount(webLogs.size());
+
 			i++;
 		}
 	}
