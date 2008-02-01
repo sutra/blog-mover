@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<body>
+		<menu ref="parent" />
+		<menu ref="modules" />
+		<menu ref="reports" />
+		<links>
+			<item name="Redv.com" href="http://redv.com/"/>
+			<item name="Blog Mover" href="http://blogmover.redv.com/"/>
+		</links>
+		
+	</body>
+</project>

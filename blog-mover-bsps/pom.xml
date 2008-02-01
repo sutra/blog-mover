@@ -30,4 +30,7 @@
 		<module>blog-mover-bsps-sina</module>
 		<module>blog-mover-bsps-space</module>
 	</modules>
+	<reporting>
+		<outputDirectory>../target/site/${artifactId}/</outputDirectory>
+	</reporting>
 </project>

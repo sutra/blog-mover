@@ -16,4 +16,7 @@
 		<module>blog-mover-blogengines-oblog</module>
 		<module>blog-mover-blogengines-oblog-test</module>
 	</modules>
+	<reporting>
+		<outputDirectory>../target/site/${artifactId}/</outputDirectory>
+	</reporting>
 </project>

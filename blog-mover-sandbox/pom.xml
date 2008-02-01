@@ -12,6 +12,9 @@
 	<artifactId>blog-mover-sandbox</artifactId>
 	<packaging>jar</packaging>
 	<name>Blog Mover Sandbox</name>
+	<reporting>
+		<outputDirectory>../target/site/${artifactId}/</outputDirectory>
+	</reporting>
 	<dependencies>
 		<dependency>
 			<groupId>${groupId}</groupId>

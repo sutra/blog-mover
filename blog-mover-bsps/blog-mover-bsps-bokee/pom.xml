@@ -12,6 +12,11 @@
 	<artifactId>blog-mover-bsps-bokee</artifactId>
 	<packaging>jar</packaging>
 	<name>Blog Mover bsps bokee</name>
+	<reporting>
+		<outputDirectory>
+			../../target/site/${parent.artifactId}/${artifactId}/
+		</outputDirectory>
+	</reporting>
 	<dependencies>
 		<dependency>
 			<groupId>${groupId}</groupId>
