@@ -135,6 +135,7 @@ public class SinaReader extends AbstractBlogReader {
 				boolean rs = matcher.find();
 				if (rs) {
 					pages = NumberUtils.toInt(matcher.group(1));
+					this.status.setApproximative(true);
 					this.status.setTotalCount(20 * pages);
 				}
 				break;
