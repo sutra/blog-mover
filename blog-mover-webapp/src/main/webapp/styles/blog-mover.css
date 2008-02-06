@@ -166,6 +166,7 @@ div #webLogsBox {
 
 td.label {
 	text-align: right;
+	white-space: nowrap;
 }
 
 .mockButton {

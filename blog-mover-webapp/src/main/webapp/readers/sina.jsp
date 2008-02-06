@@ -9,28 +9,28 @@
 	<table>
 		<tr>
 			<td class="label">
-				Sina Blog 帐号：
+				<label for="sina_username">Sina Blog 帐号：</label>
 			</td>
 			<td>
-				<input type="text" name="username" tabindex="100" />
+				<input type="text" id="sina_username" name="username" tabindex="100" />
 				（在这里填写你的 Sina Blog 帐号。）
 			</td>
 		</tr>
 		<tr>
 			<td class="label">
-				Sina Blog 密码：
+				<label for="sina_password">Sina Blog 密码：</label>
 			</td>
 			<td>
-				<input type="password" name="password" tabindex="101" />
+				<input type="password" id="sina_password" name="password" tabindex="101" />
 				（在这里填写 Sina Blog 密码，我们不会记录您的密码，在搬家完成后就删除这些个人信息。）
 			</td>
 		</tr>
 		<tr>
 			<td style="vertical-align:top;" class="label">
-				验证码：
+				<label for="sina_identifyingCode">验证码：</label>
 			</td>
 			<td>
-				<input type="text" name="identifyingCode" tabindex="102" />
+				<input type="text" id="sina_identifyingCode" name="identifyingCode" tabindex="102" />
 				（请在这里填写后面这张图片上的文字，这个验证码是给搬家程序登录 Sina Blog
 				用的。如果你看不清下面的图片，请单击图片重新获取一张。）
 				<br />
