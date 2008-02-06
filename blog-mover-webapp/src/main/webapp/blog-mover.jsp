@@ -65,6 +65,7 @@
 			<jsp:directive.include file="includes/analytics.jsp" />
 			<jsp:directive.include file="includes/ads.jsp" />
 			<jsp:directive.include file="includes/footer.jsp" />
+			<div style="position:absolute;top:-2px;left:205px;background:url('images/01shu.gif');width:65px;height:91px;" title="鼠年快乐"></div>
 		</div>
 	</body>
 </html>
