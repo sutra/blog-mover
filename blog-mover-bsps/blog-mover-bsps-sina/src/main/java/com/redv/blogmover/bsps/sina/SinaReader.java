@@ -22,12 +22,15 @@ import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.html.HTMLDocument;
+import org.w3c.dom.html.HTMLScriptElement;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.BlogMoverRuntimeException;
@@ -151,25 +154,19 @@ public class SinaReader extends AbstractBlogReader {
 	 * @param document
 	 */
 	private void parse(Document document) {
-		NodeList nodeList = document.getChildNodes();
-		if (nodeList.getLength() <= 0) {
-			throw new BlogMoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
+		DomNodeUtils.debug(log, document);
+		HTMLDocument htmlDocument = (HTMLDocument) document;
+		NodeList scripts = htmlDocument.getElementsByTagName("script");
+		for (int i = 0, l = scripts.getLength(); i < l; i++) {
+			HTMLScriptElement script = (HTMLScriptElement) scripts.item(i);
+			log.debug(script.getSrc());
+			if (StringUtils.isEmpty(script.getSrc())) {
+				log.debug(script.getText());
+				if (script.getText().trim().startsWith("//<![CDATA[")) {
+					parse(script.getText());
+				}
+			}
 		}
-		nodeList = nodeList.item(0).getChildNodes();
-		if (nodeList.getLength() <= 1) {
-			throw new BlogMoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
-		}
-		nodeList = nodeList.item(1).getChildNodes();
-		if (nodeList.getLength() <= 19) {
-			throw new BlogMoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
-		}
-		nodeList = nodeList.item(19).getChildNodes();
-		if (nodeList.getLength() <= 0) {
-			throw new BlogMoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
-		}
-		Node node = nodeList.item(0);
-		String str = node.getNodeValue();
-		parse(str);
 	}
 
 	/**
@@ -421,7 +418,10 @@ public class SinaReader extends AbstractBlogReader {
 		}
 		sr.setIdentifyingCode(identifyingCode.toString().trim());
 		List<WebLog> entries = sr.read();
+		int i = 0;
 		for (WebLog entry : entries) {
+			System.out.print(++i);
+			System.out.print('\t');
 			System.out.println(entry.getTitle());
 			System.out.println(entry.getUrl());
 		}
