@@ -29,6 +29,8 @@ public class StatusImpl implements Status {
 
 	private int totalCount;
 
+	private boolean approximative;
+
 	/**
 	 * 
 	 */
@@ -95,6 +97,24 @@ public class StatusImpl implements Status {
 	 */
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
+	}
+
+	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see com.redv.blogmover.Status#isApproximative()
+	 */
+	public boolean isApproximative() {
+		return this.approximative;
+	}
+
+	/*
+	 * （非 Javadoc）
+	 * 
+	 * @see com.redv.blogmover.Status#setApproximative(boolean)
+	 */
+	public void setApproximative(boolean approximative) {
+		this.approximative = approximative;
 	}
 
 	/*

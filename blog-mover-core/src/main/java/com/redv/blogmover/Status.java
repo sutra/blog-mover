@@ -54,4 +54,18 @@ public interface Status extends Serializable {
 	 * @param totalCount
 	 */
 	void setTotalCount(int totalCount);
+
+	/**
+	 * 获取日志总数是否是近似数。
+	 * 
+	 * @return
+	 */
+	boolean isApproximative();
+
+	/**
+	 * 设置日志总数是否为近似。
+	 * 
+	 * @param approximative
+	 */
+	void setApproximative(boolean approximative);
 }
