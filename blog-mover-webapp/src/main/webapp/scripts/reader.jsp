@@ -148,7 +148,8 @@ function readStatusReply(data) {
 	// 读取尚未结束
 	if (reading) {
 		var s = "正在读取…… 当前读取数目/总数： " + data.currentCount + "/" 
-			+ (data.totalCount == -1 ? "未知" : data.totalCount) + "，当前正在处理的日志：" 
+			+ (data.totalCount == -1 ? "未知" : (data.approximative ? ("约" + data.totalCount) : data.totalCount)) 
+			+ "，当前正在处理的日志：" 
 			+ (data.currentWebLog.title === null ? "" : data.currentWebLog.title) 
 			+ "(" + (data.currentWebLog.publishedDate == null ? "" : data.currentWebLog.publishedDate.toLocaleString()) + ")。";
 		setStatus(s);
