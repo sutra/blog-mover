@@ -1,6 +1,5 @@
 package com.redv.blogmover.bsps.com.blogcn;
 
-
 import java.io.IOException;
 
 import junit.framework.TestCase;
@@ -39,18 +38,18 @@ public class LoginResponseParserTest extends TestCase {
 	 * @throws IOException
 	 */
 	public void testParse() throws IOException, SAXException {
-		testParse("login-success.html",
+		testParse("login-success-response.html",
 				LoginResponseParser.RESULT_LOGGED_IN);
 	}
 
 	public void testParsePasswordIncorrect() throws IOException, SAXException {
-		testParse("login-fail-1.html",
-				LoginResponseParser.RESULT_PASSWORD_INCORRECT); // login-fail-password-incorrect-response.html
+		testParse("login-fail-password-incorrect-response.html",
+				LoginResponseParser.RESULT_PASSWORD_INCORRECT);
 	}
 
 	public void testParseUsernameNotExists() throws IOException, SAXException {
-		testParse("login-fail-2.html",
-				LoginResponseParser.RESULT_USERNAME_NOT_EXISTS); // login-fail-username-not-exists-response.html
+		testParse("login-fail-username-not-exists-response.html",
+				LoginResponseParser.RESULT_USERNAME_NOT_EXISTS);
 	}
 
 	private void testParse(String htmlFile, int expectedResult)

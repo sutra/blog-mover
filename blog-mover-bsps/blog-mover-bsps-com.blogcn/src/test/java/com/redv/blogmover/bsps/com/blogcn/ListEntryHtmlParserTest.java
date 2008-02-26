@@ -83,7 +83,7 @@ public class ListEntryHtmlParserTest extends TestCase {
 		String editUrlPart = "/blue_log_ct.asp?action=edit&id=52108763&UserID=32361141&uid=blogmoverdev&dbID=3&t=2007%2D2%2D1+10%3A03%3A42";
 		modifyLinks.add(editUrlPart);
 
-		String filename = "blue_modfile_1.html"; // blue_modfile.asp_1_entry.html
+		String filename = "blue_modfile.asp_1_entry.html";
 		URL url = this.getClass().getResource(filename);
 		assertNotNull(url);
 		testParse(url, "UTF-8", 1, 1, 1, titles, publishedDates, permalinks,
@@ -102,8 +102,8 @@ public class ListEntryHtmlParserTest extends TestCase {
 			ParseException {
 		log.debug("testParse2PagesEntriesPage1");
 		URL url = this.getClass()
-				.getResource("list-1.txt");
-		String encoding = "UTF-8"; // list-page-2pages-page1.html.txt
+				.getResource("list-page-2pages-page1.html.txt");
+		String encoding = "UTF-8";
 		int expectedCurrentPage = 1;
 		int expectedTotalEntries = 12;
 		int expectedTotalPages = 2;
@@ -187,7 +187,7 @@ public class ListEntryHtmlParserTest extends TestCase {
 			ParseException {
 		log.debug("testParse2PagesEntriesPage2");
 		URL url = this.getClass()
-				.getResource("list-2.txt"); // list-page-2pages-page2.html.txt
+				.getResource("list-page-2pages-page2.html.txt");
 		String encoding = "UTF-8";
 		int expectedCurrentPage = 2;
 		int expectedTotalEntries = 12;
