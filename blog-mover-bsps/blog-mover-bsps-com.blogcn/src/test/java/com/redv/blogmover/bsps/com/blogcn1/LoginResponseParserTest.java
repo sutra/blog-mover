@@ -1,7 +1,7 @@
 /**
  * Created on 2007-1-31 下午11:49:50
  */
-package com.redv.blogmover.bsps.com.blogcn;
+package com.redv.blogmover.bsps.com.blogcn1;
 
 import java.io.IOException;
 
@@ -10,6 +10,7 @@ import junit.framework.TestCase;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import com.redv.blogmover.bsps.com.blogcn.LoginResponseParser;
 import com.redv.blogmover.util.HtmlFileToDocument;
 
 /**
@@ -34,7 +35,7 @@ public class LoginResponseParserTest extends TestCase {
 
 	/**
 	 * Test method for
-	 * {@link com.redv.blogmover.bsps.com.blogcn.LoginResponseParser#parse()}.
+	 * {@link com.redv.blogmover.bsps.com.blogcn1.LoginResponseParser#parse()}.
 	 * 
 	 * @throws SAXException
 	 * @throws IOException

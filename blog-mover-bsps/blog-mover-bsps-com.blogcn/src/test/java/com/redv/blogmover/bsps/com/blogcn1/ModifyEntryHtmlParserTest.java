@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.redv.blogmover.bsps.com.blogcn;
+package com.redv.blogmover.bsps.com.blogcn1;
 
 import java.io.IOException;
 import java.util.Date;
@@ -14,6 +14,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import com.redv.blogmover.WebLog;
+import com.redv.blogmover.bsps.com.blogcn.ModifyEntryHtmlParser;
 import com.redv.blogmover.util.HtmlFileToDocument;
 
 /**
@@ -38,7 +39,7 @@ public class ModifyEntryHtmlParserTest extends TestCase {
 
 	/**
 	 * Test method for
-	 * {@link com.redv.blogmover.bsps.com.blogcn.ModifyEntryHtmlParser#parse()}.
+	 * {@link com.redv.blogmover.bsps.com.blogcn1.ModifyEntryHtmlParser#parse()}.
 	 * 
 	 * @throws SAXException
 	 * @throws IOException

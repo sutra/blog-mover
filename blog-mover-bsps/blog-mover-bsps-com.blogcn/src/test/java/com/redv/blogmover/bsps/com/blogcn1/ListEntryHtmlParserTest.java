@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.redv.blogmover.bsps.com.blogcn;
+package com.redv.blogmover.bsps.com.blogcn1;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +19,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import com.redv.blogmover.bsps.com.blogcn.ListEntryHtmlParser;
 import com.redv.blogmover.util.HtmlFileToDocument;
 
 /**
@@ -61,7 +62,7 @@ public class ListEntryHtmlParserTest extends TestCase {
 
 	/**
 	 * Test method for
-	 * {@link com.redv.blogmover.bsps.com.blogcn.ListEntryHtmlParser#parse()}.
+	 * {@link com.redv.blogmover.bsps.com.blogcn1.ListEntryHtmlParser#parse()}.
 	 * 您共发表了1篇日志，公开日志（1）隐藏日志（0）。
 	 * 
 	 * @throws SAXException
