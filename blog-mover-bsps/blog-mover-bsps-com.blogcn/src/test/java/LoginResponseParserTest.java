@@ -1,7 +1,4 @@
-/**
- * Created on 2007-1-31 下午11:49:50
- */
-package com.redv.blogmover.bsps.com.blogcn1;
+
 
 import java.io.IOException;
 

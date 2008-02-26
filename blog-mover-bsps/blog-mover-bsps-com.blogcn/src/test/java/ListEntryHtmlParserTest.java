@@ -1,7 +1,4 @@
-/**
- * 
- */
-package com.redv.blogmover.bsps.com.blogcn1;
+
 
 import java.io.IOException;
 import java.net.URL;
