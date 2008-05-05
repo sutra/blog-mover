@@ -25,9 +25,10 @@
 	window.onbeforeunload = doClose;
 //}
 function doClose() {
-	if (readerBusy || writerBusy) {
-		var t = "───────────────────────\r\n您确定要离开 Blog Mover 吗？\r\n确定后未完成的操作你将无法控制。\r\n───────────────────────";
-		return t;
+	if (readerBusy) {
+		return "───────────────────────\r\n正在读取……\r\n您确定要离开 Blog Mover 吗？\r\n确定后未完成的操作你将无法控制。\r\n───────────────────────";
+	} else if (writerBusy) {
+		return "───────────────────────\r\n正在写入……\r\n您确定要离开 Blog Mover 吗？\r\n确定后未完成的操作你将无法控制。\r\n───────────────────────";
 	}
 }
 
