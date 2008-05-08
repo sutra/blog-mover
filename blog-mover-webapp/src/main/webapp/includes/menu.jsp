@@ -21,7 +21,7 @@
 				选项(<span class="accesskey">O</span>) </a>
 		</li>
 		<li id="menu_about">
-			<a title="关于 Blog Remover" onclick="return selectTab('about')"
+			<a title="关于 Blog Mover" onclick="return selectTab('about')"
 				accesskey="A"> 关于 Blog Mover(<span class="accesskey">A</span>) </a>
 		</li>
 		<%--
