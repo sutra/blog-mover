@@ -3,12 +3,15 @@
  */
 package com.redv.blogmover.bsps.baidu;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HeaderGroup;
 import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -47,13 +50,25 @@ public class BaiduLogin {
 
 	public void login(String username, String password)
 			throws BlogMoverException {
-		String action = "http://passport.baidu.com/?login&tpl=sp&tpl_reg=sp&u=http://hi.baidu.com/";
-		String u = "http://hi.baidu.com/";
-		NameValuePair[] parameters = new NameValuePair[4];
-		parameters[0] = new NameValuePair("u", u);
-		parameters[1] = new NameValuePair("username", username);
-		parameters[2] = new NameValuePair("password", password);
-		parameters[3] = new NameValuePair("submit", " 登录 ");
+		this.httpDocument.get("http://www.baidu.com/");
+		this.httpDocument
+				.get("http://passport.baidu.com/?login&tpl=mn&u=http%3A//www.baidu.com/");
+		String action = "http://passport.baidu.com/?login";
+		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+		parameters.add(new NameValuePair("tpl_ok", StringUtils.EMPTY));
+		parameters.add(new NameValuePair("next_target", StringUtils.EMPTY));
+		parameters.add(new NameValuePair("tpl", "mn"));
+		parameters.add(new NameValuePair("skip_ok", StringUtils.EMPTY));
+		parameters.add(new NameValuePair("aid", StringUtils.EMPTY));
+		parameters.add(new NameValuePair("need_pay", StringUtils.EMPTY));
+		parameters.add(new NameValuePair("need_coin", StringUtils.EMPTY));
+		parameters.add(new NameValuePair("u", "http://www.baidu.com/"));
+		parameters.add(new NameValuePair("return_method", "get"));
+		parameters.add(new NameValuePair("psp_tt", "0"));
+		parameters.add(new NameValuePair("username", username));
+		parameters.add(new NameValuePair("password", password));
+		parameters.add(new NameValuePair("mem_pass", "on"));
+		// parameters.add(new NameValuePair(StringUtils.EMPTY, "登录"));
 		HeaderGroup hg = new HeaderGroup();
 		hg.addHeader(new Header("Content-Type",
 				"application/x-www-form-urlencoded; charset=GB2312"));
@@ -83,6 +98,7 @@ public class BaiduLogin {
 			throw new LoginFailedException("登录失败。错误信息:" + err_msg + "， 错误代码:"
 					+ err_code);
 		}
+		this.httpDocument.get("http://www.baidu.com/");
 	}
 
 }

@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.httpclient.Header;
+import org.apache.commons.httpclient.HeaderGroup;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -54,8 +56,7 @@ public class BaiduReader extends AbstractBlogReader {
 	private String password;
 
 	/**
-	 * the handle of user's blog.<br />
-	 * http://hi.baidu.com/BLOGHANDLE/
+	 * the handle of user's blog.<br /> http://hi.baidu.com/BLOGHANDLE/
 	 */
 	private String blogHandle;
 
@@ -84,6 +85,7 @@ public class BaiduReader extends AbstractBlogReader {
 	public List<WebLog> read() throws BlogMoverException {
 		checkLogin();
 		blogHandle = BaiduUtils.findBlogHandle(this.httpDocument);
+		this.httpDocument.get("http://hi.baidu.com/" + blogHandle);
 		parseSetting(blogHandle);
 		String url = "http://hi.baidu.com/" + blogHandle + "/blog/index/";
 		for (int i = 0; i < Integer.MAX_VALUE; i++) {
@@ -125,7 +127,10 @@ public class BaiduReader extends AbstractBlogReader {
 	private void parseSetting(String blogHandle) throws BlogMoverException {
 		String settingUrl = "http://hi.baidu.com/" + blogHandle
 				+ "/modify/spbasic/0";
-		Document document = httpDocument.get(settingUrl);
+		HeaderGroup requestHeaderGroup = new HeaderGroup();
+		requestHeaderGroup.addHeader(new Header("Referer",
+				"http://hi.baidu.com/" + blogHandle));
+		Document document = httpDocument.get(settingUrl, requestHeaderGroup);
 		// DispNum.
 		Element spConfigDispNum = document.getElementById("spConfigDispNum");
 		if (spConfigDispNum == null) {
@@ -250,7 +255,7 @@ public class BaiduReader extends AbstractBlogReader {
 					+ textContent);
 			if (StringUtils.equals(styleClass, "tit")) { // Title.
 				// webLog.setTitle(textContent);
-			} else if (StringUtils.equals(styleClass, "date")) { // PublishedDate.
+			} else if (StringUtils.equals(styleClass, "date")) { //PublishedDate.
 				if (!publishedDateSetted) {
 					webLog.setPublishedDate(parseDate(textContent));
 					publishedDateSetted = true;

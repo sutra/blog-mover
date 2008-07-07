@@ -40,13 +40,14 @@ public class BaiduUtils {
 			} catch (NullPointerException e) {
 				// Yes, just do nothing.
 			}
-			if ("".equals(name) && "立即进入我的空间".equals(value)) {
+			if ("Input".equals(name) && "立即进入我的空间".equals(value)) {
 				String onclick = input.getAttributes().getNamedItem("onclick")
 						.getNodeValue();
 				Pattern p = Pattern.compile("window.location.href='/([^/']+)'");
 				Matcher m = p.matcher(onclick);
 				if (m.matches()) {
 					ret = m.group(1);
+					break;
 				}
 			}
 		}
