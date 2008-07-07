@@ -6,7 +6,8 @@ package com.redv.blogmover.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
+import java.util.Iterator;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.Header;
@@ -41,7 +42,6 @@ public class HttpDocument implements Serializable {
 	 */
 	private static final long serialVersionUID = 3668507850703993669L;
 
-	@SuppressWarnings("unused")
 	private static final Log log = LogFactory.getLog(HttpDocument.class);
 
 	private transient HttpClient httpClient;
@@ -212,8 +212,20 @@ public class HttpDocument implements Serializable {
 	 * @return
 	 */
 	public Document get(String url) {
+		return get(url, null);
+	}
+
+	/**
+	 * Execute `get' method.
+	 * 
+	 * @param url
+	 * @param requestHeaderGroup
+	 * @return
+	 */
+	public Document get(String url, HeaderGroup requestHeaderGroup) {
 		GetMethod getMethod = new GetMethod(url);
 		getMethod.setFollowRedirects(followRedirects);
+		addRequestHeaderGroup(getMethod, this.requestHeaderGroup);
 		addRequestHeaderGroup(getMethod, requestHeaderGroup);
 		if (manualCookie) {
 			addCookies(getMethod, httpClient.getState().getCookies());
@@ -241,8 +253,23 @@ public class HttpDocument implements Serializable {
 	 * @param requestHeaderGroup
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public Document post(String action, NameValuePair[] parameters,
 			HeaderGroup requestHeaderGroup) {
+		if (log.isDebugEnabled()) {
+			log.debug("action: " + action);
+			log.debug("parameters: ");
+			for (NameValuePair parameter : parameters) {
+				log.debug(parameter.getName() + ":" + parameter.getValue());
+			}
+			log.debug("requestHeaderGroup: ");
+
+			for (Iterator<Header> iter = requestHeaderGroup.getIterator(); iter
+					.hasNext();) {
+				Header header = iter.next();
+				log.debug(header.getName() + ":" + header.getValue());
+			}
+		}
 		PostMethod postMethod;
 		if (this.requestCharSet == null) {
 			postMethod = new PostMethod(action);
@@ -268,7 +295,7 @@ public class HttpDocument implements Serializable {
 	 * @param parameters
 	 * @return
 	 */
-	public Document post(String action, List<NameValuePair> parameters) {
+	public Document post(String action, Collection<NameValuePair> parameters) {
 		return post(action, parameters, null);
 	}
 
@@ -280,7 +307,7 @@ public class HttpDocument implements Serializable {
 	 * @param requestHeaderGroup
 	 * @return
 	 */
-	public Document post(String action, List<NameValuePair> parameters,
+	public Document post(String action, Collection<NameValuePair> parameters,
 			HeaderGroup requestHeaderGroup) {
 		NameValuePair[] nvps = null;
 		if (parameters != null) {
