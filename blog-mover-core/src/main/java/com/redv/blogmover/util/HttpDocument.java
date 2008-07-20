@@ -3,11 +3,15 @@
  */
 package com.redv.blogmover.util;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.zip.DataFormatException;
+import java.util.zip.Inflater;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.Header;
@@ -20,6 +24,7 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cyberneko.html.parsers.DOMParser;
@@ -393,7 +398,21 @@ public class HttpDocument implements Serializable {
 				log.debug("URI: " + method.getURI().toString()
 						+ "\ngetResponseBodyAsString: " + s);
 			}
-			InputStream inputStream = method.getResponseBodyAsStream();
+			InputStream inputStream;
+			Header contentEncodingHeader = method
+					.getResponseHeader("Content-Encoding");
+			if ("deflate".equals(contentEncodingHeader.getValue())) {
+				InputStream body = method.getResponseBodyAsStream();
+				try {
+					inputStream = new ByteArrayInputStream(decompress(body));
+				} catch (DataFormatException e) {
+					throw new IOException(e.getMessage());
+				} finally {
+					body.close();
+				}
+			} else {
+				inputStream = method.getResponseBodyAsStream();
+			}
 			try {
 				DOMParser parser = new DOMParser();
 				InputSource inputSource = new InputSource();
@@ -492,5 +511,23 @@ public class HttpDocument implements Serializable {
 			method.addRequestHeader("Cookie", value
 					+ cookieToHeaderString(cookies));
 		}
+	}
+
+	public static byte[] decompress(InputStream inputStream)
+			throws IOException, DataFormatException {
+		// Decompress the bytes
+		Inflater decompresser = new Inflater(true);
+		decompresser.setInput(IOUtils.toByteArray(inputStream));
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		try {
+			byte[] result = new byte[2048];
+			do {
+				int resultLength = decompresser.inflate(result);
+				os.write(result, 0, resultLength);
+			} while (!decompresser.finished());
+		} finally {
+			decompresser.end();
+		}
+		return os.toByteArray();
 	}
 }
