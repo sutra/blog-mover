@@ -30,7 +30,6 @@ import com.redv.blogmover.util.HttpDocument;
  * 
  */
 class DoNewsLogin implements Serializable {
-	@SuppressWarnings("unused")
 	private final Log log = LogFactory.getLog(this.getClass());
 
 	/**

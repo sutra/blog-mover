@@ -135,7 +135,6 @@ public class CSDNBlogWriter implements BlogWriter {
 	 * 
 	 * @see com.redv.blogremover.BlogWriter#write(java.util.List)
 	 */
-	@SuppressWarnings("unchecked")
 	public void write(List<WebLog> webLogs) throws BlogMoverException {
 		log.debug("write(java.util.List) called. webLogs.size()="
 				+ webLogs.size());
