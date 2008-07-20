@@ -71,7 +71,6 @@ public abstract class AbstractBlogWriter implements BlogWriter {
 	 * 
 	 * @see com.redv.blogremover.BlogWriter#write(java.util.List)
 	 */
-	@SuppressWarnings("unchecked")
 	public void write(List<WebLog> webLogs) throws BlogMoverException {
 		this.status.setTotalCount(webLogs.size());
 		// 对日志排序。
@@ -124,7 +123,6 @@ public abstract class AbstractBlogWriter implements BlogWriter {
 	 * @param attachments
 	 * @throws BlogMoverException
 	 */
-	@SuppressWarnings("unchecked")
 	private void write(WebLog webLog, Map<Attachment, String> attachments)
 			throws BlogMoverException {
 		log.debug("开始写入日志：" + webLog.getTitle());
