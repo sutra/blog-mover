@@ -28,7 +28,6 @@ import com.redv.blogmover.impl.WebLogImpl;
  * 
  */
 public class MetaWeblogWriterTest extends TestCase {
-	@SuppressWarnings("unused")
 	private static final Log log = LogFactory
 			.getLog(MetaWeblogWriterTest.class);
 

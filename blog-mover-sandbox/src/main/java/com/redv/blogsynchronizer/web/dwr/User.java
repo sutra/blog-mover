@@ -402,7 +402,6 @@ public class User implements Serializable {
 		 * 
 		 * @throws BlogMoverException
 		 */
-		@SuppressWarnings("unchecked")
 		public void write() throws BlogMoverException {
 			log.debug("write() called.");
 			this.getUserFacade().write();
