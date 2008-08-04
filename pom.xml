@@ -1,4 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0       http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<description>
 		Blog Moving Tool(博客搬家通用工具): Our goal is allowing your blog
 		moving freely between each BSP.(我们的目标是让你的 Blog 可以在各个 BSP
@@ -161,9 +161,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:svn:http://blog-mover.googlecode.com/svn/tags/3.0.1</connection>
-		<developerConnection>scm:svn:https://blog-mover.googlecode.com/svn/tags/3.0.1</developerConnection>
-		<url>http://blog-mover.googlecode.com/svn/tags/3.0.1</url>
+		<connection>scm:svn:http://blog-mover.googlecode.com/svn/trunk/</connection>
+		<developerConnection>scm:svn:https://blog-mover.googlecode.com/svn/trunk/</developerConnection>
+		<url>http://blog-mover.googlecode.com/svn/</url>
 	</scm>
 	<dependencyManagement>
 		<dependencies>
