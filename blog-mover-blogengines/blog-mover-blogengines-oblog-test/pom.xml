@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.redv.blogmover</groupId>
 		<artifactId>blog-mover-blogengines</artifactId>
-		<version>3.0</version>
+		<version>3.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>blog-mover-blogengines-oblog-test</artifactId>
 	<packaging>jar</packaging>
