@@ -269,10 +269,12 @@ public class HttpDocument implements Serializable {
 			}
 			log.debug("requestHeaderGroup: ");
 
-			for (Iterator<Header> iter = requestHeaderGroup.getIterator(); iter
-					.hasNext();) {
-				Header header = iter.next();
-				log.debug(header.getName() + ":" + header.getValue());
+			if (requestHeaderGroup != null) {
+				for (Iterator<Header> iter = requestHeaderGroup.getIterator(); iter
+						.hasNext();) {
+					Header header = iter.next();
+					log.debug(header.getName() + ":" + header.getValue());
+				}
 			}
 		}
 		PostMethod postMethod;
@@ -401,7 +403,8 @@ public class HttpDocument implements Serializable {
 			InputStream inputStream;
 			Header contentEncodingHeader = method
 					.getResponseHeader("Content-Encoding");
-			if ("deflate".equals(contentEncodingHeader.getValue())) {
+			if (contentEncodingHeader != null
+					&& "deflate".equals(contentEncodingHeader.getValue())) {
 				InputStream body = method.getResponseBodyAsStream();
 				try {
 					inputStream = new ByteArrayInputStream(decompress(body));
