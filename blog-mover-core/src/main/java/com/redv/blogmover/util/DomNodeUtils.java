@@ -213,14 +213,35 @@ public class DomNodeUtils {
 		return hfs;
 	}
 
+	/**
+	 * Output the node as xml to debug.
+	 * 
+	 * @param log
+	 * @param node
+	 */
 	public static void debug(Log log, Node node) {
+		debug(null, log, node);
+	}
+
+	/**
+	 * Output the node as xml to debug.
+	 * 
+	 * @param title
+	 * @param log
+	 * @param node
+	 */
+	public static void debug(String title, Log log, Node node) {
 		if (log.isDebugEnabled()) {
 			try {
-				log.debug(getXmlAsString(node));
+				String s = getXmlAsString(node);
+				if (title != null) {
+					log.debug(String.format("%1$s: %2$s", title, s));
+				} else {
+					log.debug(s);
+				}
 			} catch (TransformerException e) {
 				log.debug("Error while get xml as string from a node.", e);
 			}
 		}
 	}
-
 }
