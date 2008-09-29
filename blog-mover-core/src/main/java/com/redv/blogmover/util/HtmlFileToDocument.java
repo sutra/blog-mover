@@ -17,7 +17,9 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
- * @author shutrazh
+ * Read document from input stream.
+ * 
+ * @author Sutra Zhou
  * 
  */
 public class HtmlFileToDocument {

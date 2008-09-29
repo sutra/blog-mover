@@ -30,32 +30,57 @@ import org.w3c.dom.Text;
 public class DomNodeUtils {
 	private static final Log log = LogFactory.getLog(DomNodeUtils.class);
 
+	/**
+	 * Get text of the specified node recursively.
+	 * 
+	 * @param node
+	 * @return
+	 */
 	public static String getTextContent(Node node) {
-		String ret = null;
+		return getTextContent(node, false);
+	}
+
+	/**
+	 * Get text of the specified node recursively.
+	 * 
+	 * @param node
+	 * @param comment
+	 *            retrive comment as text
+	 * @return
+	 */
+	public static String getTextContent(Node node, boolean comment) {
+		StringBuilder ret = new StringBuilder();
+		if (log.isDebugEnabled()) {
+			log.debug("node type: " + node.getNodeType());
+		}
 		switch (node.getNodeType()) {
-		case Node.ELEMENT_NODE:
-		case Node.ATTRIBUTE_NODE:
-		case Node.ENTITY_NODE:
-		case Node.ENTITY_REFERENCE_NODE:
-		case Node.DOCUMENT_FRAGMENT_NODE:
-			Node child = node.getFirstChild();
-			if (child != null) {
-				ret = child.getNodeValue();
+		case Node.ELEMENT_NODE: // 1
+		case Node.ATTRIBUTE_NODE:// 2
+		case Node.ENTITY_NODE: // 6
+		case Node.ENTITY_REFERENCE_NODE: // 5
+		case Node.DOCUMENT_NODE: // 9
+		case Node.DOCUMENT_FRAGMENT_NODE: // 11
+			NodeList childNodes = node.getChildNodes();
+			for (int i = 0, l = childNodes.getLength(); i < l; i++) {
+				ret.append(getTextContent(childNodes.item(i)));
 			}
 			break;
-		case Node.TEXT_NODE:
-		case Node.CDATA_SECTION_NODE:
-		case Node.COMMENT_NODE:
-		case Node.PROCESSING_INSTRUCTION_NODE:
-			ret = node.getNodeValue();
+		case Node.TEXT_NODE: // 3
+		case Node.CDATA_SECTION_NODE: // 4
+		case Node.PROCESSING_INSTRUCTION_NODE: // 7
+			ret.append(node.getNodeValue());
 			break;
-		case Node.DOCUMENT_NODE:
-		case Node.DOCUMENT_TYPE_NODE:
-		case Node.NOTATION_NODE:
+		case Node.COMMENT_NODE: // 8
+			if (comment) {
+				ret.append(node.getNodeValue());
+			}
+			break;
+		case Node.DOCUMENT_TYPE_NODE: // 10
+		case Node.NOTATION_NODE: // 12
 			ret = null;
 			break;
 		}
-		return ret;
+		return ret != null ? ret.toString() : null;
 	}
 
 	/**
