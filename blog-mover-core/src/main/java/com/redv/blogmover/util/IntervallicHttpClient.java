@@ -36,6 +36,8 @@ public class IntervallicHttpClient extends HttpClient {
 			.getName()
 			+ ".MAXIMUM_INTERVAL";
 
+	private long lastExecutionTime = 0L;
+
 	/**
 	 * 
 	 */
@@ -77,8 +79,8 @@ public class IntervallicHttpClient extends HttpClient {
 	@Override
 	public int executeMethod(HostConfiguration hostconfig, HttpMethod method,
 			HttpState state) throws IOException, HttpException {
-		long interval = randomInterval();
-		if (interval != 0L) {
+		long interval = calcInterval();
+		if (interval >= 0L) {
 			log.debug(String.format("Sleep %1$s milliseconds.", interval));
 			try {
 				Thread.sleep(interval);
@@ -86,7 +88,24 @@ public class IntervallicHttpClient extends HttpClient {
 				throw new RuntimeException(e);
 			}
 		}
-		return super.executeMethod(hostconfig, method, state);
+		try {
+			return super.executeMethod(hostconfig, method, state);
+		} finally {
+			lastExecutionTime = System.currentTimeMillis();
+		}
+	}
+
+	private long calcInterval() {
+		long randomInterval = randomInterval();
+		long currentTimeMillis = System.currentTimeMillis();
+		long interval = lastExecutionTime + randomInterval - currentTimeMillis;
+		if (log.isDebugEnabled()) {
+			String format = "calc interval: lastExecutionTime + randomInterval - currentTimeMillis = interval: %1$s + %2$s - %3$s = %4$s.";
+			String s = String.format(format, lastExecutionTime, randomInterval,
+					currentTimeMillis, interval);
+			log.debug(s);
+		}
+		return interval;
 	}
 
 	private long randomInterval() {
