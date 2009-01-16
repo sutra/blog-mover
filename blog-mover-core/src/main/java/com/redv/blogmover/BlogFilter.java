@@ -1,12 +1,17 @@
 package com.redv.blogmover;
 
 public interface BlogFilter {
-  ReadFilterResult run(WebLog blog);
+	/**
+	 * Execute the filter.
+	 * @param blog the blog
+	 * @return the filter result
+	 */
+	ReadFilterResult run(WebLog blog);
 
-  public static BlogFilter NONE = new BlogFilter() {
-    public ReadFilterResult run(WebLog blog) {
-      return ReadFilterResult.ACCEPT_AND_READ_MORE;
-    }
+	static BlogFilter NONE = new BlogFilter() {
+		public ReadFilterResult run(WebLog blog) {
+			return ReadFilterResult.ACCEPT_AND_READ_MORE;
+		}
 
-  };
+	};
 }
