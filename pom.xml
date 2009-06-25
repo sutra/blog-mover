@@ -197,7 +197,7 @@
 			<uniqueVersion>false</uniqueVersion>
 			<id>mirrors.redv.com</id>
 			<name>Redv.com</name>
-			<url>sftp://mirrors.redv.com/pub/blog-mover</url>
+			<url>sftp://mirrors.redv.com:3389/var/ftp/pub/blog-mover</url>
 			<layout>default</layout>
 		</repository>
 	</distributionManagement>
