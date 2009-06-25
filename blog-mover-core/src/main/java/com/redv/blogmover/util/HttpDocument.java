@@ -22,6 +22,7 @@ import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URIException;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.io.IOUtils;
@@ -229,6 +230,7 @@ public class HttpDocument implements Serializable {
 	 */
 	public Document get(String url, HeaderGroup requestHeaderGroup) {
 		GetMethod getMethod = new GetMethod(url);
+		getMethod.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
 		getMethod.setFollowRedirects(followRedirects);
 		addRequestHeaderGroup(getMethod, this.requestHeaderGroup);
 		addRequestHeaderGroup(getMethod, requestHeaderGroup);
@@ -283,6 +285,7 @@ public class HttpDocument implements Serializable {
 		} else {
 			postMethod = new CharSetPostMethod(action, this.requestCharSet);
 		}
+		postMethod.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
 		addRequestHeaderGroup(postMethod, this.requestHeaderGroup);
 		addRequestHeaderGroup(postMethod, requestHeaderGroup);
 		if (manualCookie) {
