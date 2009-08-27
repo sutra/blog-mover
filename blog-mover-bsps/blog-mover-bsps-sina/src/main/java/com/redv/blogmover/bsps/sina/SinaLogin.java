@@ -3,7 +3,6 @@
  */
 package com.redv.blogmover.bsps.sina;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
@@ -15,9 +14,6 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -62,8 +58,7 @@ public class SinaLogin {
 
 	public void login(String loginname, String passwd, String checkwd)
 			throws BlogMoverException {
-		// String action =
-		// "http://blog.sina.com.cn/login.php?url=%2Fcontrol%2F";
+		// String action = "http://blog.sina.com.cn/login.php?url=%2Fcontrol%2F";
 		String action = "http://my.blog.sina.com.cn/login.php?url=%2F";
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 
@@ -73,8 +68,10 @@ public class SinaLogin {
 		parameter = new NameValuePair("passwd", passwd);
 		parameters.add(parameter);
 
+		/*
 		parameter = new NameValuePair("checkwd", checkwd);
 		parameters.add(parameter);
+		*/
 
 		Document document = httpDocument.post(action, parameters);
 		DomNodeUtils.debug(log, document);
@@ -102,12 +99,16 @@ public class SinaLogin {
 
 	public static byte[] getIdentifyingCodeImage(HttpClient httpClient)
 			throws HttpException, IOException {
+		/*
 		// String url = "http://blog.sina.com.cn/myblog/checkwd_image.php";
 		String url = "http://my.blog.sina.com.cn/myblog/checkwd_image.php?"
 				+ System.currentTimeMillis();
 		GetMethod method = new GetMethod(url);
 		httpClient.executeMethod(method);
+		
 		return method.getResponseBody();
+		*/
+		return new byte[]{};
 	}
 
 	public static void main(String[] args) throws HttpException, IOException,
@@ -126,21 +127,10 @@ public class SinaLogin {
 		System.out.print("Please enter your password: ");
 		String password = lnr.readLine();
 		System.out.println("Your entered password is: " + password.toString());
-		byte[] image = getIdentifyingCodeImage(httpClient);
-		File file = new File(SystemUtils.JAVA_IO_TMPDIR, SinaReader.class
-				.getName()
-				+ ".png");
-		FileUtils.writeByteArrayToFile(file, image);
-		System.out.print(String.format(
-				"Please enter the code on the image(%1$s): ", file.getPath()));
-		String identifyingCode = lnr.readLine();
-		System.out.println("Your entered code is: " + identifyingCode);
-		if (!file.delete()) {
-			file.deleteOnExit();
-		}
+		
+		byte[] identifyingCode = getIdentifyingCodeImage(httpClient);
 		try {
-			login.login(username.toString(), password.toString(),
-					identifyingCode.toString());
+			login.login(username.toString(), password.toString() ,identifyingCode.toString());
 			System.out.println("Login OK.");
 		} catch (LoginFailedException ex) {
 			System.out.println("Login failed.");

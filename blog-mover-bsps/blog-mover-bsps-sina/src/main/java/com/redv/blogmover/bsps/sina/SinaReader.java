@@ -4,13 +4,9 @@
 package com.redv.blogmover.bsps.sina;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,33 +16,40 @@ import java.util.regex.Pattern;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.lang.math.NumberUtils;
+import org.ho.yaml.Yaml;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.html.HTMLDocument;
-import org.w3c.dom.html.HTMLScriptElement;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.BlogMoverRuntimeException;
+import com.redv.blogmover.BlogSettings;
+import com.redv.blogmover.Category;
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
+import com.redv.blogmover.impl.CategoryImpl;
 import com.redv.blogmover.impl.WebLogImpl;
+import com.redv.blogmover.util.DocumentToString;
 import com.redv.blogmover.util.DomNodeUtils;
 import com.redv.blogmover.util.HttpDocument;
+import com.redv.blogmover.util.IntUtil;
+import com.redv.blogmover.util.StringUtil;
 
 /**
- * @author Joe
+ * @author Richard Zhu
  * @version 1.0
  * 
  */
 public class SinaReader extends AbstractBlogReader {
+
+	/**
+	 * 配置文件路径
+	 */
+	public static String configFilePath = System.getProperty("user.dir")
+			+ "\\settings.yaml";
+
 	private HttpClient httpClient;
 
 	private HttpDocument httpDocument;
@@ -57,6 +60,27 @@ public class SinaReader extends AbstractBlogReader {
 
 	private String password;
 
+	private String uid;
+
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
+	public static BlogSettings config = null;
+
+	public static BlogSettings getConfig() {
+		if(null == SinaReader.config) {
+			SinaReader.config = SinaReader.initConfig();
+			return config;
+		}
+		return SinaReader.config;
+	}
+
+
 	private String identifyingCode;
 
 	private Set<String> ids = new HashSet<String>();
@@ -65,12 +89,26 @@ public class SinaReader extends AbstractBlogReader {
 
 	public SinaReader() {
 		super();
-
+		
 		httpClient = new HttpClient();
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
 		httpDocument = new HttpDocument(httpClient, true, "GB2312");
 		httpDocument.setRequestCharSet("GB2312");
+	}
+	
+	public static BlogSettings initConfig()
+	{
+		String filePath = SinaReader.configFilePath;
+		File rulesFile = new File(filePath);
+		
+		try {
+			BlogSettings config = Yaml.loadType(rulesFile, BlogSettings.class);
+			return config;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	/**
@@ -113,39 +151,37 @@ public class SinaReader extends AbstractBlogReader {
 	 */
 	@Override
 	public List<WebLog> read() throws BlogMoverException {
-		if (!loggedIn) {
-			new SinaLogin(httpDocument).login(username, password,
-					identifyingCode);
-			loggedIn = true;
-		}
+		String url = "http://blog.sina.com.cn/s/articlelist_" + this.getUid()
+				+ "_0_%s.html";
 
-		String url = "http://blog.sina.com.cn/control/writing/explorer/article_list_sort.php";
+		String acateUrl = "http://blogcnf.sinajs.cn/acate?jv=x&"
+				+ this.getUid();
+
+		int totalArticleCount = 0;
 		int pages = 0;
-		Document document = httpDocument.get(url);
-		NodeList tds = document.getElementsByTagName("td");
-		log.debug("tds.getLength(): " + tds.getLength());
-		for (int i = 0; i < tds.getLength(); i++) {
-			Element td = (Element) tds.item(i);
-			if ("page_bar".equals(td.getAttribute("class"))) {
-				String pageStr = DomNodeUtils.getTextContent(td);
-				log.debug("pageStr: " + pageStr);
-				String p = "共([0-9]+)页";
-				Pattern pattern = Pattern.compile(p);
-				Matcher matcher = pattern.matcher(pageStr);
-				boolean rs = matcher.find();
-				if (rs) {
-					pages = NumberUtils.toInt(matcher.group(1));
-					this.status.setApproximative(true);
-					this.status.setTotalCount(20 * pages);
-				}
-				break;
-			}
+		Document document = httpDocument.get(acateUrl);
+
+		// 获取文章总数和页码总数
+		String p = "\"total\":([0-9]+)";
+		Pattern pattern = Pattern.compile(p);
+		Matcher matcher = pattern.matcher(document.getFirstChild()
+				.getTextContent());
+		boolean rs = matcher.find();
+		if (rs) {
+			totalArticleCount = NumberUtils.toInt(matcher.group(1));
+			this.status.setApproximative(true);
+			this.status.setTotalCount(totalArticleCount);
 		}
-		parse(document);
-		for (int i = 2; i <= pages; i++) {
-			document = httpDocument.get(url + "?p=" + i);
+		pages = IntUtil.GetPageCount(totalArticleCount);
+		log.debug("---- 日志页数 ----：" + String.valueOf(pages));
+
+		String listPageUrl = "";
+		for (int i = 1; i <= pages; i++) {
+			listPageUrl = String.format(url, i);
+			document = httpDocument.get(listPageUrl);
 			parse(document);
 		}
+
 		return this.webLogs;
 	}
 
@@ -155,52 +191,15 @@ public class SinaReader extends AbstractBlogReader {
 	 * @param document
 	 */
 	private void parse(Document document) {
-		DomNodeUtils.debug(log, document);
-		HTMLDocument htmlDocument = (HTMLDocument) document;
-		NodeList scripts = htmlDocument.getElementsByTagName("script");
-		for (int i = 0, l = scripts.getLength(); i < l; i++) {
-			HTMLScriptElement script = (HTMLScriptElement) scripts.item(i);
-			log.debug(script.getSrc());
-			if (StringUtils.isEmpty(script.getSrc())) {
-				log.debug(script.getText());
-				if (script.getText().trim().startsWith("//<![CDATA[")) {
-					parse(script.getText());
-				}
-			}
-		}
-	}
+		String doc = DocumentToString.toString(document);
 
-	/**
-	 * 分析日志列表。
-	 * 
-	 * @param str
-	 */
-	void parse(String str) {
-		String[] strs = str.split("data: \\[");
-		for (String s : strs) {
-			parseOne(s);
-		}
-	}
-
-	/**
-	 * 分析日志列表中的某一个日志。
-	 * 
-	 * @param str
-	 */
-	private void parseOne(String str) {
-		log.debug("str: " + str);
-		String pattern = "/writing/scriber/article_edit\\.php\\?blog_id\\=([0-9a-z]+)";
+		String pattern = "http://blog.sina.com.cn/s/blog_([0-9a-z]+).html";
 		Pattern p = Pattern.compile(pattern);
-		Matcher m = p.matcher(str);
-		boolean rs = m.find();
-		log.debug("rs: " + rs);
-		log.debug("groupCount: " + m.groupCount());
-		if (rs) {
-			for (int i = 1; i <= m.groupCount(); i++) {
-				String id = m.group(i);
-				if (ids.add(id)) {
-					detailWebLog(id);
-				}
+		Matcher m = p.matcher(doc);
+		while (m.find()) {
+			String id = m.group(1);
+			if (ids.add(id)) {
+				detailWebLog(id);
 			}
 		}
 	}
@@ -209,31 +208,80 @@ public class SinaReader extends AbstractBlogReader {
 	 * 将某个日志读取完毕。
 	 * 
 	 * @param id
+	 *            日志编号
 	 */
 	private void detailWebLog(String id) {
-		String editUrl = "http://blog.sina.com.cn/control/writing/scriber/article_edit.php?blog_id="
-				+ id;
-		String url = "http://blog.sina.com.cn/u/" + id;
+		String postUrl = "http://blog.sina.com.cn/s/blog_" + id + ".html";
+		String url = "http://blog.sina.com.cn/u/" + this.getUid();
 		WebLog webLog = new WebLogImpl();
 		webLog.setUrl(url);
 
-		Document document = httpDocument.get(editUrl);
-		log.debug("---- document ----");
-		DomNodeUtils.debug(this.log, document);
-		Element element = document.getElementById("blog_title");
-		if (element == null) {
-			throw new BlogMoverRuntimeException("获取的数据不是预期的格式，请稍后重试。");
+		Document document = httpDocument.get(postUrl);
+		document.normalize();
+		String doc = DocumentToString.toString(document);
+
+		// 日志标题
+		String pattern = "<b\\s*id=\"t_" + id + "\">(.*?)</b>";
+		Pattern p = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE
+				| Pattern.UNICODE_CASE | Pattern.MULTILINE | Pattern.COMMENTS);
+		Matcher m = p.matcher(doc);
+		boolean rs = m.find();
+		if (rs) {
+			webLog.setTitle(m.group(1));
+			log.debug("title: " + webLog.getTitle());
+		} else {
+			throw new BlogMoverRuntimeException("新浪日志页码标题编号已变更，请稍后重试。");
 		}
-		webLog.setTitle(element.getAttribute("value"));
-		log.debug("title: " + webLog.getTitle());
 
-		webLog.setPublishedDate(this.findDate(document));
-		log.debug("publishedDate: " + webLog.getPublishedDate());
+		// 发表时间
+		pattern = "class=\"time\">\\((.*?)\\)</span>";
+		p = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE
+				| Pattern.UNICODE_CASE | Pattern.MULTILINE | Pattern.COMMENTS);
+		m = p.matcher(doc);
+		rs = m.find();
+		if (rs) {
+			webLog.setPublishedDate(StringUtil.strToDate(m.group(1)));
+			log.debug("publishedDate: " + webLog.getPublishedDate());
+		}
 
-		// body
-		webLog.setBody(this.findBody(document));
+		// tags 标签
+		pattern = "var\\s*\\$tag='(.*?)';";
+		p = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE
+				| Pattern.UNICODE_CASE | Pattern.MULTILINE | Pattern.COMMENTS);
+		m = p.matcher(doc);
+		rs = m.find();
+		if (rs) {
+			String tags = m.group(1);
+			webLog.setTags(tags.split(","));
+			log.debug("tags: " + tags);
+		}
 
-		readComments(webLog);
+		// 日志所属分类
+		pattern = "分类：<a\\shref=\"(.*?)\">(.*?)</a>";
+		p = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE
+				| Pattern.UNICODE_CASE | Pattern.MULTILINE | Pattern.COMMENTS);
+		m = p.matcher(doc);
+		rs = m.find();
+		if (rs) {
+			String strCategory = m.group(2);
+			CategoryImpl category = new CategoryImpl();
+			category.setName(strCategory);
+			Category[] categories = new CategoryImpl[] { category };
+			webLog.setCategories(categories);
+			log.debug("category: " + strCategory);
+		}
+
+		// 日志内容（含图片）
+		NodeList bodyNodeList = document.getElementById("articleBody").getChildNodes();
+		StringBuilder sb = new StringBuilder();
+		BlogSettings config = SinaReader.getConfig();
+		for (int i = 0; i < bodyNodeList.getLength(); i++) {
+			sb.append(DomNodeUtils.TextExtractor(bodyNodeList.item(i), config));
+		}
+		webLog.setBody(StringEscapeUtils.unescapeJavaScript(sb.toString()));
+
+		// 评论信息
+		readComments(webLog, id);
 
 		this.status.setCurrentWebLog(webLog);
 		webLogs.add(webLog);
@@ -241,156 +289,44 @@ public class SinaReader extends AbstractBlogReader {
 	}
 
 	/**
-	 * 从日志详细页面中找到日期。
-	 * 
-	 * @param document
-	 * @return
-	 */
-	private Date findDate(Document document) {
-		int year = 0, month = 0, day = 0, hours = 0, minutes = 0, seconds = 0;
-		// date
-		NodeList nodeList = document.getElementsByTagName("script");
-		Node node = nodeList.item(14);
-		String str = node.getFirstChild().getNodeValue();
-		log.debug("node value: " + str);
-
-		// year
-		String pattern = "setSelect\\(\"year\",		'([0-9]{4})'\\);";
-		Pattern p = Pattern.compile(pattern);
-		Matcher m = p.matcher(str);
-		boolean rs = m.find();
-		log.debug("rs: " + rs);
-		log.debug("groupCount: " + m.groupCount());
-		if (rs) {
-			for (int i = 1; i <= m.groupCount(); i++) {
-				year = NumberUtils.toInt(m.group(i));
-				log.debug("year: " + year);
-			}
-		}
-		// month
-		pattern = "setSelect\\(\"month\",		'([0-9]{1,2})'\\);";
-		p = Pattern.compile(pattern);
-		m = p.matcher(str);
-		rs = m.find();
-		if (rs) {
-			for (int i = 1; i <= m.groupCount(); i++) {
-				month = NumberUtils.toInt(m.group(i));
-				log.debug("month: " + month);
-			}
-		}
-		// day
-		pattern = "setSelect\\(\"day\",		'([0-9]{1,2})'\\);";
-		p = Pattern.compile(pattern);
-		m = p.matcher(str);
-		rs = m.find();
-		if (rs) {
-			for (int i = 1; i <= m.groupCount(); i++) {
-				day = NumberUtils.toInt(m.group(i));
-				log.debug("day: " + day);
-			}
-		}
-		// hours
-		pattern = "setSelect\\(\"hours\",		'([0-9]{1,2})'\\);";
-		p = Pattern.compile(pattern);
-		m = p.matcher(str);
-		rs = m.find();
-		if (rs) {
-			for (int i = 1; i <= m.groupCount(); i++) {
-				hours = NumberUtils.toInt(m.group(i));
-				log.debug("hours: " + hours);
-			}
-		}
-		// minutes
-		pattern = "setSelect\\(\"minutes\",	'([0-9]{1,2})'\\);";
-		p = Pattern.compile(pattern);
-		m = p.matcher(str);
-		rs = m.find();
-		if (rs) {
-			for (int i = 1; i <= m.groupCount(); i++) {
-				minutes = NumberUtils.toInt(m.group(i));
-				log.debug("minutes: " + minutes);
-			}
-		}
-		// seconds
-		pattern = "setSelect\\(\"seconds\",	'([0-9]{1,2})'\\);";
-		p = Pattern.compile(pattern);
-		m = p.matcher(str);
-		rs = m.find();
-		if (rs) {
-			for (int i = 1; i <= m.groupCount(); i++) {
-				seconds = NumberUtils.toInt(m.group(i));
-				log.debug("seconds: " + seconds);
-			}
-		}
-
-		Calendar cal = new GregorianCalendar(year, month, day, hours, minutes,
-				seconds);
-		return cal.getTime();
-	}
-
-	/**
-	 * 从日志详细页面中找到日志内容。
-	 * 
-	 * @param document
-	 * @return
-	 */
-	private String findBody(Document document) {
-		String body = null;
-		NodeList nodeList = document.getElementsByTagName("script");
-		boolean notFound = true;
-		int index = 0;
-		while (index < nodeList.getLength() && notFound) {
-			Node node = nodeList.item(index);
-			index++;
-			if (node.getFirstChild() == null) {
-				continue;
-			}
-			String str = node.getFirstChild().getNodeValue();
-			log.debug("node value: " + str);
-
-			String pattern = "if\\(sState == \"iframe\"\\)\\{\\s*SinaEditor\\.initialize\\(\"SinaEditor\", \"blog_body\", true, \"(.*)\"\\);";
-			Pattern p = Pattern.compile(pattern);
-			Matcher m = p.matcher(str);
-			boolean rs = m.find();
-			if (rs) {
-				notFound = false;
-				for (int i = 1; i <= m.groupCount(); i++) {
-					body = m.group(i);
-					body = body.substring(0, body.length() - 3);
-					body = StringEscapeUtils.unescapeJavaScript(body);
-					log.debug("body: " + body);
-				}
-			}
-		}
-		return body;
-	}
-
-	/**
 	 * @param webLog
 	 */
-	private void readComments(WebLog webLog) {
-		String url = webLog.getUrl();
-		String commentsPageUrl = new ViewBlogPageParser(this.httpDocument
-				.get(url)).getCommentsFirstPageUrl();
-		if (commentsPageUrl == null) {
-			return;
+	private void readComments(WebLog webLog, String postId) {
+		String commentsPageUrl = "http://blog.sina.com.cn/s/comment_" + postId
+				+ "_%s.html";
+		String uid = postId.substring(0, 8);
+		String aids = postId.substring(10);
+
+		// 获取评论总数，也可以获得阅读、收藏次数
+		int totalCommentsCount = 0;
+		String commentsCnfUrl = "http://blogcnf.sinajs.cn/num?uid=" + uid
+				+ "&aids=" + aids + "&requestId=scriptId_0.942631857192015";
+		Document cnfDoc = this.httpDocument.get(commentsCnfUrl);
+		String p = "\"" + aids + "\":\\{c:(\\d+),";
+		Pattern pattern = Pattern.compile(p);
+		Matcher matcher = pattern.matcher(cnfDoc.getFirstChild()
+				.getTextContent());
+		boolean rs = matcher.find();
+		if (rs) {
+			totalCommentsCount = NumberUtils.toInt(matcher.group(1));
+		} else {
+			return; // 如果找不到评论总数，则退出
 		}
 
-		String commentsPageUrlPattern = commentsPageUrl.substring(0,
-				commentsPageUrl.length() - 6)
-				+ "%1$s.html";
-		log.debug("commentsPageUrlPattern: " + commentsPageUrlPattern);
+		int pages = IntUtil.GetPageCount(totalCommentsCount);
+
 		CommentPageParser commentPageParser;
 		List<Comment> comments = null;
-		int i = 1;
-		do {
-			commentsPageUrl = String.format(commentsPageUrlPattern, i);
+		String url = "";
+		for (int i = 1; i <= pages; i++) {
+			url = String.format(commentsPageUrl, i);
+			log.debug(url);
+
 			commentPageParser = new CommentPageParser(this.httpDocument
-					.get(commentsPageUrl));
+					.getHtml(url));
 			comments = commentPageParser.getComments();
 			webLog.getComments().addAll(comments);
-			i++;
-		} while (comments.size() != 0);
+		}
 	}
 
 	public byte[] getIdentifyingCodeImage() throws HttpException, IOException {
@@ -399,25 +335,21 @@ public class SinaReader extends AbstractBlogReader {
 
 	public static void main(String[] args) throws HttpException, IOException,
 			BlogMoverException {
+
 		SinaReader sr = new SinaReader();
-		LineNumberReader lnr = new LineNumberReader(new InputStreamReader(
-				System.in));
-		System.out.print("Please enter your username: ");
-		sr.setUsername(lnr.readLine());
-		System.out.print("Please enter your password: ");
-		sr.setPassword(lnr.readLine());
-		byte[] image = sr.getIdentifyingCodeImage();
-		File file = new File(SystemUtils.JAVA_IO_TMPDIR, SinaReader.class
-				.getName());
-		FileUtils.writeByteArrayToFile(file, image);
-		System.out.print(String.format(
-				"Please enter the code on the image(%1$s): ", file.getPath()));
-		String identifyingCode = lnr.readLine();
-		System.out.println("Your entered code is: " + identifyingCode);
-		if (!file.delete()) {
-			file.deleteOnExit();
-		}
-		sr.setIdentifyingCode(identifyingCode.toString().trim());
+
+		sr.setUid("1258516351");
+		/*
+		 * LineNumberReader lnr = new LineNumberReader(new InputStreamReader(
+		 * System.in)); System.out.print("Please enter your username: ");
+		 * sr.setUsername(lnr.readLine());
+		 * System.out.print("Please enter your password: ");
+		 * sr.setPassword(lnr.readLine());
+		 * 
+		 * String identifyingCode = "";
+		 * 
+		 * sr.setIdentifyingCode(identifyingCode);
+		 */
 		List<WebLog> entries = sr.read();
 		int i = 0;
 		for (WebLog entry : entries) {

@@ -43,7 +43,6 @@ public abstract class AbstractBlogReader implements BlogReader {
 	public AbstractBlogReader() {
 		this.bsp = new BSP();
 		this.bsp.setId(this.getClass().getPackage().getName());
-
 		this.status = new StatusImpl();
 	}
 

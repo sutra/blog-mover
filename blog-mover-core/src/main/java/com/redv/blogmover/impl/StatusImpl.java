@@ -56,8 +56,7 @@ public class StatusImpl implements Status {
 	 * @see com.redv.blogremover.Status#setCurrentWebLog(com.redv.blogremover.WebLog)
 	 */
 	public void setCurrentWebLog(WebLog webLog) {
-		log
-				.debug("setCurrentWebLog(com.redv.blogremover.WebLog) called. webLog="
+		log.debug("setCurrentWebLog(com.redv.blogremover.WebLog) called. webLog="
 						+ ((webLog == null) ? "null" : webLog.getTitle()));
 		this.currentWebLog = webLog;
 	}

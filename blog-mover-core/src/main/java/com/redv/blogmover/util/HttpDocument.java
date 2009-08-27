@@ -221,6 +221,26 @@ public class HttpDocument implements Serializable {
 		return get(url, null);
 	}
 
+	public String getHtml(String url) {
+		GetMethod getMethod = new GetMethod(url);
+		getMethod.getParams().setCookiePolicy(
+				CookiePolicy.BROWSER_COMPATIBILITY);
+		getMethod.setFollowRedirects(followRedirects);
+		addRequestHeaderGroup(getMethod, this.requestHeaderGroup);
+		addRequestHeaderGroup(getMethod, requestHeaderGroup);
+		if (manualCookie) {
+			addCookies(getMethod, httpClient.getState().getCookies());
+		}
+		executeMethod(httpClient, getMethod);
+		try {
+			return getHtmlInternal(getMethod);
+		} catch (SAXException e) {
+			throw new BlogMoverRuntimeException(e);
+		} catch (IOException e) {
+			throw new BlogMoverRuntimeException(e);
+		}
+	}
+
 	/**
 	 * Execute `get' method.
 	 * 
@@ -230,7 +250,8 @@ public class HttpDocument implements Serializable {
 	 */
 	public Document get(String url, HeaderGroup requestHeaderGroup) {
 		GetMethod getMethod = new GetMethod(url);
-		getMethod.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
+		getMethod.getParams().setCookiePolicy(
+				CookiePolicy.BROWSER_COMPATIBILITY);
 		getMethod.setFollowRedirects(followRedirects);
 		addRequestHeaderGroup(getMethod, this.requestHeaderGroup);
 		addRequestHeaderGroup(getMethod, requestHeaderGroup);
@@ -285,7 +306,8 @@ public class HttpDocument implements Serializable {
 		} else {
 			postMethod = new CharSetPostMethod(action, this.requestCharSet);
 		}
-		postMethod.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
+		postMethod.getParams().setCookiePolicy(
+				CookiePolicy.BROWSER_COMPATIBILITY);
 		addRequestHeaderGroup(postMethod, this.requestHeaderGroup);
 		addRequestHeaderGroup(postMethod, requestHeaderGroup);
 		if (manualCookie) {
@@ -433,6 +455,79 @@ public class HttpDocument implements Serializable {
 				inputStream.close();
 				method.releaseConnection();
 			}
+		}
+		return document;
+	}
+
+	/**
+	 * 获取HTML内容
+	 * @param method
+	 * @return
+	 * @throws SAXException
+	 * @throws IOException
+	 */
+	private String getHtmlInternal(HttpMethod method)
+			throws SAXException, IOException {
+		if (log.isDebugEnabled()) {
+			Header[] headers = method.getRequestHeaders();
+			log.debug("---- request header ----");
+			for (Header header : headers) {
+				log.debug(header.getName() + ":" + header.getValue());
+			}
+		}
+		String document = "";
+		// 检查是否重定向
+		int statuscode = method.getStatusCode();
+		if ((statuscode == HttpStatus.SC_MOVED_TEMPORARILY)
+				|| (statuscode == HttpStatus.SC_MOVED_PERMANENTLY)
+				|| (statuscode == HttpStatus.SC_SEE_OTHER)
+				|| (statuscode == HttpStatus.SC_TEMPORARY_REDIRECT)) {
+			// 读取新的URL地址
+			Header header = method.getResponseHeader("location");
+			if (header != null) {
+				String newuri = header.getValue();
+				if ((newuri == null) || (newuri.equals(""))) {
+					newuri = "/";
+				} 
+				org.apache.commons.httpclient.URI parentUri = method.getURI();
+				if (!newuri.startsWith(parentUri.getScheme())) {
+					String s = newuri.startsWith("/") ? newuri : parentUri
+							.getAboveHierPath()
+							+ newuri;
+					// Really need to decode?
+					log.debug("before decode:" + s);
+					s = java.net.URLDecoder.decode(s, "UTF-8");
+					newuri = new org.apache.commons.httpclient.URI(parentUri
+							.getScheme(), parentUri.getHost(), (s), "")
+							.toString();
+				}
+				log.debug("Redirect: " + newuri);
+				method.releaseConnection();
+				document = method.getResponseBodyAsString();
+			} else {
+				throw new BlogMoverRuntimeException("Invalid redirect");
+			}
+		} else {
+			if (log.isDebugEnabled()) {
+				String s = null;
+				if (encoding != null) {
+					document = new String(method.getResponseBody(), encoding);
+				} else {
+					document = method.getResponseBodyAsString();
+				}
+				log.debug("URI: " + method.getURI().toString()
+						+ "\ngetResponseBodyAsString: " + s);
+			}
+
+			Header contentEncodingHeader = method
+					.getResponseHeader("Content-Encoding");
+			if (contentEncodingHeader != null
+					&& "deflate".equals(contentEncodingHeader.getValue())) {
+				document = method.getResponseBodyAsString();
+			} else {
+				document = method.getResponseBodyAsString();
+			}
+			method.releaseConnection();
 		}
 		return document;
 	}

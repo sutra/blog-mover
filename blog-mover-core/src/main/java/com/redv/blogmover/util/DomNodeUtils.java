@@ -3,10 +3,16 @@
  */
 package com.redv.blogmover.util;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.StringWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -21,6 +27,10 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
+
+import com.redv.blogmover.BlogSettings;
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
  * @author Joe
@@ -158,6 +168,14 @@ public class DomNodeUtils {
 		return xmlString.toString();
 	}
 
+	public static String getHtmlAsString(Node node) {
+		String s = "";
+		try {
+			s = getXmlAsString(node);
+		} catch (TransformerException e) {
+		}
+		return s.toLowerCase().replaceAll(" xmlns=\"http://www.w3.org/1999/xhtml\"", "");
+	}
 	/**
 	 * 获取某节点下的子节点（包括孙子……节点）的标签名为tagName的节点。
 	 * 
@@ -268,5 +286,92 @@ public class DomNodeUtils {
 				log.debug("Error while get xml as string from a node.", e);
 			}
 		}
+	}
+
+	public static String TextExtractor(Node root, BlogSettings config) {
+		// 若是文本节点的话，直接返回
+		if (root.getNodeType() == Node.TEXT_NODE) {
+			return root.getNodeValue().trim();
+		}
+		if (root.getNodeType() == Node.ELEMENT_NODE) {
+			Element elmt = (Element) root;
+			// 抛弃脚本
+			if (elmt.getTagName().equals("SCRIPT"))
+				return "";
+
+			if (elmt.getTagName().equalsIgnoreCase("IMG")) {
+				String imgSrc = elmt.getAttribute("src");
+				
+				if(config.getIsSaveImage()) {
+					// 下载图片
+					File file = saveImg(imgSrc, config.getImageSavePath());
+					String fileName = file.getName();
+					// 替换图片地址
+					elmt.setAttribute("src", config.getImageUrlPrefix() + fileName);
+				}
+				
+				return getHtmlAsString(root);
+			}
+			NodeList children = elmt.getChildNodes();
+			StringBuilder text = new StringBuilder();
+			for (int i = 0; i < children.getLength(); i++) {
+				text.append(TextExtractor(children.item(i), config));
+			}
+			return text.toString();
+		}
+		// 对其它类型的节点，返回空值
+		return "";
+	}
+
+	/**
+	 * 下载URL图片
+	 * 
+	 * @param url
+	 *            图片URL地址
+	 * @param path
+	 *            图片存放地址
+	 * @return 返回新文件名字加设定后缀,如果读取失败则返回null
+	 */
+	public static File saveImg(String url, String paths) {
+		File newName = null;
+
+		URL imgUrl = null;
+		BufferedImage img = null;
+		FileOutputStream out = null;
+		boolean isDownload = false;
+		File testNewName = null;
+		try {
+			String newFileName = paths + UUID.randomUUID().toString() + ".jpg";
+			imgUrl = new URL(url);
+			img = ImageIO.read(imgUrl);
+			out = new FileOutputStream(newFileName);
+			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+			encoder.encode(img);
+			out.close();
+			img.flush();
+			log.info("读取图片成功!" + imgUrl.toString());
+			testNewName = new File(newFileName);
+			isDownload = true;
+		} catch (Exception e) {
+			log.info("读取图片失败!" + e.getMessage());
+		}
+
+		finally {
+			if (null != null) {
+				img.flush();
+			}
+
+			if (null != out) {
+				try {
+					out.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+
+		if (isDownload) {
+			newName = testNewName;
+		}
+		return newName;
 	}
 }
