@@ -11,9 +11,9 @@ var count = 0;
  */
 var cellFuncs = [
 	function(data) {
-		return "<input type='checkbox' id='index" + count 
+		return "<label><input type='checkbox' id='index" + count 
 		+ "' name='index' value='" + count 
-		+ "' /><label for='index" + count + "'>&nbsp;" + (++count) 
+		+ "' />&nbsp;" + (++count) 
 		+ "</label>";
 	},
 	function(data) {

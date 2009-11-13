@@ -35,12 +35,9 @@
 					<thead>
 						<tr>
 							<th style="text-align:left;">
-								<input type="checkbox" id="index"
-									onclick="checkAll(this.checked)" />
-								<label for='index'>
-									&nbsp;
-									<fmt:message key="No." />
-								</label>
+								<label><input type="checkbox" id="index"
+									onclick="checkAll(this.checked)"
+									/>&nbsp;<fmt:message key="No." /></label>
 							</th>
 							<th>
 								<fmt:message key="title" />
