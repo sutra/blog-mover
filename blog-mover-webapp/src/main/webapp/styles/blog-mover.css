@@ -80,6 +80,7 @@ h3 {
 #blogMoverTopRight a.blogMoverTopRightLast {
 	border: 0px;
 }
+
 #readers,#webLogs,#writers,#options {
 	height: 240px;
 	overflow-y: auto;
