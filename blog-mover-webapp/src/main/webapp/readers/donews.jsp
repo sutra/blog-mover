@@ -39,12 +39,12 @@
 				用的。如果你看不清下面的图片，请单击图片重新获取一张。）
 				<br />
 				<img src="identifying-code-image?type=reader&now=donews"
-					alt="验证码图片，单击重新获取新的验证码。" style="border:0px;"
+					alt="验证码图片，单击重新获取新的验证码。" style="border:0px;cursor:pointer"
 					onclick="this.src='identifying-code-image?type=reader&now=' + new Date().getTime()" />
 			</td>
 		</tr>
 	</table>
 </div>
 <div class="attention">
-	仅支持读入日志内容，不支持评论、标签、多媒体、日期。
+	仅支持读入日志内容、日期，不支持评论、标签、多媒体。
 </div>

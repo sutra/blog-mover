@@ -10,8 +10,13 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
@@ -25,6 +30,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogMoverException;
+import com.redv.blogmover.BlogMoverRuntimeException;
 import com.redv.blogmover.WebLog;
 import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.impl.WebLogImpl;
@@ -36,6 +42,18 @@ import com.redv.blogmover.util.HttpDocument;
  * @author <a href="mailto:rory.cn@gmail.com">Rory</a>
  */
 public class DoNewsBlogReader extends AbstractBlogReader {
+	private static final String URL_BASE = "http://blog.donews.com";
+	private static final String URL_FORMAT = URL_BASE
+			+ "/%1$s/archive/%2$s/%3$s.aspx";
+	private static final DateFormat URL_DATE_FORMAT = new SimpleDateFormat(
+			"yyyy/MM/dd", Locale.ENGLISH);
+	private static final String DUMMY_DATE_STRING = "2000/01/01";
+	private static final DateFormat DISPLAY_DATE_FORMAT = new SimpleDateFormat(
+			"yyyy年MM月dd日 h:mm a", Locale.ENGLISH);
+	private static final String DISPLAY_DATE_PARSE_FLAG = "发表于";
+	private static final int DISPLAY_DATE_PARSE_FLAG_LENGTH = DISPLAY_DATE_PARSE_FLAG
+			.length();
+
 	private HttpClient httpClient;
 
 	private HttpDocument httpDocument;
@@ -74,10 +92,8 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 		this.username = username;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.redv.blogremover.impl.AbstractBlogReader#read()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<WebLog> read() throws BlogMoverException {
@@ -95,10 +111,41 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 				break;
 			}
 		}
-		if (pager == null) {
-			// TODO??
-			throw new BlogMoverException("没有找到分页部分代码，无法继续。");
+
+		// 解析页数。
+		int totalPage;
+		if (pager != null) {
+			Node last = getLastPageNode(pager);
+			String href = last.getAttributes().getNamedItem("href").getNodeValue();
+			String pageString = href.substring("EditPosts.aspx?pg=".length(), href
+					.length());
+			log.debug("pageString: " + pageString);
+			totalPage = NumberUtils.toInt(pageString);
+		} else {
+			totalPage = 1;
+			this.status.setApproximative(true);
 		}
+		this.status.setTotalCount(10 * totalPage);
+
+		// 解析当前页的 blog entry 列表。
+		parse(document);
+
+		// 当前页也就是第一页上面已经解析过了，这里从第二页开始。
+		for (int i = 2; i <= totalPage; i++) {
+			log.debug("Parse page " + i);
+			parse(httpDocument.get(url + i));
+		}
+		return this.webLogs;
+	}
+
+	/**
+	 * 获取最后一页按钮的节点元素。
+	 * 
+	 * @param pager
+	 *            翻页部分的HTML节点
+	 * @return 最后一页按钮的HTML节点
+	 */
+	private Node getLastPageNode(Element pager) {
 		NodeList children = pager.getChildNodes().item(0).getChildNodes().item(
 				0).getChildNodes();
 		Node last = null;
@@ -127,22 +174,8 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 				}
 				last = node;
 			}
-			// throw new BlogMoverException("没有找到最后一页标识，无法继续。");
 		}
-		String href = last.getAttributes().getNamedItem("href").getNodeValue();
-		String pageString = href.substring("EditPosts.aspx?pg=".length(), href
-				.length());
-		log.debug("pageString: " + pageString);
-		int totalPage = NumberUtils.toInt(pageString);
-		this.status.setTotalCount(10 * totalPage);
-
-		parse(document);
-
-		for (int i = 2; i <= totalPage; i++) {
-			log.debug("Parse page " + i);
-			parse(httpDocument.get(url + i));
-		}
-		return this.webLogs;
+		return last;
 	}
 
 	private void checkLogin() throws DOMException, BlogMoverException {
@@ -201,15 +234,40 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 		Element element = document.getElementById("Editor_Edit_txbExcerpt");
 		webLog.setExcerpt(DomNodeUtils.getTextContent(element));
 
-		// URL.
-
 		// PublishedDate.
+		Date publishedDate = getPublishedDate(id);
+		webLog.setPublishedDate(publishedDate);
+
+		// URL.
+		webLog.setUrl(getUrl(id, publishedDate));
 
 		return webLog;
 	}
 
 	public byte[] getIdentifyingCodeImage() throws HttpException, IOException {
 		return doNewsLogin.getIdentifyingCodeImage();
+	}
+
+	public Date getPublishedDate(String id) {
+		String url = String.format(URL_FORMAT, username, DUMMY_DATE_STRING, id);
+		Document document = httpDocument.get(url);
+		List<Node> nodes = DomNodeUtils.getElementsByCssClass(document, "div",
+				"postFoot");
+		Node postFoot = nodes.get(0);
+		String content = DomNodeUtils.getTextContent(postFoot);
+		String dateString = content.substring(content
+				.indexOf(DISPLAY_DATE_PARSE_FLAG)
+				+ DISPLAY_DATE_PARSE_FLAG_LENGTH);
+		try {
+			return DISPLAY_DATE_FORMAT.parse(dateString);
+		} catch (ParseException e) {
+			throw new BlogMoverRuntimeException(e);
+		}
+	}
+
+	public String getUrl(String id, Date publishedDate) {
+		String dateString = URL_DATE_FORMAT.format(publishedDate);
+		return String.format(URL_FORMAT, this.username, dateString, id);
 	}
 
 	public static void main(String[] args) throws HttpException, IOException,
@@ -220,7 +278,7 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 		DoNewsBlogReader dnbr = new DoNewsBlogReader();
 		byte[] image = dnbr.getIdentifyingCodeImage();
 		File tmpImageFile = new File(System.getProperty("java.io.tmpdir"),
-				DoNewsBlogReader.class.getName());
+				DoNewsBlogReader.class.getName() + ".jpg");
 		tmpImageFile.deleteOnExit();
 		OutputStream os = new FileOutputStream(tmpImageFile);
 		try {

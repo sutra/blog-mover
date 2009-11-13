@@ -20,8 +20,10 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -176,6 +178,7 @@ public class DomNodeUtils {
 		}
 		return s.toLowerCase().replaceAll(" xmlns=\"http://www.w3.org/1999/xhtml\"", "");
 	}
+
 	/**
 	 * 获取某节点下的子节点（包括孙子……节点）的标签名为tagName的节点。
 	 * 
@@ -186,6 +189,52 @@ public class DomNodeUtils {
 	public static NodeList getElementsByTagName(Node node, String tagName) {
 		// TODO
 		return null;
+	}
+
+	public static List<Node> getElementsByCssClass(Document document, String tagName, String className) {
+		List<Node> nodes = new ArrayList<Node>();
+		NodeList nodeList = document.getElementsByTagName(tagName);
+		for (int i = 0, l = nodeList.getLength(); i < l; i++) {
+			Node node = nodeList.item(i);
+			if (ArrayUtils.contains(getCssClasses(node), className)) {
+				nodes.add(node);
+			}
+		}
+		return nodes;
+	}
+
+	/**
+	 * Get the attribute value of the node.
+	 * 
+	 * @param node
+	 *            the node
+	 * @param attributeName
+	 *            the name of the attribute
+	 * @return the value of the attribute
+	 */
+	public static String getAttributeValue(Node node, String attributeName) {
+		Node attribute = node.getAttributes().getNamedItem(attributeName);
+		if (attribute != null) {
+			return attribute.getNodeValue();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Get CSS class names.
+	 * 
+	 * @param node
+	 *            the HTML node
+	 * @return CSS class names
+	 */
+	public static String[] getCssClasses(Node node) {
+		String classString = getAttributeValue(node, "class");
+		if (classString != null) {
+			return classString.split(",");
+		} else {
+			return ArrayUtils.EMPTY_STRING_ARRAY;
+		}
 	}
 
 	/**
