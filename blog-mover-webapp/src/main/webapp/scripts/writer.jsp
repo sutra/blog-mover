@@ -43,7 +43,7 @@ function blogWrite() {
 		alert("正在读取，请勿写入。");
 	} else {
 		$("writeButton").disabled = true;
-		DWREngine.setErrorHandler(writeErrorHandler);
+		// DWREngine.setErrorHandler(writeErrorHandler);
 		setStatus("初始化写入器……");
 		initWriter();
 	}
