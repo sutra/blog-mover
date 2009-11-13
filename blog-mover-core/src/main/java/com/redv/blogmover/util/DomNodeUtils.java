@@ -29,8 +29,8 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 import com.redv.blogmover.BlogSettings;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+//import com.sun.image.codec.jpeg.JPEGCodec;
+//import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
  * @author Joe
@@ -345,8 +345,9 @@ public class DomNodeUtils {
 			imgUrl = new URL(url);
 			img = ImageIO.read(imgUrl);
 			out = new FileOutputStream(newFileName);
-			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-			encoder.encode(img);
+//			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+//			encoder.encode(img);
+			ImageIO.write(img, "jpg", out);
 			out.close();
 			img.flush();
 			log.info("读取图片成功!" + imgUrl.toString());
