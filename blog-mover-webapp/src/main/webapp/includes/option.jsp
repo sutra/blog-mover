@@ -18,12 +18,12 @@
 			秒
 		</div>
 		<div>
-			<input id="debugSwitch" type="checkbox" onclick="setDebug(this.checked)" />
-			<label for="debugSwitch">
+			<label>
+				<input id="debugSwitch" type="checkbox" onclick="setDebug(this.checked)" />
 				允许 Javascript 调试
 			</label>
-			<input id="debugDivShowSwitch" type="checkbox" onclick="showDebug(this.checked)" />
-			<label for="debugDivShowSwitch">
+			<label>
+				<input id="debugDivShowSwitch" type="checkbox" onclick="showDebug(this.checked)" />
 				显示 Javascript 调试信息
 			</label>
 		</div>

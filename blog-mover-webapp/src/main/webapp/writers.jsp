@@ -6,9 +6,9 @@
 	<ol>
 		<c:forEach var="writer" items="${writers}" varStatus="status">
 			<li>
-				<input type="radio" name="writerId" id="writerId${status.count}" accesskey="${status.count}" value="${writer[0]}" onclick="return selectWriter(this.value, $('writerClassName${status.count}').value)" />
-				<input type="hidden" name="writerClassName" id="writerClassName${status.count}" value="${writer[1]}" />
-				<label for="writerId${status.count}">
+				<label>
+					<input type="radio" name="writerId" id="writerId${status.count}" accesskey="${status.count}" value="${writer[0]}" onclick="return selectWriter(this.value, $('writerClassName${status.count}').value)" />
+					<input type="hidden" name="writerClassName" id="writerClassName${status.count}" value="${writer[1]}" />
 					<fmt:message key="${writer[0]}" />
 				</label>
 			</li>
