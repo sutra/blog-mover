@@ -21,6 +21,7 @@ import java.util.Locale;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
+import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.w3c.dom.DOMException;
@@ -75,6 +76,13 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 		super();
 
 		httpClient = new IntervallicHttpClient();
+		HttpConnectionManagerParams managerParams = httpClient
+				.getHttpConnectionManager().getParams();
+		// 设置连接超时时间(单位毫秒)
+		managerParams.setConnectionTimeout(30000);
+		// 设置读数据超时时间(单位毫秒)
+		managerParams.setSoTimeout(120000);
+
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
 		httpDocument = new HttpDocument(httpClient, true, "UTF-8");
