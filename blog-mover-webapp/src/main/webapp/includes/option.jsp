@@ -14,7 +14,7 @@
 		</div>
 		<div>
 			状态刷新间隔：
-			<input type="text" value="5" id="statusRefreshInterval" style="width:20px;text-align:right;" maxlength="1" />
+			<input type="text" value="10" id="statusRefreshInterval" style="width:20px;text-align:right;" maxlength="2" />
 			秒
 		</div>
 		<div>
