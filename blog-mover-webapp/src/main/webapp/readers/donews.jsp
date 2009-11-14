@@ -30,7 +30,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="vertical-align:top;">
+			<td class="label" style="vertical-align:top;">
 				验证码：
 			</td>
 			<td>
@@ -41,6 +41,18 @@
 				<img src="identifying-code-image?type=reader&now=donews"
 					alt="验证码图片，单击重新获取新的验证码。" style="border:0px;cursor:pointer"
 					onclick="this.src='identifying-code-image?type=reader&now=' + new Date().getTime()" />
+			</td>
+		</tr>
+		<tr>
+			<td class="label">
+				HTTP 请求随机间隔：
+			</td>
+			<td>
+				<input type="text" name="minimumInterval" tabindex="103" value="1000" />
+				~
+				<input type="text" name="maximumInterval" tabindex="104" value="30000" />
+				毫秒（1秒=1000毫秒）
+				有些 BSP 限制了 HTTP 请求频度，因此用此间隔来模拟人类操作。
 			</td>
 		</tr>
 	</table>

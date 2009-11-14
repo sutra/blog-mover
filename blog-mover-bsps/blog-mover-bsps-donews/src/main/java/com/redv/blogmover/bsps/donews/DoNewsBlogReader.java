@@ -36,9 +36,10 @@ import com.redv.blogmover.impl.AbstractBlogReader;
 import com.redv.blogmover.impl.WebLogImpl;
 import com.redv.blogmover.util.DomNodeUtils;
 import com.redv.blogmover.util.HttpDocument;
+import com.redv.blogmover.util.IntervallicHttpClient;
 
 /**
- * @author Shutra
+ * @author Sutra
  * @author <a href="mailto:rory.cn@gmail.com">Rory</a>
  */
 public class DoNewsBlogReader extends AbstractBlogReader {
@@ -73,7 +74,7 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 	public DoNewsBlogReader() {
 		super();
 
-		httpClient = new HttpClient();
+		httpClient = new IntervallicHttpClient();
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
 		httpDocument = new HttpDocument(httpClient, true, "UTF-8");
@@ -97,6 +98,11 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 	 */
 	@Override
 	public List<WebLog> read() throws BlogMoverException {
+		this.httpClient.getParams().setLongParameter(
+				IntervallicHttpClient.MINIMUM_INTERVAL, this.minimumInterval);
+		this.httpClient.getParams().setLongParameter(
+				IntervallicHttpClient.MAXIMUM_INTERVAL, this.maximumInterval);
+
 		webLogs = new ArrayList<WebLog>();
 		checkLogin();
 		String url = "http://writeblog.donews.com/EditPosts.aspx?pg=";

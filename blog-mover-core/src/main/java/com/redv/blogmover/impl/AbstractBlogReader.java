@@ -31,7 +31,20 @@ public abstract class AbstractBlogReader implements BlogReader {
 
 	protected Status status;
 
+	/**
+	 * 固定操作间隔。
+	 */
 	protected long operationInterval;
+
+	/**
+	 * HTTP 请求随机间隔—最小值。
+	 */
+	protected long minimumInterval;
+
+	/**
+	 * HTTP 请求随机间隔—最大值。
+	 */
+	protected long maximumInterval;
 
 	protected BlogFilter m_filter = BlogFilter.NONE;
 
@@ -46,10 +59,8 @@ public abstract class AbstractBlogReader implements BlogReader {
 		this.status = new StatusImpl();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.redv.blogmover.BlogReader#getBsp()
+	/**
+	 * {@inheritDoc}
 	 */
 	public BSP getBsp() {
 		return bsp;
@@ -59,35 +70,46 @@ public abstract class AbstractBlogReader implements BlogReader {
 	 * @param operationInterval
 	 *            the operationInterval to set
 	 */
-	public void setOperationInterval(long operationInterval) {
+	public void setOperationInterval(final long operationInterval) {
 		this.operationInterval = operationInterval;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.redv.blogremover.BlogReader#read()
+	/**
+	 * @param minimumInterval the minimumInterval to set
+	 */
+	public void setMinimumInterval(final long minimumInterval) {
+		this.minimumInterval = minimumInterval;
+	}
+
+	/**
+	 * @param maximumInterval the maximumInterval to set
+	 */
+	public void setMaximumInterval(final long maximumInterval) {
+		this.maximumInterval = maximumInterval;
+	}
+
+	/**
+	 * {@inheritDoc}
 	 */
 	public abstract List<WebLog> read() throws BlogMoverException;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.redv.blogremover.BlogReader#getStatus()
+	/**
+	 * {@inheritDoc}
 	 */
 	public Status getStatus() {
 		return status;
 	}
 
-	/*
-	 * （non-Javadoc）
-	 * 
-	 * @see com.redv.blogmover.UserInputCheckable#check()
+	/**
+	 * {@inheritDoc}
 	 */
 	public void check() throws BlogMoverException {
 
 	}
 
+	/**
+	 * @param filterIdAndArg
+	 */
 	public void setBlogFilterId(String filterIdAndArg) {
 		String[] args = filterIdAndArg.split(":");
 		if ("BlogFilterNone".equals(args[0])) {
@@ -103,10 +125,16 @@ public abstract class AbstractBlogReader implements BlogReader {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setBlogFilter(BlogFilter filter) {
 		m_filter = filter;
 	}
 
+	/**
+	 * @return
+	 */
 	protected BlogFilter getBlogFilter() {
 		return m_filter;
 	}
@@ -128,6 +156,9 @@ public abstract class AbstractBlogReader implements BlogReader {
 		return res.readMore();
 	}
 
+	/**
+	 * @return
+	 */
 	protected List<WebLog> getWebLogs() {
 		return m_webLogs;
 	}
