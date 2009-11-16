@@ -24,6 +24,7 @@ import org.w3c.dom.NodeList;
 
 import com.redv.blogmover.BlogMoverException;
 import com.redv.blogmover.util.DomNodeUtils;
+import com.redv.blogmover.util.HttpClientUtils;
 import com.redv.blogmover.util.HttpDocument;
 
 /**
@@ -204,7 +205,7 @@ public class CSDNLogin {
 			IOException {
 		GetMethod showExPwdMethod = new GetMethod(showExPwdUrl);
 		if (httpDocument.isManualCookie()) {
-			HttpDocument.addCookies(showExPwdMethod, httpClient.getState()
+			HttpClientUtils.addCookies(showExPwdMethod, httpClient.getState()
 					.getCookies());
 		}
 

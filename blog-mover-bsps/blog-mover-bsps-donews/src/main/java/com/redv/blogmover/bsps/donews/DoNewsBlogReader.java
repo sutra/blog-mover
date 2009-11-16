@@ -76,17 +76,12 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 		super();
 
 		httpClient = new IntervallicHttpClient();
-		HttpConnectionManagerParams managerParams = httpClient
-				.getHttpConnectionManager().getParams();
-		// 设置连接超时时间(单位毫秒)
-		managerParams.setConnectionTimeout(30000);
-		// 设置读数据超时时间(单位毫秒)
-		managerParams.setSoTimeout(120000);
-
 		httpClient.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
 		httpDocument = new HttpDocument(httpClient, true, "UTF-8");
 		doNewsLogin = new DoNewsLogin(httpClient, httpDocument);
+
+		httpDocument.setMaximumRetryTimes(100);
 	}
 
 	public void setIdentifyingCode(String identifyingCode) {
@@ -106,6 +101,13 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 	 */
 	@Override
 	public List<WebLog> read() throws BlogMoverException {
+		HttpConnectionManagerParams managerParams = httpClient
+				.getHttpConnectionManager().getParams();
+		// 设置连接超时时间(单位毫秒)
+		managerParams.setConnectionTimeout(60000);
+		// 设置读数据超时时间(单位毫秒)
+		managerParams.setSoTimeout(60000);
+
 		this.httpClient.getParams().setLongParameter(
 				IntervallicHttpClient.MINIMUM_INTERVAL, this.minimumInterval);
 		this.httpClient.getParams().setLongParameter(

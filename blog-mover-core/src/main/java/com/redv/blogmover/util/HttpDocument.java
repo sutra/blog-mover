@@ -4,28 +4,23 @@
 package com.redv.blogmover.util;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.net.SocketTimeoutException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.zip.DataFormatException;
-import java.util.zip.Inflater;
 
-import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HeaderGroup;
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
-import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cyberneko.html.parsers.DOMParser;
@@ -48,7 +43,8 @@ public class HttpDocument implements Serializable {
 	 */
 	private static final long serialVersionUID = 3668507850703993669L;
 
-	private static final Log log = LogFactory.getLog(HttpDocument.class);
+	private static final Log LOG = LogFactory.getLog(HttpDocument.class);
+	private static final boolean DEBUG = LOG.isDebugEnabled();
 
 	private transient HttpClient httpClient;
 
@@ -61,6 +57,11 @@ public class HttpDocument implements Serializable {
 	private String encoding;
 
 	private String requestCharSet;
+
+	/**
+	 * Retry times if timed out.
+	 */
+	private int maximumRetryTimes;
 
 	/**
 	 * 
@@ -212,6 +213,15 @@ public class HttpDocument implements Serializable {
 	}
 
 	/**
+	 * Set the retry times.
+	 * 
+	 * @param maxRetryTimes the maximum retry times if timed out
+	 */
+	public void setMaximumRetryTimes(final int maximumRetryTimes) {
+		this.maximumRetryTimes = maximumRetryTimes;
+	}
+
+	/**
 	 * Execute `get' method.
 	 * 
 	 * @param url
@@ -226,12 +236,13 @@ public class HttpDocument implements Serializable {
 		getMethod.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
 		getMethod.setFollowRedirects(followRedirects);
-		addRequestHeaderGroup(getMethod, this.requestHeaderGroup);
-		addRequestHeaderGroup(getMethod, requestHeaderGroup);
+		HttpClientUtils.addRequestHeaderGroup(getMethod,
+				this.requestHeaderGroup);
+		HttpClientUtils.addRequestHeaderGroup(getMethod, requestHeaderGroup);
 		if (manualCookie) {
-			addCookies(getMethod, httpClient.getState().getCookies());
+			HttpClientUtils.addCookies(getMethod, httpClient.getState().getCookies());
 		}
-		executeMethod(httpClient, getMethod);
+		HttpClientUtils.executeMethod(httpClient, getMethod, maximumRetryTimes);
 		try {
 			return getHtmlInternal(getMethod);
 		} catch (SAXException e) {
@@ -253,13 +264,14 @@ public class HttpDocument implements Serializable {
 		getMethod.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
 		getMethod.setFollowRedirects(followRedirects);
-		addRequestHeaderGroup(getMethod, this.requestHeaderGroup);
-		addRequestHeaderGroup(getMethod, requestHeaderGroup);
+		HttpClientUtils.addRequestHeaderGroup(getMethod,
+				this.requestHeaderGroup);
+		HttpClientUtils.addRequestHeaderGroup(getMethod, requestHeaderGroup);
 		if (manualCookie) {
-			addCookies(getMethod, httpClient.getState().getCookies());
+			HttpClientUtils.addCookies(getMethod, httpClient.getState()
+					.getCookies());
 		}
-		executeMethod(httpClient, getMethod);
-		return getDocument(getMethod);
+		return execute(getMethod);
 	}
 
 	/**
@@ -284,19 +296,19 @@ public class HttpDocument implements Serializable {
 	@SuppressWarnings("unchecked")
 	public Document post(String action, NameValuePair[] parameters,
 			HeaderGroup requestHeaderGroup) {
-		if (log.isDebugEnabled()) {
-			log.debug("action: " + action);
-			log.debug("parameters: ");
+		if (DEBUG) {
+			LOG.debug("action: " + action);
+			LOG.debug("parameters: ");
 			for (NameValuePair parameter : parameters) {
-				log.debug(parameter.getName() + ":" + parameter.getValue());
+				LOG.debug(parameter.getName() + ":" + parameter.getValue());
 			}
-			log.debug("requestHeaderGroup: ");
+			LOG.debug("requestHeaderGroup: ");
 
 			if (requestHeaderGroup != null) {
 				for (Iterator<Header> iter = requestHeaderGroup.getIterator(); iter
 						.hasNext();) {
 					Header header = iter.next();
-					log.debug(header.getName() + ":" + header.getValue());
+					LOG.debug(header.getName() + ":" + header.getValue());
 				}
 			}
 		}
@@ -308,16 +320,17 @@ public class HttpDocument implements Serializable {
 		}
 		postMethod.getParams().setCookiePolicy(
 				CookiePolicy.BROWSER_COMPATIBILITY);
-		addRequestHeaderGroup(postMethod, this.requestHeaderGroup);
-		addRequestHeaderGroup(postMethod, requestHeaderGroup);
+		HttpClientUtils.addRequestHeaderGroup(postMethod,
+				this.requestHeaderGroup);
+		HttpClientUtils.addRequestHeaderGroup(postMethod, requestHeaderGroup);
 		if (manualCookie) {
-			addCookies(postMethod, httpClient.getState().getCookies());
+			HttpClientUtils.addCookies(postMethod, httpClient.getState()
+					.getCookies());
 		}
 		if (parameters != null) {
 			postMethod.addParameters(parameters);
 		}
-		executeMethod(httpClient, postMethod);
-		return getDocument(postMethod);
+		return execute(postMethod);
 	}
 
 	/**
@@ -355,9 +368,12 @@ public class HttpDocument implements Serializable {
 	 * @param method
 	 * @return
 	 */
-	public Document getDocument(HttpMethod method) {
+	private Document getDocument(HttpMethod method)
+			throws SocketTimeoutException {
 		try {
 			return getDocumentInternal(method);
+		} catch (SocketTimeoutException e) {
+			throw e;
 		} catch (SAXException e) {
 			throw new BlogMoverRuntimeException(e);
 		} catch (IOException e) {
@@ -375,11 +391,11 @@ public class HttpDocument implements Serializable {
 	 */
 	private Document getDocumentInternal(HttpMethod method)
 			throws SAXException, IOException {
-		if (log.isDebugEnabled()) {
+		if (DEBUG) {
 			Header[] headers = method.getRequestHeaders();
-			log.debug("---- request header ----");
+			LOG.debug("---- request header ----");
 			for (Header header : headers) {
-				log.debug(header.getName() + ":" + header.getValue());
+				LOG.debug(header.getName() + ":" + header.getValue());
 			}
 		}
 		Document document;
@@ -402,27 +418,27 @@ public class HttpDocument implements Serializable {
 							.getAboveHierPath()
 							+ newuri;
 					// Really need to decode?
-					log.debug("before decode:" + s);
+					LOG.debug("before decode:" + s);
 					s = java.net.URLDecoder.decode(s, "UTF-8");
 					newuri = new org.apache.commons.httpclient.URI(parentUri
 							.getScheme(), parentUri.getHost(), (s), "")
 							.toString();
 				}
-				log.debug("Redirect: " + newuri);
+				LOG.debug("Redirect: " + newuri);
 				method.releaseConnection();
 				document = get(newuri);
 			} else {
 				throw new BlogMoverRuntimeException("Invalid redirect");
 			}
 		} else {
-			if (log.isDebugEnabled()) {
+			if (LOG.isDebugEnabled()) {
 				String s = null;
 				if (encoding != null) {
 					s = new String(method.getResponseBody(), encoding);
 				} else {
 					s = method.getResponseBodyAsString();
 				}
-				log.debug("URI: " + method.getURI().toString()
+				LOG.debug("URI: " + method.getURI().toString()
 						+ "\ngetResponseBodyAsString: " + s);
 			}
 			InputStream inputStream;
@@ -432,7 +448,8 @@ public class HttpDocument implements Serializable {
 					&& "deflate".equals(contentEncodingHeader.getValue())) {
 				InputStream body = method.getResponseBodyAsStream();
 				try {
-					inputStream = new ByteArrayInputStream(decompress(body));
+					inputStream = new ByteArrayInputStream(HttpClientUtils
+							.decompress(body));
 				} catch (DataFormatException e) {
 					throw new IOException(e.getMessage());
 				} finally {
@@ -448,7 +465,7 @@ public class HttpDocument implements Serializable {
 					inputSource.setEncoding(encoding);
 				}
 				inputSource.setByteStream(inputStream);
-				log.debug("encoding: " + inputSource.getEncoding());
+				LOG.debug("encoding: " + inputSource.getEncoding());
 				parser.parse(inputSource);
 				document = parser.getDocument();
 			} finally {
@@ -468,11 +485,11 @@ public class HttpDocument implements Serializable {
 	 */
 	private String getHtmlInternal(HttpMethod method)
 			throws SAXException, IOException {
-		if (log.isDebugEnabled()) {
+		if (LOG.isDebugEnabled()) {
 			Header[] headers = method.getRequestHeaders();
-			log.debug("---- request header ----");
+			LOG.debug("---- request header ----");
 			for (Header header : headers) {
-				log.debug(header.getName() + ":" + header.getValue());
+				LOG.debug(header.getName() + ":" + header.getValue());
 			}
 		}
 		String document = "";
@@ -495,27 +512,27 @@ public class HttpDocument implements Serializable {
 							.getAboveHierPath()
 							+ newuri;
 					// Really need to decode?
-					log.debug("before decode:" + s);
+					LOG.debug("before decode:" + s);
 					s = java.net.URLDecoder.decode(s, "UTF-8");
 					newuri = new org.apache.commons.httpclient.URI(parentUri
 							.getScheme(), parentUri.getHost(), (s), "")
 							.toString();
 				}
-				log.debug("Redirect: " + newuri);
+				LOG.debug("Redirect: " + newuri);
 				method.releaseConnection();
 				document = method.getResponseBodyAsString();
 			} else {
 				throw new BlogMoverRuntimeException("Invalid redirect");
 			}
 		} else {
-			if (log.isDebugEnabled()) {
+			if (LOG.isDebugEnabled()) {
 				String s = null;
 				if (encoding != null) {
 					document = new String(method.getResponseBody(), encoding);
 				} else {
 					document = method.getResponseBodyAsString();
 				}
-				log.debug("URI: " + method.getURI().toString()
+				LOG.debug("URI: " + method.getURI().toString()
 						+ "\ngetResponseBodyAsString: " + s);
 			}
 
@@ -532,103 +549,23 @@ public class HttpDocument implements Serializable {
 		return document;
 	}
 
-	/**
-	 * Convert the cookies to header format.
-	 * 
-	 * @param cookies
-	 * @return
-	 */
-	private static String cookieToHeaderString(Cookie[] cookies) {
-		StringBuffer ret = new StringBuffer();
-		for (Cookie cookie : cookies) {
-			ret.append(cookie.getName()).append("=").append(cookie.getValue())
-					.append("; ");
-		}
-		String s = ret.toString();
-		log.debug("Cookie string: " + s);
-		return s;
+	private Document execute(HttpMethod method) {
+		return this.execute(method, this.maximumRetryTimes);
 	}
 
-	/**
-	 * Add headers to http method.
-	 * 
-	 * @param method
-	 * @param requestHeaderGroup
-	 */
-	public static void addRequestHeaderGroup(HttpMethod method,
-			HeaderGroup requestHeaderGroup) {
-		if (requestHeaderGroup != null) {
-			for (Header header : requestHeaderGroup.getAllHeaders()) {
-				method.addRequestHeader(header);
-			}
-		}
-	}
-
-	/**
-	 * Execute http method.
-	 * 
-	 * @param httpClient
-	 * @param method
-	 */
-	public static void executeMethod(HttpClient httpClient, HttpMethod method) {
+	private Document execute(final HttpMethod method,
+			final int maximumRetryTimes) {
+		HttpClientUtils.executeMethod(httpClient, method, maximumRetryTimes);
+		Document document;
 		try {
-			httpClient.executeMethod(method);
-		} catch (HttpException e) {
-			String url = null;
-			try {
-				url = method.getURI().toString();
-			} catch (URIException e1) {
+			document = getDocument(method);
+		} catch (SocketTimeoutException e) {
+			if (maximumRetryTimes > 0) {
+				return execute(method, maximumRetryTimes - 1);
+			} else {
+				throw HttpClientUtils.convertException(method, e);
 			}
-			throw new BlogMoverRuntimeException("HttpException: url=" + url, e);
-		} catch (IOException e) {
-			String url = null;
-			try {
-				url = method.getURI().toString();
-			} catch (URIException e1) {
-			}
-			throw new BlogMoverRuntimeException("HttpException: url=" + url, e);
 		}
-	}
-
-	/**
-	 * Add cookies to http method.
-	 * 
-	 * @param method
-	 * @param cookies
-	 */
-	public static void addCookies(HttpMethod method, Cookie[] cookies) {
-		if (cookies != null) {
-			Header header = method.getRequestHeader("Cookie");
-			if (header == null) {
-				header = new Header();
-			}
-			String value = header.getValue();
-			if (value == null) {
-				value = "";
-			}
-			if (value.trim().endsWith(";") == false) {
-				value += "; ";
-			}
-			method.addRequestHeader("Cookie", value
-					+ cookieToHeaderString(cookies));
-		}
-	}
-
-	public static byte[] decompress(InputStream inputStream)
-			throws IOException, DataFormatException {
-		// Decompress the bytes
-		Inflater decompresser = new Inflater(true);
-		decompresser.setInput(IOUtils.toByteArray(inputStream));
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		try {
-			byte[] result = new byte[2048];
-			do {
-				int resultLength = decompresser.inflate(result);
-				os.write(result, 0, resultLength);
-			} while (!decompresser.finished());
-		} finally {
-			decompresser.end();
-		}
-		return os.toByteArray();
+		return document;
 	}
 }

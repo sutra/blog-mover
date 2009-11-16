@@ -68,13 +68,8 @@ public class IntervallicHttpClient extends HttpClient {
 		super(httpConnectionManager);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.apache.commons.httpclient.HttpClient#executeMethod(org.apache.commons
-	 * .httpclient.HostConfiguration, org.apache.commons.httpclient.HttpMethod,
-	 * org.apache.commons.httpclient.HttpState)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int executeMethod(HostConfiguration hostconfig, HttpMethod method,
