@@ -18,12 +18,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.xml.transform.TransformerException;
+
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
+import org.jfree.util.Log;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -203,6 +206,14 @@ public class DoNewsBlogReader extends AbstractBlogReader {
 
 	private void parse(Document document) {
 		Element listingTable = document.getElementById("Listing");
+		if (listingTable == null) {
+			try {
+				log.error("Listing table not found in: "
+						+ DomNodeUtils.getXmlAsString(document));
+			} catch (TransformerException e) {
+				log.error(e.getMessage(), e);
+			}
+		}
 		NodeList trs = listingTable.getChildNodes();
 		for (int i = 1; i < trs.getLength(); i++) {
 			NodeList tds = trs.item(i).getChildNodes();
