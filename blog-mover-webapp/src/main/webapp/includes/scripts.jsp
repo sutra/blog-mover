@@ -58,5 +58,6 @@ function doLogout() {
 var metaWeblogReader = new MetaWeblog("readers");
 var metaWeblogWriter = new MetaWeblog("writers");
 var blogger = new Blogger("writers");
+keepSession();
 //-->
 </script>

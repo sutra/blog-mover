@@ -66,6 +66,14 @@ public class User implements RemoteUser, Serializable {
 		this.userDelegate = new UserDelegate();
 	}
 
+	/**
+	 * User agent beat to keep HTTP session.
+	 */
+	public void beat() {
+		log.debug("Beating...");
+		// Really do nothing.
+	}
+
 	public void setReader(String className) {
 		try {
 			this.userDelegate.setReader(className);

@@ -100,3 +100,15 @@ function selectWriter(writerId, writerClassName) {
 		return true;
 	}
 }
+
+// Keep HTTP session.
+// When reading a large blog, maybe need a long time,
+// the user maybe leave from the computer, so keeping session is useful. 
+var BEAT_INTERVAL = <%=session.getMaxInactiveInterval() * 1000 / 2%>;
+function beat() {
+	debug("Beating...");
+	User.beat();
+}
+function keepSession() {
+	setInterval(beat, BEAT_INTERVAL);
+}
