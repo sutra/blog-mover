@@ -46,7 +46,7 @@
 			<artifactId>xmlrpc-client</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>nekohtml</groupId>
+			<groupId>net.sourceforge.nekohtml</groupId>
 			<artifactId>nekohtml</artifactId>
 		</dependency>
 	</dependencies>
