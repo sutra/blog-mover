@@ -4,6 +4,7 @@
 		<groupId>com.redv.blogmover</groupId>
 		<artifactId>blog-mover-bsps</artifactId>
 		<version>3.0.1</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>blog-mover-bsps-donews</artifactId>
 	<packaging>jar</packaging>

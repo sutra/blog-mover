@@ -3,6 +3,7 @@
 		<groupId>com.redv.blogmover</groupId>
 		<artifactId>blog-mover</artifactId>
 		<version>3.0.1</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>blog-mover-web</artifactId>

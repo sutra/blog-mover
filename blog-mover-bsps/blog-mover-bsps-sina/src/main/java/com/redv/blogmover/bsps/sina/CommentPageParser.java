@@ -10,9 +10,11 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.Document;
 
 import com.redv.blogmover.Comment;
 import com.redv.blogmover.impl.CommentImpl;
+import com.redv.blogmover.util.DomNodeUtils;
 import com.redv.blogmover.util.StringUtil;
 
 /**
@@ -23,11 +25,11 @@ import com.redv.blogmover.util.StringUtil;
 public class CommentPageParser {
 	private static final Log log = LogFactory.getLog(CommentPageParser.class);
 
-	private String document;
+	private Document document;
 
 	private List<Comment> comments;
 
-	public CommentPageParser(String document) {
+	public CommentPageParser(Document document) {
 		this.document = document;
 		this.comments = new ArrayList<Comment>();
 
@@ -45,7 +47,7 @@ public class CommentPageParser {
 	 * 解析一个评论页面
 	 */
 	private void parse() {
-		String doc = this.document;
+		String doc = DomNodeUtils.getHtmlAsString(document);
 
 		doc = doc.replaceAll("\\\n", "")
 		.replaceAll("\\n", "")

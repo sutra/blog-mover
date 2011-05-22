@@ -322,8 +322,7 @@ public class SinaReader extends AbstractBlogReader {
 			url = String.format(commentsPageUrl, i);
 			log.debug(url);
 
-			commentPageParser = new CommentPageParser(this.httpDocument
-					.getHtml(url));
+			commentPageParser = new CommentPageParser(this.httpDocument.get(url));
 			comments = commentPageParser.getComments();
 			webLog.getComments().addAll(comments);
 		}
