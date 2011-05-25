@@ -104,6 +104,14 @@
 			<param-name>classes</param-name>
 			<param-value>java.lang.Object</param-value>
 		</init-param>
+		<init-param>
+			<param-name>crossDomainSessionSecurity</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>allowScriptTagRemoting</param-name>
+			<param-value>true</param-value>
+		</init-param>
 		<load-on-startup>20</load-on-startup>
 	</servlet>
 	<servlet>
