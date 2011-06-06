@@ -6,7 +6,43 @@
 		<title>Server Info</title>
 	</head>
 	<body>
-		<%@ page import="java.util.*"%>
+		<%@ page import="java.util.*, org.apache.commons.lang.ObjectUtils"%>
+		Session:
+		<table>
+			<%
+			Enumeration<String> attributeNames = session.getAttributeNames();
+			while (attributeNames.hasMoreElements()) {
+				String attributeName = attributeNames.nextElement();
+				Object attribute = session.getAttribute(attributeName);
+				out.println(String.format("<tr><td>%1$s</td><td>%2$s</td></tr>",attributeName, ObjectUtils.toString(attribute)));
+			}
+			%>
+		</table>
+		Header:
+		<table border="1">
+			<%
+			Enumeration<String> headerNames = request.getHeaderNames();
+			while (headerNames.hasMoreElements()) {
+				out.println("<tr>");
+				String headerName = headerNames.nextElement();
+				out.println("<td>");
+				out.println(headerName);
+				System.out.println(headerName);
+				out.println("</td>");
+				out.println("<td>");
+				Enumeration<String> headers = request.getHeaders(headerName);
+				while (headers.hasMoreElements()) {
+					String header = headers.nextElement();
+					out.println(header);
+					System.out.println(header);
+					out.println("<br />");
+				}
+				out.println("</td>");
+				out.println("</tr>");
+			}
+			%>
+		</table>
+		Env:
 		<table border="1">
 			<%
 				Map env = System.getenv();
