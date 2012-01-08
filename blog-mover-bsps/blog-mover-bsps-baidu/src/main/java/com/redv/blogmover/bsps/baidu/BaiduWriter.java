@@ -33,14 +33,9 @@ import com.redv.blogmover.util.HttpDocument;
 /**
  * @author Joe
  * @version 1.0
- * 
+ *
  */
 public class BaiduWriter extends AbstractBlogWriter {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2312355891089879880L;
 
 	private HttpDocument httpDocument;
 
@@ -54,7 +49,7 @@ public class BaiduWriter extends AbstractBlogWriter {
 			.compile(".*writestr\\(\"(.*)\"\\);.*");
 
 	/**
-	 * 
+	 *
 	 */
 	public BaiduWriter() {
 		super();
@@ -81,18 +76,18 @@ public class BaiduWriter extends AbstractBlogWriter {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#start()
 	 */
 	@Override
 	protected void begin() throws BlogMoverException {
 		new BaiduLogin(httpDocument).login(username, password);
-		this.blogHandle = BaiduUtils.findBlogHandle(this.httpDocument);
+		blogHandle = BaiduUtils.findBlogHandle(httpDocument);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#end()
 	 */
 	@Override
@@ -102,7 +97,7 @@ public class BaiduWriter extends AbstractBlogWriter {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#writeBlog(com.redv.blogremover.WebLog,
 	 *      java.util.Map)
 	 */
@@ -176,7 +171,7 @@ public class BaiduWriter extends AbstractBlogWriter {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#writeComment(com.redv.blogremover.Comment)
 	 */
 	@Override
@@ -187,7 +182,7 @@ public class BaiduWriter extends AbstractBlogWriter {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.redv.blogremover.impl.AbstractBlogWriter#writeAttachment(com.redv.blogremover.Attachment)
 	 */
 	@Override

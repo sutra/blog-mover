@@ -6,9 +6,7 @@
 		<version>3.0.1</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<groupId>com.redv.blogmover</groupId>
 	<artifactId>blog-mover-bsps</artifactId>
-	<version>3.0.1</version>
 	<packaging>pom</packaging>
 	<name>Blog Mover bsps</name>
 	<modules>
