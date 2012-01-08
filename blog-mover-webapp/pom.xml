@@ -10,7 +10,6 @@
 	<packaging>war</packaging>
 	<name>Blog Mover Web Application</name>
 	<build>
-		<finalName>blogmover</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
@@ -179,4 +178,30 @@
 			<version>${version}</version>
 		</dependency>
 	</dependencies>
+	<profiles>
+		<profile>
+			<id>production</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webResources>
+								<resource>
+									<directory>src/main/production</directory>
+									<targetPath>WEB-INF/classes</targetPath>
+									<includes>
+										<include>jdbc.properties</include>
+										<include>log4j.properties</include>
+									</includes>
+									<filtering>true</filtering>
+								</resource>
+							</webResources>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
