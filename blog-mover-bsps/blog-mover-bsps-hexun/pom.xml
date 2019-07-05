@@ -11,14 +11,14 @@
 	<name>Blog Mover bsps hexun</name>
 	<reporting>
 		<outputDirectory>
-			../../target/site/${parent.artifactId}/${artifactId}/
+			../../target/site/${project.parent.artifactId}/${project.artifactId}/
 		</outputDirectory>
 	</reporting>
 	<dependencies>
 		<dependency>
-			<groupId>${groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>blog-mover-core</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-httpclient</groupId>

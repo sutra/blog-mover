@@ -10,13 +10,13 @@
 	<packaging>jar</packaging>
 	<name>Blog Mover Feed</name>
 	<reporting>
-		<outputDirectory>../target/site/${artifactId}/</outputDirectory>
+		<outputDirectory>../target/site/${project.artifactId}/</outputDirectory>
 	</reporting>
 	<dependencies>
 		<dependency>
-			<groupId>${groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>blog-mover-core</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>rome</groupId>

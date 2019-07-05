@@ -26,6 +26,6 @@
 		<module>blog-mover-bsps-space</module>
 	</modules>
 	<reporting>
-		<outputDirectory>../target/site/${artifactId}/</outputDirectory>
+		<outputDirectory>../target/site/${project.artifactId}/</outputDirectory>
 	</reporting>
 </project>
